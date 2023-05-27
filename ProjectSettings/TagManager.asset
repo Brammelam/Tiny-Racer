@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Terrain
+  - car
+  - target
+  - Music
+  - Ambient
+  - nature
+  - Snow
+  - City
+  - Ghost
+  - ghostSphere
+  - engineNoise
+  - recordTime
+  - lapTime
+  - Slider
+  - hat
+  - sc
+  - hatButton
+  - save
+  - tutorial
+  - tutorial2
+  - unlockables
+  - unlockbutton
+  - highscore
+  - welcome
+  - level
+  - globalrecord
+  - localrecord
+  - keyboardbutton
+  - inputfieldwelcome
+  - inputfieldpassword
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Volume
+  - Water
+  - UI
+  - Floor
+  - UI2
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: ui
+    uniqueID: 757518113
+    locked: 0

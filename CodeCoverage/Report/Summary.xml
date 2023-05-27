@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>27.05.2023 - 00.14.58</Generatedon>
+    <Parser>MultiReportParser (2x OpenCoverParser)</Parser>
+    <Assemblies>4</Assemblies>
+    <Classes>80</Classes>
+    <Files>79</Files>
+    <Coveredlines>1169</Coveredlines>
+    <Uncoveredlines>3771</Uncoveredlines>
+    <Coverablelines>4940</Coverablelines>
+    <Totallines>8981</Totallines>
+    <Linecoverage>23.6</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>150</Coveredmethods>
+    <Totalmethods>516</Totalmethods>
+    <Methodcoverage>29</Methodcoverage>
+  </Summary>
+  <Coverage>
+    <Assembly name="Assembly-CSharp" classes="66" coverage="31" coveredlines="924" coverablelines="2973" totallines="6202" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="109" totalmethods="347" methodcoverage="31.4">
+      <Class name="addLetter" coverage="0" coveredlines="0" coverablelines="14" totallines="30" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="AmbientClass" coverage="36.3" coveredlines="4" coverablelines="11" totallines="35" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="3" methodcoverage="33.3" />
+      <Class name="backScript" coverage="0" coveredlines="0" coverablelines="3" totallines="14" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+      <Class name="buttonSelect" coverage="0" coveredlines="0" coverablelines="14" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
+      <Class name="cameraFollow" coverage="93.9" coveredlines="31" coverablelines="33" totallines="62" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="5" methodcoverage="100" />
+      <Class name="CarAITargetMouse" coverage="0" coveredlines="0" coverablelines="17" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="carController" coverage="0" coveredlines="0" coverablelines="47" totallines="88" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="9" methodcoverage="0" />
+      <Class name="carController2" coverage="0" coveredlines="0" coverablelines="102" totallines="166" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="11" methodcoverage="0" />
+      <Class name="carDriverAI" coverage="0" coveredlines="0" coverablelines="39" totallines="88" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="CarDriverImp" coverage="0" coveredlines="0" coverablelines="84" totallines="137" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="10" methodcoverage="0" />
+      <Class name="CarMusicClass" coverage="42.4" coveredlines="14" coverablelines="33" totallines="66" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="6" methodcoverage="33.3" />
+      <Class name="CarsettingsSO" coverage="83.3" coveredlines="10" coverablelines="12" totallines="59" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="12" methodcoverage="83.3" />
+      <Class name="changeMaterial" coverage="27.9" coveredlines="12" coverablelines="43" totallines="105" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="5" methodcoverage="20" />
+      <Class name="changeQuality" coverage="0" coveredlines="0" coverablelines="12" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+      <Class name="checkName" coverage="18.1" coveredlines="2" coverablelines="11" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="2" methodcoverage="50" />
+      <Class name="checkShit" coverage="49.2" coveredlines="155" coverablelines="315" totallines="511" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="14" methodcoverage="57.1" />
+      <Class name="CityScript" coverage="0" coveredlines="0" coverablelines="11" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="CurrentscoreSO" coverage="100" coveredlines="2" coverablelines="2" totallines="17" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
+      <Class name="FileHandler" coverage="0" coveredlines="0" coverablelines="34" totallines="359" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="6" methodcoverage="0" />
+      <Class name="flipScript" coverage="0" coveredlines="0" coverablelines="20" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="FloatSO" coverage="50" coveredlines="1" coverablelines="2" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="2" methodcoverage="50" />
+      <Class name="GarageScreen" coverage="0" coveredlines="0" coverablelines="140" totallines="247" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="10" methodcoverage="0" />
+      <Class name="garageScript" coverage="0" coveredlines="0" coverablelines="4" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="ghostFollower" coverage="0" coveredlines="0" coverablelines="5" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="ghostRecorder" coverage="100" coveredlines="4" coverablelines="4" totallines="20" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
+      <Class name="GhostsSO" coverage="25" coveredlines="1" coverablelines="4" totallines="31" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="4" methodcoverage="25" />
+      <Class name="hatScript" coverage="4.6" coveredlines="6" coverablelines="130" totallines="182" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="6" methodcoverage="33.3" />
+      <Class name="hideButton" coverage="31.8" coveredlines="14" coverablelines="44" totallines="76" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="2" methodcoverage="50" />
+      <Class name="horn" coverage="17.6" coveredlines="3" coverablelines="17" totallines="30" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="3" methodcoverage="33.3" />
+      <Class name="InputEntry" coverage="0" coveredlines="0" coverablelines="5" totallines="13" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+      <Class name="InputHandler" coverage="0" coveredlines="0" coverablelines="47" totallines="92" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="8" methodcoverage="0" />
+      <Class name="instance" coverage="0" coveredlines="0" coverablelines="14" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="JsonHelper" coverage="0" coveredlines="0" coverablelines="14" totallines="359" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="lapTime" coverage="100" coveredlines="22" coverablelines="22" totallines="51" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
+      <Class name="LeaderBoard" coverage="48.5" coveredlines="34" coverablelines="70" totallines="118" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="6" methodcoverage="33.3" />
+      <Class name="loadScript" coverage="28.5" coveredlines="2" coverablelines="7" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="2" methodcoverage="50" />
+      <Class name="MovingScript" coverage="0" coveredlines="0" coverablelines="6" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="MusicClass" coverage="0" coveredlines="0" coverablelines="11" totallines="31" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="Navigate" coverage="0" coveredlines="0" coverablelines="9" totallines="29" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="navigateKeys" coverage="50" coveredlines="2" coverablelines="4" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="2" methodcoverage="50" />
+      <Class name="newAI" coverage="0" coveredlines="0" coverablelines="38" totallines="89" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="newAI2" coverage="100" coveredlines="38" coverablelines="38" totallines="69" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
+      <Class name="newController" coverage="0" coveredlines="0" coverablelines="45" totallines="76" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="10" methodcoverage="0" />
+      <Class name="openKeyboard" coverage="50" coveredlines="2" coverablelines="4" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="2" methodcoverage="50" />
+      <Class name="Outline" coverage="2.7" coveredlines="4" coverablelines="143" totallines="309" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="19" methodcoverage="5.2" />
+      <Class name="PathCreation.Examples.GeneratePathExample" coverage="0" coveredlines="0" coverablelines="7" totallines="20" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="PathCreation.Examples.PathFollower" coverage="91.4" coveredlines="32" coverablelines="35" totallines="66" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="4" methodcoverage="75" />
+      <Class name="PathCreation.Examples.PathPlacer" coverage="0" coveredlines="0" coverablelines="26" totallines="46" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
+      <Class name="PathCreation.Examples.PathSceneTool" coverage="8.3" coveredlines="1" coverablelines="12" totallines="32" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="4" methodcoverage="25" />
+      <Class name="PathCreation.Examples.PathSpawner" coverage="0" coveredlines="0" coverablelines="8" totallines="25" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+      <Class name="PathCreation.Examples.RoadMeshCreator" coverage="3.1" coveredlines="3" coverablelines="94" totallines="155" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="5" methodcoverage="20" />
+      <Class name="PlayerManager" coverage="45.9" coveredlines="223" coverablelines="485" totallines="772" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="18" totalmethods="34" methodcoverage="52.9" />
+      <Class name="playernamescript" coverage="0" coveredlines="0" coverablelines="7" totallines="50" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="prefabscriptls" coverage="0" coveredlines="0" coverablelines="8" totallines="27" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="rotateCar" coverage="0" coveredlines="0" coverablelines="6" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="rotationTracker" coverage="96.4" coveredlines="81" coverablelines="84" totallines="147" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="7" methodcoverage="85.7" />
+      <Class name="saveLevel" coverage="0" coveredlines="0" coverablelines="27" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
+      <Class name="Score" coverage="37.1" coveredlines="36" coverablelines="97" totallines="149" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="8" methodcoverage="37.5" />
+      <Class name="ScoresSO" coverage="50" coveredlines="2" coverablelines="4" totallines="29" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="4" methodcoverage="50" />
+      <Class name="selectedCar" coverage="41.8" coveredlines="85" coverablelines="203" totallines="309" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="9" totalmethods="21" methodcoverage="42.8" />
+      <Class name="selectedLevel" coverage="61.9" coveredlines="83" coverablelines="134" totallines="227" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="11" totalmethods="16" methodcoverage="68.7" />
+      <Class name="SetVolume" coverage="27.7" coveredlines="5" coverablelines="18" totallines="42" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="5" methodcoverage="20" />
+      <Class name="SnowScript" coverage="0" coveredlines="0" coverablelines="11" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="speedTracker" coverage="100" coveredlines="10" coverablelines="10" totallines="23" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
+      <Class name="titleCar" coverage="0" coveredlines="0" coverablelines="10" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
+      <Class name="tutorialScript" coverage="0" coveredlines="0" coverablelines="3" totallines="14" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+    </Assembly>
+    <Assembly name="Assembly-CSharp-Editor" classes="1" coverage="0" coveredlines="0" coverablelines="73" totallines="108" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="7" methodcoverage="0">
+      <Class name="PathCreation.Examples.PathSceneToolEditor" coverage="0" coveredlines="0" coverablelines="73" totallines="108" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="7" methodcoverage="0" />
+    </Assembly>
+    <Assembly name="PathCreator" classes="9" coverage="22.3" coveredlines="245" coverablelines="1094" totallines="1799" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="41" totalmethods="125" methodcoverage="32.8">
+      <Class name="PathCreation.BezierPath" coverage="5.9" coveredlines="25" coverablelines="417" totallines="678" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="43" methodcoverage="18.6" />
+      <Class name="PathCreation.GlobalDisplaySettings" coverage="0" coveredlines="0" coverablelines="30" totallines="70" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="PathCreation.MinMax3D" coverage="100" coveredlines="11" coverablelines="11" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100" />
+      <Class name="PathCreation.PathCreator" coverage="6.7" coveredlines="4" coverablelines="59" totallines="112" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="7" methodcoverage="14.2" />
+      <Class name="PathCreation.PathCreatorData" coverage="22.7" coveredlines="18" coverablelines="79" totallines="136" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="11" methodcoverage="27.2" />
+      <Class name="PathCreation.Utility.CubicBezierUtility" coverage="22.6" coveredlines="19" coverablelines="84" totallines="136" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="13" methodcoverage="38.4" />
+      <Class name="PathCreation.Utility.MathUtility" coverage="30.5" coveredlines="36" coverablelines="118" totallines="162" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="18" methodcoverage="33.3" />
+      <Class name="PathCreation.Utility.VertexPathUtility" coverage="53" coveredlines="53" coverablelines="100" totallines="139" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="3" methodcoverage="66.6" />
+      <Class name="PathCreation.VertexPath" coverage="40.3" coveredlines="79" coverablelines="196" totallines="345" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="22" methodcoverage="45.4" />
+    </Assembly>
+    <Assembly name="PathCreatorEditor" classes="4" coverage="0" coveredlines="0" coverablelines="800" totallines="1231" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="37" methodcoverage="0">
+      <Class name="PathCreationEditor.MouseUtility" coverage="0" coveredlines="0" coverablelines="23" totallines="43" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+      <Class name="PathCreationEditor.PathEditor" coverage="0" coveredlines="0" coverablelines="506" totallines="736" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="26" methodcoverage="0" />
+      <Class name="PathCreationEditor.PathHandle" coverage="0" coveredlines="0" coverablelines="142" totallines="237" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="5" methodcoverage="0" />
+      <Class name="PathCreationEditor.ScreenSpacePolyLine" coverage="0" coveredlines="0" coverablelines="129" totallines="215" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="5" methodcoverage="0" />
+    </Assembly>
+  </Coverage>
+</CoverageReport>
