@@ -127,6 +127,7 @@
     <Compile Include="Assets\ProgressBar.cs" />
     <Compile Include="Assets\Progress.cs" />
     <Compile Include="Assets\LoadingText.cs" />
+    <Compile Include="Assets\ToggleButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />

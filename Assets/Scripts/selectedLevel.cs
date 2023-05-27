@@ -44,6 +44,10 @@ public class selectedLevel : MonoBehaviour
     [SerializeField]
     private FloatSO ScoreSO;
 
+    [SerializeField]
+    public Text[] textObjects;
+    private Color day, night;
+
     // Start is called before the first frame update
     public void Awake()
     {
@@ -79,6 +83,11 @@ public class selectedLevel : MonoBehaviour
             }
         }
 
+        //Set the colors
+        day = new Color(0.196f, 0.196f, 0.196f);
+        night = new Color(0.86f, 0.86f, 0.86f);
+
+        //Toggle night mode
         if (levelIndex > 7) SetNightMode(true);
         else SetNightMode(false);
     }
@@ -159,18 +168,19 @@ public class selectedLevel : MonoBehaviour
         directionalLight.enabled = !_mode;
         if (_mode)
         {
-            levelText.color = new Color(0.86f, 0.86f, 0.86f);
-            levelRecordText.color = levelText.color;
-            levelRecordTitleText.color = levelText.color;
+            foreach (Text _text in textObjects) {
+                _text.color = night;
+            }
+            _switchOn.Play();
         }
         else
         {
-            levelText.color = new Color(0.196f, 0.196f, 0.196f);
-            levelRecordText.color = levelText.color;
-            levelRecordTitleText.color = levelText.color;
+            foreach (Text _text in textObjects)
+            {
+                _text.color = day;
+            }
+            _switchOff.Play();
         }
-        if (_mode) _switchOn.Play();
-        if (!_mode) _switchOff.Play();
     }
 
     public void UpdateLevelName()
