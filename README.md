@@ -2,7 +2,7 @@
 
 Tiny Racer is a simple, yet tricky racing game where you navigate through challenging levels using just a single button. Put your reflexes to the test as you accelerate by touching the screen and brake by releasing. Can you master the art of timing to reach the finish line?
 
-![Image Description](https://i.imgur.com/eXxjlcN.png)
+![One of the forest levels](https://i.imgur.com/eXxjlcN.png)
 
 <h2>Features</h2>
 
@@ -13,7 +13,7 @@ Tiny Racer is a simple, yet tricky racing game where you navigate through challe
 * Garage Customization: Personalize your car in the garage. Customize its appearance and make it truly yours before hitting the tracks.
 * Backend Integration: Your progress is automatically saved and synced with a backend system. Never lose your hard-earned achievements or upgrades.
 
-![Image Description](https://i.imgur.com/RQsCN47.png)
+![One of the winter levels](https://i.imgur.com/RQsCN47.png)
 
 <h2>How to Play</h2>
 
@@ -26,13 +26,13 @@ Tiny Racer is a simple, yet tricky racing game where you navigate through challe
 * Visit the garage to customize your car's appearance.
 * Challenge yourself to beat your best times and conquer all the levels.
 
-![Image Description](https://i.imgur.com/f8VJIHt.png)
+![The garage](https://i.imgur.com/f8VJIHt.png)
 
 <h2>Development</h2>
 
 The game is developed using Unity and programmed in C#. The backend integration utilizes a custom backend system for storing and syncing player progress.
 
-![Image Description](https://i.imgur.com/pLvXZWP.png)
+![The start menu](https://i.imgur.com/pLvXZWP.png)
 
 <h2>Contributions</h2>
 
