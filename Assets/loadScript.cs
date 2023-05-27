@@ -14,11 +14,7 @@ public class loadScript : MonoBehaviour
         int i = Random.Range(0, 2);
         Debug.Log(i);
         this.GetComponent<Image>().sprite = ls[i];
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

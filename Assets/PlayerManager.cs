@@ -102,6 +102,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     public MeshRenderer[] alloriginalcolors;
 
+    public delegate void ProgressUpdateDelegate(float progress);
+    public event ProgressUpdateDelegate OnProgressUpdate;
+    public ProgressBar progressBar;
+
+    public float Progress { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -109,6 +115,7 @@ public class PlayerManager : MonoBehaviour
         selectButton.interactable = false;
         StartCoroutine(SetupRoutine());
         ghosts = ghostsSO.GhostIds;
+
     }
 
     public void Update()
@@ -135,7 +142,7 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
-
+    /*
     IEnumerator SetupRoutine()
     {
         yield return LoginRoutine();
@@ -149,6 +156,42 @@ public class PlayerManager : MonoBehaviour
             
         yield return SetUpUI();
         //SetGhostId();
+    }
+    */
+    IEnumerator SetupRoutine()
+    {
+        float[] stepProgress = { 0.1f, 0.3f, 0.2f, 0.1f, 0.1f, 0.1f, 0.1f };
+        IEnumerator[] coroutines = {
+        LoginRoutine(),
+        leaderBoard.FetchHighscores(),
+        GetPlayerName(),
+        CheckCars(),
+        DownloadPlayerFileKeys(),
+        GetCarSettingsData(),
+        SetUpUI()
+    };
+
+        Progress = 0f;
+
+        for (int i = 0; i < coroutines.Length; i++)
+        {
+            yield return StartCoroutine(coroutines[i]);
+            Progress += stepProgress[i];
+            UpdateProgress(Progress);
+        }
+
+        // Set Ghost ID
+        // SetGhostId();
+
+        // Progress complete
+        Progress = 1f;
+        UpdateProgress(Progress);
+    }
+
+    void UpdateProgress(float progress)
+    {
+        // Invoke the event to notify subscribers
+        OnProgressUpdate?.Invoke(progress);
     }
 
     IEnumerator SetUpUI()
