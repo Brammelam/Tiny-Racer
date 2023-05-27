@@ -15,8 +15,8 @@ Backend Integration: Your progress is automatically saved and synced with a back
 
 <h2>How to Play</h2>
 
-* Launch the game and select a car from the garage.
-* Choose a level to race in.
+* The latest build is playable at https://brammelam.github.io/tiny-racers-web/
+* Select a car from the garage and choose a level to race in.
 * Touch and hold the screen to accelerate your car.
 * Release your touch to apply the brakes and slow down.
 * Navigate through the level, avoiding flipping over in tight turns and aiming for the finish line.
