@@ -35,8 +35,8 @@ public class checkShit : MonoBehaviour
     public bool tipped = false;
     public speedTracker st;
     public rotationTracker rt;
-    private float tipAngleLeft = 45f;
-    private float tipAngleRight = -45f;
+    private float tipAngleLeft = 20f;
+    private float tipAngleRight = -20f;
     [SerializeField]
     private float tipSpeed = 1.6f;
     public PathCreator pathCreator;
@@ -459,7 +459,7 @@ public class checkShit : MonoBehaviour
 
         copPosition = cop.transform.position;
         copRotation = cop.transform.rotation;
-        direction = st.direction;
+        direction = cop.transform.forward;
         if (hatIndex != 3)
         {
             _hat.transform.parent = null;
@@ -469,8 +469,14 @@ public class checkShit : MonoBehaviour
         Destroy(rb);
         deadCop.SetActive(true);
         deadCop.transform.SetPositionAndRotation(copPosition, copRotation);
-        deadCop.GetComponent<Rigidbody>().AddForce(Vector3.up * 3000f, ForceMode.Impulse);
-        deadCop.GetComponent<Rigidbody>().AddTorque(Vector3.forward * -rt.averageAngle * 500f, ForceMode.Impulse);
+
+        // Calculate flip direction based on the corner direction
+        Vector3 flipDirection = Quaternion.Euler(0f, 0f, -90f) * direction;
+
+
+        deadCop.GetComponent<Rigidbody>().AddForce(Vector3.up * 10000f, ForceMode.Impulse);
+        deadCop.GetComponent<Rigidbody>().AddForce(direction * 10000f, ForceMode.Impulse);
+        deadCop.GetComponent<Rigidbody>().AddTorque(flipDirection * 5000f * -rt.averageAngle, ForceMode.Impulse);
         Instantiate(Resources.Load("carCrashSound") as GameObject);
     }
 

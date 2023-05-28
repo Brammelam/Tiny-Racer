@@ -99,7 +99,7 @@ public class Score : MonoBehaviour
 			if (gh.lapCompleted) restartText.GetComponent<Text>().text = "Saving lap time, please hold";
 			else if (!gh.lapCompleted) restartText.GetComponent<Text>().text = "Tap to restart";
 
-			restartText.GetComponent<Text>().horizontalOverflow = HorizontalWrapMode.Wrap;
+			restartText.GetComponent<Text>().horizontalOverflow = HorizontalWrapMode.Overflow;
 			restartText.GetComponent<Text>().fontSize = 40;
 
 

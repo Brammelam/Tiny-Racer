@@ -90,7 +90,6 @@
     <Compile Include="Assets\Scripts\newAI2.cs" />
     <Compile Include="Assets\Scripts\changeQuality.cs" />
     <Compile Include="Assets\loadScript.cs" />
-    <Compile Include="Assets\Scripts\flipScript.cs" />
     <Compile Include="Assets\hideButton.cs" />
     <Compile Include="Assets\prefabscriptls.cs" />
     <Compile Include="Assets\Scripts\Score.cs" />

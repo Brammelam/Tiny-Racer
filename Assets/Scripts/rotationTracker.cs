@@ -15,7 +15,7 @@ public class rotationTracker : MonoBehaviour
     private Vector3 lastForwardVector = Vector3.zero;
     public float angle = 0f;
     [SerializeField]
-    public float tippingAngle = 10f;
+    public float tippingAngle = 100f;
     float t = 0f;
     private float timer = 0.4f;
     public float currentAngle = 0f;
@@ -30,7 +30,7 @@ public class rotationTracker : MonoBehaviour
     [SerializeField]
     bool tipcarbool, tipcarboolback = false;
 
-    private const int BUFFER_SIZE = 30;
+    private const int BUFFER_SIZE = 20;
 
     private int frameCount = 0;
     private Vector3[] forwardVectors = new Vector3[BUFFER_SIZE];
@@ -121,7 +121,7 @@ public class rotationTracker : MonoBehaviour
                     tipcarboolback = false;
                 }
 
-            
+           
             frameCount++;
         }
     }
@@ -129,11 +129,6 @@ public class rotationTracker : MonoBehaviour
     {
         return averageAngle;
     }
-
-
-
- 
-
 
     public void FinishSetup()
     {
