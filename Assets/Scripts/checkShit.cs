@@ -279,9 +279,18 @@ public class checkShit : MonoBehaviour
 
             currentSpeed = player.speed;
 
-            if (((Time.timeScale * st.speed) >= (Time.timeScale * tipSpeed)) && !tipped && ((rt.averageAngle > 0 && rt.averageAngle > tipAngleLeft) || (rt.averageAngle < 0 && rt.averageAngle < tipAngleRight)))
+            if (((Time.timeScale * st.speed) >= (Time.timeScale * tipSpeed)) && !tipped)
             {
-                FlipCar();
+                if ((rt.averageAngle > 0 && rt.averageAngle > tipAngleLeft))
+                {
+                    // Left turn condition is met, flip car
+                    FlipCar();
+                }
+                else if ((rt.averageAngle < 0 && rt.averageAngle < tipAngleRight))
+                {
+                    // Right turn condition is met, flip car
+                    FlipCar();
+                }
             }
         }
         // Restart level on spacebar, touch screen or mouseclick

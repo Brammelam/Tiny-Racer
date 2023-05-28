@@ -30,10 +30,11 @@ public class rotationTracker : MonoBehaviour
     [SerializeField]
     bool tipcarbool, tipcarboolback = false;
 
-    private const int BUFFER_SIZE = 20;
+    private const int BUFFER_SIZE = 35;
 
     private int frameCount = 0;
     private Vector3[] forwardVectors = new Vector3[BUFFER_SIZE];
+    private float[] weights = new float[BUFFER_SIZE];
 
     public void Start()
     {
@@ -42,6 +43,7 @@ public class rotationTracker : MonoBehaviour
         forwardVector = transform.forward;
         lastForwardVector = transform.forward;
         targetangle = turningangle = 0f;
+
     }
 
     public void TipCarFunction()
@@ -64,11 +66,19 @@ public class rotationTracker : MonoBehaviour
 
             // Compute the average forward vector over the last 10 frames
             Vector3 avgForwardVector = Vector3.zero;
+            float totalWeight = 0f;
+
             for (int i = 0; i < BUFFER_SIZE; i++)
             {
-                avgForwardVector += forwardVectors[i];
+                int weightIndex = frameCount - i;
+                float weight = weightIndex < 10 ? (10 - weightIndex) : 1f; // Assign higher weight to newest 10 vectors
+
+                avgForwardVector += forwardVectors[i] * weight;
+                totalWeight += weight;
             }
-            avgForwardVector /= BUFFER_SIZE;
+
+            avgForwardVector /= totalWeight;
+
 
             // Compute the cross product of the current forward vector and the average forward vector
             Vector3 crossProduct = Vector3.Cross(transform.forward, avgForwardVector);
