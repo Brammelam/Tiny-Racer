@@ -101,7 +101,7 @@ MonoBehaviour:
     overrideState: 1
     value: -5
   brightness:
-    overrideState: 1
+    overrideState: 0
     value: 21
   postExposure:
     overrideState: 1
@@ -1476,14 +1476,14 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   focusDistance:
-    overrideState: 1
-    value: 40.24
+    overrideState: 0
+    value: 24.5
   aperture:
-    overrideState: 1
-    value: 3
+    overrideState: 0
+    value: 10.2
   focalLength:
-    overrideState: 1
-    value: 100
+    overrideState: 0
+    value: 178
   kernelSize:
-    overrideState: 1
+    overrideState: 0
     value: 0

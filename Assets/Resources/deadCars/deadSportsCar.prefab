@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4285891419892266390}
   - component: {fileID: 4391065662692250238}
   - component: {fileID: 4391065662692250239}
-  - component: {fileID: -5508510780338233910}
   m_Layer: 0
   m_Name: deadSportsCar
   m_TagString: Untagged
@@ -63,21 +62,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5346546, y: 1.0105566, z: 3.9110057}
   m_Center: {x: 0.007224083, y: 0.6121835, z: -0.004208883}
---- !u!114 &-5508510780338233910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3472657004133281580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6624e1818c001a44d912df42ebabcaaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb2: {fileID: 4391065662692250238}
-  gh: {fileID: 0}
-  check: {fileID: 0}
 --- !u!1001 &3186323257865404249
 PrefabInstance:
   m_ObjectHideFlags: 0

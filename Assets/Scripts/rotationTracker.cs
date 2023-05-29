@@ -10,52 +10,72 @@ public class rotationTracker : MonoBehaviour
     public Transform _car;
 
     //References to the relevent axis angle variables
-
     private Vector3 forwardVector = Vector3.zero;
     private Vector3 lastForwardVector = Vector3.zero;
-    public float angle = 0f;
+
     [SerializeField]
-    public float tippingAngle = 100f;
+    public float driftingAngle = 25f;
+
+    private bool tipcarbool, tipcarboolback = false;
+    private float previousAverageAngle;
+    private float driftingAngleDifference = 5f;
     float t = 0f;
-    private float timer = 0.4f;
-    public float currentAngle = 0f;
+    private float duration = 2f;
+    private float stepSize;
+
 
     public bool wait, firstTime;
     public bool turningleft, turningright, tippingBack = false;
+    [SerializeField]
     public float turningangle;
     public float targetangle;
-    [SerializeField]
-    public float averageAngle;
-    delegate float TipCar(float tipAngle);
-    [SerializeField]
-    bool tipcarbool, tipcarboolback = false;
+    
+    
+    //delegate float TipCar(float tipAngle);
 
-    private const int BUFFER_SIZE = 35;
+    private const int BUFFER_SIZE = 20;
 
     private int frameCount = 0;
     private Vector3[] forwardVectors = new Vector3[BUFFER_SIZE];
-    private float[] weights = new float[BUFFER_SIZE];
+
+    [SerializeField]
+    public float averageAngle;
+    [SerializeField]
+    private float driftCooldown = 2f;
+    private float driftCooldownTimer = 0f;
+
+    private newAI2 playerValues;
+
+    public enum CarState
+    {
+        Normal,
+        Drifting,
+        Returning
+    }
+
+    [SerializeField]
+    private CarState currentState = CarState.Normal;
 
     public void Start()
     {
         wait = true;
         firstTime = true;
-        forwardVector = transform.forward;
-        lastForwardVector = transform.forward;
         targetangle = turningangle = 0f;
+        stepSize = 1f / (30f);
+        playerValues = GetComponent<newAI2>();
 
     }
 
-    public void TipCarFunction()
+    public void DriftCarFunction()
     {
-        turningangle = Mathf.Lerp(0f, targetangle, t / timer);
-        t += Time.deltaTime;
+        turningangle = Mathf.Lerp(0f, targetangle, t);
+        t += stepSize;
     }
 
-    public void TipCarBackFunction()
+    public void DriftCarBackFunction()
     {
-        turningangle = Mathf.Lerp(targetangle, 0f, t / timer);
-        t += Time.deltaTime;
+        turningangle = Mathf.Lerp(targetangle, 0f, t);
+        t += stepSize;
     }
     public void Update()
     {
@@ -64,83 +84,70 @@ public class rotationTracker : MonoBehaviour
             // Add the current forward vector to the buffer
             forwardVectors[frameCount % BUFFER_SIZE] = transform.forward;
 
-            // Compute the average forward vector over the last 10 frames
+            // Compute the average forward vector over the last BUFFER_SIZE frames
             Vector3 avgForwardVector = Vector3.zero;
-            float totalWeight = 0f;
-
             for (int i = 0; i < BUFFER_SIZE; i++)
             {
-                int weightIndex = frameCount - i;
-                float weight = weightIndex < 10 ? (10 - weightIndex) : 1f; // Assign higher weight to newest 10 vectors
-
-                avgForwardVector += forwardVectors[i] * weight;
-                totalWeight += weight;
+                avgForwardVector += forwardVectors[i];
             }
-
-            avgForwardVector /= totalWeight;
-
+            avgForwardVector /= BUFFER_SIZE;
+            //avgForwardVector -= transform.right * turningangle;
 
             // Compute the cross product of the current forward vector and the average forward vector
             Vector3 crossProduct = Vector3.Cross(transform.forward, avgForwardVector);
-
             averageAngle = Vector3.Angle(transform.forward, avgForwardVector);
 
-            // Turn left
-            if (crossProduct.y > 0)
+           switch (currentState)
             {
-                averageAngle = Vector3.Angle(transform.forward, avgForwardVector);
+                case CarState.Normal:
+                    // Start drifting if average angle exceeds the drifting angle threshold
+                    if (Mathf.Abs(averageAngle) > driftingAngle && driftCooldownTimer <= 0f && playerValues.speed > 50f)
+                    {
+                        if (crossProduct.y > 0)
+                            targetangle = 10f + (25f * (playerValues.speed / 100));
+                        else
+                            targetangle = -10f - (25f * (playerValues.speed / 100));
 
+                        currentState = CarState.Drifting;
+                        t = 0f;
+
+                        // Start the cooldown timer
+                        driftCooldownTimer = driftCooldown;
+                    }
+                    break;
+
+                case CarState.Drifting:
+                    DriftCarFunction();
+
+                    // Check if the maximum angle is reached
+                    if (Mathf.Abs(turningangle) >= Mathf.Abs(targetangle))
+                    {
+                        currentState = CarState.Returning;
+                        t = 0f;
+                    }
+                    break;
+
+                case CarState.Returning:
+
+                    // Check if the car has returned to the starting position
+                    if (Mathf.Abs(turningangle) <= 0.2f)
+                    {
+                        currentState = CarState.Normal;
+                        targetangle = 0f;
+                        turningangle = 0f;
+                    }
+                    break;
             }
-            // or turn right
-            else if (crossProduct.y < 0)
-            {
-                averageAngle = -Vector3.Angle(transform.forward, avgForwardVector);
 
-            }
+            if (driftCooldownTimer > 0f)
+                driftCooldownTimer -= Time.deltaTime;
 
-            // Car starts tipping if average angle exceeds treshold
-            if (Mathf.Abs(averageAngle) > tippingAngle)
-            {
-                if (crossProduct.y > 0)
-                    targetangle = 2f;
-                else
-                    targetangle = -2f;
-                tipcarbool = true;
-                t = 0f;
-            }
-
-            // Start tilting the car out
-            if (tipcarbool)
-                TipCarFunction();
-
-            // Stop tipping if the maximum angle is reached
-            if ((Mathf.Abs(turningangle) >= Mathf.Abs(targetangle)) && tipcarbool)
-            {
-                tipcarbool = false;
-                tipcarboolback = true;
-                t = 0f;
-            }
-
-            if (tipcarboolback)
-                if (Mathf.Abs(turningangle) > 0.1f)
-                    TipCarBackFunction();
-                else
-                {
-                    targetangle = 0f;
-                    turningangle = 0f;
-                    tipcarboolback = false;
-                }
-
-           
             frameCount++;
         }
     }
-    public float GetAverageAngle()
-    {
-        return averageAngle;
-    }
 
-    public void FinishSetup()
+
+public void FinishSetup()
     {
         if (firstTime)
         {

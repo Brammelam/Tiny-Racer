@@ -30,8 +30,8 @@ public class cameraFollow : MonoBehaviour
     public void Update()
     {
         // Zoom in when car is tipped
-        if (check.tipped && this.gameObject.GetComponent<Camera>().orthographicSize > 20f)       
-                this.gameObject.GetComponent<Camera>().orthographicSize = this.gameObject.GetComponent<Camera>().orthographicSize - 0.01f;          
+        if (check.tipped && this.gameObject.GetComponent<Camera>().orthographicSize > 20f)
+            this.gameObject.GetComponent<Camera>().orthographicSize = this.gameObject.GetComponent<Camera>().orthographicSize - 0.01f;          
         
     }
 
@@ -47,8 +47,8 @@ public class cameraFollow : MonoBehaviour
             t = check.player.speed / 100f;
         if (!check.tipped && objectToFollow != null)
         {
-            // Zoom out slightly, relative to car speed
-            this.gameObject.GetComponent<Camera>().orthographicSize = cameraDistance + Mathf.SmoothStep(0, 3f, t); 
+            // Zoom out slightly, relative to car speed  This makes me throw up, disabled
+            //this.gameObject.GetComponent<Camera>().orthographicSize = cameraDistance + Mathf.SmoothStep(0, 3f, t); 
 
             // The camera follows a point ahead of the car determined by an offset (float value) to see the road ahead
             if (offset > 10f)

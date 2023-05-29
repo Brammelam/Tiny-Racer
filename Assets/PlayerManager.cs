@@ -96,7 +96,7 @@ public class PlayerManager : MonoBehaviour
     public Color[,] oldcolors;
 
     [SerializeField]
-    public MeshRenderer renderer = new MeshRenderer();
+    public MeshRenderer newrenderer = new MeshRenderer();
     public MeshRenderer oldrenderer;
 
     [SerializeField]
@@ -114,7 +114,7 @@ public class PlayerManager : MonoBehaviour
         // Save original colors for reset function
         selectButton.interactable = false;
         StartCoroutine(SetupRoutine());
-        ghosts = ghostsSO.GhostIds;
+        //ghosts = ghostsSO.GhostIds;
 
     }
 
@@ -437,6 +437,7 @@ public class PlayerManager : MonoBehaviour
         SceneManager.LoadScene(_currentLevel + 1);
     }
 
+    /*
     public void SaveToFile(List<float> _ghostData)
     {
         string filePath = Path.Combine(Application.persistentDataPath + "/" + currentLevel + ".txt");
@@ -446,7 +447,7 @@ public class PlayerManager : MonoBehaviour
         writer.Close();
         StartCoroutine(UploadGhostData());
     }
-
+    */
     public IEnumerator DownloadLevelTextFile(string _s)
     {
         bool done = false;
@@ -633,9 +634,9 @@ public class PlayerManager : MonoBehaviour
 
     public void SetCarDefaultSettingsData()
     {
-        renderer = pmhat.cars[currentCar].GetComponentInChildren<MeshRenderer>();
-        renderer.materials[0].color = oldcolors[0, currentCar];
-        renderer.materials[1].color = oldcolors[1, currentCar];
+        newrenderer = pmhat.cars[currentCar].GetComponentInChildren<MeshRenderer>();
+        newrenderer.materials[0].color = oldcolors[0, currentCar];
+        newrenderer.materials[1].color = oldcolors[1, currentCar];
 
         carsettings.BodyColor[0] = oldcolors[0, currentCar].r;
         carsettings.BodyColor[1] = oldcolors[0, currentCar].g;
@@ -684,7 +685,7 @@ public class PlayerManager : MonoBehaviour
 
     public void StartUploadGhost(List<float> _ghostData)
     {
-        SaveToFile(_ghostData);
+        //SaveToFile(_ghostData);
     }
 
     public IEnumerator UploadGhostData()
@@ -722,20 +723,20 @@ public class PlayerManager : MonoBehaviour
 
     public void ResetOriginalCar()
     {
-        renderer = pmhat.cars[currentCar].GetComponentInChildren<MeshRenderer>();
-        renderer.materials[0].color = oldcolors[0, currentCar];
-        renderer.materials[1].color = oldcolors[1, currentCar];
+        newrenderer = pmhat.cars[currentCar].GetComponentInChildren<MeshRenderer>();
+        newrenderer.materials[0].color = oldcolors[0, currentCar];
+        newrenderer.materials[1].color = oldcolors[1, currentCar];
     }
 
     public void ModifyCar()
     {
-        renderer = pmhat.cars[currentCar].GetComponentInChildren<MeshRenderer>();
+        newrenderer = pmhat.cars[currentCar].GetComponentInChildren<MeshRenderer>();
 
         Color _bodyColor = new Color(carsettings.BodyColor[0], carsettings.BodyColor[1], carsettings.BodyColor[2]);
         Color _windowColor = new Color(carsettings.WindowColor[0], carsettings.WindowColor[1], carsettings.WindowColor[2]);
 
-        renderer.materials[0].color = _bodyColor;
-        renderer.materials[1].color = _windowColor;
+        newrenderer.materials[0].color = _bodyColor;
+        newrenderer.materials[1].color = _windowColor;
     }
 
     public void SavePreferences()

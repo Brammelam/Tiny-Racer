@@ -2066,7 +2066,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 0.9871, b: 0.871, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2074,7 +2074,7 @@ Light:
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
-    m_Resolution: -1
+    m_Resolution: 0
     m_CustomResolution: -1
     m_Strength: 0.771
     m_Bias: 0.285
@@ -2104,9 +2104,9 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 135
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -2124,13 +2124,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266962417}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.65904003, y: 0.120115556, z: 0.19846259, w: 0.7154377}
+  m_LocalPosition: {x: -143.5, y: 35.8, z: -39.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 63.551, y: 76.699, z: 83.223}
 --- !u!1001 &272972614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3004,11 +3004,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -200
-  far clip plane: 200
+  near clip plane: -100.4
+  far clip plane: 250.2
   field of view: 89.6
   orthographic: 1
-  orthographic size: 40
+  orthographic size: 28.28
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3032,7 +3032,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382089041}
   m_LocalRotation: {x: 0.22315519, y: -0.7639462, z: 0.3405302, w: 0.50062686}
-  m_LocalPosition: {x: 16, y: 16.2, z: 11.6}
+  m_LocalPosition: {x: 22.2, y: -7.8, z: 64.3}
   m_LocalScale: {x: 1.12, y: 1.12, z: 1.12}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3073,7 +3073,7 @@ MonoBehaviour:
     m_Bits: 8
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
-  antialiasingMode: 3
+  antialiasingMode: 1
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
@@ -3963,10 +3963,6 @@ MonoBehaviour:
   - {fileID: 3472657004133281580, guid: 43f1f7dbb4ffb7c4496c727bef967ab5, type: 3}
   - {fileID: 3472657004133281580, guid: 26c5b95bd7721e64fa43707ff45abf50, type: 3}
   saveRecord: []
-  loadedGhost: []
-  ghostDistanceTravelled: 0
-  ghost: {fileID: 0}
-  _ghostFollower: {fileID: 0}
   cop: {fileID: 0}
   deadCop: {fileID: 3472657004133281580, guid: de3f2d93ea0231640b351b6c745d768e, type: 3}
   rb: {fileID: 0}
@@ -13672,16 +13668,16 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 949888d42efe5734f9948099c41dc85e, type: 2}
+  - {fileID: 2100000, guid: 86edc6b23ff4bec459958a378af9d7d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

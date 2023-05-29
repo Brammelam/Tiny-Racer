@@ -17,16 +17,15 @@ public class checkShit : MonoBehaviour
     private List<float> playerRecord;
     public List<float> saveRecord;
 
-    public List<float> loadedGhost;
+    //public List<float> loadedGhost;
 
-    public float ghostDistanceTravelled;
+    //public float ghostDistanceTravelled;
 
-    public GameObject ghost;
-    public ghostFollower _ghostFollower;
+    //public GameObject ghost;
+    //public ghostFollower _ghostFollower;
     public GameObject cop;
     public GameObject deadCop;
-    public Rigidbody rb;
-    public Rigidbody rb2;
+    public Rigidbody rb, rb2;
     public Vector3 copPosition = Vector3.zero;
     public Vector3 direction = Vector3.zero;
     public Vector3 flipSpeed = Vector3.zero;
@@ -35,8 +34,11 @@ public class checkShit : MonoBehaviour
     public bool tipped = false;
     public speedTracker st;
     public rotationTracker rt;
-    private float tipAngleLeft = 20f;
-    private float tipAngleRight = -20f;
+    //private float tipAngleLeft = 35f;
+    //private float tipAngleRight = -35f;
+    private const float MIN_ANGLE = 45f;
+    private const float FLIP_ANGLE = 65f;
+    private const float MAX_SPEED = 100f;
     [SerializeField]
     private float tipSpeed = 1.6f;
     public PathCreator pathCreator;
@@ -93,42 +95,22 @@ public class checkShit : MonoBehaviour
     [SerializeField]
     float currspeed;
 
+    private bool allObjectsFound = false;
+    private bool ready = false;
+
     public void Awake()
     {
-        pm = GameObject.FindObjectOfType<PlayerManager>();
-        _score = GameObject.FindObjectOfType<Score>();
-        leaderBoard = GameObject.FindObjectOfType<LeaderBoard>();
-
-        playerRecord = new List<float>();
-        saveRecord = new List<float>();
        
-        currentLevel = pm.currentLevel;
+        pm = GameObject.FindObjectOfType<PlayerManager>();
+        /*
+       _score = GameObject.FindObjectOfType<Score>();
+       leaderBoard = GameObject.FindObjectOfType<LeaderBoard>();
+       */
+        playerRecord = new List<float>();
+        saveRecord = new List<float>();          
 
-        Physics.gravity = new Vector3(0, -50F, 0);
-        LoadPrefs();
-
-        cars = new List<GameObject>(7);
-        cars.Add(Resources.Load<GameObject>("PlayerCars/NormalCar2"));
-        cars.Add(Resources.Load<GameObject>("PlayerCars/NormalCar"));
-        cars.Add(Resources.Load<GameObject>("PlayerCars/SUV"));
-        cars.Add(Resources.Load<GameObject>("PlayerCars/SportsCar"));
-        cars.Add(Resources.Load<GameObject>("PlayerCars/SportsCar2"));
-        cars.Add(Resources.Load<GameObject>("PlayerCars/Taxi"));
-        cars.Add(Resources.Load<GameObject>("PlayerCars/Cop"));
-
-        deadCars = new List<GameObject>(7);
-        deadCars.Add(Resources.Load<GameObject>("deadCars/deadNormalCar2"));
-        deadCars.Add(Resources.Load<GameObject>("deadCars/deadNormalCar"));
-        deadCars.Add(Resources.Load<GameObject>("deadCars/deadSUV"));
-        deadCars.Add(Resources.Load<GameObject>("deadCars/deadSportsCar"));
-        deadCars.Add(Resources.Load<GameObject>("deadCars/deadSportsCar2"));
-        deadCars.Add(Resources.Load<GameObject>("deadCars/deadTaxi"));
-        deadCars.Add(Resources.Load<GameObject>("deadCars/deadCop"));
-
-        ghost = Instantiate(Resources.Load("ghostCar") as GameObject);
-        _ghostFollower = ghost.GetComponent<ghostFollower>();
+        Physics.gravity = new Vector3(0, -50F, 0);      
         
-
         if (currentLevel < 3 || currentLevel == 7 || currentLevel == 8 || currentLevel == 9)
         {
             GameObject.FindGameObjectWithTag("Ambient").GetComponent<AmbientClass>().PlayAmbientMusic();
@@ -151,9 +133,8 @@ public class checkShit : MonoBehaviour
         _car.PlayCarMusic();
         _car.timeElapsed = 0;
 
-
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<cameraFollow>();
-        LoadGhost();
+        
         /*
         // Wait until finished saving
         if (GameObject.FindGameObjectWithTag("save") != null)
@@ -164,11 +145,106 @@ public class checkShit : MonoBehaviour
 
     public void Start()
     {
+        Application.targetFrameRate = 60;
         tipped = false;
+        
+    }
+
+    IEnumerator LoadPrefs()
+    {
         recordTime = pm.currentScoreSO.CurrentScore;
-        cop = Instantiate(cars[pm.currentCar]);
-        deadCop = Instantiate(deadCars[pm.currentCar]);
-        cop.GetComponent<newAI2>().enabled = true;
+        whatCar = pm.carsettings.CurrentCar;
+        hatIndex = pm.carsettings.CurrentHat;
+        currentLevel = pm.currentLevel;
+
+        cars = new List<GameObject>(1);
+        deadCars = new List<GameObject>(1);
+
+        switch (whatCar)
+        {
+            case 0:
+                cars.Add(Resources.Load<GameObject>("PlayerCars/NormalCar2"));
+                deadCars.Add(Resources.Load<GameObject>("deadCars/deadNormalCar2"));
+                break;
+            case 1:
+                cars.Add(Resources.Load<GameObject>("PlayerCars/NormalCar"));
+                deadCars.Add(Resources.Load<GameObject>("deadCars/deadNormalCar"));
+                break;
+            case 2:
+                cars.Add(Resources.Load<GameObject>("PlayerCars/SUV"));
+                deadCars.Add(Resources.Load<GameObject>("deadCars/deadSUV"));
+                break;
+            case 3:
+                cars.Add(Resources.Load<GameObject>("PlayerCars/SportsCar"));
+                deadCars.Add(Resources.Load<GameObject>("deadCars/deadSportsCar"));
+                break;
+            case 4:
+                cars.Add(Resources.Load<GameObject>("PlayerCars/SportsCar2"));
+                deadCars.Add(Resources.Load<GameObject>("deadCars/deadSportsCar2"));
+                break;
+            case 5:
+                cars.Add(Resources.Load<GameObject>("PlayerCars/Taxi"));
+                deadCars.Add(Resources.Load<GameObject>("deadCars/deadTaxi"));
+                break;
+            default:
+                cars.Add(Resources.Load<GameObject>("PlayerCars/Cop"));
+                deadCars.Add(Resources.Load<GameObject>("deadCars/deadCop"));
+                break;
+        }
+           
+        cop = Instantiate(cars[0]);
+        deadCop = Instantiate(deadCars[0]);
+        if (hatIndex != 3)
+        {
+            if (hatIndex == 0)
+                _hat = Instantiate(Resources.Load("tophat1") as GameObject);
+            if (hatIndex == 1)
+                _hat = Instantiate(Resources.Load("crown1") as GameObject);
+            if (hatIndex == 2)
+                _hat = Instantiate(Resources.Load("party1") as GameObject);
+        }
+        yield return WaitForAssignments();
+
+        cop.GetComponent<newAI2>().enabled = true;       
+
+    }
+ 
+    IEnumerator WaitForAssignments()
+    {
+        // Wait until the required assignments are successful
+        while (cop.GetComponent<newAI2>() == null ||
+               cop.GetComponent<Rigidbody>() == null ||
+               cop.GetComponent<speedTracker>() == null ||
+               cop.GetComponent<rotationTracker>() == null ||
+               deadCop.GetComponent<Rigidbody>() == null
+               )
+        {
+            yield return null;
+        }
+
+        // Assign the components to the variables
+        cop = GameObject.FindGameObjectWithTag("Player");
+        player = cop.GetComponent<newAI2>();
+        rb = cop.GetComponent<Rigidbody>();
+        st = cop.GetComponent<speedTracker>();
+        rt = cop.GetComponent<rotationTracker>();
+        rb2 = deadCop.GetComponent<Rigidbody>();
+
+
+        _hat.transform.SetParent(cop.transform);
+
+        _hat.transform.localPosition = new Vector3(0, 1.4f, -0.3f);
+        if (whatCar == 5)
+            _hat.transform.localPosition = new Vector3(0, 1.6f, -0.3f);
+        if (hatIndex == 2)
+            _hat.transform.localPosition -= new Vector3(0, -0.2f, 0);
+        
+
+        //ghost = GameObject.FindGameObjectWithTag("Ghost") ?? ghost;
+
+        //ghost = Instantiate(Resources.Load("ghostCar") as GameObject);
+        //_ghostFollower = ghost.GetComponent<ghostFollower>();
+
         if (pm.carsettings.CustomCar)
         {
             Color _colbody = new Color(pm.carsettings.BodyColor[0], pm.carsettings.BodyColor[1], pm.carsettings.BodyColor[2]);
@@ -179,19 +255,12 @@ public class checkShit : MonoBehaviour
             deadCop.GetComponentInChildren<MeshRenderer>().materials[1].color = _colwindow;
         }
         deadCop.SetActive(false);
+        //loadedGhost = pm.ghostData;     
+
+
+        ready = true;
     }
 
-    public void LoadPrefs()
-    {
-        whatCar = pm.carsettings.CurrentCar;
-        hatIndex = pm.carsettings.CurrentHat;
-
-    }
- 
-    public void LoadGhost()
-    {
-        loadedGhost = pm.ghostData;
-    }
 
     /*
     public void DontWaitForGhost()
@@ -225,74 +294,49 @@ public class checkShit : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void FindObjectsInScene()
+    {
+
+        pm = FindObjectOfType<PlayerManager>() ?? pm;
+        _score = FindObjectOfType<Score>() ?? _score;
+        leaderBoard = FindObjectOfType<LeaderBoard>() ?? leaderBoard;
+
+        // check if all conditions are met
+        if (pm != null && _score != null && leaderBoard != null)
+        {
+            allObjectsFound = true;
+            StartCoroutine(LoadPrefs());
+
+        }
+    }
     // Update is called once per frame
     public void Update()
     {
-        if (Input.GetKeyUp("escape")) Menu();
+        if (!allObjectsFound)
+        {
+            FindObjectsInScene();
+            return;
+        }
 
-        if (pm == null) 
-            pm = GameObject.FindObjectOfType<PlayerManager>();
-        if (_score == null) 
-            _score = GameObject.FindObjectOfType<Score>();
+        if (Input.GetKeyUp("escape")) Menu();
 
         if (!_score.isActiveAndEnabled) _score.enabled = true;
 
-        if (leaderBoard == null)
-            leaderBoard = GameObject.FindObjectOfType<LeaderBoard>();
+        if (ready) GameLogic();
 
         if (!tipped)
-        {
-            if (cop == null)
-                cop = GameObject.FindGameObjectWithTag("Player");
+        {                    
 
-            if (rb == null)
-                rb = Rigidbody.FindObjectOfType<Rigidbody>();
-            
-            if (st == null)
-                st = speedTracker.FindObjectOfType<speedTracker>();
-           
-            if (rt == null)           
-                rt = rotationTracker.FindObjectOfType<rotationTracker>();
-            
-            if (player == null)            
-                player = cop.GetComponent<newAI2>();
-            
-            if (ghost == null)            
-               ghost = GameObject.FindGameObjectWithTag("Ghost");
-            
-            if (_hat == null && hatIndex != 3)
+            float thresholdAngle = MIN_ANGLE + (FLIP_ANGLE - MIN_ANGLE) * (player.speed / MAX_SPEED);
+            float adjustedThresholdAngle = thresholdAngle + Mathf.Abs(rt.turningangle);
+
+            // Perform your logic based on the average angle and threshold angle
+            if (Mathf.Abs(rt.averageAngle) > adjustedThresholdAngle)
             {
-                if (hatIndex == 0)
-                    _hat = Instantiate(Resources.Load("tophat1") as GameObject);
-                if (hatIndex == 1)
-                    _hat = Instantiate(Resources.Load("crown1") as GameObject);
-                if (hatIndex == 2)
-                    _hat = Instantiate(Resources.Load("party1") as GameObject);
-                _hat.transform.SetParent(cop.transform);
-
-                _hat.transform.localPosition = new Vector3(0, 1.4f, -0.3f);
-                if (whatCar == 5)
-                    _hat.transform.localPosition = new Vector3(0, 1.6f, -0.3f);
-                if (hatIndex == 2)
-                    _hat.transform.localPosition -= new Vector3(0, -0.2f, 0);
-            }
-
-            currentSpeed = player.speed;
-
-            if (((Time.timeScale * st.speed) >= (Time.timeScale * tipSpeed)) && !tipped)
-            {
-                if ((rt.averageAngle > 0 && rt.averageAngle > tipAngleLeft))
-                {
-                    // Left turn condition is met, flip car
-                    FlipCar();
-                }
-                else if ((rt.averageAngle < 0 && rt.averageAngle < tipAngleRight))
-                {
-                    // Right turn condition is met, flip car
-                    FlipCar();
-                }
+                FlipCar();
             }
         }
+
         // Restart level on spacebar, touch screen or mouseclick
         else if (tipped)
         {
@@ -300,10 +344,10 @@ public class checkShit : MonoBehaviour
         }
     }
 
-    public void FixedUpdate()
+    public void GameLogic()
     {
-        currspeed = Time.timeScale * st.speed;
-        if (player != null && player.touching && !hasStarted)
+        currspeed = Time.timeScale * st.CurrentSpeed;
+        if (player.touching && !hasStarted)
         {
             startTime = Time.time;
             hasStarted = true;
@@ -317,7 +361,7 @@ public class checkShit : MonoBehaviour
             //TUTORIAL STUFF
             if (pm.currentLevel == 9)
             {
-                if (someCount == 0 )
+                if (someCount == 0)
                 {
                     if (player.distanceTravelled > 120 && player.distanceTravelled < 135 && !setSlow)
                     {
@@ -331,7 +375,7 @@ public class checkShit : MonoBehaviour
                     {
                         if (Time.timeScale < 1f)
                         {
-                            
+
                             Time.timeScale += 0.02f;
                             Time.fixedDeltaTime = Time.timeScale * 0.02f;
                             if (Time.timeScale >= 1f)
@@ -381,6 +425,7 @@ public class checkShit : MonoBehaviour
                 Destroy(donut, 5f);
             }
 
+            /*
             // start ghost when player starts playing
             if (index < loadedGhost.Count && currentLevel != 9)
             {
@@ -389,7 +434,7 @@ public class checkShit : MonoBehaviour
                 ghost.transform.SetPositionAndRotation(pathCreator.path.GetPointAtDistance(ghostDistance), pathCreator.path.GetRotationAtDistance(ghostDistance));
                 index++;
             }
-
+            */
             // If player completes a lap, reset values and start saving
             // this part continues working even when new scenes are loaded
             if (player.distanceTravelled >= pathCreator.path.length && !tipped)
@@ -399,7 +444,7 @@ public class checkShit : MonoBehaviour
 
                 if (!pm.unlockedCars.Contains(s) && currentLevel != 9)
                 {
-                    pm.TriggerEvent("grantCar"+c);
+                    pm.TriggerEvent("grantCar" + c);
                 }
 
                 // Disables repeating tutorial text after completing first lap
@@ -413,7 +458,7 @@ public class checkShit : MonoBehaviour
                         pm.TriggerEvent("tutorialUnlock");
                         pm.unlockedCars.Add("TutorialUnlock");
                     }
-                    
+
                     someCount = 1;
                 }
 
@@ -425,16 +470,16 @@ public class checkShit : MonoBehaviour
                 if (recordTime == 0 || elapsedTime < recordTime)
                 {
 
-                    pm.UpdateScoreText(Mathf.Round(elapsedTime * 100)/100);
-                    
+                    pm.UpdateScoreText(Mathf.Round(elapsedTime * 100) / 100);
+
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * -100);
 
                     StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel));
-                    
-                    loadedGhost = playerRecord;
 
-                    pm.StartUploadGhost(playerRecord);
+                    //loadedGhost = playerRecord;
+
+                    //pm.StartUploadGhost(playerRecord);
 
 
                     SavePrefs();
@@ -475,17 +520,16 @@ public class checkShit : MonoBehaviour
             _hat.GetComponent<Rigidbody>().isKinematic = false;
         }
         Destroy(cop);
-        Destroy(rb);
+        //Destroy(rb);
         deadCop.SetActive(true);
         deadCop.transform.SetPositionAndRotation(copPosition, copRotation);
 
         // Calculate flip direction based on the corner direction
         Vector3 flipDirection = Quaternion.Euler(0f, 0f, -90f) * direction;
 
-
-        deadCop.GetComponent<Rigidbody>().AddForce(Vector3.up * 10000f, ForceMode.Impulse);
-        deadCop.GetComponent<Rigidbody>().AddForce(direction * 10000f, ForceMode.Impulse);
-        deadCop.GetComponent<Rigidbody>().AddTorque(flipDirection * 5000f * -rt.averageAngle, ForceMode.Impulse);
+        rb2.AddForce(Vector3.up * 10000f, ForceMode.Impulse);
+        rb2.AddForce(direction * 10000f, ForceMode.Impulse);
+        rb2.AddTorque(flipDirection * 5000f * -rt.averageAngle, ForceMode.Impulse);
         Instantiate(Resources.Load("carCrashSound") as GameObject);
     }
 
@@ -511,10 +555,10 @@ public class checkShit : MonoBehaviour
 
     IEnumerator ReturnToMenu()
     {
-        yield return leaderBoard.FetchHighscores();
+        SavePrefs();
+        //yield return leaderBoard.FetchHighscores();
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f;
-        SavePrefs();
         GameObject.FindGameObjectWithTag("City").GetComponent<CityScript>().StopCityMusic();
         GameObject.FindGameObjectWithTag("Snow").GetComponent<SnowScript>().StopSnowMusic();
         GameObject.FindGameObjectWithTag("Ambient").GetComponent<AudioSource>().pitch = 1f;
@@ -522,5 +566,6 @@ public class checkShit : MonoBehaviour
         GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().PlayMusic();
         _car.StopCarMusic();
         SceneManager.LoadScene(0);
+        yield return null;
     }
 }

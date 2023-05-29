@@ -217,8 +217,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
-  - {fileID: 1904895592697892187}
   - {fileID: 8613243549497826734}
+  - {fileID: 237548815664573774}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -250,9 +250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e591aae7fa2b49a774d3ff9b37fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  rb: {fileID: 1555150608783596522}
-  rb2: {fileID: 4391065662692250238, guid: de3f2d93ea0231640b351b6c745d768e, type: 3}
   cop: {fileID: 1825199115517716153}
   deadCop: {fileID: 3472657004133281580, guid: de3f2d93ea0231640b351b6c745d768e, type: 3}
   pathCreator: {fileID: 0}
@@ -260,12 +257,12 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   copPosition: {x: 0, y: 0, z: 0}
   copRotation: {x: 0, y: 0, z: 0, w: 1}
+  driftPoint: {fileID: 237548815664573774}
   distanceTravelled: 0
   speed: 0
-  rotationTracker: {fileID: 1555150608783596519}
-  speedTracker: {fileID: 1555150608783596512}
   check: {fileID: 0}
   touching: 0
+  mult: 0
 --- !u!114 &1555150608783596519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,9 +276,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _car: {fileID: 1305965003160566787}
-  forwardVector: {x: 0, y: 0, z: 0}
-  lastForwardVector: {x: 0, y: 0, z: 0}
-  angle: 0
+  driftingAngle: 25
+  wait: 0
+  firstTime: 0
+  turningleft: 0
+  turningright: 0
+  tippingBack: 0
+  turningangle: 0
+  targetangle: 0
+  averageAngle: 0
+  driftCooldown: 2
+  currentState: 0
 --- !u!114 &1555150608783596512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,94 +675,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 1
   m_ShadowAngle: 0
---- !u!1 &7267018748176440928
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1904895592697892187}
-  - component: {fileID: 3654850518457857041}
-  - component: {fileID: 260391908851191941}
-  m_Layer: 0
-  m_Name: default
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1904895592697892187
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7267018748176440928}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1305965003160566787}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3654850518457857041
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7267018748176440928}
-  m_Mesh: {fileID: -2432090755550338912, guid: 4395b7e4432e53345a91f67f49dd5c2c, type: 3}
---- !u!23 &260391908851191941
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7267018748176440928}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: -8848810374240701247, guid: 4395b7e4432e53345a91f67f49dd5c2c, type: 3}
-  - {fileID: -7184292951177722594, guid: 4395b7e4432e53345a91f67f49dd5c2c, type: 3}
-  - {fileID: -5243988174349660497, guid: 4395b7e4432e53345a91f67f49dd5c2c, type: 3}
-  - {fileID: -1598722958210515638, guid: 4395b7e4432e53345a91f67f49dd5c2c, type: 3}
-  - {fileID: -1580535799172915004, guid: 4395b7e4432e53345a91f67f49dd5c2c, type: 3}
-  - {fileID: 4376495798698692818, guid: 4395b7e4432e53345a91f67f49dd5c2c, type: 3}
-  - {fileID: 7324344676739449138, guid: 4395b7e4432e53345a91f67f49dd5c2c, type: 3}
-  - {fileID: -8071395891432882468, guid: 4395b7e4432e53345a91f67f49dd5c2c, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8767119991808798013
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,6 +768,36 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 1
   m_ShadowAngle: 0
+--- !u!1 &8780539253288219072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 237548815664573774}
+  m_Layer: 0
+  m_Name: driftPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &237548815664573774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8780539253288219072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 1.36}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1305965003160566787}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9181805364628065435
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,7 +900,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3aad90670b7f6094186c69cc4e483787, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3aad90670b7f6094186c69cc4e483787, type: 3}
       propertyPath: m_LocalPosition.x
