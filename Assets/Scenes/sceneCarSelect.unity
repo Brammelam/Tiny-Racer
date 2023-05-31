@@ -974,7 +974,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &21379612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1321,7 +1322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &32063638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1614,7 +1616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &36376168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1791,7 +1794,7 @@ GameObject:
   - component: {fileID: 37665065}
   m_Layer: 5
   m_Name: EnterPassword
-  m_TagString: inputfieldpassword
+  m_TagString: b
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1830,9 +1833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2665a43a754bb6c4d99b1f4302667326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputText: {fileID: 2127065143}
-  playerName: 
-  playerInput: {fileID: 37665063}
+  inputField: {fileID: 0}
 --- !u!114 &37665066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1901,9 +1902,9 @@ MonoBehaviour:
   m_OnSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1843081505}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: OpenTextMenu
+      - m_Target: {fileID: 293366222}
+        m_TargetAssemblyTypeName: KeyboardManager, Assembly-CSharp
+        m_MethodName: SelectEmail
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2033,7 +2034,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &40855319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2566,6 +2568,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4b2b4c3be75044cad3177054a44fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputFields: []
+  currentInputField: 0
 --- !u!1 &71314971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,7 +2622,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &71314974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2753,7 +2758,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &74174406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3046,7 +3052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &80583581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3260,7 +3267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &83841663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3395,7 +3403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &90264561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3717,7 +3726,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &106321770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3839,6 +3849,7 @@ MonoBehaviour:
   resetPasswordInputField: {fileID: 1613058245}
   rememberMeToggle: {fileID: 125230176}
   playerManager: {fileID: 1843081505}
+  serverManager: {fileID: 0}
 --- !u!4 &108454764
 Transform:
   m_ObjectHideFlags: 0
@@ -3905,7 +3916,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &111776645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4040,7 +4052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &114547516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4554,7 +4567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &118814236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4768,7 +4782,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &120848250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5080,7 +5095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &128234955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5215,7 +5231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &129644585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5350,7 +5367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &134491624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5643,7 +5661,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &140122488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5972,7 +5991,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &154891095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6107,7 +6127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &157223989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6321,7 +6342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &157783569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6707,7 +6729,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &166999036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7641,7 +7664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &205380790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7776,7 +7800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &214966618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8395,7 +8420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &234548475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8530,7 +8556,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &237531410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9034,7 +9061,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &255896995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9923,7 +9951,7 @@ GameObject:
   - component: {fileID: 292920646}
   m_Layer: 5
   m_Name: EnterPassword
-  m_TagString: inputfieldpassword
+  m_TagString: c
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9962,9 +9990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2665a43a754bb6c4d99b1f4302667326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputText: {fileID: 688905104}
-  playerName: 
-  playerInput: {fileID: 292920644}
+  inputField: {fileID: 0}
 --- !u!114 &292920647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10033,9 +10059,9 @@ MonoBehaviour:
   m_OnSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1843081505}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: OpenTextMenu
+      - m_Target: {fileID: 48522657}
+        m_TargetAssemblyTypeName: KeyboardManager, Assembly-CSharp
+        m_MethodName: SelectPw
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10165,7 +10191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &293357786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10341,6 +10368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4b2b4c3be75044cad3177054a44fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputFields: []
+  currentInputField: 0
 --- !u!1 &296294963
 GameObject:
   m_ObjectHideFlags: 0
@@ -10445,7 +10474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &296344946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11191,7 +11221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &329361183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11326,7 +11357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &329487351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11844,7 +11876,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &335350493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12246,7 +12279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &349733902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12456,7 +12490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &352042453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12670,7 +12705,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &361048083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12884,7 +12920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &364843072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13055,7 +13092,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &370731422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13725,7 +13763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &394699163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14136,7 +14175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &405093184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14350,7 +14390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &407286747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14978,7 +15019,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &430273761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15113,7 +15155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &430731580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15676,7 +15719,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &446986212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15890,7 +15934,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &457483796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16025,7 +16070,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &459402731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16160,7 +16206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &460671474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16650,9 +16697,10 @@ GameObject:
   - component: {fileID: 467116969}
   - component: {fileID: 467116968}
   - component: {fileID: 467116967}
+  - component: {fileID: 467116971}
   m_Layer: 5
   m_Name: EnterEmail
-  m_TagString: inputfieldwelcome
+  m_TagString: b
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16690,9 +16738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2665a43a754bb6c4d99b1f4302667326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputText: {fileID: 1991691091}
-  playerName: 
-  playerInput: {fileID: 467116965}
+  inputField: {fileID: 0}
 --- !u!114 &467116968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16761,9 +16807,9 @@ MonoBehaviour:
   m_OnSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1843081505}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: OpenTextMenu
+      - m_Target: {fileID: 48522657}
+        m_TargetAssemblyTypeName: KeyboardManager, Assembly-CSharp
+        m_MethodName: SelectEmail
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16841,6 +16887,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467116965}
   m_CullTransparentMesh: 1
+--- !u!114 &467116971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467116965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0231452650ffec4bb3b9e0c766d426e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &469569957
 GameObject:
   m_ObjectHideFlags: 0
@@ -17038,7 +17096,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &476473852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17330,7 +17389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &478449449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17653,7 +17713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &484770080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17788,7 +17849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &485937756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17994,8 +18056,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leaderboardIds: 2c2100002d210000d0210000d4210000d5210000d6210000d7210000d8210000d9210000
-  leaderboardNames: []
-  leaderboardScores: []
   currentScore: 
   playerNames: {fileID: 0}
   playerScores: {fileID: 0}
@@ -18407,7 +18467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &504282581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18621,7 +18682,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &507182468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18870,7 +18932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &526172203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19005,7 +19068,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &528115361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19140,7 +19204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &537504867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19275,7 +19340,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &538724105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19555,7 +19621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &542370699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19919,7 +19986,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &555938776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20054,7 +20122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &556802132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20189,7 +20258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &559169351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20324,7 +20394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &565911613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20538,7 +20609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &569132854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20752,7 +20824,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &572009872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20966,7 +21039,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &578424589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21180,7 +21254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &584294996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21442,7 +21517,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &593194358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21855,6 +21931,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4b2b4c3be75044cad3177054a44fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputFields: []
+  currentInputField: 0
 --- !u!1 &608973870
 GameObject:
   m_ObjectHideFlags: 0
@@ -22672,7 +22750,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &647609054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23208,7 +23287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &666130649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23343,7 +23423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &668111694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23612,7 +23693,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &669824794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23747,7 +23829,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &670096396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23882,7 +23965,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &673096786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24017,7 +24101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &687423251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24286,7 +24371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &689583944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25058,7 +25144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &727272185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25351,7 +25438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &737472671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25644,7 +25732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &750449848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25858,7 +25947,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &752398153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25993,7 +26083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &758811700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26128,7 +26219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &762318466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26263,7 +26355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &765196125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26556,7 +26649,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &773144635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27072,7 +27166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &782540008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27207,7 +27302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &784456459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27611,7 +27707,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &786603940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27855,7 +27952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &794954872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27990,7 +28088,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &799757431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28976,7 +29075,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &846598486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29424,7 +29524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &854139827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29559,7 +29660,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &854464746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29694,7 +29796,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &873114566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30159,7 +30262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &877592039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30410,7 +30514,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &880084771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31067,7 +31172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &905977611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31281,7 +31387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &911257958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31416,7 +31523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &911813573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31662,7 +31770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &922280182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32556,7 +32665,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &961428143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32767,7 +32877,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &967910688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33217,7 +33328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &979470691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33431,7 +33543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &987258122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33827,7 +33940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &998979434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34264,7 +34378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1007592236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34478,7 +34593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1011155391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34882,7 +34998,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1026625012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35301,7 +35418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1039208206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36120,7 +36238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1073708655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36374,7 +36493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1075567095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36509,7 +36629,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1077763528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36644,7 +36765,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1079011463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36779,7 +36901,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1080034899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36914,7 +37037,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1091589129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37049,7 +37173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1097227358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37462,7 +37587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1103748303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38141,7 +38267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1123093107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38425,9 +38552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2665a43a754bb6c4d99b1f4302667326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputText: {fileID: 668754236}
-  playerName: 
-  playerInput: {fileID: 1124411026}
+  inputField: {fileID: 0}
 --- !u!1 &1134167133
 GameObject:
   m_ObjectHideFlags: 0
@@ -38555,7 +38680,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1137535808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38690,7 +38816,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1141169416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38904,7 +39031,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1151965213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39039,7 +39167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1153079022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39253,7 +39382,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1160207934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39799,7 +39929,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1172998058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39934,7 +40065,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1173547717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40148,7 +40280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1176928140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40283,7 +40416,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1180166833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40687,7 +40821,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1190763267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40901,7 +41036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1201766038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41074,7 +41210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1210494773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41288,7 +41425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1213438152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41692,7 +41830,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1231003928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42147,7 +42286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1235593208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42408,7 +42548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1240329136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42543,7 +42684,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1242814276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42757,7 +42899,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1251274914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42971,7 +43114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1264918629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43418,7 +43562,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1274882284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43632,7 +43777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1277214776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43937,7 +44083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1281024408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44035,7 +44182,7 @@ GameObject:
   - component: {fileID: 1285593168}
   m_Layer: 5
   m_Name: EnterNickname
-  m_TagString: inputfieldwelcome
+  m_TagString: a
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44073,9 +44220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2665a43a754bb6c4d99b1f4302667326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputText: {fileID: 1801211113}
-  playerName: 
-  playerInput: {fileID: 1285593166}
+  inputField: {fileID: 0}
 --- !u!114 &1285593169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44144,9 +44289,9 @@ MonoBehaviour:
   m_OnSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1843081505}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: OpenTextMenu
+      - m_Target: {fileID: 48522657}
+        m_TargetAssemblyTypeName: KeyboardManager, Assembly-CSharp
+        m_MethodName: SelectNick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -44276,7 +44421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1290558279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44648,7 +44794,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1304096344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45194,7 +45341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1326609833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45724,7 +45872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1339274794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46225,7 +46374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1359796530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46766,7 +46916,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1392140446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46980,7 +47131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1394348870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47230,7 +47382,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1396420529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47365,7 +47518,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1397235926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47724,7 +47878,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1403331425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47859,7 +48014,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1403381432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48073,7 +48229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1422337454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48244,7 +48401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1432859386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48379,7 +48537,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1434817577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48629,7 +48788,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1443407493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48812,7 +48972,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1443891913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49184,7 +49345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1456891624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49398,7 +49560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1472470300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49612,7 +49775,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1480605951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49747,7 +49911,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1480724559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49845,7 +50010,7 @@ GameObject:
   - component: {fileID: 1480839147}
   m_Layer: 5
   m_Name: EnterName
-  m_TagString: inputfieldwelcome
+  m_TagString: a
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49883,9 +50048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2665a43a754bb6c4d99b1f4302667326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputText: {fileID: 2102892471}
-  playerName: 
-  playerInput: {fileID: 1480839145}
+  inputField: {fileID: 0}
 --- !u!114 &1480839148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49954,9 +50117,9 @@ MonoBehaviour:
   m_OnSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1843081505}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: OpenTextMenu
+      - m_Target: {fileID: 293366222}
+        m_TargetAssemblyTypeName: KeyboardManager, Assembly-CSharp
+        m_MethodName: SelectNick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -50162,7 +50325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1481420840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50534,7 +50698,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1507019443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50985,7 +51150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1524125637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51120,7 +51286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1528682190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51512,7 +51679,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1531355773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51956,7 +52124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1544099999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52091,7 +52260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1544794673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52231,7 +52401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1551306786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52603,7 +52774,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1557565792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52903,7 +53075,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1567488593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53090,7 +53263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1578964988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53379,7 +53553,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1583539993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53514,7 +53689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1588081222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53649,7 +53825,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1588885114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54181,7 +54358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1598576052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54554,9 +54732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2665a43a754bb6c4d99b1f4302667326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputText: {fileID: 1278994958}
-  playerName: 
-  playerInput: {fileID: 1613058242}
+  inputField: {fileID: 0}
 --- !u!114 &1613058245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54625,9 +54801,9 @@ MonoBehaviour:
   m_OnSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1843081505}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: OpenTextMenu
+      - m_Target: {fileID: 605296437}
+        m_TargetAssemblyTypeName: KeyboardManager, Assembly-CSharp
+        m_MethodName: SelectNick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -55102,7 +55278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1631648474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55395,7 +55572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1639761989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55530,7 +55708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1640362836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55898,7 +56077,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1649857281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56500,7 +56680,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1664494005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56635,7 +56816,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1669602747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57062,7 +57244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1679066027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57785,7 +57968,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1694120603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58701,7 +58885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1707997568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59109,7 +59294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1720889927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59244,7 +59430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1727398848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59489,7 +59676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1732748219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60047,7 +60235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1752131019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60688,7 +60877,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1762701098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61675,7 +61865,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1797097525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61900,7 +62091,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1799954337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62169,7 +62361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1802544986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62304,7 +62497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1804460410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62518,7 +62712,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1819227059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62653,7 +62848,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1824029268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62957,7 +63153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1831772777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63134,6 +63331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4b2b4c3be75044cad3177054a44fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputFields: []
+  currentInputField: 0
 --- !u!1 &1833352324
 GameObject:
   m_ObjectHideFlags: 0
@@ -63431,11 +63630,13 @@ MonoBehaviour:
   ghostData: []
   currentLevel: 0
   currentTime: 0
+  playerId: 0
   currentHS: 0
   ghosts: 000000000000000000000000000000000000000000000000000000000000000000000000
   playerIds: 000000000000000000000000000000000000000000000000000000000000000000000000
   leaderboardNames: []
   leaderboardScores: []
+  leaderboardPlayerScores: []
   scoreSO: {fileID: 11400000, guid: 5d8a39938aacd0d49bdfb603bf3cd44a, type: 2}
   leaderboardNamesSO: {fileID: 11400000, guid: a7a6a56080aaf754ea78367f7cb03bad, type: 2}
   leaderboardScoresSO: {fileID: 11400000, guid: a7a6a56080aaf754ea78367f7cb03bad, type: 2}
@@ -63738,7 +63939,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1848531709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63873,7 +64075,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1850589507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64182,7 +64385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1860011057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64317,7 +64521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1860158427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64452,7 +64657,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1861854713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65067,7 +65273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1875159511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65621,6 +65828,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4b2b4c3be75044cad3177054a44fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputFields: []
+  currentInputField: 0
 --- !u!1 &1888583596
 GameObject:
   m_ObjectHideFlags: 0
@@ -65752,7 +65961,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1891126445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65966,7 +66176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1897387322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66259,7 +66470,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1900622795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66545,7 +66757,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1919822820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67019,7 +67232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1940694912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67308,7 +67522,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1955148593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67637,7 +67852,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1967955798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67851,7 +68067,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1970088422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68265,7 +68482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1975047091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68400,7 +68618,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1975208285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68769,7 +68988,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1975866291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68904,7 +69124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1124411028}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1981720999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69525,7 +69746,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1995911522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69660,7 +69882,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &1998815948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69874,7 +70097,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &2000719771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70322,7 +70546,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &2003738598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70536,7 +70761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &2013644209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70781,7 +71007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &2015684214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71382,7 +71609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &2036096994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72088,7 +72316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &2056618685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72223,7 +72452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &2060020437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73517,7 +73747,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &2113105333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73865,7 +74096,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &2129900598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74079,7 +74311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &2133861919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74214,7 +74447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &2135755235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74504,7 +74738,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9a8aa04516dcb4983ca3fd58fd216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playernameInputfield: {fileID: 1694687617}
+  assignedInputFieldIndex: 0
+  playernameInputField: {fileID: 0}
 --- !u!114 &2141990478
 MonoBehaviour:
   m_ObjectHideFlags: 0

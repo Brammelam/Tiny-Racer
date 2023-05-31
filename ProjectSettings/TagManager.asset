@@ -34,6 +34,11 @@ TagManager:
   - keyboardbutton
   - inputfieldwelcome
   - inputfieldpassword
+  - inputfieldnickname
+  - inputfieldemail
+  - a
+  - b
+  - c
   layers:
   - Default
   - TransparentFX
