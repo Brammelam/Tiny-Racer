@@ -9,6 +9,7 @@ using TMPro;
 
 public class selectedLevel : MonoBehaviour
 {
+    [Header("Buttons and stuff")]
     public Button nextButton;
     public Button previousButton;
     public Button selectButton;
@@ -30,8 +31,11 @@ public class selectedLevel : MonoBehaviour
     public Text levelRecordText;
     public Text levelRecordTitleText;
 
+    [Header("Leaderboards")]
     public TextMeshProUGUI playerNames;
     public TextMeshProUGUI playerScores;
+    public TextMeshProUGUI playerOwnScore;
+
 
     public Light directionalLight;
     public AudioSource _switchOn;
@@ -41,18 +45,19 @@ public class selectedLevel : MonoBehaviour
     public PlayerManager pm;
     public LeaderBoard leaderBoard;
 
-    [SerializeField]
+    [Header("Scores")]
     private FloatSO ScoreSO;
 
-    [SerializeField]
+    [Header("Text stuff")]
     public Text[] textObjects;
     private Color day, night;
+
+    private bool ready = false;
 
     // Start is called before the first frame update
     public void Awake()
     {
-        pm = GameObject.FindObjectOfType<PlayerManager>();
-        leaderBoard = GameObject.FindObjectOfType<LeaderBoard>();
+
         
         LoadPrefs();
 
@@ -62,7 +67,7 @@ public class selectedLevel : MonoBehaviour
         previousButton.onClick.AddListener(PreviousLevel);
         selectButton.onClick.AddListener(Wrapper);
 
-        UpdateLevelName();
+        
 
         // Camera positions for toggling current selected level
         pos1 = this.transform.position;
@@ -70,6 +75,19 @@ public class selectedLevel : MonoBehaviour
         this.transform.position = this.transform.position - (move * (levelIndex - 1));
 
 
+    }
+
+    private void LookForStuff()
+    {
+        if (pm == null)
+            pm = GameObject.FindObjectOfType<PlayerManager>();
+        if (leaderBoard == null)
+            leaderBoard = GameObject.FindObjectOfType<LeaderBoard>();
+        if (pm != null && leaderBoard != null)
+        {
+            ready = true;
+            UpdateLevelName();
+        }
     }
 
     public void Start()
@@ -110,6 +128,10 @@ public class selectedLevel : MonoBehaviour
         foreach (GameObject level in levels)
         {
             level.transform.Rotate(0, -1f, 0);
+        }
+        if (pm == null || leaderBoard == null)
+        {
+            LookForStuff(); 
         }
     }
 
@@ -190,18 +212,25 @@ public class selectedLevel : MonoBehaviour
         if (pm.leaderboardScores[_levelIndex] != "")
         {
             string _tempScore = pm.leaderboardScores[_levelIndex];
+            string _tempPlayerScore = pm.leaderboardPlayerScores[_levelIndex];
+
             float _floatScore = float.Parse(_tempScore);
+            float _floatPlayerScore = float.Parse(_tempPlayerScore);
+
             _floatScore *= -0.01f;
+            _floatPlayerScore *= -0.01f;
             // Format the highscores retrieved from LeaderBoard
             playerNames.text = pm.leaderboardNames[_levelIndex];
             playerScores.text = (_floatScore).ToString() + "s";
-            pm.UpdateScoreText(_floatScore);
+            playerOwnScore.text = (_floatPlayerScore).ToString() + "s";
+            pm.UpdateScoreText(_floatScore, _floatPlayerScore);
 
         } else
         {
-            playerNames.text = "No record for level";
+            playerNames.text = "No global score";
             playerScores.text = "Make your claim!";
-            pm.UpdateScoreText(0);
+            playerOwnScore.text = "Set your own time!";
+            pm.UpdateScoreText(0, 0);
         }
 
 
@@ -223,15 +252,18 @@ public class selectedLevel : MonoBehaviour
 
     public void SavePrefs()
     {
+        /*
         PlayerPrefs.SetInt(levelKey, levelIndex);
         PlayerPrefs.Save();
-
+        */
     }
 
     public void LoadPrefs()
     {
-        var tutorial = PlayerPrefs.GetInt(tutorialKey, 1);
         levelIndex = 1;
+        /*
+        var tutorial = PlayerPrefs.GetInt(tutorialKey, 1);
         tutorialIndex = tutorial;
+        */
     }
 }

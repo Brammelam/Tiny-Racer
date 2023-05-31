@@ -12,5 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5824eeb1b30029d4b8bf0eaf21b2773a, type: 3}
   m_Name: New Scores SO
   m_EditorClassIdentifier: 
-  _names: []
-  _scores: []
+  _names:
+  - No score
+  - No score
+  - No score
+  - No score
+  - No score
+  - No score
+  - No score
+  - No score
+  - brammelam
+  _scores:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - -912
+  _playerScores:
+  - 0
+  - -912
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0

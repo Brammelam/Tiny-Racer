@@ -48,7 +48,8 @@ public class checkShit : MonoBehaviour
     public float startTime = 0f;
 
     public float elapsedTime = 0f;
-    public float recordTime;
+    public float globalRecordTime;
+    public float playerRecordTime;
     public bool hasStarted = false;
     public newAI2 player;
 
@@ -152,7 +153,8 @@ public class checkShit : MonoBehaviour
 
     IEnumerator LoadPrefs()
     {
-        recordTime = pm.currentScoreSO.CurrentScore;
+        globalRecordTime = pm.currentScoreSO.CurrentScore;
+
         whatCar = pm.carsettings.CurrentCar;
         hatIndex = pm.carsettings.CurrentHat;
         currentLevel = pm.currentLevel;
@@ -194,20 +196,15 @@ public class checkShit : MonoBehaviour
            
         cop = Instantiate(cars[0]);
         deadCop = Instantiate(deadCars[0]);
-        if (hatIndex != 3)
-        {
-            if (hatIndex == 0)
-                _hat = Instantiate(Resources.Load("tophat1") as GameObject);
-            if (hatIndex == 1)
-                _hat = Instantiate(Resources.Load("crown1") as GameObject);
-            if (hatIndex == 2)
-                _hat = Instantiate(Resources.Load("party1") as GameObject);
-        }
-        yield return WaitForAssignments();
 
-        cop.GetComponent<newAI2>().enabled = true;       
+        yield return WaitForAssignments();
+        if (hatIndex != 3) yield return SetHat();
+
+        ready = true;
 
     }
+
+
  
     IEnumerator WaitForAssignments()
     {
@@ -231,14 +228,7 @@ public class checkShit : MonoBehaviour
         rb2 = deadCop.GetComponent<Rigidbody>();
 
 
-        _hat.transform.SetParent(cop.transform);
 
-        _hat.transform.localPosition = new Vector3(0, 1.4f, -0.3f);
-        if (whatCar == 5)
-            _hat.transform.localPosition = new Vector3(0, 1.6f, -0.3f);
-        if (hatIndex == 2)
-            _hat.transform.localPosition -= new Vector3(0, -0.2f, 0);
-        
 
         //ghost = GameObject.FindGameObjectWithTag("Ghost") ?? ghost;
 
@@ -258,7 +248,27 @@ public class checkShit : MonoBehaviour
         //loadedGhost = pm.ghostData;     
 
 
-        ready = true;
+        
+    }
+
+    IEnumerator SetHat()
+    {
+        if (hatIndex == 0)
+            _hat = Instantiate(Resources.Load("tophat1") as GameObject);
+        if (hatIndex == 1)
+            _hat = Instantiate(Resources.Load("crown1") as GameObject);
+        if (hatIndex == 2)
+            _hat = Instantiate(Resources.Load("party1") as GameObject);
+      
+        _hat.transform.SetParent(cop.transform);
+
+        _hat.transform.localPosition = new Vector3(0, 1.4f, -0.3f);
+        if (whatCar == 5)
+            _hat.transform.localPosition = new Vector3(0, 1.6f, -0.3f);
+        if (hatIndex == 2)
+            _hat.transform.localPosition -= new Vector3(0, -0.2f, 0);
+
+        yield return null;
     }
 
 
@@ -286,12 +296,14 @@ public class checkShit : MonoBehaviour
     */
     public void SavePrefs()
     {
+        /*
         string levelKey = "Record level " + currentLevel;
         PlayerPrefs.SetFloat(levelKey, recordTime);
         PlayerPrefs.SetInt(carKey, whatCar);
         if (completedTutorialLap)
             PlayerPrefs.SetInt("Tutorial", 1);
         PlayerPrefs.Save();
+        */
     }
 
     public void FindObjectsInScene()
@@ -444,7 +456,9 @@ public class checkShit : MonoBehaviour
 
                 if (!pm.unlockedCars.Contains(s) && currentLevel != 9)
                 {
-                    pm.TriggerEvent("grantCar" + c);
+                    Debug.Log("Unlocked car nr " + c);
+                    string triggerCarUnlock = "grantCar" + c;
+                    pm.TriggerEvent(triggerCarUnlock);
                 }
 
                 // Disables repeating tutorial text after completing first lap
@@ -466,11 +480,11 @@ public class checkShit : MonoBehaviour
                 player.distanceTravelled = 0;
                 index = 0;
 
-                // Save ghost
-                if (recordTime == 0 || elapsedTime < recordTime)
+                // Player beat global record
+                if (globalRecordTime == 0 || elapsedTime < globalRecordTime)
                 {
-
-                    pm.UpdateScoreText(Mathf.Round(elapsedTime * 100) / 100);
+                    float _tempScore = Mathf.Round(elapsedTime * 100) / 100;
+                    pm.UpdateScoreText(_tempScore, _tempScore);
 
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * -100);
@@ -484,7 +498,19 @@ public class checkShit : MonoBehaviour
 
                     SavePrefs();
                 }
-                playerRecord = new List<float>();
+
+                // Player only beat own record, not global record
+                if ((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime))
+                {
+                    float _tempScore = Mathf.Round(elapsedTime * 100) / 100;
+                    pm.UpdateScoreText(pm.currentScoreSO.CurrentScore, _tempScore);
+
+                    // Upload highscore
+                    int _recordTime = Mathf.RoundToInt(elapsedTime * -100);
+
+                    StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel));
+                }
+                playerRecord = new List<float>(); // Not sure why this is here
                 startTime = Time.time;
                 Victory();
             }

@@ -9,8 +9,8 @@ public class ScoresSO : ScriptableObject
     private List<string> _names;
     [SerializeField]
     public List<string> _scores;
-
-
+    [SerializeField]
+    private List<string> _playerScores;
 
 
     public List<string> Names
@@ -25,5 +25,9 @@ public class ScoresSO : ScriptableObject
         set { _scores = value; }
     }
 
-
+    public List<string> PlayerValues
+    {
+        get { return _playerScores; }
+        set { _playerScores = value; }
+    }
 }

@@ -30,11 +30,20 @@ public class PlayerManager : MonoBehaviour
     public Text playerName;
     public GameObject infoText;
     public GameObject confirmation;
+    
+    [Header("Screens")]
     public GameObject welcomeScreen;
     public GameObject selectionScreen;
     public GameObject settingsScreen;
     public GameObject loadingScreen;
     public GameObject garageScreen;
+    public GameObject startScreen;
+    public GameObject registerScreen;
+    public GameObject loginScreen;
+    public GameObject resetpasswordScreen;
+
+    
+
     [SerializeField]
     public GarageScreen garage;
     [SerializeField]
@@ -47,13 +56,14 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     public int currentLevel;
     public float currentTime;
-    private int playerId;
+    public int playerId;
     public float currentHS;
 
     public List<int> ghosts;
     public List<int> playerIds;
     public List<string> leaderboardNames;
     public List<string> leaderboardScores;
+    public List<string> leaderboardPlayerScores;
 
     [SerializeField]
     public FloatSO scoreSO;
@@ -108,10 +118,13 @@ public class PlayerManager : MonoBehaviour
 
     public float Progress { get; private set; }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Setup()
     {
-        // Save original colors for reset function
+
+        leaderboardNames = new List<string>();
+        leaderboardScores = new List<string>();
+        leaderboardPlayerScores = new List<string>();
+
         selectButton.interactable = false;
         StartCoroutine(SetupRoutine());
         //ghosts = ghostsSO.GhostIds;
@@ -158,17 +171,43 @@ public class PlayerManager : MonoBehaviour
         //SetGhostId();
     }
     */
+
+    // Add something like this - We are making too many calls to the server for no reason, save in a DoNotDestroy object or something..
+    public IEnumerator ReturnToMenu()
+    {
+        float[] stepProgress = { 0.25f, 0.25f, 0.25f, 0.25f };
+        loadingScreen.SetActive(true);
+        IEnumerator[] coroutines = {
+            SetUpUI(),
+            CheckCars(),
+            GetCarSettingsData(),
+            DisableStartScreens()
+        };
+        Progress = 0f;
+
+        for (int i = 0; i < coroutines.Length; i++)
+        {
+            yield return StartCoroutine(coroutines[i]);
+            Progress += stepProgress[i];
+            UpdateProgress(Progress);
+        }
+    }
+
     IEnumerator SetupRoutine()
     {
-        float[] stepProgress = { 0.1f, 0.3f, 0.2f, 0.1f, 0.1f, 0.1f, 0.1f };
+        loadingScreen.SetActive(true);
+        float[] stepProgress = { 0.3f, 0.2f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f };
         IEnumerator[] coroutines = {
-        LoginRoutine(),
-        leaderBoard.FetchHighscores(),
+        //LoginRoutine(),
+
         GetPlayerName(),
-        CheckCars(),
+        leaderBoard.FetchHighscores(),
+        leaderBoard.FetchPlayerScores(),
+        SetUpUI(),
         DownloadPlayerFileKeys(),
+        CheckCars(),
         GetCarSettingsData(),
-        SetUpUI()
+        DisableStartScreens()
     };
 
         Progress = 0f;
@@ -186,6 +225,20 @@ public class PlayerManager : MonoBehaviour
         // Progress complete
         Progress = 1f;
         UpdateProgress(Progress);
+        // Update the leaderboard values in the end
+        SetSO();
+    }
+
+    public IEnumerator DisableStartScreens()
+    {
+        bool done = false;
+        startScreen.SetActive(false);
+        registerScreen.SetActive(false);
+        loginScreen.SetActive(false);
+        resetpasswordScreen.SetActive(false);
+        loadingScreen.SetActive(false);
+        done = true;
+        yield return new WaitWhile(() => done == false);
     }
 
     void UpdateProgress(float progress)
@@ -197,6 +250,8 @@ public class PlayerManager : MonoBehaviour
     IEnumerator SetUpUI()
     {
         bool done = false;
+        selectionScreen.SetActive(true);
+        selectedCar.SetActive(true);
         nextButton.onClick.AddListener(selectedCar.GetComponent<selectedCar>().NextCar);
         previousButton.onClick.AddListener(selectedCar.GetComponent<selectedCar>().PreviousCar);
         nextButton.onClick.AddListener(selectedCar.GetComponent<selectedCar>().UpdateCarName);
@@ -205,16 +260,13 @@ public class PlayerManager : MonoBehaviour
         selectButton.gameObject.GetComponentInChildren<Text>().text = "PLAY";
         selectButton.interactable = true;
 
-        loadingScreen.SetActive(false);
-        selectionScreen.SetActive(true);
-        selectedCar.SetActive(true);
-
         selectedCar.GetComponent<selectedCar>().LoadPrefs();
 
         done = true;
         yield return new WaitWhile(() => done == false);
     }
 
+    /* GuestSession disabled while trying out WhitelabelLogin
     IEnumerator LoginRoutine()
     {
         bool done = false;
@@ -235,27 +287,30 @@ public class PlayerManager : MonoBehaviour
         });
         yield return new WaitWhile(() => done == false);
     }
-
+    */
     public void SetSO()
     {
         leaderboardNamesSO.Names = leaderboardNames;
         leaderboardScoresSO.Values = leaderboardScores;
+        leaderboardScoresSO.PlayerValues = leaderboardPlayerScores;
     }
 
-    public void UpdateScoreText(float _score)
+    public void UpdateScoreText(float _score, float _playerScore)
     {
 
         currentScoreSO.CurrentScore = _score;
+        currentScoreSO.CurrentPlayerScore = _playerScore;
         currentScoreSObool = true;
     }
 
     public void TriggerEvent(string _car)
     {
-        LootLockerSDKManager.ExecuteTrigger(_car, (response) =>
+        string triggerName = _car;
+        LootLockerSDKManager.ExecuteTrigger(triggerName, (response) =>
         {
             if (response.success)
             {
-
+                Debug.Log("Successfully triggered event");
 
             }
             else
@@ -266,6 +321,7 @@ public class PlayerManager : MonoBehaviour
         });
     }
 
+    // Fetch unlocked cars and check if tutorial is completed for player
     IEnumerator CheckCars()
     {
         bool done = false;
@@ -277,6 +333,7 @@ public class PlayerManager : MonoBehaviour
                 LootLockerInventory[] inventory = response.inventory;
                 for (int i = 0; i < inventory.Length; i++)
                 {
+                    Debug.Log("Found this in the inventory: " + inventory[i].asset.name.ToString());
                     unlockedCars.Add(inventory[i].asset.name.ToString());
                 }
 
@@ -299,7 +356,7 @@ public class PlayerManager : MonoBehaviour
         if (settingsScreen.activeSelf == true)
         {
 
-            if (playernameInputfieldSettings.text != playerNameString && playernameInputfieldSettings.text != "")
+            if (playernameInputfieldSettings.text != "")
             {
                 infoText.SetActive(true);
                 infoText.GetComponent<Text>().text = @"Name changed! <('-'<)";
@@ -329,9 +386,7 @@ public class PlayerManager : MonoBehaviour
             {
                 if (response.success)
                 {
-                    welcomeScreen.SetActive(false);
-                    selectionScreen.SetActive(true);
-                    selectedCar.SetActive(true);
+
                     playerName.text = "Welcome back, " + response.name.ToString() + "!";
                     playerNameString = response.name.ToString();
 
@@ -364,12 +419,6 @@ public class PlayerManager : MonoBehaviour
                     playerNameString = response.name.ToString();
                     playerName.text = "Welcome back, " + response.name.ToString() + "!";
 
-                }
-                else
-                {
-                    welcomeScreen.SetActive(true);
-                    selectionScreen.SetActive(false);
-                    selectedCar.SetActive(false);
                 }
 
                 done = true;
@@ -660,6 +709,7 @@ public class PlayerManager : MonoBehaviour
         }); yield return new WaitWhile(() => done == false);
     }
 
+    // Fetch ghost data and carsettings (color, which car, which hat)
     public IEnumerator DownloadPlayerFileKeys()
     {
         bool done = false;
@@ -676,6 +726,7 @@ public class PlayerManager : MonoBehaviour
                 {                
                     carsettings.SettingsKey = item.value;
                 }
+
                 i++;
             }
             done = true;
@@ -737,6 +788,8 @@ public class PlayerManager : MonoBehaviour
 
         newrenderer.materials[0].color = _bodyColor;
         newrenderer.materials[1].color = _windowColor;
+
+        
     }
 
     public void SavePreferences()
@@ -813,4 +866,6 @@ public class PlayerManager : MonoBehaviour
                 done = true;
         }); yield return new WaitWhile(() => done == false);
     }
+
+
 }

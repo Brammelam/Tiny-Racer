@@ -29,6 +29,7 @@ public class Score : MonoBehaviour
 	public bool showText = false;
 	public bool check = false;
 	public int tempCount = 0;
+	private bool ready = false;
 
 
 	void Awake()
@@ -38,8 +39,8 @@ public class Score : MonoBehaviour
 		scoreText ??= GameObject.FindGameObjectWithTag("Slider")?.GetComponent<Slider>();
 	}
 
-	void FixedUpdate()
-	{
+	void FindObjects()
+    {
 		if (player == null)
 		{
 			player = GameObject.FindObjectOfType<newAI2>();
@@ -49,6 +50,17 @@ public class Score : MonoBehaviour
 			gh = GameObject.FindObjectOfType<checkShit>();
 		}
 		if (scoreText == null) scoreText = GameObject.FindObjectOfType<Slider>();
+
+		if (player != null && gh != null && scoreText != null) ready = true;
+	}
+
+	void Update()
+	{
+		while (!ready)
+		{
+			FindObjects();
+			return;
+		}
 
 		if (gh.currentLevel == 9)
         {
@@ -80,16 +92,6 @@ public class Score : MonoBehaviour
 
 		if (!gh.tipped)
 		{
-			if (player == null)
-			{
-				player = FindObjectOfType<newAI2>();
-			}
-			if (gh == null)
-			{
-				gh = FindObjectOfType<checkShit>();
-			}
-
-			if (scoreText == null) scoreText = FindObjectOfType<Slider>();
 			scoreText.value = Mathf.Lerp(0, maxValue, player.speed / maxValue);
 			image.color = Color.Lerp(minTip, maxTip, player.speed / maxValue);
 
@@ -102,18 +104,13 @@ public class Score : MonoBehaviour
 			restartText.GetComponent<Text>().horizontalOverflow = HorizontalWrapMode.Overflow;
 			restartText.GetComponent<Text>().fontSize = 40;
 
-
 			if (!showText)
-            {
-				
+            {			
 				showText = true;
 				coroutine = ShowRestartText(0.5f);
 				StartCoroutine(coroutine);
             }
         }
-
-
-
 	}
 
 	public void ShowTutorial1()
@@ -145,5 +142,4 @@ public class Score : MonoBehaviour
 		restartText.SetActive(true);
 		
 	}
-
 }

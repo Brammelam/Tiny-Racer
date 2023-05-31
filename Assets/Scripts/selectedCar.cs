@@ -239,7 +239,7 @@ public class selectedCar : MonoBehaviour
     {
         bool done = false;
         yield return StartCoroutine(pm.SavePreferencesToFilePM());
-        SavePrefs();
+        //SavePrefs();
         pm.carsettings.CurrentCar = pm.currentCar;
         pm.carsettings.CurrentHat = hatIndex;
         if(pm.unlockedCars.Contains("TutorialUnlock"))
@@ -256,9 +256,11 @@ public class selectedCar : MonoBehaviour
 
     public void SavePrefs()
     {
+        /*
         PlayerPrefs.SetInt(carKey, carIndex);
         PlayerPrefs.SetInt(hatKey, hatIndex);
         PlayerPrefs.Save();
+        */
     }
 
     // Disabling music and effect sliders for now
