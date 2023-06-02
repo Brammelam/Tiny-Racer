@@ -9,14 +9,11 @@ using TMPro;
 public class LeaderBoard : MonoBehaviour
 {
 
-    public List<int> leaderboardIds = new List<int>()
-    {
-        8492, 8493, 8656, 8660, 8661, 8662, 8663, 8664, 8665
-    };
+    public List<int> leaderboardIds;
 
-    //public List<string> leaderboardNames;
-    //public List<string> leaderboardScores;
-    //public List<string> leaderboardPlayerScores;
+    public List<string> leaderboardNames;
+    public List<string> leaderboardScores;
+    public List<string> leaderboardPlayerScores;
 
     public string currentScore;
 
@@ -41,6 +38,11 @@ public class LeaderBoard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        leaderboardIds = new List<int>()
+        {
+            8492, 8493, 8656, 8660, 8661, 8662, 8663, 8664, 8665
+        };
+
         DontDestroyOnLoad(this);
         if (pm == null) pm = GameObject.FindObjectOfType<PlayerManager>();
     }
@@ -58,15 +60,7 @@ public class LeaderBoard : MonoBehaviour
 
         LootLockerSDKManager.SubmitScore(playerID, scoreToUpload, levelID, (response) =>
         {
-            if (response.success)
-            {
-                Debug.Log("Success when uploading score to level " + level);
-                
-            } else
-            {
-                Debug.Log("Failed" + response.Error);
-                
-            }
+
         });
         done = true;
         yield return new WaitWhile(() => done == false);
@@ -74,80 +68,123 @@ public class LeaderBoard : MonoBehaviour
 
     public IEnumerator FetchPlayerScores()
     {
-        int count = 0;
-
-        List<string> tempPlayerScores = new List<string>(9);
+        bool done = false;
+        Dictionary<int, int> tempPlayerScores = new Dictionary<int, int>(leaderboardIds.Count);
 
         foreach (int i in leaderboardIds)
         {
-
-            LootLockerSDKManager.GetMemberRank(i, pm.playerId, (response) =>
+            LootLockerSDKManager.GetAllMemberRanks(pm.playerId, 1, (response) =>
             {
                 if (response.statusCode == 200)
                 {
-                    string playerScore = (response.score == 0) ? "0" : response.score.ToString();
+                    foreach (var leaderboard in response.leaderboards)
+                    {
+                        int leaderboardId = leaderboard.leaderboard_id;
+                        int score = leaderboard.rank.score;
 
-                    tempPlayerScores.Add(playerScore);
-                    
+                        tempPlayerScores[leaderboardId] = score;
+                    }
+
+                    List<int> scoresList = new List<int>();
+
+                    foreach (int leaderboardId in leaderboardIds)
+                    {
+                        // Get the score for the current leaderboard ID from the dictionary
+                        int score = tempPlayerScores.ContainsKey(leaderboardId) ? tempPlayerScores[leaderboardId] : 0;
+
+                        // Add the score to the list
+                        scoresList.Add(score);
+                    }
+
+                    // Convert scoresList to a list of strings in the same index order
+                    List<string> leaderboardPlayerScores = new List<string>();
+                    for (int i = 0; i < leaderboardIds.Count; i++)
+                    {
+                        int leaderboardId = leaderboardIds[i];
+                        int score = scoresList[i];
+                        leaderboardPlayerScores.Add(score.ToString());
+                    }
+
+                    // Assign leaderboardPlayerScores to pm.leaderboardPlayerScores
+                    pm.leaderboardPlayerScores = leaderboardPlayerScores;
+
+                    done = true;
                 }
 
                 else
                 {
-                    Debug.Log("failed getting highscoredata for player with ID: " + pm.playerId + ",  " + response.Error);                   
-                }
 
-                count++;
+                    done = true;
+                }
             });
 
         }
+        yield return new WaitUntil(() => done = true);
 
-        yield return new WaitUntil(() => count == leaderboardIds.Count);
-        pm.leaderboardPlayerScores = tempPlayerScores;
     }
 
     public IEnumerator FetchHighscores()
     {
-        List<string> tempPlayerNames = new List<string>(9);
-        List<string> tempPlayerScores = new List<string>(9);
-        int count = 0;
+        List<LeaderboardEntry> leaderboardEntries = new List<LeaderboardEntry>();
 
-        foreach (int i in leaderboardIds)
+        int completedRequests = 0; // Counter to track completed requests
+
+        foreach (int leaderboardId in leaderboardIds)
         {
-            Debug.Log("Now trying to find global highscores for leaderboard  " + i);
-            LootLockerSDKManager.GetScoreList(i, 1, 0, (response) =>
-            {
-                if (response.success)
-                {
-                    Debug.Log("234234234" + response.items);
-                    
-                    LootLockerLeaderboardMember[] members = response.items;
+            int? previousCursor = null;
+            bool isRequestCompleted = false;
 
-                    if (members.Length == 0 )
-                    {
-                        tempPlayerNames.Add("No score");
-                        tempPlayerScores.Add("0");
-                    }
-                    else
-                    {
-                        string playerName = members[0].player.name != "" ? members[0].player.name : Convert.ToString(members[0].player.id);
-                        string playerScore = Convert.ToString(members[0].score);
-                        tempPlayerNames.Add(playerName);
-                        tempPlayerScores.Add(playerScore);
-                    }
-                    
+            LootLockerSDKManager.GetScoreList(leaderboardId, 1, 0, (response) =>
+            {
+                LeaderboardEntry entry = new LeaderboardEntry();
+                entry.leaderboardId = leaderboardId;
+
+                if (response.success && response.items.Length > 0)
+                {
+                    entry.fastestTime = response.items[0].score;
+                    entry.playerName = response.items[0].player.name;
                 }
                 else
                 {
-                    Debug.Log("Failed getting global highscores: " + response.Error);
+                    entry.fastestTime = 99999; // Default value if no score is found
+                    entry.playerName = "Anonymous"; // Default player name
                 }
 
-                count++; // Increment the count after each response
+                leaderboardEntries.Add(entry);
+
+                completedRequests++; // Increment completed requests counter
+
+                isRequestCompleted = true; // Set the flag to indicate the request is completed
             });
+
+            yield return new WaitUntil(() => isRequestCompleted);
         }
 
-        yield return new WaitUntil(() => count == leaderboardIds.Count);
+        // Wait until all requests have completed
+        yield return new WaitUntil(() => completedRequests == leaderboardIds.Count);
 
-        pm.leaderboardNames = tempPlayerNames;
-        pm.leaderboardScores = tempPlayerScores;
+        leaderboardEntries.Sort((x, y) => leaderboardIds.IndexOf(x.leaderboardId) - leaderboardIds.IndexOf(y.leaderboardId));
+
+        // Extract the fastest times and player names in the correct order
+        List<int> fastestTimes = new List<int>();
+        foreach (LeaderboardEntry entry in leaderboardEntries)
+        {
+            fastestTimes.Add(entry.fastestTime);
+        }
+
+        // Convert fastestTimes and playerNames to lists of strings
+        List<string> leaderboardFastestTimesAsString = fastestTimes.ConvertAll(time => time.ToString());
+        List<string> leaderboardPlayerNames = leaderboardEntries.ConvertAll(entry => entry.playerName);
+
+        // Assign leaderboardFastestTimesAsString and leaderboardPlayerNames to pm.leaderboardPlayerScores and pm.leaderboardNames respectively
+        pm.leaderboardScores = leaderboardFastestTimesAsString;
+        pm.leaderboardNames = leaderboardPlayerNames;
+    }
+
+    public class LeaderboardEntry
+    {
+        public int leaderboardId;
+        public int fastestTime;
+        public string playerName;
     }
 }

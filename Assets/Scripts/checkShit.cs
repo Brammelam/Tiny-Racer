@@ -487,7 +487,7 @@ public class checkShit : MonoBehaviour
                     pm.UpdateScoreText(_tempScore, _tempScore);
 
                     // Upload highscore
-                    int _recordTime = Mathf.RoundToInt(elapsedTime * -100);
+                    int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
 
                     StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel));
 
@@ -506,7 +506,7 @@ public class checkShit : MonoBehaviour
                     pm.UpdateScoreText(pm.currentScoreSO.CurrentScore, _tempScore);
 
                     // Upload highscore
-                    int _recordTime = Mathf.RoundToInt(elapsedTime * -100);
+                    int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
 
                     StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel));
                 }

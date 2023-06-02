@@ -217,8 +217,8 @@ public class selectedLevel : MonoBehaviour
             float _floatScore = float.Parse(_tempScore);
             float _floatPlayerScore = float.Parse(_tempPlayerScore);
 
-            _floatScore *= -0.01f;
-            _floatPlayerScore *= -0.01f;
+            _floatScore *= 0.01f;
+            _floatPlayerScore *= 0.01f;
             // Format the highscores retrieved from LeaderBoard
             playerNames.text = pm.leaderboardNames[_levelIndex];
             playerScores.text = (_floatScore).ToString() + "s";

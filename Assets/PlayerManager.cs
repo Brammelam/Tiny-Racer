@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 using System.IO;
 using UnityEngine.Networking;
 using UnityEngine.Events;
+using Newtonsoft.Json;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -59,8 +60,8 @@ public class PlayerManager : MonoBehaviour
     public int playerId;
     public float currentHS;
 
-    public List<int> ghosts;
-    public List<int> playerIds;
+    //public List<int> ghosts;
+    //public List<int> playerIds;
     public List<string> leaderboardNames;
     public List<string> leaderboardScores;
     public List<string> leaderboardPlayerScores;
@@ -118,17 +119,13 @@ public class PlayerManager : MonoBehaviour
 
     public float Progress { get; private set; }
 
+
+
     public void Setup()
     {
-
-        leaderboardNames = new List<string>();
-        leaderboardScores = new List<string>();
-        leaderboardPlayerScores = new List<string>();
-
         selectButton.interactable = false;
         StartCoroutine(SetupRoutine());
         //ghosts = ghostsSO.GhostIds;
-
     }
 
     public void Update()
@@ -175,12 +172,11 @@ public class PlayerManager : MonoBehaviour
     // Add something like this - We are making too many calls to the server for no reason, save in a DoNotDestroy object or something..
     public IEnumerator ReturnToMenu()
     {
-        float[] stepProgress = { 0.25f, 0.25f, 0.25f, 0.25f };
+        float[] stepProgress = { 0.25f, 0.25f };
         loadingScreen.SetActive(true);
+
         IEnumerator[] coroutines = {
-            SetUpUI(),
-            CheckCars(),
-            GetCarSettingsData(),
+            SetUpUI(),            
             DisableStartScreens()
         };
         Progress = 0f;
@@ -191,23 +187,28 @@ public class PlayerManager : MonoBehaviour
             Progress += stepProgress[i];
             UpdateProgress(Progress);
         }
+
+        Progress = 1f;
+        UpdateProgress(Progress);
+        GetSO();
+        if (carsettings.CustomCar) ModifyCar();
     }
 
     IEnumerator SetupRoutine()
     {
         loadingScreen.SetActive(true);
-        float[] stepProgress = { 0.3f, 0.2f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f };
-        IEnumerator[] coroutines = {
-        //LoginRoutine(),
+        float[] stepProgress = { 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.2f };
 
-        GetPlayerName(),
-        leaderBoard.FetchHighscores(),
-        leaderBoard.FetchPlayerScores(),
-        SetUpUI(),
-        DownloadPlayerFileKeys(),
-        CheckCars(),
-        GetCarSettingsData(),
-        DisableStartScreens()
+        IEnumerator[] coroutines = {        
+
+            GetPlayerName(),
+            SetUpUI(),
+            DownloadPlayerFileKeys(),
+            CheckCars(),
+            GetCarSettingsData(),
+            leaderBoard.FetchHighscores(),
+            leaderBoard.FetchPlayerScores(),
+            DisableStartScreens(),
     };
 
         Progress = 0f;
@@ -288,11 +289,41 @@ public class PlayerManager : MonoBehaviour
         yield return new WaitWhile(() => done == false);
     }
     */
+
+    public class LootLockerResponse
+    {
+        public bool Success { get; set; }
+        public string Message { get; set; }
+        public DataObject Data { get; set; }
+    }
+
+    // Nested DataObject class definition
+    public class DataObject
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
     public void SetSO()
     {
+
         leaderboardNamesSO.Names = leaderboardNames;
         leaderboardScoresSO.Values = leaderboardScores;
         leaderboardScoresSO.PlayerValues = leaderboardPlayerScores;
+
+    }
+
+    public void GetSO()
+    {
+        leaderboardNames = leaderboardNamesSO.Names;
+        leaderboardScores = leaderboardScoresSO.Values;
+        leaderboardPlayerScores = leaderboardScoresSO.PlayerValues;
+
+        sc.hatIndex = carsettings.CurrentHat;
+        sc.carIndex = carsettings.CurrentCar;
+        currentCar = sc.carIndex;
+        currentHat = sc.hatIndex;
+
     }
 
     public void UpdateScoreText(float _score, float _playerScore)
@@ -310,12 +341,12 @@ public class PlayerManager : MonoBehaviour
         {
             if (response.success)
             {
-                Debug.Log("Successfully triggered event");
+
 
             }
             else
             {
-                Debug.Log("Could not trigger event " + response.Error);
+
 
             }
         });
@@ -333,7 +364,7 @@ public class PlayerManager : MonoBehaviour
                 LootLockerInventory[] inventory = response.inventory;
                 for (int i = 0; i < inventory.Length; i++)
                 {
-                    Debug.Log("Found this in the inventory: " + inventory[i].asset.name.ToString());
+
                     unlockedCars.Add(inventory[i].asset.name.ToString());
                 }
 
@@ -659,7 +690,7 @@ public class PlayerManager : MonoBehaviour
         var s = "";
         bool done = false;
         int f = int.Parse(carsettings.SettingsKey);
-        Debug.Log($"Sending the follow filekey: {f}");
+
         LootLockerSDKManager.GetPlayerFile(f, (response) =>
         {
             if (response.success)
@@ -716,14 +747,17 @@ public class PlayerManager : MonoBehaviour
         int i = 0;
         LootLockerSDKManager.GetEntirePersistentStorage((response) =>
         {
+
             foreach (var item in response.payload)
             {
                 if (item.key == i.ToString())
                 {
+
                     ghostsSO.GhostIds[i] = int.Parse(item.value);
                 }
                 if (item.key == "999")
-                {                
+                {
+
                     carsettings.SettingsKey = item.value;
                 }
 
@@ -739,6 +773,7 @@ public class PlayerManager : MonoBehaviour
         //SaveToFile(_ghostData);
     }
 
+    /*
     public IEnumerator UploadGhostData()
     {
         bool done = false;
@@ -771,6 +806,7 @@ public class PlayerManager : MonoBehaviour
             }); yield return new WaitWhile(() => done == false);
         }
     }
+    */
 
     public void ResetOriginalCar()
     {

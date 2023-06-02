@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
@@ -20,18 +19,13 @@ public class SetVolume : MonoBehaviour
         // Honk when effects-slider is adjusted and released
         if (Input.GetMouseButtonDown(0)) _mouseUp = true;
         else if (Input.GetMouseButtonUp(0)) _mouseUp = false;
-
-
-
-
-
     }
+
     public void SetLevel(float _sliderValue)
     {
         string _volumeParameter = this.name.ToString();
         mixer.SetFloat(_volumeParameter, Mathf.Log10(_sliderValue) * 20);
-        PlayerPrefs.SetFloat(_volumeParameter, _sliderValue);
-        
+        PlayerPrefs.SetFloat(_volumeParameter, _sliderValue); 
     }
 
     public void Honk()

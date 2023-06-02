@@ -293,13 +293,13 @@ public class selectedCar : MonoBehaviour
             Debug.Log("Failed with error: " + e);
         }
 
-        float _masterVolume = PlayerPrefs.GetFloat("masterVolume", 0.2f);
+        float _masterVolume = PlayerPrefs.GetFloat("masterVolume", 0.15f);
 
         _volumeSlider.value = _masterVolume;
 
         mixer.SetFloat("masterVolume", Mathf.Log10(_masterVolume) * 20);
 
-        _qualityIndex = PlayerPrefs.GetInt("Quality", 0);
+        _qualityIndex = PlayerPrefs.GetInt("Quality", 2);
 
         ChangeQuality(_qualityIndex);
     }
