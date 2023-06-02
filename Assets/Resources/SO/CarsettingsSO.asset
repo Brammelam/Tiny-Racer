@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6d70ed8de08f2546a8391748b8d1cb1, type: 3}
-  m_Name: Carsettings
+  m_Name: CarsettingsSO
   m_EditorClassIdentifier: 
   bodyColor:
   - 0.2218698

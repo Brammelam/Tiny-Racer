@@ -24,6 +24,7 @@ public class LeaderBoard : MonoBehaviour
 
     private void Awake()
     {
+
         int numLeaderBoards = FindObjectsOfType<LeaderBoard>().Length;
         if (numLeaderBoards != 1)
         {
@@ -60,9 +61,11 @@ public class LeaderBoard : MonoBehaviour
 
         LootLockerSDKManager.SubmitScore(playerID, scoreToUpload, levelID, (response) =>
         {
-
+            if (!response.success) Debug.Log("Failed to upload score!");
+            
+            done = true;
         });
-        done = true;
+
         yield return new WaitWhile(() => done == false);
     }
 
@@ -71,8 +74,6 @@ public class LeaderBoard : MonoBehaviour
         bool done = false;
         Dictionary<int, int> tempPlayerScores = new Dictionary<int, int>(leaderboardIds.Count);
 
-        foreach (int i in leaderboardIds)
-        {
             LootLockerSDKManager.GetAllMemberRanks(pm.playerId, 1, (response) =>
             {
                 if (response.statusCode == 200)
@@ -82,10 +83,10 @@ public class LeaderBoard : MonoBehaviour
                         int leaderboardId = leaderboard.leaderboard_id;
                         int score = leaderboard.rank.score;
 
-                        tempPlayerScores[leaderboardId] = score;
+                        tempPlayerScores.Add(leaderboardId, score);
                     }
 
-                    List<int> scoresList = new List<int>();
+                    List<int> scoresList = new List<int>(leaderboardIds.Count);
 
                     foreach (int leaderboardId in leaderboardIds)
                     {
@@ -97,28 +98,21 @@ public class LeaderBoard : MonoBehaviour
                     }
 
                     // Convert scoresList to a list of strings in the same index order
-                    List<string> leaderboardPlayerScores = new List<string>();
+                    List<string> _leaderboardPlayerScores = new List<string>();
                     for (int i = 0; i < leaderboardIds.Count; i++)
                     {
-                        int leaderboardId = leaderboardIds[i];
-                        int score = scoresList[i];
-                        leaderboardPlayerScores.Add(score.ToString());
+                        string score = scoresList[i].ToString();
+                        _leaderboardPlayerScores.Add(score);
                     }
 
                     // Assign leaderboardPlayerScores to pm.leaderboardPlayerScores
-                    pm.leaderboardPlayerScores = leaderboardPlayerScores;
-
+                    leaderboardPlayerScores = _leaderboardPlayerScores;
+                    pm.leaderboardSO.PlayerValues = _leaderboardPlayerScores;
                     done = true;
                 }
-
-                else
-                {
-
-                    done = true;
-                }
+                else done = true;
             });
-
-        }
+       
         yield return new WaitUntil(() => done = true);
 
     }
@@ -131,7 +125,6 @@ public class LeaderBoard : MonoBehaviour
 
         foreach (int leaderboardId in leaderboardIds)
         {
-            int? previousCursor = null;
             bool isRequestCompleted = false;
 
             LootLockerSDKManager.GetScoreList(leaderboardId, 1, 0, (response) =>
@@ -177,8 +170,10 @@ public class LeaderBoard : MonoBehaviour
         List<string> leaderboardPlayerNames = leaderboardEntries.ConvertAll(entry => entry.playerName);
 
         // Assign leaderboardFastestTimesAsString and leaderboardPlayerNames to pm.leaderboardPlayerScores and pm.leaderboardNames respectively
-        pm.leaderboardScores = leaderboardFastestTimesAsString;
-        pm.leaderboardNames = leaderboardPlayerNames;
+        leaderboardScores = leaderboardFastestTimesAsString;
+        leaderboardNames = leaderboardPlayerNames;
+        pm.leaderboardSO.Names = leaderboardPlayerNames;
+        pm.leaderboardSO.Values = leaderboardFastestTimesAsString;
     }
 
     public class LeaderboardEntry

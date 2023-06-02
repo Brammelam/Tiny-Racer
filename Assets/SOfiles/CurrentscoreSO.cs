@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -7,6 +5,7 @@ public class CurrentscoreSO : ScriptableObject
 {
     [SerializeField]
     private float _currentScore;
+    [SerializeField]
     private float _currentPlayerScore;
 
     public float CurrentScore
@@ -20,5 +19,4 @@ public class CurrentscoreSO : ScriptableObject
         get { return _currentPlayerScore; }
         set { _currentPlayerScore = value; }
     }
-
 }

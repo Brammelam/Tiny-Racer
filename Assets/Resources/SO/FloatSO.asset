@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 538a0b5e5eb858b419d7d11c82ec4c53, type: 3}
-  m_Name: New Ghosts SO
+  m_Script: {fileID: 11500000, guid: aa32e2c4ba4ec1042932de1666c4d06e, type: 3}
+  m_Name: FloatSO
   m_EditorClassIdentifier: 
-  ghostId: 000000000000000000000000000000000000000000000000000000000000000000000000
-  playerId: 000000000000000000000000000000000000000000000000000000000000000000000000
+  _value: 0

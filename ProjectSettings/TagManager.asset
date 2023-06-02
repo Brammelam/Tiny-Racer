@@ -39,6 +39,8 @@ TagManager:
   - a
   - b
   - c
+  - carScreen
+  - loadingScreen
   layers:
   - Default
   - TransparentFX

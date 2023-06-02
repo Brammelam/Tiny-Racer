@@ -11,6 +11,8 @@ public class ScoresSO : ScriptableObject
     public List<string> _scores;
     [SerializeField]
     private List<string> _playerScores;
+    [SerializeField]
+    public int _levelIndex;
 
 
     public List<string> Names
@@ -29,5 +31,11 @@ public class ScoresSO : ScriptableObject
     {
         get { return _playerScores; }
         set { _playerScores = value; }
+    }
+
+    public int CurrentLevel
+    {
+        get { return _levelIndex; }
+        set { _levelIndex = value; }
     }
 }

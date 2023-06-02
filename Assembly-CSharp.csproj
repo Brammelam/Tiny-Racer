@@ -59,7 +59,7 @@
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\PathSpawner.cs" />
     <Compile Include="Assets\Scripts\CarMusicClass.cs" />
-    <Compile Include="Assets\instance.cs" />
+    <Compile Include="Assets\Instance.cs" />
     <Compile Include="Assets\Scripts\CityScript.cs" />
     <Compile Include="Assets\findPlayerManager.cs" />
     <Compile Include="Assets\Scripts\newController.cs" />
@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\changeQuality.cs" />
     <Compile Include="Assets\loadScript.cs" />
     <Compile Include="Assets\LoadingText.cs" />
+    <Compile Include="Assets\SafeAreaHandler.cs" />
     <Compile Include="Assets\hideButton.cs" />
     <Compile Include="Assets\prefabscriptls.cs" />
     <Compile Include="Assets\Scripts\Score.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Assets\Scripts\cameraFollow.cs" />
     <Compile Include="Assets\SOfiles\CurrentscoreSO.cs" />
     <Compile Include="Assets\Scripts\horn.cs" />
+    <Compile Include="Assets\Scripts\SessionManager.cs" />
     <Compile Include="Assets\Scripts\navigateKeys.cs" />
     <Compile Include="Assets\Scripts\rotationTracker.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\PathSceneTool.cs" />
@@ -115,9 +117,11 @@
     <Compile Include="Assets\Scripts\backScript.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\PathFollower.cs" />
     <Compile Include="Assets\InputEntry.cs" />
+    <Compile Include="Assets\ToggleLoginStart.cs" />
     <Compile Include="Assets\Scripts\buttonSelect.cs" />
     <Compile Include="Assets\Scripts\selectedLevel.cs" />
     <Compile Include="Assets\playernamescript.cs" />
+    <Compile Include="Assets\PlayerManagerManager.cs" />
     <Compile Include="Assets\Scripts\checkShit.cs" />
     <Compile Include="Assets\Resources\saveLevel.cs" />
     <Compile Include="Assets\AddLetterClass.cs" />
@@ -129,7 +133,7 @@
     <Compile Include="Assets\CarDriverAI\Scripts\CarDriverImp.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\RoadMeshCreator.cs" />
     <Compile Include="Assets\ProgressBar.cs" />
-    <Compile Include="Assets\SafeAreaHandler.cs" />
+    <Compile Include="Assets\SOfiles\UnlockedCarsSO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />

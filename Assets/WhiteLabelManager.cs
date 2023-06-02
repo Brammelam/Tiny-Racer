@@ -27,11 +27,46 @@ public class WhiteLabelManager : MonoBehaviour
     public Toggle rememberMeToggle;
     private int rememberMe;
 
-    [SerializeField]
+    [Header("Managers")]
     public PlayerManager playerManager;
-    public LootLockerServerManager serverManager;
 
+    IEnumerator AnimateButton(Button _button, string _s1, string _s2)
+    {
+        yield return StartCoroutine(FirstFunction(_button, _s1));
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(SecondFunction(_button, _s2));
+    }
 
+    IEnumerator FirstFunction(Button _button, string _s)
+    {
+        // Code for the first function
+        _button.GetComponentInChildren<Text>().text = _s;
+        yield return null;
+    }
+
+    IEnumerator SecondFunction(Button _button, string _s)
+    {
+        // Code for the second function
+        _button.GetComponentInChildren<Text>().text = _s;
+        yield return null;
+    }
+
+    public void Start()
+    {
+        LootLockerServerManager serverManager = GameObject.FindObjectOfType<LootLockerServerManager>();
+
+        if (serverManager != null)
+        {
+            Debug.Log("We are already playing, skipping stuff..");
+            StartCoroutine(playerManager.ReturnToMenu());
+        }
+        else
+        {
+            rememberMe = PlayerPrefs.GetInt("rememberMe", 0);
+            if (rememberMe == 0) rememberMeToggle.isOn = false;
+            else rememberMeToggle.isOn = true;
+        }
+    }
 
     public void AutofillLogin()
     {
@@ -47,7 +82,7 @@ public class WhiteLabelManager : MonoBehaviour
     // Start is called before the first frame update
     public void Login()
     {
-
+        loginButton.interactable = false;
         string email = existinguserEmailInputField.text;
         string password = existinguserPasswordInputField.text;
 
@@ -55,7 +90,8 @@ public class WhiteLabelManager : MonoBehaviour
         {
             if (!response.success)
             {
-                loginButton.GetComponentInChildren<Text>().text = ":(";
+                loginButton.interactable = true;
+                StartCoroutine(AnimateButton(loginButton, ":(", "REGISTER"));
                 Debug.Log("Error while logging in!");
                 return;
             } else
@@ -72,6 +108,8 @@ public class WhiteLabelManager : MonoBehaviour
             {
                 if (!response.success)
                 {
+                    loginButton.interactable = true;
+                    StartCoroutine(AnimateButton(loginButton, ":(", "REGISTER"));
                     // Error while starting session
                     Debug.Log("Error starting LootLocker session");
                     return;
@@ -89,6 +127,7 @@ public class WhiteLabelManager : MonoBehaviour
 
     public void NewUser()
     {
+        registerButton.interactable = false;
         string email = newuserEmailInputField.text;
         string password = newuserPasswordInputField.text;
         string nickname = nicknamelInputField.text;
@@ -96,7 +135,9 @@ public class WhiteLabelManager : MonoBehaviour
         void Error(string error)
         {
             Debug.Log(error);
-            registerButton.GetComponentInChildren<Text>().text = ":(";
+            registerButton.interactable = true;
+            StartCoroutine(AnimateButton(registerButton, ":(", "REGISTER"));
+
         }
 
         LootLockerSDKManager.WhiteLabelSignUp(email, password, (response) =>
@@ -131,22 +172,6 @@ public class WhiteLabelManager : MonoBehaviour
                 });
             }
         });
-    }
-
-    public void Start()
-    {
-        var existingObj = FindObjectOfType<LootLockerServerManager>();
-        // Skip login if we already are playing, and returning to menu
-        if (existingObj != null)
-        {
-            Debug.Log("We are already playing, skipping stuff..");
-            playerManager.Setup();
-        }
-
-        rememberMe = PlayerPrefs.GetInt("rememberMe", 0);
-        if (rememberMe == 0) rememberMeToggle.isOn = false;
-        else rememberMeToggle.isOn = true;
-
     }
 
     public void ToggleRememberMe()

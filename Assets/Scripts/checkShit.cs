@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class checkShit : MonoBehaviour
 {
-    LeaderBoard leaderBoard;
-    PlayerManager pm;
+    public LeaderBoard leaderBoard;
+    public PlayerManager pm;
 
     public List<GameObject> cars;
     public List<GameObject> deadCars;
@@ -43,6 +43,7 @@ public class checkShit : MonoBehaviour
     private float tipSpeed = 1.6f;
     public PathCreator pathCreator;
     private IEnumerator coroutine;
+    public float currspeed;
 
     // private IEnumerator playCoroutine;
     public float startTime = 0f;
@@ -92,17 +93,16 @@ public class checkShit : MonoBehaviour
     public bool completedTutorialLap = false;
     public int someCount = 0;
 
-    string _s;
-    [SerializeField]
-    float currspeed;
-
     private bool allObjectsFound = false;
     private bool ready = false;
 
     public void Awake()
     {
-       
-        pm = GameObject.FindObjectOfType<PlayerManager>();
+        GameObject playerManagerObject = new GameObject("PlayerManager");
+
+        // Add the PlayerManager component to the GameObject
+        pm = playerManagerObject.AddComponent<PlayerManager>();
+
         /*
        _score = GameObject.FindObjectOfType<Score>();
        leaderBoard = GameObject.FindObjectOfType<LeaderBoard>();
@@ -153,7 +153,9 @@ public class checkShit : MonoBehaviour
 
     IEnumerator LoadPrefs()
     {
+        currentLevel = pm.currentLevel;
         globalRecordTime = pm.currentScoreSO.CurrentScore;
+        playerRecordTime = pm.currentScoreSO.CurrentPlayerScore;
 
         whatCar = pm.carsettings.CurrentCar;
         hatIndex = pm.carsettings.CurrentHat;
@@ -371,7 +373,7 @@ public class checkShit : MonoBehaviour
             frame++;
 
             //TUTORIAL STUFF
-            if (pm.currentLevel == 9)
+            if (currentLevel == 9)
             {
                 if (someCount == 0)
                 {
@@ -483,8 +485,12 @@ public class checkShit : MonoBehaviour
                 // Player beat global record
                 if (globalRecordTime == 0 || elapsedTime < globalRecordTime)
                 {
+                    int i = 2;
+                    Victory(i);
                     float _tempScore = Mathf.Round(elapsedTime * 100) / 100;
                     pm.UpdateScoreText(_tempScore, _tempScore);
+                    globalRecordTime = _tempScore;
+                    playerRecordTime = _tempScore;
 
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
@@ -500,11 +506,13 @@ public class checkShit : MonoBehaviour
                 }
 
                 // Player only beat own record, not global record
-                if ((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime))
+                else if ((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime))
                 {
+                    int i = 1;
+                    Victory(i);
                     float _tempScore = Mathf.Round(elapsedTime * 100) / 100;
                     pm.UpdateScoreText(pm.currentScoreSO.CurrentScore, _tempScore);
-
+                    playerRecordTime = _tempScore;
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
 
@@ -512,7 +520,7 @@ public class checkShit : MonoBehaviour
                 }
                 playerRecord = new List<float>(); // Not sure why this is here
                 startTime = Time.time;
-                Victory();
+                
             }
 
             // Start recording the player
@@ -522,11 +530,14 @@ public class checkShit : MonoBehaviour
 
     // celebration when completing a lap. Very slow... causes stuttering
     // Removed for now
-    private void Victory()
+    private void Victory(int _i)
     {       
         Vector3 spawnVector3 = pathCreator.path.GetPointAtDistance(0) + new Vector3(0, 5, 0);
         GameObject conf1 = Instantiate(Resources.Load("confetti1"), spawnVector3, Quaternion.Euler(-40f, 0, 0f)) as GameObject;
-        //GameObject conf2 = Instantiate(Resources.Load("confetti2"), spawnVector3, Quaternion.Euler(-140f, 0, 0f)) as GameObject;
+        if (_i > 1) // Beating global record justifies double the confetti
+        {
+            GameObject conf2 = Instantiate(Resources.Load("confetti2"), spawnVector3, Quaternion.Euler(-140f, 0, 0f)) as GameObject;
+        }
 
         Destroy(conf1, 3f);
         //Destroy(conf2, 3f);

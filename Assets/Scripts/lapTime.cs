@@ -17,13 +17,19 @@ public class lapTime : MonoBehaviour
     {
         recordtext = GameObject.Find("recordTime").GetComponent<Text>();
         timetext = GameObject.Find("lapTime").GetComponent<Text>();
-        if (pm == null) pm = GameObject.FindObjectOfType<PlayerManager>();
+        
         if (check == null) check = GameObject.FindGameObjectWithTag("GameController").GetComponent<checkShit>();
+        if (pm == null) pm = check.pm;
+    }
+
+    private void LookForStuff()
+    {
+        if (pm == null) pm = check.pm;
     }
 
     public void Start()
     {
-
+        LookForStuff();
         UpdateRecord();
 
     }
@@ -31,7 +37,7 @@ public class lapTime : MonoBehaviour
     void FixedUpdate()
     {
         if (check == null) check = GameObject.FindGameObjectWithTag("GameController").GetComponent<checkShit>();
-        if (pm == null) pm = GameObject.FindObjectOfType<PlayerManager>();
+        if (pm == null) LookForStuff();
 
         timetext.text = check.elapsedTime.ToString("F2") + "s";
 

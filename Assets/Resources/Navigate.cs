@@ -21,9 +21,4 @@ public class Navigate : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
     }
-
-    public void ReturnToMenu()
-    {  
-        SceneManager.LoadScene(0);
-    }
 }

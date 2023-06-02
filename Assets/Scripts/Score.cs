@@ -1,5 +1,4 @@
 using System.Collections;
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,6 +33,7 @@ public class Score : MonoBehaviour
 
 	void Awake()
 	{
+		tutorial = GameObject.FindGameObjectWithTag("tutorial");
 		player ??= GameObject.FindGameObjectWithTag("Player")?.GetComponent<newAI2>();
 		gh ??= GameObject.FindGameObjectWithTag("GameController")?.GetComponent<checkShit>();
 		scoreText ??= GameObject.FindGameObjectWithTag("Slider")?.GetComponent<Slider>();

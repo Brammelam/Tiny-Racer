@@ -45,12 +45,12 @@ public class changeMaterial : MonoBehaviour
 
             for (int i = 0; i < newmaterials.Count; i++)
             {
-
-
                 mat[i] = black;
             }
 
             newRend.materials = mat;
+
+
         }
 
         

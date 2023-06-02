@@ -51,7 +51,7 @@ public class selectedCar : MonoBehaviour
 
     private void Awake()
     {     
-        carIndex = pm.currentCar;
+        carIndex = carsettings.CurrentCar;
         cars = GameObject.FindGameObjectsWithTag("car").ToList();
         hats = GameObject.FindGameObjectsWithTag("hatButton").ToList();
         cars = cars.OrderBy(car => car.name).ToList();
@@ -61,12 +61,21 @@ public class selectedCar : MonoBehaviour
         GameObject.FindGameObjectWithTag("Snow").GetComponent<SnowScript>().StopSnowMusic();
         GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().PlayMusic();
 
-        pm = GameObject.FindObjectOfType<PlayerManager>();
+        PlayerManager[] _pm = GameObject.FindObjectsOfType<PlayerManager>();
+        if (_pm.Length > 1)
+        {
+            foreach (PlayerManager p in _pm)
+            {
+                bool isDont = p.IsDontDestroyOnLoad();
+                if (isDont) pm = p;
+            }
+        } else pm = GameObject.FindObjectOfType<PlayerManager>();
+
 
         pos1 = this.transform.position;
         pos2 = this.transform.position - (move * 6);
         
-        carText.text = carNames[pm.currentCar];
+        carText.text = carNames[carIndex];
     }
 
 
@@ -242,11 +251,11 @@ public class selectedCar : MonoBehaviour
         //SavePrefs();
         pm.carsettings.CurrentCar = pm.currentCar;
         pm.carsettings.CurrentHat = hatIndex;
-        if(pm.unlockedCars.Contains("TutorialUnlock"))
+        if(pm.unlockedCarsSO.UnlockedCars.Contains("TutorialUnlock"))
             SceneManager.LoadScene(1);
         else
         {
-            pm.currentLevel = 9;
+            pm.leaderboardSO.CurrentLevel = 9;
             SceneManager.LoadScene(11);
         }
 
@@ -266,18 +275,17 @@ public class selectedCar : MonoBehaviour
     // Disabling music and effect sliders for now
     public void LoadPrefs()
     {
+        if (pm == null) pm = GameObject.FindObjectOfType<PlayerManager>();
+
         hatIndex = carsettings.CurrentHat;
         carIndex = carsettings.CurrentCar;
-        pm.currentCar = carIndex;
-        pm.currentHat = hatIndex;
 
         this.transform.position = this.transform.position - (move * carIndex);
         DontMoveHat(move * carIndex);
         addNewNode(hatIndex);
 
         try
-        {
-            if (pm == null) pm = GameObject.FindObjectOfType<PlayerManager>();
+        {          
             pm.oldcolors = new Color[2,7];
             for (int col = 0; col < 2; col++)
             {
@@ -287,6 +295,7 @@ public class selectedCar : MonoBehaviour
                 }
             }
             pm.SetCarDefaultSettingsData();
+            if (pm.carsettings.CustomCar) pm.ModifyCar();
         }
         catch (Exception e)
         {

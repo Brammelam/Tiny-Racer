@@ -271,12 +271,6 @@ public class GarageScreen : MonoBehaviour
         renderer.materials[0].color = pm.oldcolors[0,c];
         renderer.materials[1].color = pm.oldcolors[1,c];
 
-        carsettings.BodyColor[0] = pm.oldcolors[0, c].r;
-        carsettings.BodyColor[1] = pm.oldcolors[0, c].g;
-        carsettings.BodyColor[2] = pm.oldcolors[0, c].b;
-        carsettings.WindowColor[0] = pm.oldcolors[1, c].r;
-        carsettings.WindowColor[1] = pm.oldcolors[1, c].g;
-        carsettings.WindowColor[2] = pm.oldcolors[1, c].b;
         carsettings.CustomCar = false;
         SetSliders();
         pm.ResetOriginalCar();

@@ -1,37 +1,45 @@
-using System.Collections;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using UnityEngine;
-using LootLocker.Requests;
-using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.IO;
 using UnityEngine.Networking;
-using UnityEngine.Events;
-using Newtonsoft.Json;
+using LootLocker.Requests;
+using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
+    [Header("UI")]
     public Button nextButton;
     public Button previousButton;
     public Button selectButton;
-
-    [SerializeField] GameObject cam1;
-    [SerializeField] GameObject cam2;
-
-    [SerializeField] AudioListener audio1;
-    [SerializeField] AudioListener audio2;
-
-
+    public GameObject cam1;
+    public GameObject cam2;
+    public AudioListener audio1;
+    public AudioListener audio2;
     public LeaderBoard leaderBoard;
     public TMP_InputField playernameInputfield;
     public TMP_InputField playernameInputfieldSettings;
     public Text playerName;
     public GameObject infoText;
     public GameObject confirmation;
-    
+    private GameObject unlockButton;
+    private GameObject playButton;
+    private Text unlockText;
+    public List<changeMaterial> changemat;
+    private List<Material> materials;
+    public List<Material> oldmaterials;
+    public Color[,] oldcolors;
+    public MeshRenderer newrenderer = new MeshRenderer();
+    public MeshRenderer oldrenderer;
+    public MeshRenderer[] alloriginalcolors;
+    public delegate void ProgressUpdateDelegate(float progress);
+    public event ProgressUpdateDelegate OnProgressUpdate;
+    public ProgressBar progressBar;
+    //public List<changeMaterial> changemat;
+
     [Header("Screens")]
     public GameObject welcomeScreen;
     public GameObject selectionScreen;
@@ -42,84 +50,49 @@ public class PlayerManager : MonoBehaviour
     public GameObject registerScreen;
     public GameObject loginScreen;
     public GameObject resetpasswordScreen;
-
-    
-
-    [SerializeField]
     public GarageScreen garage;
-    [SerializeField]
     public selectedCar sc;
     public GameObject selectedCar;
-    public string playerNameString;
-    public List<string> unlockedCars = new List<string>();
-    [SerializeField]
-    public List<float> ghostData;
-    [SerializeField]
+
+
+
+
+    [Header("Persistent Data")]
+    public List<string> leaderboardNames;
+    public List<string> leaderboardScores;
+    public List<string> leaderboardPlayerScores;
+    public FloatSO levelSO;
+    public ScoresSO leaderboardSO;
+    public CurrentscoreSO currentScoreSO;
+    public GhostsSO ghostsSO;
+    public UnlockedCarsSO unlockedCarsSO;
+    public CarsettingsSO carsettings;
+    public bool currentScoreSObool = false;
+    public int currentCar;
     public int currentLevel;
     public float currentTime;
     public int playerId;
     public float currentHS;
-
+    public string playerNameString;
+    public List<string> unlockedCars;
+    public List<float> ghostData;
     //public List<int> ghosts;
     //public List<int> playerIds;
-    public List<string> leaderboardNames;
-    public List<string> leaderboardScores;
-    public List<string> leaderboardPlayerScores;
 
-    [SerializeField]
-    public FloatSO scoreSO;
-
-    [SerializeField]
-    public ScoresSO leaderboardNamesSO, leaderboardScoresSO;
-
-    [SerializeField]
-    public CurrentscoreSO currentScoreSO;
-    public bool currentScoreSObool = false;
-
-    [SerializeField]
-    private GhostsSO ghostsSO;
-
-    [SerializeField]
-    public int currentCar;
-
-    [SerializeField]
-    private GameObject unlockButton;
-    [SerializeField]
-    private GameObject playButton;
-    [SerializeField]
-    private Text unlockText;
-
-    [SerializeField]
-    List<changeMaterial> changemat;
-
-    [SerializeField]
-    public selectedCar pmhat;
     public int currentHat;
-
-    [SerializeField]
-    public CarsettingsSO carsettings;
-
-    [SerializeField]
-    private List<Material> materials;
-    public List<Material> oldmaterials;
-
-    [SerializeField]
-    public Color[,] oldcolors;
-
-    [SerializeField]
-    public MeshRenderer newrenderer = new MeshRenderer();
-    public MeshRenderer oldrenderer;
-
-    [SerializeField]
-    public MeshRenderer[] alloriginalcolors;
-
-    public delegate void ProgressUpdateDelegate(float progress);
-    public event ProgressUpdateDelegate OnProgressUpdate;
-    public ProgressBar progressBar;
 
     public float Progress { get; private set; }
 
+    public bool IsDontDestroyOnLoad()
+    {
+        // Check if the GameObject has the DontDestroyOnLoad flag set
+        return (gameObject.hideFlags & HideFlags.DontSaveInBuild) != 0;
+    }
 
+    private void Start()
+    {
+        GetSO();
+    }
 
     public void Setup()
     {
@@ -173,7 +146,13 @@ public class PlayerManager : MonoBehaviour
     public IEnumerator ReturnToMenu()
     {
         float[] stepProgress = { 0.25f, 0.25f };
-        loadingScreen.SetActive(true);
+
+        // Disable any login screens if they are active
+        GameObject[] welcomeScreens = GameObject.FindGameObjectsWithTag("welcome");
+        foreach (GameObject welcomeScreen in welcomeScreens)
+        {
+            welcomeScreen.SetActive(false);
+        }
 
         IEnumerator[] coroutines = {
             SetUpUI(),            
@@ -192,6 +171,8 @@ public class PlayerManager : MonoBehaviour
         UpdateProgress(Progress);
         GetSO();
         if (carsettings.CustomCar) ModifyCar();
+
+        yield return null;
     }
 
     IEnumerator SetupRoutine()
@@ -226,7 +207,8 @@ public class PlayerManager : MonoBehaviour
         // Progress complete
         Progress = 1f;
         UpdateProgress(Progress);
-        // Update the leaderboard values in the end
+        
+        
         SetSO();
     }
 
@@ -307,28 +289,31 @@ public class PlayerManager : MonoBehaviour
     public void SetSO()
     {
 
-        leaderboardNamesSO.Names = leaderboardNames;
-        leaderboardScoresSO.Values = leaderboardScores;
-        leaderboardScoresSO.PlayerValues = leaderboardPlayerScores;
-
     }
 
     public void GetSO()
     {
-        leaderboardNames = leaderboardNamesSO.Names;
-        leaderboardScores = leaderboardScoresSO.Values;
-        leaderboardPlayerScores = leaderboardScoresSO.PlayerValues;
+        levelSO = Resources.Load<FloatSO>("SO/FloatSO");
+        leaderboardSO = Resources.Load<ScoresSO>("SO/ScoresSO");
+        unlockedCarsSO = Resources.Load<UnlockedCarsSO>("SO/UnlockedCarsSO");
+        currentScoreSO = Resources.Load<CurrentscoreSO>("SO/CurrentscoreSO");
+        //ghostsSO;
+        carsettings = Resources.Load<CarsettingsSO>("SO/CarsettingsSO"); ;
+        currentScoreSObool = false;
+        unlockedCars = unlockedCarsSO.UnlockedCars;
+        leaderboardNames = leaderboardSO.Names;
+        leaderboardScores = leaderboardSO.Values;
+        leaderboardPlayerScores = leaderboardSO.PlayerValues;
 
-        sc.hatIndex = carsettings.CurrentHat;
-        sc.carIndex = carsettings.CurrentCar;
-        currentCar = sc.carIndex;
-        currentHat = sc.hatIndex;
+        currentCar = carsettings.CurrentCar;
+        currentHat = carsettings.CurrentHat;
+        currentLevel = leaderboardSO.CurrentLevel;
+
 
     }
 
     public void UpdateScoreText(float _score, float _playerScore)
     {
-
         currentScoreSO.CurrentScore = _score;
         currentScoreSO.CurrentPlayerScore = _playerScore;
         currentScoreSObool = true;
@@ -366,9 +351,11 @@ public class PlayerManager : MonoBehaviour
                 {
 
                     unlockedCars.Add(inventory[i].asset.name.ToString());
+
                 }
 
                 foreach (changeMaterial changemat in changemat) changemat.SetLockedCars();
+                SetCarDefaultSettingsData();
 
                 done = true;
             }
@@ -378,8 +365,9 @@ public class PlayerManager : MonoBehaviour
                 done = true;
             }
         });
+        unlockedCarsSO.UnlockedCars = unlockedCars;
         yield return new WaitWhile(() => done == false);
-
+        
     }
 
     public void SetPlayerName()
@@ -512,7 +500,7 @@ public class PlayerManager : MonoBehaviour
     public void SetCurrentLevel(int _currentLevel)
     {
         currentLevel = _currentLevel - 1;
-        scoreSO.Value = currentLevel;
+        levelSO.Value = currentLevel;
 
         SceneManager.LoadScene(_currentLevel + 1);
     }
@@ -600,27 +588,6 @@ public class PlayerManager : MonoBehaviour
         if (carsettings.CustomCar) ModifyCar();
 
         done = true;
-        yield return new WaitWhile(() => done == false);
-    }
-
-    public IEnumerator GetMemberHighscore(int currentLevel)
-    {
-        bool done = false;
-        LootLockerSDKManager.GetScoreList(leaderBoard.leaderboardIds[currentLevel - 1], 1, 0, (response) =>
-          {
-              if (response.statusCode == 200)
-              {
-                  currentHS = response.items[0].score;
-                  currentHS *= -0.01f;
-                  done = true;
-
-              }
-              else
-              {
-                  Debug.Log("failed: " + response.Error);
-                  done = true;
-              }
-          });
         yield return new WaitWhile(() => done == false);
     }
 
@@ -714,17 +681,9 @@ public class PlayerManager : MonoBehaviour
 
     public void SetCarDefaultSettingsData()
     {
-        newrenderer = pmhat.cars[currentCar].GetComponentInChildren<MeshRenderer>();
+        newrenderer = sc.cars[currentCar].GetComponentInChildren<MeshRenderer>();
         newrenderer.materials[0].color = oldcolors[0, currentCar];
         newrenderer.materials[1].color = oldcolors[1, currentCar];
-
-        carsettings.BodyColor[0] = oldcolors[0, currentCar].r;
-        carsettings.BodyColor[1] = oldcolors[0, currentCar].g;
-        carsettings.BodyColor[2] = oldcolors[0, currentCar].b;
-        carsettings.WindowColor[0] = oldcolors[1, currentCar].r;
-        carsettings.WindowColor[1] = oldcolors[1, currentCar].g;
-        carsettings.WindowColor[2] = oldcolors[1, currentCar].b;
-        carsettings.CustomCar = false;
     }
 
     public IEnumerator UploadPlayerGhost()
@@ -810,14 +769,14 @@ public class PlayerManager : MonoBehaviour
 
     public void ResetOriginalCar()
     {
-        newrenderer = pmhat.cars[currentCar].GetComponentInChildren<MeshRenderer>();
+        newrenderer = sc.cars[currentCar].GetComponentInChildren<MeshRenderer>();
         newrenderer.materials[0].color = oldcolors[0, currentCar];
         newrenderer.materials[1].color = oldcolors[1, currentCar];
     }
 
     public void ModifyCar()
     {
-        newrenderer = pmhat.cars[currentCar].GetComponentInChildren<MeshRenderer>();
+        newrenderer = sc.cars[currentCar].GetComponentInChildren<MeshRenderer>();
 
         Color _bodyColor = new Color(carsettings.BodyColor[0], carsettings.BodyColor[1], carsettings.BodyColor[2]);
         Color _windowColor = new Color(carsettings.WindowColor[0], carsettings.WindowColor[1], carsettings.WindowColor[2]);
