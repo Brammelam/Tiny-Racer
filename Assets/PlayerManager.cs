@@ -25,9 +25,9 @@ public class PlayerManager : MonoBehaviour
     public Text playerName;
     public GameObject infoText;
     public GameObject confirmation;
-    private GameObject unlockButton;
-    private GameObject playButton;
-    private Text unlockText;
+    public GameObject unlockButton;
+    public GameObject playButton;
+    public Text unlockText;
     public List<changeMaterial> changemat;
     private List<Material> materials;
     public List<Material> oldmaterials;
@@ -91,7 +91,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        GetSO();
+        StartCoroutine(GetSO());
     }
 
     public void Setup()
@@ -145,7 +145,7 @@ public class PlayerManager : MonoBehaviour
     // Add something like this - We are making too many calls to the server for no reason, save in a DoNotDestroy object or something..
     public IEnumerator ReturnToMenu()
     {
-        float[] stepProgress = { 0.25f, 0.25f };
+        float[] stepProgress = { 0.25f, 0.25f, 0.25f };
 
         // Disable any login screens if they are active
         GameObject[] welcomeScreens = GameObject.FindGameObjectsWithTag("welcome");
@@ -155,7 +155,8 @@ public class PlayerManager : MonoBehaviour
         }
 
         IEnumerator[] coroutines = {
-            SetUpUI(),            
+            SetUpUI(),
+            GetSO(),
             DisableStartScreens()
         };
         Progress = 0f;
@@ -169,7 +170,7 @@ public class PlayerManager : MonoBehaviour
 
         Progress = 1f;
         UpdateProgress(Progress);
-        GetSO();
+
         if (carsettings.CustomCar) ModifyCar();
 
         yield return null;
@@ -242,9 +243,7 @@ public class PlayerManager : MonoBehaviour
         
         selectButton.gameObject.GetComponentInChildren<Text>().text = "PLAY";
         selectButton.interactable = true;
-
         selectedCar.GetComponent<selectedCar>().LoadPrefs();
-
         done = true;
         yield return new WaitWhile(() => done == false);
     }
@@ -291,7 +290,7 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    public void GetSO()
+    public IEnumerator GetSO()
     {
         levelSO = Resources.Load<FloatSO>("SO/FloatSO");
         leaderboardSO = Resources.Load<ScoresSO>("SO/ScoresSO");
@@ -307,16 +306,29 @@ public class PlayerManager : MonoBehaviour
 
         currentCar = carsettings.CurrentCar;
         currentHat = carsettings.CurrentHat;
-        currentLevel = leaderboardSO.CurrentLevel;
+        currentLevel = levelSO.Value;
+        playerNameString = currentScoreSO.CurrentPlayerName;
+
+        yield return null;
 
 
     }
 
-    public void UpdateScoreText(float _score, float _playerScore)
+    public void UpdateScoreText(float _score, bool _uploadPlayerScoreAsGlobal)
     {
-        currentScoreSO.CurrentScore = _score;
-        currentScoreSO.CurrentPlayerScore = _playerScore;
-        currentScoreSObool = true;
+
+        if (_uploadPlayerScoreAsGlobal)
+        {
+            leaderboardSO.Values[currentLevel] = _score.ToString();
+            leaderboardSO.PlayerValues[currentLevel] = _score.ToString();
+            leaderboardSO.Names[currentLevel] = playerNameString;
+            currentScoreSO.CurrentScore = _score;
+            currentScoreSO.CurrentPlayerScore = _score;
+        } else
+        {
+            leaderboardSO.PlayerValues[currentLevel] = _score.ToString();            
+            currentScoreSO.CurrentPlayerScore = _score;
+        }
     }
 
     public void TriggerEvent(string _car)
@@ -326,13 +338,11 @@ public class PlayerManager : MonoBehaviour
         {
             if (response.success)
             {
-
-
+                Debug.Log("Successfully retrieved triggered events");
             }
             else
             {
-
-
+                Debug.Log("Error retrieving triggered events");
             }
         });
     }
@@ -354,8 +364,7 @@ public class PlayerManager : MonoBehaviour
 
                 }
 
-                foreach (changeMaterial changemat in changemat) changemat.SetLockedCars();
-                SetCarDefaultSettingsData();
+                foreach (changeMaterial changemat in changemat) changemat.SetLockedCars();                
 
                 done = true;
             }
@@ -387,6 +396,7 @@ public class PlayerManager : MonoBehaviour
 
                         playerName.text = "Welcome back, " + response.name.ToString() + "!";
                         playerNameString = response.name.ToString();
+                        currentScoreSO.CurrentPlayerName = playerNameString;
                     }
                     else
                     {
@@ -784,6 +794,7 @@ public class PlayerManager : MonoBehaviour
         newrenderer.materials[0].color = _bodyColor;
         newrenderer.materials[1].color = _windowColor;
 
+        sc.addNewNode(currentHat);
         
     }
 

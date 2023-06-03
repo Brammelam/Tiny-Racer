@@ -196,11 +196,9 @@ public class selectedLevel : MonoBehaviour
             string _tempScore = leaderBoard.leaderboardScores[_levelIndex];
             string _tempPlayerScore = leaderBoard.leaderboardPlayerScores[_levelIndex];
 
-            float _floatScore = float.Parse(_tempScore);
-            float _floatPlayerScore = float.Parse(_tempPlayerScore);
+            float _floatScore = (float.Parse(_tempScore) * 100) / 100;
+            float _floatPlayerScore = (float.Parse(_tempPlayerScore) * 100) / 100;
 
-            _floatScore *= 0.01f;
-            _floatPlayerScore *= 0.01f;
             // Format the highscores retrieved from LeaderBoard
             playerNames.text = leaderBoard.leaderboardNames[_levelIndex];
             playerScores.text = _floatScore.ToString() + "s";

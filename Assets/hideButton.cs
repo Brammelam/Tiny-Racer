@@ -14,7 +14,8 @@ public class hideButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        pm = GameObject.FindObjectOfType<PlayerManager>();
+        
     }
 
 
@@ -22,11 +23,11 @@ public class hideButton : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        int i = pm.currentCar+1;
+        
         if (button == null) button = GameObject.FindGameObjectWithTag("unlockbutton");
         if (pm.currentCar != 0)
         {
-            
+            int i = pm.currentCar + 1;
             // You have claimed the unlocked car
             if (pm.unlockedCars.Contains("gotcar" + i))
             {

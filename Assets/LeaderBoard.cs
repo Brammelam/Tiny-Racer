@@ -72,9 +72,10 @@ public class LeaderBoard : MonoBehaviour
     public IEnumerator FetchPlayerScores()
     {
         bool done = false;
-        Dictionary<int, int> tempPlayerScores = new Dictionary<int, int>(leaderboardIds.Count);
+        int _numberOfLeaderboards = leaderboardIds.Count;
+        Dictionary<int, int> tempPlayerScores = new Dictionary<int, int>(_numberOfLeaderboards);
 
-            LootLockerSDKManager.GetAllMemberRanks(pm.playerId, 1, (response) =>
+            LootLockerSDKManager.GetAllMemberRanks(pm.playerId, _numberOfLeaderboards, (response) =>
             {
                 if (response.statusCode == 200)
                 {
@@ -134,8 +135,17 @@ public class LeaderBoard : MonoBehaviour
 
                 if (response.success && response.items.Length > 0)
                 {
-                    entry.fastestTime = response.items[0].score;
-                    entry.playerName = response.items[0].player.name;
+                    var item = response.items[0];
+                    if (string.IsNullOrEmpty(item.player.name)) 
+                    {
+                        entry.playerName = "Anonymous";
+                    } 
+                    else
+                    {
+                        entry.fastestTime = item.score;
+                        entry.playerName = item.player.name;
+                    }
+
                 }
                 else
                 {

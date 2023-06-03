@@ -102,16 +102,22 @@ public class checkShit : MonoBehaviour
 
         // Add the PlayerManager component to the GameObject
         pm = playerManagerObject.AddComponent<PlayerManager>();
-
-        /*
-       _score = GameObject.FindObjectOfType<Score>();
-       leaderBoard = GameObject.FindObjectOfType<LeaderBoard>();
-       */
-        playerRecord = new List<float>();
-        saveRecord = new List<float>();          
-
-        Physics.gravity = new Vector3(0, -50F, 0);      
         
+        
+    }
+
+    public IEnumerator Start()
+    {
+        yield return StartCoroutine(pm.GetSO());
+        Application.targetFrameRate = 60;
+        tipped = false;
+
+        currentLevel = pm.currentLevel;
+        playerRecord = new List<float>();
+        saveRecord = new List<float>();
+
+        Physics.gravity = new Vector3(0, -50F, 0);
+
         if (currentLevel < 3 || currentLevel == 7 || currentLevel == 8 || currentLevel == 9)
         {
             GameObject.FindGameObjectWithTag("Ambient").GetComponent<AmbientClass>().PlayAmbientMusic();
@@ -135,20 +141,13 @@ public class checkShit : MonoBehaviour
         _car.timeElapsed = 0;
 
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<cameraFollow>();
-        
+
         /*
         // Wait until finished saving
         if (GameObject.FindGameObjectWithTag("save") != null)
             StartCoroutine(WaitForGhost());
         else DontWaitForGhost();
         */
-    }
-
-    public void Start()
-    {
-        Application.targetFrameRate = 60;
-        tipped = false;
-        
     }
 
     IEnumerator LoadPrefs()
@@ -461,6 +460,7 @@ public class checkShit : MonoBehaviour
                     Debug.Log("Unlocked car nr " + c);
                     string triggerCarUnlock = "grantCar" + c;
                     pm.TriggerEvent(triggerCarUnlock);
+                    pm.unlockedCarsSO.UnlockedCars.Add(s);
                 }
 
                 // Disables repeating tutorial text after completing first lap
@@ -485,10 +485,11 @@ public class checkShit : MonoBehaviour
                 // Player beat global record
                 if (globalRecordTime == 0 || elapsedTime < globalRecordTime)
                 {
+                    bool uploadGlobal = true;
                     int i = 2;
                     Victory(i);
                     float _tempScore = Mathf.Round(elapsedTime * 100) / 100;
-                    pm.UpdateScoreText(_tempScore, _tempScore);
+                    pm.UpdateScoreText(_tempScore, uploadGlobal);
                     globalRecordTime = _tempScore;
                     playerRecordTime = _tempScore;
 
@@ -508,17 +509,18 @@ public class checkShit : MonoBehaviour
                 // Player only beat own record, not global record
                 else if ((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime))
                 {
+                    bool uploadGlobal = false;
                     int i = 1;
                     Victory(i);
                     float _tempScore = Mathf.Round(elapsedTime * 100) / 100;
-                    pm.UpdateScoreText(pm.currentScoreSO.CurrentScore, _tempScore);
+                    pm.UpdateScoreText(_tempScore, uploadGlobal);
                     playerRecordTime = _tempScore;
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
 
                     StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel));
                 }
-                playerRecord = new List<float>(); // Not sure why this is here
+                playerRecord = new List<float>(); // Resets the ghost data array
                 startTime = Time.time;
                 
             }
