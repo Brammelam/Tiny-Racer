@@ -257,7 +257,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   copPosition: {x: 0, y: 0, z: 0}
   copRotation: {x: 0, y: 0, z: 0, w: 1}
-  driftPoint: {fileID: 0}
+  driftPoint: {fileID: 5657499256518639242}
   distanceTravelled: 0
   speed: 0
   check: {fileID: 0}

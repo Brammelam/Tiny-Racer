@@ -475,10 +475,11 @@ public class checkShit : MonoBehaviour
                 string _car = "car" + _currentLevel.ToString();
                 string _gotCar = "gotcar" + _currentLevel.ToString();
                 
-                if (!pm.unlockedCars.Contains(_currrentLevelString) && currentLevel != 9)
+                if (!pm.unlockedCars.Contains(_car) && currentLevel != 9)
                 {
                     string triggerCarUnlock = "grantCar" + _currrentLevelString;
-                    pm.TriggerEvent(triggerCarUnlock);                
+                    pm.TriggerEvent(triggerCarUnlock);
+                    pm.unlockedCars.Add(_car);
                 }
 
                 // Disables repeating tutorial text after completing first lap
@@ -525,7 +526,7 @@ public class checkShit : MonoBehaviour
                 }
 
                 // Player only beat own record, not global record
-                else if ((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime) && currentLevel != 9)
+                else if ((((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime)) || (playerRecordTime == 0)) && currentLevel != 9)
                 {
                     bool isGlobalRecord = false;
 

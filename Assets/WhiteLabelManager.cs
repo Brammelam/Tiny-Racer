@@ -181,7 +181,7 @@ public class WhiteLabelManager : MonoBehaviour
                             Error(response.Error);
                             return;
                         }
-                        //playerManager.playerId = response.player_id;
+                        playerManager.playerId = response.player_id;
                         playerManager.Setup();
                     });
                 });

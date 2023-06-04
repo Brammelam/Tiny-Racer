@@ -167,7 +167,7 @@ public class selectedCar : MonoBehaviour
             }
             if (Input.GetKeyUp("space") || Input.GetKeyUp("enter"))
             {               
-                SelectCar();
+                //SelectCar();
             }
         }
     }

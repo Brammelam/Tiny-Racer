@@ -258,7 +258,6 @@ public class PlayerManager : MonoBehaviour
         
         selectButton.gameObject.GetComponentInChildren<Text>().text = "PLAY";
         selectButton.interactable = true;
-        //selectedCar.GetComponent<selectedCar>().SetCamera();
 
         
         done = true;

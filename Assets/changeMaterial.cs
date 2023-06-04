@@ -39,7 +39,7 @@ public class changeMaterial : MonoBehaviour
     public void SetLockedCars()
     {
         int index = transform.GetSiblingIndex() + 1;
-        if (!pm.unlockedCars.Contains("gotcar" + index) && index > 1)
+        if (!pm.unlockedCars.Contains("gotcar" + index) && index > 0)
         {
 
             Material[] mat = newmaterials.ToArray();

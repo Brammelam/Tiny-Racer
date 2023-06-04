@@ -73,7 +73,7 @@ public class lapTime : MonoBehaviour
         recordtext.text = _newRecordText + "s";
     }
 
-    private void OnSceneUnloaded()
+    private void OnDestroy()
     {
         currentScoreSO.OnScoreChanged -= SetRecord;
     }

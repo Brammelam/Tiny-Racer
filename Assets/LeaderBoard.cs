@@ -66,7 +66,7 @@ public class LeaderBoard : MonoBehaviour
                 pm.UpdateScoreText(scoreToUpload, isGlobalScore);
 
             }
-            Debug.Log("Failed to upload score!");
+            else { Debug.Log("Failed to upload score!"); }
             
             done = true;
         });
@@ -97,7 +97,7 @@ public class LeaderBoard : MonoBehaviour
                     foreach (int leaderboardId in leaderboardIds)
                     {
                         // Get the score for the current leaderboard ID from the dictionary
-                        int score = tempPlayerScores.ContainsKey(leaderboardId) ? tempPlayerScores[leaderboardId] : 0;
+                        int score = tempPlayerScores.ContainsKey(leaderboardId) ? tempPlayerScores[leaderboardId] : 99999;
 
                         // Add the score to the list
                         scoresList.Add(score);

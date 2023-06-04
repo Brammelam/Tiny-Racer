@@ -126,7 +126,6 @@ GameObject:
   - component: {fileID: 1555150608783596523}
   - component: {fileID: 1555150608783596519}
   - component: {fileID: 1555150608783596512}
-  - component: {fileID: 5425728825743394156}
   - component: {fileID: -2046071239152652036}
   m_Layer: 0
   m_Name: Cop
@@ -232,30 +231,6 @@ MonoBehaviour:
   lastPosition: {x: 0, y: 0, z: 0}
   speed: 0
   direction: {x: 0, y: 0, z: 0}
---- !u!114 &5425728825743394156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825199115517716153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f437795ea5b0ddf419b58bd9efb41898, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _car: {fileID: 8808454784599267509, guid: d2e1fc59b2017f24b9fb07d7fd213540, type: 3}
-  driftingAngle: 25
-  wait: 0
-  firstTime: 0
-  turningleft: 0
-  turningright: 0
-  tippingBack: 0
-  turningangle: 0
-  targetangle: 0
-  averageAngle: 0
-  driftCooldown: 2
-  currentState: 0
 --- !u!65 &-2046071239152652036
 BoxCollider:
   m_ObjectHideFlags: 0
