@@ -62,12 +62,13 @@ public class lapTime : MonoBehaviour
 
     private void LoadRecord()
     {
-        recordtext.text = pm.currentScoreSO.CurrentScore.ToString();
+        float _newRecordFloat = pm.currentScoreSO.CurrentScore;
+        recordtext.text = _newRecordFloat.ToString();
     }
 
     public void SetRecord(float newScore)
     {
-        float _newRecordFloat = pm.currentScoreSO.CurrentScore;
+        float _newRecordFloat = newScore / 100;
         string _newRecordText = _newRecordFloat.ToString();
         recordtext.text = _newRecordText + "s";
     }

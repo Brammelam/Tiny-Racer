@@ -22,7 +22,7 @@ public class changeMaterial : MonoBehaviour
 
     IEnumerator coroutine;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         black = Resources.Load("black") as Material;
 
@@ -36,11 +36,12 @@ public class changeMaterial : MonoBehaviour
 
     }
 
-    public void  SetLockedCars()
+    public void SetLockedCars()
     {
         int index = transform.GetSiblingIndex() + 1;
-        if (!pm.unlockedCars.Contains("gotcar" + index))
+        if (!pm.unlockedCars.Contains("gotcar" + index) && index > 1)
         {
+
             Material[] mat = newmaterials.ToArray();
 
             for (int i = 0; i < newmaterials.Count; i++)
@@ -50,10 +51,7 @@ public class changeMaterial : MonoBehaviour
 
             newRend.materials = mat;
 
-
-        }
-
-        
+        }       
     }
 
      // Check which cars are unlocked by the player, defaults to no

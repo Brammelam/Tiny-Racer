@@ -25,7 +25,7 @@ public class selectedLevel : MonoBehaviour
     private const string tutorialKey = "Tutorial";
     public Vector3 pos1 = Vector3.zero;
     public Vector3 pos2 = Vector3.zero;
-    public Vector3 move = new Vector3(100f, 0, 0);
+    public Vector3 move;
     public float moveSpeed = 0.1f;
     public Text levelText;
     public Text levelRecordText;
@@ -54,7 +54,13 @@ public class selectedLevel : MonoBehaviour
 
     private bool ready = false;
 
-
+    private void Awake()
+    {
+        move = new Vector3(100f, 0, 0);
+        // Camera positions for toggling current selected level
+        pos1 = this.transform.position;
+        pos2 = this.transform.position - (move * 8);
+    }
     public void Start()
     {
         levels = GameObject.FindGameObjectsWithTag("nature").ToList();
@@ -86,10 +92,9 @@ public class selectedLevel : MonoBehaviour
             leaderBoard = GameObject.FindObjectOfType<LeaderBoard>();
         if (pm != null && leaderBoard != null)
         {
-            ready = true;
-
-            LoadPrefs();            
-            UpdateLevelName();
+            
+            if (pm.allSOfound) OnSOReady();            
+            
         }
     }
 
@@ -98,12 +103,17 @@ public class selectedLevel : MonoBehaviour
         UpdateLevelName();
     }
 
-    public void Update()
+    private void FixedUpdate()
     {
         foreach (GameObject level in levels)
         {
             level.transform.Rotate(0, -1f, 0);
         }
+    }
+
+    public void Update()
+    {
+
         if (!ready)
         {
             LookForStuff();
@@ -119,19 +129,17 @@ public class selectedLevel : MonoBehaviour
 
     public void NextLevel()
     {
-        if (levelIndex < 9)
+        if (levelIndex < 8)
         {
             this.transform.position = this.transform.position - move;
             levelIndex += 1;
-            if (levelIndex == 8)
-            {
-                SetNightMode(true);
-            }
+            
+            if (levelIndex == 7) SetNightMode(true);            
         }
         else
         {
             this.transform.position = pos1;
-            levelIndex = 1;
+            levelIndex = 0;
             SetNightMode(false);
         }
 
@@ -140,16 +148,17 @@ public class selectedLevel : MonoBehaviour
 
     public void PreviousLevel()
     {
-        if (levelIndex > 1)
+        if (levelIndex > 0)
         {
             this.transform.position = this.transform.position + move;
             levelIndex -= 1;
-            if (levelIndex == 7) SetNightMode(false);
+            
+            if (levelIndex == 6) SetNightMode(false);
         }
         else
         {
             this.transform.position = pos2;
-            levelIndex = 9;
+            levelIndex = 8;
             SetNightMode(true);
         }
         
@@ -189,29 +198,23 @@ public class selectedLevel : MonoBehaviour
 
     public void UpdateLevelName()
     {
-        int _levelIndex = levelIndex - 1;
-        levelText.text = "1 - " + levelIndex.ToString();
-        if (leaderBoard != null)
-        {
-            string _tempScore = leaderBoard.leaderboardScores[_levelIndex];
-            string _tempPlayerScore = leaderBoard.leaderboardPlayerScores[_levelIndex];
+        int _levelIndexName = levelIndex + 1;
+        levelText.text = "1 - " + _levelIndexName.ToString();
 
-            float _floatScore = (float.Parse(_tempScore) * 100) / 100;
-            float _floatPlayerScore = (float.Parse(_tempPlayerScore) * 100) / 100;
+        string _tempScore = leaderBoard.leaderboardScores[levelIndex];
+        string _tempPlayerScore = leaderBoard.leaderboardPlayerScores[levelIndex];
 
-            // Format the highscores retrieved from LeaderBoard
-            playerNames.text = leaderBoard.leaderboardNames[_levelIndex];
-            playerScores.text = _floatScore.ToString() + "s";
-            playerOwnScore.text = _floatPlayerScore.ToString() + "s";
-            pm.currentLevel = _levelIndex;
-            SavePrefs(_floatScore, _floatPlayerScore);
+        float _floatScore = float.Parse(_tempScore) / 100;
+        float _floatPlayerScore = float.Parse(_tempPlayerScore) / 100;
 
-        } else
-        {
-            playerNames.text = "No global score";
-            playerScores.text = "Make your claim!";
-            playerOwnScore.text = "Set your own time!";
-        }
+        // Format the highscores retrieved from LeaderBoard
+        playerNames.text = leaderBoard.leaderboardNames[levelIndex];
+        playerScores.text = _floatScore.ToString() + "s";
+        playerOwnScore.text = _floatPlayerScore.ToString() + "s";
+        pm.leaderboardSO.CurrentLevel = levelIndex;
+        SavePrefs(_floatScore, _floatPlayerScore);
+
+
     }
 
     public void Wrapper()
@@ -221,7 +224,7 @@ public class selectedLevel : MonoBehaviour
 
     IEnumerator SelectLevel()
     {
-        pm.SetCurrentLevel(levelIndex);
+        pm.SetCurrentLevel(levelIndex + 2); // Taking into account carSelect and levelSelect as first two levels
         yield return null;
                    
       
@@ -231,21 +234,20 @@ public class selectedLevel : MonoBehaviour
     {
         pm.currentScoreSO.CurrentScore = _score;
         pm.currentScoreSO.CurrentPlayerScore = _playerScore;
+
     }
 
-    public void LoadPrefs()
+    public void OnSOReady()
     {
-        // Levels start at 1
-        levelIndex = pm.currentLevel + 1;
+        ready = true;
+        levelIndex = pm.leaderboardSO.CurrentLevel;
 
-        // Camera positions for toggling current selected level
-        pos1 = this.transform.position;
-        pos2 = this.transform.position - (move * 8);
-        this.transform.position = this.transform.position - (move * (levelIndex - 1));
+        this.transform.position = this.transform.position - (move * (levelIndex));
 
         //Toggle night mode
         if (levelIndex > 7) SetNightMode(true);
         else SetNightMode(false);
         UpdateLevelName();
+
     }
 }

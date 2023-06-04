@@ -32,6 +32,7 @@ public class checkShit : MonoBehaviour
     public Vector3 velocity = Vector3.zero;
     public Quaternion copRotation = Quaternion.Euler(0, 0, 0);
     public bool tipped = false;
+    public event Action<bool> TippedChanged;
     public speedTracker st;
     public rotationTracker rt;
     //private float tipAngleLeft = 35f;
@@ -70,11 +71,9 @@ public class checkShit : MonoBehaviour
     public int lapLength = 0;
     public Vector3 lastGhostDistance;
 
-    public CarMusicClass _car;
-
     public Score _score;
     public GameObject _hat;
-
+    public CarMusicClass _car;
     public int hatIndex;
 
     private int frame;
@@ -93,52 +92,28 @@ public class checkShit : MonoBehaviour
     public bool completedTutorialLap = false;
     public int someCount = 0;
 
+    [SerializeField]
     private bool allObjectsFound = false;
     private bool ready = false;
+    public AudioManager audioManager;
+
 
     public void Awake()
     {
-        GameObject playerManagerObject = new GameObject("PlayerManager");
-
-        // Add the PlayerManager component to the GameObject
-        pm = playerManagerObject.AddComponent<PlayerManager>();
-        
-        
-    }
-
-    public IEnumerator Start()
-    {
-        yield return StartCoroutine(pm.GetSO());
+        // Set ingame framerate to 60
         Application.targetFrameRate = 60;
+        
+        // Generate a playermanager
+        GameObject playerManagerObject = new GameObject("PlayerManager");
+        pm = playerManagerObject.AddComponent<PlayerManager>();
+
         tipped = false;
 
         currentLevel = pm.currentLevel;
         playerRecord = new List<float>();
         saveRecord = new List<float>();
-
+        
         Physics.gravity = new Vector3(0, -50F, 0);
-
-        if (currentLevel < 3 || currentLevel == 7 || currentLevel == 8 || currentLevel == 9)
-        {
-            GameObject.FindGameObjectWithTag("Ambient").GetComponent<AmbientClass>().PlayAmbientMusic();
-            if (currentLevel == 7 || currentLevel == 8)
-            {
-                GameObject.FindGameObjectWithTag("Ambient").GetComponent<AudioSource>().pitch = 0.5f;
-            }
-        }
-        else if (currentLevel == 3)
-        {
-            GameObject.FindGameObjectWithTag("City").GetComponent<CityScript>().PlayCityMusic();
-            GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().StopMusic();
-        }
-        else if (currentLevel > 3 && currentLevel != 7)
-        {
-            GameObject.FindGameObjectWithTag("Snow").GetComponent<SnowScript>().PlaySnowMusic();
-        }
-
-        _car = GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>();
-        _car.PlayCarMusic();
-        _car.timeElapsed = 0;
 
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<cameraFollow>();
 
@@ -148,6 +123,8 @@ public class checkShit : MonoBehaviour
             StartCoroutine(WaitForGhost());
         else DontWaitForGhost();
         */
+
+
     }
 
     IEnumerator LoadPrefs()
@@ -201,11 +178,39 @@ public class checkShit : MonoBehaviour
         yield return WaitForAssignments();
         if (hatIndex != 3) yield return SetHat();
 
+        if (currentLevel < 3 || currentLevel == 7 || currentLevel == 8 || currentLevel == 9)
+        {
+            GameObject.FindGameObjectWithTag("Ambient").GetComponent<AmbientClass>().PlayAmbientMusic();
+            if (currentLevel == 7 || currentLevel == 8)
+            {
+                GameObject.FindGameObjectWithTag("Ambient").GetComponent<AudioSource>().pitch = 0.5f;
+            }
+            else GameObject.FindGameObjectWithTag("Ambient").GetComponent<AudioSource>().pitch = 1f;
+        }
+        else if (currentLevel == 3)
+        {
+            GameObject.FindGameObjectWithTag("City").GetComponent<CityScript>().PlayCityMusic();
+            GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().StopMusic();
+        }
+        else if (currentLevel > 3 && currentLevel != 7)
+        {
+            GameObject.FindGameObjectWithTag("Snow").GetComponent<SnowScript>().PlaySnowMusic();
+        }
+
+        _car = GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>();
+        _car.PlayCarMusic();
+        _car.timeElapsed = 0;
+
+
         ready = true;
 
     }
 
-
+    private void OnSpeedChanged(float _speed)
+    {
+        currentSpeed = _speed;
+        Debug.Log("Updating speed with " + _speed);
+    }
  
     IEnumerator WaitForAssignments()
     {
@@ -227,7 +232,8 @@ public class checkShit : MonoBehaviour
         st = cop.GetComponent<speedTracker>();
         rt = cop.GetComponent<rotationTracker>();
         rb2 = deadCop.GetComponent<Rigidbody>();
-
+        Debug.Log("Now assigning SPEEDTRACKER DELEGATE");
+        
 
 
 
@@ -254,20 +260,29 @@ public class checkShit : MonoBehaviour
 
     IEnumerator SetHat()
     {
-        if (hatIndex == 0)
-            _hat = Instantiate(Resources.Load("tophat1") as GameObject);
-        if (hatIndex == 1)
-            _hat = Instantiate(Resources.Load("crown1") as GameObject);
-        if (hatIndex == 2)
-            _hat = Instantiate(Resources.Load("party1") as GameObject);
-      
-        _hat.transform.SetParent(cop.transform);
+        string hatName = "";
+        Vector3 hatPosition = new Vector3(0, 1.4f, -0.3f);
 
-        _hat.transform.localPosition = new Vector3(0, 1.4f, -0.3f);
+        switch (hatIndex)
+        {
+            case 0:
+                hatName = "tophat1";
+                break;
+            case 1:
+                hatName = "crown1";
+                break;
+            case 2:
+                hatName = "party1";
+                hatPosition -= new Vector3(0, -0.2f, 0);
+                break;
+        }
+
+        _hat = Instantiate(Resources.Load(hatName) as GameObject);
+        _hat.transform.SetParent(cop.transform);
+        _hat.transform.localPosition = hatPosition;
+
         if (whatCar == 5)
             _hat.transform.localPosition = new Vector3(0, 1.6f, -0.3f);
-        if (hatIndex == 2)
-            _hat.transform.localPosition -= new Vector3(0, -0.2f, 0);
 
         yield return null;
     }
@@ -322,6 +337,7 @@ public class checkShit : MonoBehaviour
 
         }
     }
+
     // Update is called once per frame
     public void Update()
     {
@@ -338,8 +354,8 @@ public class checkShit : MonoBehaviour
         if (ready) GameLogic();
 
         if (!tipped)
-        {                    
-
+        {
+            currentSpeed = st.speed * 50;
             float thresholdAngle = MIN_ANGLE + (FLIP_ANGLE - MIN_ANGLE) * (player.speed / MAX_SPEED);
             float adjustedThresholdAngle = thresholdAngle + Mathf.Abs(rt.turningangle);
 
@@ -452,15 +468,15 @@ public class checkShit : MonoBehaviour
             // this part continues working even when new scenes are loaded
             if (player.distanceTravelled >= pathCreator.path.length && !tipped)
             {
-                float c = currentLevel + 1;
-                string s = "car" + c.ToString();
-
-                if (!pm.unlockedCars.Contains(s) && currentLevel != 9)
+                float _currentLevel = currentLevel + 1; // cars start at 1
+                string _currrentLevelString = currentLevel.ToString();
+                string _car = "car" + _currentLevel.ToString();
+                string _gotCar = "gotcar" + _currentLevel.ToString();
+                
+                if (!pm.unlockedCars.Contains(_currrentLevelString) && currentLevel != 9)
                 {
-                    Debug.Log("Unlocked car nr " + c);
-                    string triggerCarUnlock = "grantCar" + c;
-                    pm.TriggerEvent(triggerCarUnlock);
-                    pm.unlockedCarsSO.UnlockedCars.Add(s);
+                    string triggerCarUnlock = "grantCar" + _currrentLevelString;
+                    pm.TriggerEvent(triggerCarUnlock);                
                 }
 
                 // Disables repeating tutorial text after completing first lap
@@ -485,19 +501,19 @@ public class checkShit : MonoBehaviour
                 // Player beat global record
                 if (globalRecordTime == 0 || elapsedTime < globalRecordTime)
                 {
-                    bool uploadGlobal = true;
-                    int i = 2;
-                    Victory(i);
-                    float _tempScore = Mathf.Round(elapsedTime * 100) / 100;
-                    pm.UpdateScoreText(_tempScore, uploadGlobal);
+                    bool isGlobalRecord = true;
+
+                    Victory(2);
+                    float _tempScore = Mathf.Round((elapsedTime * 100) / 100);
+                    
                     globalRecordTime = _tempScore;
                     playerRecordTime = _tempScore;
 
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
 
-                    StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel));
-
+                    StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel, isGlobalRecord));
+                    pm.UpdateScoreText(_recordTime, isGlobalRecord);
                     //loadedGhost = playerRecord;
 
                     //pm.StartUploadGhost(playerRecord);
@@ -509,16 +525,17 @@ public class checkShit : MonoBehaviour
                 // Player only beat own record, not global record
                 else if ((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime))
                 {
-                    bool uploadGlobal = false;
-                    int i = 1;
-                    Victory(i);
-                    float _tempScore = Mathf.Round(elapsedTime * 100) / 100;
-                    pm.UpdateScoreText(_tempScore, uploadGlobal);
+                    bool isGlobalRecord = false;
+
+                    Victory(1);
+                    float _tempScore = Mathf.Round((elapsedTime * 100) / 100);
+                    
                     playerRecordTime = _tempScore;
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
 
-                    StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel));
+                    StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel, isGlobalRecord));
+                    pm.UpdateScoreText(_recordTime, isGlobalRecord);
                 }
                 playerRecord = new List<float>(); // Resets the ghost data array
                 startTime = Time.time;
@@ -549,7 +566,7 @@ public class checkShit : MonoBehaviour
     public void FlipCar()
     {
         tipped = true;
-
+        TippedChanged?.Invoke(tipped);
         copPosition = cop.transform.position;
         copRotation = cop.transform.rotation;
         direction = cop.transform.forward;
@@ -598,13 +615,19 @@ public class checkShit : MonoBehaviour
         //yield return leaderBoard.FetchHighscores();
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f;
-        GameObject.FindGameObjectWithTag("City").GetComponent<CityScript>().StopCityMusic();
-        GameObject.FindGameObjectWithTag("Snow").GetComponent<SnowScript>().StopSnowMusic();
-        GameObject.FindGameObjectWithTag("Ambient").GetComponent<AudioSource>().pitch = 1f;
-        GameObject.FindGameObjectWithTag("Ambient").GetComponent<AmbientClass>().StopAmbientMusic();
-        GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().PlayMusic();
-        _car.StopCarMusic();
+
         SceneManager.LoadScene(0);
         yield return null;
     }
+
+    private void OnDestroy()
+    {
+        GameObject.FindGameObjectWithTag("Ambient").GetComponent<AudioSource>().pitch = 1f;
+        GameObject.FindGameObjectWithTag("Ambient").GetComponent<AmbientClass>().StopAmbientMusic();
+        GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().StopMusic();
+        GameObject.FindGameObjectWithTag("City").GetComponent<CityScript>().StopCityMusic();
+        GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>().StopCarMusic();
+        GameObject.FindGameObjectWithTag("Snow").GetComponent<CityScript>().StopCityMusic();
+    }
+
 }

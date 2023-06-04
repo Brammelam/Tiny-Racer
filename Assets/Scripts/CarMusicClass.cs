@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,12 +10,12 @@ public class CarMusicClass : MonoBehaviour
 
     public float _pitch;
     public float timeElapsed = 0;
+    
+    
     public void Awake()
     {
         if (GameObject.FindGameObjectsWithTag("engineNoise").Length == 1) DontDestroyOnLoad(gameObject);
-
-        else Destroy(gameObject);
-
+        else Destroy(gameObject);        
     }
 
     
@@ -55,7 +54,7 @@ public class CarMusicClass : MonoBehaviour
 
     public void SlowCarMusic()
     {
-
+        
         if (timeElapsed < 2f)
         {
             _audioSource.pitch = Mathf.Lerp(1f, 0.0001f, timeElapsed / 2f);

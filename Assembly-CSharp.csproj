@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\PathSpawner.cs" />
-    <Compile Include="Assets\Scripts\CarMusicClass.cs" />
+    <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Instance.cs" />
     <Compile Include="Assets\Scripts\CityScript.cs" />
     <Compile Include="Assets\findPlayerManager.cs" />
@@ -100,6 +100,7 @@
     <Compile Include="Assets\Scripts\Score.cs" />
     <Compile Include="Assets\Scripts\lapTime.cs" />
     <Compile Include="Assets\MovingScript.cs" />
+    <Compile Include="Assets\SOfiles\UnlockedCarsSO.cs" />
     <Compile Include="Assets\Scripts\tutorialScript.cs" />
     <Compile Include="Assets\SOfiles\ScoresSO.cs" />
     <Compile Include="Assets\Resources\SetVolume.cs" />
@@ -133,7 +134,7 @@
     <Compile Include="Assets\CarDriverAI\Scripts\CarDriverImp.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\RoadMeshCreator.cs" />
     <Compile Include="Assets\ProgressBar.cs" />
-    <Compile Include="Assets\SOfiles\UnlockedCarsSO.cs" />
+    <Compile Include="Assets\Scripts\CarMusicClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />

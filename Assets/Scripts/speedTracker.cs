@@ -19,7 +19,7 @@ public class speedTracker : MonoBehaviour
 		direction = (carPosition - lastPosition);
 		lastPosition = transform.position;
 
-
+		//UpdateSpeed();
 
 	}
 
@@ -30,5 +30,6 @@ public class speedTracker : MonoBehaviour
 
 		// Notify subscribers that the speed has changed
 		SpeedChanged?.Invoke(CurrentSpeed);
+		Debug.Log("SPEED CHANGED YO");
 	}
 }

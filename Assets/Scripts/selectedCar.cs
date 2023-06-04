@@ -24,7 +24,7 @@ public class selectedCar : MonoBehaviour
     private const string hatKey = "Selected Hat";
     public Vector3 pos1 = Vector3.zero;
     public Vector3 pos2 = Vector3.zero;
-    public Vector3 move = new Vector3(100f, 0, 0);
+    public Vector3 move;
     public float moveSpeed = 0.1f;
     public Text carText;
 
@@ -50,40 +50,32 @@ public class selectedCar : MonoBehaviour
 
 
     private void Awake()
-    {     
-        carIndex = carsettings.CurrentCar;
+    {
         cars = GameObject.FindGameObjectsWithTag("car").ToList();
         hats = GameObject.FindGameObjectsWithTag("hatButton").ToList();
         cars = cars.OrderBy(car => car.name).ToList();
-        GameObject.FindGameObjectWithTag("Ambient").GetComponent<AmbientClass>().StopAmbientMusic();
-        GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>().StopCarMusic();
-        GameObject.FindGameObjectWithTag("City").GetComponent<CityScript>().StopCityMusic();
-        GameObject.FindGameObjectWithTag("Snow").GetComponent<SnowScript>().StopSnowMusic();
-        GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().PlayMusic();
 
-        PlayerManager[] _pm = GameObject.FindObjectsOfType<PlayerManager>();
-        if (_pm.Length > 1)
-        {
-            foreach (PlayerManager p in _pm)
-            {
-                bool isDont = p.IsDontDestroyOnLoad();
-                if (isDont) pm = p;
-            }
-        } else pm = GameObject.FindObjectOfType<PlayerManager>();
-
-
+        move = new Vector3(100f, 0, 0);
         pos1 = this.transform.position;
         pos2 = this.transform.position - (move * 6);
-        
-        carText.text = carNames[carIndex];
+
+        GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().PlayMusic();
     }
 
+    private void Start()
+    {
+
+
+        LoadPrefs();
+        
+        Debug.Log("Subscribed to SOReady in SelectedCar");
+
+    }
 
     private void OnApplicationQuit()
     {
-        SavePrefs();
-    }
 
+    }
 
     public void Unlock()
     {
@@ -142,14 +134,13 @@ public class selectedCar : MonoBehaviour
                     _hat.transform.localPosition -= new Vector3(0, -0.2f, 0);
             }
         }
-        SavePrefs();
     }
 
     public void removeNewNode(int _index)
     {
         Destroy(_hat);
         hatIndex = 3;
-        SavePrefs();
+
     }
 
     public void removeNewNodeButton()
@@ -188,10 +179,7 @@ public class selectedCar : MonoBehaviour
 
     public void UpdateCarName()
     {
-        SavePrefs();
         carText.text = carNames[pm.currentCar];
-        addNewNode(hatIndex);
-        carChangeEvent = true;
 
         // Disable outlines on all hats when changing cars (hat is turned off so outline must also be turned off)
         GameObject[] rdwoc = GameObject.FindGameObjectsWithTag("hatButton");
@@ -213,13 +201,15 @@ public class selectedCar : MonoBehaviour
         {
             this.transform.position = this.transform.position - move;
             DontMoveHat(move);
-            pm.currentCar += 1;            
+            pm.currentCar += 1;
+            carIndex += 1;
         }
         else
         {
             this.transform.position = pos1;
             DontMoveHat(-6 * move);
             pm.currentCar = 0;
+            carIndex = 0;
         }
     }
 
@@ -230,12 +220,14 @@ public class selectedCar : MonoBehaviour
             this.transform.position = this.transform.position + move;
             DontMoveHat(-move);
             pm.currentCar -= 1;
+            carIndex -= 1;
         }
         else
         {
             this.transform.position = pos2;
             DontMoveHat(6 * move);
             pm.currentCar = 6;
+            carIndex = 6;
         }
     }
 
@@ -249,13 +241,12 @@ public class selectedCar : MonoBehaviour
         bool done = false;
         yield return StartCoroutine(pm.SavePreferencesToFilePM());
         //SavePrefs();
-        pm.carsettings.CurrentCar = pm.currentCar;
-        pm.carsettings.CurrentHat = hatIndex;
-        if(pm.unlockedCarsSO.UnlockedCars.Contains("TutorialUnlock"))
+
+        if(pm.unlockedCars.Contains("TutorialUnlock"))
             SceneManager.LoadScene(1);
         else
         {
-            pm.leaderboardSO.CurrentLevel = 9;
+            pm.currentLevel = 9;
             SceneManager.LoadScene(11);
         }
 
@@ -263,26 +254,17 @@ public class selectedCar : MonoBehaviour
         yield return new WaitWhile(() => done == false);
     }
 
-    public void SavePrefs()
-    {
-        /*
-        PlayerPrefs.SetInt(carKey, carIndex);
-        PlayerPrefs.SetInt(hatKey, hatIndex);
-        PlayerPrefs.Save();
-        */
-    }
-
     // Disabling music and effect sliders for now
     public void LoadPrefs()
     {
-        if (pm == null) pm = GameObject.FindObjectOfType<PlayerManager>();
-
-        hatIndex = carsettings.CurrentHat;
-        carIndex = carsettings.CurrentCar;
+        carsettings = pm.carsettings;
+        hatIndex = pm.carsettings.CurrentHat;
+        carIndex = pm.carsettings.CurrentCar;
+        carText.text = carNames[carIndex];
 
         this.transform.position = this.transform.position - (move * carIndex);
+        UpdateCarName();
         DontMoveHat(move * carIndex);
-        addNewNode(hatIndex);
 
         try
         {          

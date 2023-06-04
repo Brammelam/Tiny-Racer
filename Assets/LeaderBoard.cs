@@ -53,7 +53,7 @@ public class LeaderBoard : MonoBehaviour
         if (pm == null) pm = GameObject.FindObjectOfType<PlayerManager>();
     }
 
-    public IEnumerator SubmitScoreCoroutine(int scoreToUpload, int level)
+    public IEnumerator SubmitScoreCoroutine(int scoreToUpload, int level, bool isGlobalScore)
     {
         bool done = false;
         string playerID = pm.playerId.ToString();
@@ -61,7 +61,12 @@ public class LeaderBoard : MonoBehaviour
 
         LootLockerSDKManager.SubmitScore(playerID, scoreToUpload, levelID, (response) =>
         {
-            if (!response.success) Debug.Log("Failed to upload score!");
+            if (response.success)
+            {
+                pm.UpdateScoreText(scoreToUpload, isGlobalScore);
+
+            }
+            Debug.Log("Failed to upload score!");
             
             done = true;
         });

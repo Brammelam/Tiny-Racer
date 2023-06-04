@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class ScoresSO : ScriptableObject
     [SerializeField]
     public int _levelIndex;
 
+    public event Action<int> LevelIndexChanged;
 
     public List<string> Names
     {
@@ -36,6 +38,15 @@ public class ScoresSO : ScriptableObject
     public int CurrentLevel
     {
         get { return _levelIndex; }
-        set { _levelIndex = value; }
+        set
+        {
+            _levelIndex = value;
+            OnLevelIndexChanged();
+        }
+    }
+
+    private void OnLevelIndexChanged()
+    {
+        LevelIndexChanged?.Invoke(_levelIndex);
     }
 }

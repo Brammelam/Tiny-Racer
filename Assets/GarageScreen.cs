@@ -222,6 +222,7 @@ public class GarageScreen : MonoBehaviour
         writer.WriteLine(selectedCar.carIndex);
         writer.WriteLine(selectedCar.hatIndex);
         writer.WriteLine(carsettings.CustomCar);
+        writer.WriteLine(pm.currentLevel);
         writer.Close();
 
         LootLockerSDKManager.UploadPlayerFile(filePath, "carsettings", true, (response) =>

@@ -69,6 +69,7 @@ public class PlayerManager : MonoBehaviour
     public CarsettingsSO carsettings;
     public bool currentScoreSObool = false;
     public int currentCar;
+    public int currentHat;
     public int currentLevel;
     public float currentTime;
     public int playerId;
@@ -78,20 +79,35 @@ public class PlayerManager : MonoBehaviour
     public List<float> ghostData;
     //public List<int> ghosts;
     //public List<int> playerIds;
-
-    public int currentHat;
+    public bool allSOfound;
 
     public float Progress { get; private set; }
+    public event Action<int> LevelChanged;
+    public event Action SOReady;
+    GameObject audioManager;
 
-    public bool IsDontDestroyOnLoad()
+    void Awake()
     {
-        // Check if the GameObject has the DontDestroyOnLoad flag set
-        return (gameObject.hideFlags & HideFlags.DontSaveInBuild) != 0;
+        allSOfound = false;
+
+        //audioManager = Instantiate(Resources.Load("AudioManagerPrefab") as GameObject);
+        sc = GameObject.FindObjectOfType<selectedCar>();
+    }
+
+    public void OnSOReady()
+    {
+        SOReady?.Invoke();
+    }
+
+    public void OnLevelChanged()
+    {
+        LevelChanged?.Invoke(currentLevel);
     }
 
     private void Start()
     {
         StartCoroutine(GetSO());
+        //audioManager.GetComponent<AudioManager>().Initialize();
     }
 
     public void Setup()
@@ -171,8 +187,6 @@ public class PlayerManager : MonoBehaviour
         Progress = 1f;
         UpdateProgress(Progress);
 
-        if (carsettings.CustomCar) ModifyCar();
-
         yield return null;
     }
 
@@ -183,14 +197,15 @@ public class PlayerManager : MonoBehaviour
 
         IEnumerator[] coroutines = {        
 
-            GetPlayerName(),
-            SetUpUI(),
+            GetPlayerName(),           
             DownloadPlayerFileKeys(),
             CheckCars(),
             GetCarSettingsData(),
             leaderBoard.FetchHighscores(),
             leaderBoard.FetchPlayerScores(),
+            SetUpUI(),
             DisableStartScreens(),
+
     };
 
         Progress = 0f;
@@ -243,7 +258,9 @@ public class PlayerManager : MonoBehaviour
         
         selectButton.gameObject.GetComponentInChildren<Text>().text = "PLAY";
         selectButton.interactable = true;
-        selectedCar.GetComponent<selectedCar>().LoadPrefs();
+        //selectedCar.GetComponent<selectedCar>().SetCamera();
+
+        
         done = true;
         yield return new WaitWhile(() => done == false);
     }
@@ -291,32 +308,32 @@ public class PlayerManager : MonoBehaviour
     }
 
     public IEnumerator GetSO()
-    {
-        levelSO = Resources.Load<FloatSO>("SO/FloatSO");
+    {   
+        // Load the Scriptable Objects
         leaderboardSO = Resources.Load<ScoresSO>("SO/ScoresSO");
         unlockedCarsSO = Resources.Load<UnlockedCarsSO>("SO/UnlockedCarsSO");
         currentScoreSO = Resources.Load<CurrentscoreSO>("SO/CurrentscoreSO");
-        //ghostsSO;
+        //ghostsSO;  Disabled for now, will enable ghosts later
         carsettings = Resources.Load<CarsettingsSO>("SO/CarsettingsSO"); ;
-        currentScoreSObool = false;
         unlockedCars = unlockedCarsSO.UnlockedCars;
+
+        // Load the carsettings for the player
+        currentCar = carsettings.CurrentCar;
+        currentHat = carsettings.CurrentHat;
+        currentLevel = leaderboardSO.CurrentLevel;
+        playerNameString = currentScoreSO.CurrentPlayerName;
+        //sc.addNewNode(currentHat);  This results in the player being able to wear two hats lol
+        
+        //load the leaderboards for highscores on levelselect
         leaderboardNames = leaderboardSO.Names;
         leaderboardScores = leaderboardSO.Values;
         leaderboardPlayerScores = leaderboardSO.PlayerValues;
-
-        currentCar = carsettings.CurrentCar;
-        currentHat = carsettings.CurrentHat;
-        currentLevel = levelSO.Value;
-        playerNameString = currentScoreSO.CurrentPlayerName;
-
+        allSOfound = true;
         yield return null;
-
-
     }
 
     public void UpdateScoreText(float _score, bool _uploadPlayerScoreAsGlobal)
     {
-
         if (_uploadPlayerScoreAsGlobal)
         {
             leaderboardSO.Values[currentLevel] = _score.ToString();
@@ -324,7 +341,8 @@ public class PlayerManager : MonoBehaviour
             leaderboardSO.Names[currentLevel] = playerNameString;
             currentScoreSO.CurrentScore = _score;
             currentScoreSO.CurrentPlayerScore = _score;
-        } else
+        } 
+        else
         {
             leaderboardSO.PlayerValues[currentLevel] = _score.ToString();            
             currentScoreSO.CurrentPlayerScore = _score;
@@ -338,7 +356,8 @@ public class PlayerManager : MonoBehaviour
         {
             if (response.success)
             {
-                Debug.Log("Successfully retrieved triggered events");
+                Debug.Log("Successfully retrieved triggered events");                
+                unlockedCarsSO.UnlockedCars.Add(_car);
             }
             else
             {
@@ -362,9 +381,7 @@ public class PlayerManager : MonoBehaviour
 
                     unlockedCars.Add(inventory[i].asset.name.ToString());
 
-                }
-
-                foreach (changeMaterial changemat in changemat) changemat.SetLockedCars();                
+                }           
 
                 done = true;
             }
@@ -447,7 +464,7 @@ public class PlayerManager : MonoBehaviour
                 {
                     playerNameString = response.name.ToString();
                     playerName.text = "Welcome back, " + response.name.ToString() + "!";
-
+                    currentScoreSO.CurrentPlayerName = playerNameString;
                 }
 
                 done = true;
@@ -509,10 +526,10 @@ public class PlayerManager : MonoBehaviour
 
     public void SetCurrentLevel(int _currentLevel)
     {
-        currentLevel = _currentLevel - 1;
-        levelSO.Value = currentLevel;
+        
+        leaderboardSO.CurrentLevel = _currentLevel - 2; //Subtracting the carSelect and levelSelect levels
 
-        SceneManager.LoadScene(_currentLevel + 1);
+        SceneManager.LoadScene(_currentLevel);
     }
 
     /*
@@ -581,9 +598,10 @@ public class PlayerManager : MonoBehaviour
         int l = int.Parse(stringarray[6]);
         // CurrentHat
         int m = int.Parse(stringarray[7]);
-
+        // CustomCar
         bool n = bool.Parse(stringarray[8]);
-
+        //
+        int o = int.Parse(stringarray[9]);
         // Update CarsettingsSO
         carsettings.BodyColor[0] = f;
         carsettings.BodyColor[1] = g;
@@ -594,8 +612,7 @@ public class PlayerManager : MonoBehaviour
         carsettings.CurrentCar = l;
         carsettings.CurrentHat = m;
         carsettings.CustomCar = n;
-
-        if (carsettings.CustomCar) ModifyCar();
+        leaderboardSO.CurrentLevel = o;
 
         done = true;
         yield return new WaitWhile(() => done == false);
@@ -694,6 +711,7 @@ public class PlayerManager : MonoBehaviour
         newrenderer = sc.cars[currentCar].GetComponentInChildren<MeshRenderer>();
         newrenderer.materials[0].color = oldcolors[0, currentCar];
         newrenderer.materials[1].color = oldcolors[1, currentCar];
+        foreach (changeMaterial changemat in changemat) changemat.SetLockedCars();
     }
 
     public IEnumerator UploadPlayerGhost()
@@ -794,7 +812,7 @@ public class PlayerManager : MonoBehaviour
         newrenderer.materials[0].color = _bodyColor;
         newrenderer.materials[1].color = _windowColor;
 
-        sc.addNewNode(currentHat);
+        
         
     }
 
@@ -814,8 +832,6 @@ public class PlayerManager : MonoBehaviour
     public IEnumerator SavePreferencesToFilePM()
     {
         int c = currentCar;
-        carsettings.CurrentCar = currentCar;
-        carsettings.CurrentHat = sc.hatIndex;     
 
         bool done = false;
         string filePath = Path.Combine(Application.persistentDataPath + "/carsettings.txt");
@@ -838,9 +854,10 @@ public class PlayerManager : MonoBehaviour
         writer.WriteLine(carsettings.WindowColor[1]);
         writer.WriteLine(carsettings.WindowColor[2]);
 
-        writer.WriteLine(currentCar);
-        writer.WriteLine(currentHat);
+        writer.WriteLine(carsettings.CurrentCar);
+        writer.WriteLine(carsettings.CurrentHat);
         writer.WriteLine(carsettings.CustomCar);
+        writer.WriteLine(leaderboardSO.CurrentLevel);
         writer.Close();
 
         LootLockerSDKManager.UploadPlayerFile(filePath, "carsettings", true, (response) =>

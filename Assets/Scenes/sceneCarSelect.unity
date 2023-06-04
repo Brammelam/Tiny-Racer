@@ -2405,7 +2405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 0.695, g: 0.695, b: 0.695, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2413,8 +2413,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 0bbb245a025f1994a919c7c7b168cf07, type: 3}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: 36ea5a70ac2364f4d9406071c694ac0b, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -2425,7 +2425,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Version 1.5 - June 2, 2023
+  m_Text: Version 1.6 - June 4, 2023
 --- !u!222 &43457087
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28713,8 +28713,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 839482671}
-  - component: {fileID: 839482670}
   - component: {fileID: 839482669}
+  - component: {fileID: 839482670}
   m_Layer: 0
   m_Name: ThemeMusic
   m_TagString: Music
@@ -28734,13 +28734,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -5840398818790808829, guid: a7e716b03fc309c45abbf7ca05086747, type: 2}
   m_audioClip: {fileID: 8300000, guid: a679a6605037bb146beb363a53776a2e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.55
+  m_Volume: 0.26
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 154
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -33820,7 +33820,7 @@ GameObject:
   m_Component:
   - component: {fileID: 998803388}
   - component: {fileID: 998803387}
-  - component: {fileID: 998803389}
+  - component: {fileID: 998803390}
   m_Layer: 0
   m_Name: carEngineNoise
   m_TagString: engineNoise
@@ -33838,7 +33838,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 9016479986813586607, guid: a7e716b03fc309c45abbf7ca05086747, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 256aed3f84dcdf3499723916f9fa179e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 222541189706e754993c7c2764209fde, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1.2
@@ -33938,7 +33938,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &998803389
+--- !u!114 &998803390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -33947,14 +33947,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 998803386}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f7086807e12c6148a5e46f742631cd0, type: 3}
+  m_Script: {fileID: 11500000, guid: f30cdbfe5c6e4c848aeefcf775122311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 998803387}
   _audio: {fileID: 998803386}
-  _carMusicClass: {fileID: 998803389}
+  _carMusicClass: {fileID: 998803390}
   _check: {fileID: 0}
-  _pitch: 0
+  _pitch: 1.2
   timeElapsed: 0
 --- !u!1 &998979431
 GameObject:
@@ -63865,6 +63865,7 @@ MonoBehaviour:
   carsettings: {fileID: 11400000, guid: a28940d6dcc199949b60e1985e6c907b, type: 2}
   currentScoreSObool: 0
   currentCar: 0
+  currentHat: 0
   currentLevel: 0
   currentTime: 0
   playerId: 0
@@ -63872,7 +63873,7 @@ MonoBehaviour:
   playerNameString: 
   unlockedCars: []
   ghostData: []
-  currentHat: 0
+  allSOfound: 0
 --- !u!4 &1843081506
 Transform:
   m_ObjectHideFlags: 0
