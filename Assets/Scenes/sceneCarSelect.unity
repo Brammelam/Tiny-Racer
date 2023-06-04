@@ -3852,12 +3852,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newuserEmailInputField: {fileID: 467116968}
   newuserPasswordInputField: {fileID: 292920647}
-  nicknamelInputField: {fileID: 1285593169}
+  nicknameInputField: {fileID: 1285593169}
   registerButton: {fileID: 25131522}
   existinguserEmailInputField: {fileID: 1480839148}
   existinguserPasswordInputField: {fileID: 37665066}
   loginButton: {fileID: 628360464}
   resetPasswordInputField: {fileID: 1613058245}
+  resetPasswordButton: {fileID: 1875645289}
   rememberMeToggle: {fileID: 125230176}
   playerManager: {fileID: 1843081505}
 --- !u!4 &108454764
@@ -16826,7 +16827,7 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 6
+  m_ContentType: 9
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 7
@@ -36402,7 +36403,6 @@ GameObject:
   - component: {fileID: 1074772225}
   - component: {fileID: 1074772224}
   - component: {fileID: 1074772223}
-  - component: {fileID: 1074772222}
   m_Layer: 5
   m_Name: RegisterScreen
   m_TagString: welcome
@@ -36410,18 +36410,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &1074772222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1074772221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c54c5e80dc69f984cabe00d8095619be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1074772223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50217,14 +50205,14 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 6
+  m_ContentType: 0
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 7
+  m_KeyboardType: 0
   m_LineType: 0
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 7
+  m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
   m_CharacterLimit: 0
@@ -65665,6 +65653,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 108454763}
+        m_TargetAssemblyTypeName: WhiteLabelManager, Assembly-CSharp
+        m_MethodName: TriggerButtonWait
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1875645290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71075,7 +71075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2014416846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71126,6 +71126,7 @@ MonoBehaviour:
   _select: 0
   carChangeEvent: 0
   carsettings: {fileID: 11400000, guid: a28940d6dcc199949b60e1985e6c907b, type: 2}
+  leaderboardSO: {fileID: 0}
 --- !u!4 &2014416847
 Transform:
   m_ObjectHideFlags: 0

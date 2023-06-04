@@ -321,6 +321,11 @@ public class PlayerManager : MonoBehaviour
         currentCar = carsettings.CurrentCar;
         currentHat = carsettings.CurrentHat;
         currentLevel = leaderboardSO.CurrentLevel;
+        if (leaderboardSO.CurrentLevel == 9 && unlockedCars.Contains("TutorialUnlock"))
+        {
+            leaderboardSO.CurrentLevel = 0;
+            currentLevel = 0; // Fix player getting stuck in tutorial
+        }
         playerNameString = currentScoreSO.CurrentPlayerName;
         //sc.addNewNode(currentHat);  This results in the player being able to wear two hats lol
         
@@ -811,6 +816,9 @@ public class PlayerManager : MonoBehaviour
 
         newrenderer.materials[0].color = _bodyColor;
         newrenderer.materials[1].color = _windowColor;
+
+        sc.addNewNode(carsettings.CurrentHat);
+        
 
         
         

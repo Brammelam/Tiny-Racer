@@ -47,6 +47,7 @@ public class selectedCar : MonoBehaviour
 
     [SerializeField]
     public CarsettingsSO carsettings;
+    public ScoresSO leaderboardSO;
 
 
     private void Awake()
@@ -246,7 +247,7 @@ public class selectedCar : MonoBehaviour
             SceneManager.LoadScene(1);
         else
         {
-            pm.currentLevel = 9;
+            pm.leaderboardSO.CurrentLevel = 9;
             SceneManager.LoadScene(11);
         }
 

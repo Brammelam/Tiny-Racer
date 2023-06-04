@@ -12,7 +12,7 @@ public class WhiteLabelManager : MonoBehaviour
     [Header("New User")]
     public TMP_InputField newuserEmailInputField;
     public TMP_InputField newuserPasswordInputField;
-    public TMP_InputField nicknamelInputField;
+    public TMP_InputField nicknameInputField;
     public Button registerButton;
 
     [Header("Existing User")]
@@ -22,6 +22,7 @@ public class WhiteLabelManager : MonoBehaviour
 
     [Header("Reset password")]
     public TMP_InputField resetPasswordInputField;
+    public Button resetPasswordButton;
 
     [Header("Remember me")]
     public Toggle rememberMeToggle;
@@ -125,12 +126,26 @@ public class WhiteLabelManager : MonoBehaviour
         });
     }
 
+    public void TriggerButtonWait()
+    {
+        StartCoroutine(ReEnableButtons());
+    }
+
+    
+    IEnumerator ReEnableButtons()
+    {
+        yield return new WaitForSeconds(2f);
+        registerButton.interactable = true;
+        loginButton.interactable = true;
+        resetPasswordButton.interactable = true;
+    }
+
     public void NewUser()
     {
         registerButton.interactable = false;
         string email = newuserEmailInputField.text;
         string password = newuserPasswordInputField.text;
-        string nickname = nicknamelInputField.text;
+        string nickname = nicknameInputField.text;
 
         void Error(string error)
         {
@@ -166,7 +181,7 @@ public class WhiteLabelManager : MonoBehaviour
                             Error(response.Error);
                             return;
                         }
-                        playerManager.playerId = Convert.ToInt32(response.public_uid);
+                        //playerManager.playerId = response.player_id;
                         playerManager.Setup();
                     });
                 });

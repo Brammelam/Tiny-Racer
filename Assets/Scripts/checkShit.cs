@@ -130,8 +130,10 @@ public class checkShit : MonoBehaviour
     IEnumerator LoadPrefs()
     {
         currentLevel = pm.currentLevel;
+
         globalRecordTime = pm.currentScoreSO.CurrentScore;
         playerRecordTime = pm.currentScoreSO.CurrentPlayerScore;
+        if (currentLevel == 9) globalRecordTime = 0;
 
         whatCar = pm.carsettings.CurrentCar;
         hatIndex = pm.carsettings.CurrentHat;
@@ -499,7 +501,7 @@ public class checkShit : MonoBehaviour
                 index = 0;
 
                 // Player beat global record
-                if (globalRecordTime == 0 || elapsedTime < globalRecordTime)
+                if ((globalRecordTime == 0 || elapsedTime < globalRecordTime) && currentLevel != 9)
                 {
                     bool isGlobalRecord = true;
 
@@ -523,7 +525,7 @@ public class checkShit : MonoBehaviour
                 }
 
                 // Player only beat own record, not global record
-                else if ((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime))
+                else if ((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime) && currentLevel != 9)
                 {
                     bool isGlobalRecord = false;
 
@@ -627,7 +629,7 @@ public class checkShit : MonoBehaviour
         GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().StopMusic();
         GameObject.FindGameObjectWithTag("City").GetComponent<CityScript>().StopCityMusic();
         GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>().StopCarMusic();
-        GameObject.FindGameObjectWithTag("Snow").GetComponent<CityScript>().StopCityMusic();
+        GameObject.FindGameObjectWithTag("Snow").GetComponent<SnowScript>().StopSnowMusic();
     }
 
 }

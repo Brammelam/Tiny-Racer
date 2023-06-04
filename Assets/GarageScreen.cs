@@ -169,7 +169,7 @@ public class GarageScreen : MonoBehaviour
         bool done = false;
         int c = pm.currentCar;
         carsettings.CurrentCar = pm.currentCar;
-        carsettings.CurrentHat = selectedCar.hatIndex;
+        carsettings.CurrentHat = pm.currentHat;
 
         if (!didyoufuckwiththeslidersbody && !didyoufuckwiththesliderswindow)
         {
