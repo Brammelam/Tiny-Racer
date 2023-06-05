@@ -61,7 +61,6 @@ public class PlayerManager : MonoBehaviour
     public List<string> leaderboardNames;
     public List<string> leaderboardScores;
     public List<string> leaderboardPlayerScores;
-    public FloatSO levelSO;
     public ScoresSO leaderboardSO;
     public CurrentscoreSO currentScoreSO;
     public GhostsSO ghostsSO;
@@ -94,19 +93,10 @@ public class PlayerManager : MonoBehaviour
         sc = GameObject.FindObjectOfType<selectedCar>();
     }
 
-    public void OnSOReady()
-    {
-        SOReady?.Invoke();
-    }
-
-    public void OnLevelChanged()
-    {
-        LevelChanged?.Invoke(currentLevel);
-    }
-
     private void Start()
     {
-        StartCoroutine(GetSO());
+
+        
         //audioManager.GetComponent<AudioManager>().Initialize();
     }
 
@@ -130,38 +120,12 @@ public class PlayerManager : MonoBehaviour
                     confirmation.SetActive(true);
                 }
             }
-
-            else if (welcomeScreen.activeSelf == true)
-            {
-                if (playernameInputfield.text != "")
-                    SetPlayerName();
-                welcomeScreen.SetActive(false);
-                selectionScreen.SetActive(true);
-                selectedCar.SetActive(true);
-            }
         }
     }
-    /*
-    IEnumerator SetupRoutine()
-    {
-        yield return LoginRoutine();
-        yield return leaderBoard.FetchHighscores();
-        yield return GetPlayerName();
-        yield return CheckCars();
 
-        yield return DownloadPlayerFileKeys();
-        
-        yield return GetCarSettingsData();
-            
-        yield return SetUpUI();
-        //SetGhostId();
-    }
-    */
-
-    // Add something like this - We are making too many calls to the server for no reason, save in a DoNotDestroy object or something..
     public IEnumerator ReturnToMenu()
     {
-        float[] stepProgress = { 0.25f, 0.25f, 0.25f };
+        float[] stepProgress = { 0.2f, 0.2f, 0.2f, 0.2f, 0.2f };
 
         // Disable any login screens if they are active
         GameObject[] welcomeScreens = GameObject.FindGameObjectsWithTag("welcome");
@@ -170,8 +134,13 @@ public class PlayerManager : MonoBehaviour
             welcomeScreen.SetActive(false);
         }
 
+        string _playa = PlayerPrefs.GetString("name");
+        playerName.text = "Welcome back, " + _playa + "!";
+
         IEnumerator[] coroutines = {
             SetUpUI(),
+            leaderBoard.FetchHighscores(),
+            leaderBoard.FetchPlayerScores(),
             GetSO(),
             DisableStartScreens()
         };
@@ -193,7 +162,7 @@ public class PlayerManager : MonoBehaviour
     IEnumerator SetupRoutine()
     {
         loadingScreen.SetActive(true);
-        float[] stepProgress = { 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.2f };
+        float[] stepProgress = { 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.2f };
 
         IEnumerator[] coroutines = {        
 
@@ -204,6 +173,7 @@ public class PlayerManager : MonoBehaviour
             leaderBoard.FetchHighscores(),
             leaderBoard.FetchPlayerScores(),
             SetUpUI(),
+            GetSO(),
             DisableStartScreens(),
 
     };
@@ -314,18 +284,15 @@ public class PlayerManager : MonoBehaviour
         currentScoreSO = Resources.Load<CurrentscoreSO>("SO/CurrentscoreSO");
         //ghostsSO;  Disabled for now, will enable ghosts later
         carsettings = Resources.Load<CarsettingsSO>("SO/CarsettingsSO"); ;
-        unlockedCars = unlockedCarsSO.UnlockedCars;
 
-        // Load the carsettings for the player
-        currentCar = carsettings.CurrentCar;
-        currentHat = carsettings.CurrentHat;
-        currentLevel = leaderboardSO.CurrentLevel;
-        if (leaderboardSO.CurrentLevel == 9 && unlockedCars.Contains("TutorialUnlock"))
-        {
-            leaderboardSO.CurrentLevel = 0;
+        // Load the carsettings for the player 
+        currentCar = PlayerPrefs.GetInt("car", 0); //currentCar = carsettings.CurrentCar;
+        currentHat = PlayerPrefs.GetInt("hat", 3);  //currentHat = carsettings.CurrentHat;
+        currentLevel = PlayerPrefs.GetInt("level", 0); //currentLevel = leaderboardSO.CurrentLevel;
+        if (currentLevel == 9 && PlayerPrefs.HasKey("TutorialUnlock"))
             currentLevel = 0; // Fix player getting stuck in tutorial
-        }
-        playerNameString = currentScoreSO.CurrentPlayerName;
+
+        playerNameString = PlayerPrefs.GetString("name");
         //sc.addNewNode(currentHat);  This results in the player being able to wear two hats lol
         
         //load the leaderboards for highscores on levelselect
@@ -358,12 +325,7 @@ public class PlayerManager : MonoBehaviour
         string triggerName = _car;
         LootLockerSDKManager.ExecuteTrigger(triggerName, (response) =>
         {
-            if (response.success)
-            {
-                Debug.Log("Successfully retrieved triggered events");                
-                unlockedCarsSO.UnlockedCars.Add(_car);
-            }
-            else
+            if (!response.success)
             {
                 Debug.Log("Error retrieving triggered events");
             }
@@ -378,15 +340,15 @@ public class PlayerManager : MonoBehaviour
         {
             if (response.success)
             {
-
                 LootLockerInventory[] inventory = response.inventory;
                 for (int i = 0; i < inventory.Length; i++)
                 {
+                    string item = inventory[i].asset.name.ToString();
+                    unlockedCars.Add(item);
+                    if (!PlayerPrefs.HasKey(item)) PlayerPrefs.SetInt(item, 1);                       
 
-                    unlockedCars.Add(inventory[i].asset.name.ToString());
-
-                }           
-
+                }
+                PlayerPrefs.Save();
                 done = true;
             }
             else
@@ -395,7 +357,7 @@ public class PlayerManager : MonoBehaviour
                 done = true;
             }
         });
-        unlockedCarsSO.UnlockedCars = unlockedCars;
+        
         yield return new WaitWhile(() => done == false);
         
     }
@@ -410,6 +372,8 @@ public class PlayerManager : MonoBehaviour
                 infoText.SetActive(true);
                 infoText.GetComponent<Text>().text = @"Name changed! <('-'<)";
                 playerNameString = playernameInputfieldSettings.text;
+                PlayerPrefs.SetString("name", playerNameString);
+                PlayerPrefs.Save();
                 LootLockerSDKManager.SetPlayerName(playerNameString, (response) =>
                 {
                     if (response.success)
@@ -417,7 +381,9 @@ public class PlayerManager : MonoBehaviour
 
                         playerName.text = "Welcome back, " + response.name.ToString() + "!";
                         playerNameString = response.name.ToString();
-                        currentScoreSO.CurrentPlayerName = playerNameString;
+                        PlayerPrefs.SetString("name", playerNameString);
+                        PlayerPrefs.Save();
+                        //currentScoreSO.CurrentPlayerName = playerNameString;
                     }
                     else
                     {
@@ -439,6 +405,8 @@ public class PlayerManager : MonoBehaviour
 
                     playerName.text = "Welcome back, " + response.name.ToString() + "!";
                     playerNameString = response.name.ToString();
+                    PlayerPrefs.SetString("name", playerNameString);
+                    PlayerPrefs.Save();
 
                 }
                 else
@@ -468,7 +436,9 @@ public class PlayerManager : MonoBehaviour
                 {
                     playerNameString = response.name.ToString();
                     playerName.text = "Welcome back, " + response.name.ToString() + "!";
-                    currentScoreSO.CurrentPlayerName = playerNameString;
+                    //currentScoreSO.CurrentPlayerName = playerNameString;
+                    PlayerPrefs.SetString("name", playerNameString);
+                    PlayerPrefs.Save();
                 }
 
                 done = true;
@@ -503,7 +473,9 @@ public class PlayerManager : MonoBehaviour
     public void SetGarage()
     {
         string _c = (currentCar + 1).ToString();
-        if (currentCar == 0 || unlockedCars.Contains("gotcar" + _c))
+        string gotcar = "gotcar" + _c;
+        currentCar = PlayerPrefs.GetInt("car", 0);
+        if (currentCar == 0 || PlayerPrefs.HasKey(gotcar))
         {
             garageScreen.SetActive(true);
             garageScreen.GetComponent<GarageScreen>().SetCar(currentCar);
@@ -529,10 +501,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void SetCurrentLevel(int _currentLevel)
-    {
-        
-        leaderboardSO.CurrentLevel = _currentLevel - 2; //Subtracting the carSelect and levelSelect levels
-
+    {        
         SceneManager.LoadScene(_currentLevel);
     }
 
@@ -578,9 +547,8 @@ public class PlayerManager : MonoBehaviour
 
     public IEnumerator DownloadSettingsTextFile(string _s)
     {
-        bool done = false;
-
-        
+        // We use a custom txt file stored on LootLocker for more permanent storage of playerprefs :D
+        bool done = false;       
 
         UnityWebRequest www = UnityWebRequest.Get(_s);
         yield return www.SendWebRequest();
@@ -603,20 +571,21 @@ public class PlayerManager : MonoBehaviour
         // CurrentHat
         int m = int.Parse(stringarray[7]);
         // CustomCar
-        bool n = bool.Parse(stringarray[8]);
+        int n = int.Parse(stringarray[8]);
         //
         int o = int.Parse(stringarray[9]);
         // Update CarsettingsSO
-        carsettings.BodyColor[0] = f;
-        carsettings.BodyColor[1] = g;
-        carsettings.BodyColor[2] = h;
-        carsettings.WindowColor[0] = i;
-        carsettings.WindowColor[1] = j;
-        carsettings.WindowColor[2] = k;
-        carsettings.CurrentCar = l;
-        carsettings.CurrentHat = m;
-        carsettings.CustomCar = n;
-        leaderboardSO.CurrentLevel = o;
+        PlayerPrefs.SetFloat("b1", f);
+        PlayerPrefs.SetFloat("b2", g);
+        PlayerPrefs.SetFloat("b2", h);
+        PlayerPrefs.SetFloat("b2", i);
+        PlayerPrefs.SetFloat("b2", j);
+        PlayerPrefs.SetFloat("b2", k);
+        PlayerPrefs.SetInt("car", l);
+        PlayerPrefs.SetInt("hat", m);
+        PlayerPrefs.SetInt("custom", n);
+        PlayerPrefs.SetInt("level", o);
+        PlayerPrefs.Save();
 
         done = true;
         yield return new WaitWhile(() => done == false);
@@ -687,27 +656,33 @@ public class PlayerManager : MonoBehaviour
     {
         var s = "";
         bool done = false;
-        int f = int.Parse(carsettings.SettingsKey);
-
-        LootLockerSDKManager.GetPlayerFile(f, (response) =>
+        int _settingsKey = 0;
+        if (PlayerPrefs.HasKey("settings"))
         {
-            if (response.success)
+            _settingsKey = PlayerPrefs.GetInt("settings");
+
+            LootLockerSDKManager.GetPlayerFile(_settingsKey, (response) =>
             {
-                if (response.id == f)
+                if (response.success)
                 {
-                    s = response.url;
-                    StartCoroutine(DownloadSettingsTextFile(s));
-                }
-                else Debug.Log("FileId did not match!");
+                    if (response.id == _settingsKey)
+                    {
+                        s = response.url;
+                        StartCoroutine(DownloadSettingsTextFile(s));
+                    }
+                    else Debug.Log("FileId did not match!");
                
-                done = true;
-            }
-            else
-            {
-                Debug.Log("Failed getting ghost data " + response.Error);
-                done = true;
-            }
-        }); yield return new WaitWhile(() => done == false);
+                    done = true;
+                }
+                else
+                {
+                    Debug.Log("Failed getting ghost data " + response.Error);
+                    done = true;
+                }
+            });
+        }
+        else done = true; 
+        yield return new WaitWhile(() => done == false);
     }
 
     public void SetCarDefaultSettingsData()
@@ -718,6 +693,8 @@ public class PlayerManager : MonoBehaviour
         foreach (changeMaterial changemat in changemat) changemat.SetLockedCars();
     }
 
+    //Ghost disabled atm
+    /*
     public IEnumerator UploadPlayerGhost()
     {
         bool done = false;
@@ -730,6 +707,7 @@ public class PlayerManager : MonoBehaviour
                 done = true;
         }); yield return new WaitWhile(() => done == false);
     }
+    */
 
     // Fetch ghost data and carsettings (color, which car, which hat)
     public IEnumerator DownloadPlayerFileKeys()
@@ -746,10 +724,12 @@ public class PlayerManager : MonoBehaviour
 
                     ghostsSO.GhostIds[i] = int.Parse(item.value);
                 }
-                if (item.key == "999")
+                if (item.key == "9999")
                 {
-
-                    carsettings.SettingsKey = item.value;
+                    int _settings = int.Parse(item.value);
+                    PlayerPrefs.SetInt("settings", _settings);
+                    PlayerPrefs.Save();
+                    //carsettings.SettingsKey = item.value;
                 }
 
                 i++;
@@ -758,12 +738,13 @@ public class PlayerManager : MonoBehaviour
         }); yield return new WaitWhile(() => done == false);
     }
 
-
+    // Ghost stuff disabled for now
+    /*
     public void StartUploadGhost(List<float> _ghostData)
     {
         //SaveToFile(_ghostData);
     }
-
+    */
     /*
     public IEnumerator UploadGhostData()
     {
@@ -808,21 +789,28 @@ public class PlayerManager : MonoBehaviour
 
     public void ModifyCar()
     {
-        newrenderer = sc.cars[currentCar].GetComponentInChildren<MeshRenderer>();
+        float b1 = PlayerPrefs.GetFloat("b1");
+        float b2 = PlayerPrefs.GetFloat("b2");
+        float b3 = PlayerPrefs.GetFloat("b3");
+        float w1 = PlayerPrefs.GetFloat("w1");
+        float w2 = PlayerPrefs.GetFloat("w2");
+        float w3 = PlayerPrefs.GetFloat("w3");
 
-        Color _bodyColor = new Color(carsettings.BodyColor[0], carsettings.BodyColor[1], carsettings.BodyColor[2]);
-        Color _windowColor = new Color(carsettings.WindowColor[0], carsettings.WindowColor[1], carsettings.WindowColor[2]);
+        int _car = PlayerPrefs.GetInt("car");
+        newrenderer = sc.cars[_car].GetComponentInChildren<MeshRenderer>();
+        
+        Color _bodyColor = new Color(b1, b2, b3);
+        Color _windowColor = new Color(w1, w2, w3);
 
         newrenderer.materials[0].color = _bodyColor;
         newrenderer.materials[1].color = _windowColor;
 
-        sc.addNewNode(carsettings.CurrentHat);
-        
-
-        
-        
+        currentHat = PlayerPrefs.GetInt("hat", 3);
+            
     }
 
+    // Preferences are saved in the garageScreen
+    /*
     public void SavePreferences()
     {
         carsettings.BodyColor[0] = garage.bodyColor.r;
@@ -835,43 +823,51 @@ public class PlayerManager : MonoBehaviour
         carsettings.CurrentHat = sc.hatIndex;
         currentHat = sc.hatIndex;
     }
+    */
 
     public IEnumerator SavePreferencesToFilePM()
     {
-        int c = currentCar;
+
+        PlayerPrefs.SetInt("car", currentCar);
+        PlayerPrefs.SetInt("hat", currentHat);
 
         bool done = false;
         string filePath = Path.Combine(Application.persistentDataPath + "/carsettings.txt");
         StreamWriter writer = new StreamWriter(filePath, false);
 
         int f = int.Parse(carsettings.SettingsKey);
-
-        if (f != 0) // check if settings exists, if so, delete previous settings
-            LootLockerSDKManager.DeletePlayerFile(f, (response) =>
+        int _settingsKey = 0;
+        
+        // check if settings exists, if so, delete previous settings
+        if (PlayerPrefs.HasKey("settings")) {
+            _settingsKey = PlayerPrefs.GetInt("settings");
+            LootLockerSDKManager.DeletePlayerFile(_settingsKey, (response) =>
             {
                 if (response.statusCode != 200)
-                    Debug.Log(response.Error);
-
+                    Debug.Log("Failed removing old playerfiles! " + response.Error);
             });
+        }
 
-        writer.WriteLine(carsettings.BodyColor[0]);
-        writer.WriteLine(carsettings.BodyColor[1]);
-        writer.WriteLine(carsettings.BodyColor[2]);
-        writer.WriteLine(carsettings.WindowColor[0]);
-        writer.WriteLine(carsettings.WindowColor[1]);
-        writer.WriteLine(carsettings.WindowColor[2]);
+        writer.WriteLine(PlayerPrefs.GetFloat("b1"));  //writer.WriteLine(carsettings.BodyColor[0]);
+        writer.WriteLine(PlayerPrefs.GetFloat("b2"));  //writer.WriteLine(carsettings.BodyColor[1]);
+        writer.WriteLine(PlayerPrefs.GetFloat("b3"));  //writer.WriteLine(carsettings.BodyColor[2]);
+        writer.WriteLine(PlayerPrefs.GetFloat("w1"));  //writer.WriteLine(carsettings.WindowColor[0]);
+        writer.WriteLine(PlayerPrefs.GetFloat("w2"));  //writer.WriteLine(carsettings.WindowColor[1]);
+        writer.WriteLine(PlayerPrefs.GetFloat("w3"));  //writer.WriteLine(carsettings.WindowColor[2]);
 
-        writer.WriteLine(carsettings.CurrentCar);
-        writer.WriteLine(carsettings.CurrentHat);
-        writer.WriteLine(carsettings.CustomCar);
-        writer.WriteLine(leaderboardSO.CurrentLevel);
+        writer.WriteLine(PlayerPrefs.GetInt("car", 0));  //writer.WriteLine(carsettings.CurrentCar);
+        writer.WriteLine(PlayerPrefs.GetInt("hat", 3));  //writer.WriteLine(carsettings.CurrentHat);
+        writer.WriteLine(PlayerPrefs.GetInt("custom", 0));  //writer.WriteLine(carsettings.CustomCar);
+        writer.WriteLine(PlayerPrefs.GetInt("level"));  //writer.WriteLine(leaderboardSO.CurrentLevel);
         writer.Close();
 
-        LootLockerSDKManager.UploadPlayerFile(filePath, "carsettings", true, (response) =>
+        LootLockerSDKManager.UploadPlayerFile(filePath, "settings", true, (response) =>
         {
             if (response.success)
             {
-                carsettings.SettingsKey = response.id.ToString();
+                PlayerPrefs.SetInt("settings", response.id);
+                PlayerPrefs.Save();
+                //carsettings.SettingsKey = response.id.ToString();
                 StartCoroutine(UploadCarsettingsKey());
                 done = true;
             }
@@ -887,14 +883,25 @@ public class PlayerManager : MonoBehaviour
     public IEnumerator UploadCarsettingsKey()
     {
         bool done = false;
-        string key = "999";
+        string key = "9999";
         string pi = carsettings.SettingsKey.ToString();
+        string _settingsKey = PlayerPrefs.GetInt("settings").ToString();
 
-        LootLockerSDKManager.UpdateOrCreateKeyValue(key, pi, (response) =>
+        LootLockerSDKManager.UpdateOrCreateKeyValue(key, _settingsKey, (response) =>
         {
             if (response.success)
                 done = true;
+            else
+            {
+                Debug.Log("Failed updating the KeyValue pair for the settings! " + response.Error);
+                done = true;
+            }
         }); yield return new WaitWhile(() => done == false);
+    }
+
+    public void OnDestroy()
+    {
+        PlayerPrefs.Save();
     }
 
 

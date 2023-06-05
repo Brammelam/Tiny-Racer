@@ -32,6 +32,8 @@ public class lapTime : MonoBehaviour
         if (pm != null && check != null)
         {
             LoadRecord();
+            currentScoreSO = pm.currentScoreSO;
+            currentScoreSO.OnScoreChanged += SetRecord;
             ready = true;
         }
         else
@@ -46,8 +48,7 @@ public class lapTime : MonoBehaviour
         ready = false;
         LookForStuff();
         
-        currentScoreSO = pm.currentScoreSO;
-        currentScoreSO.OnScoreChanged += SetRecord;
+
     }
 
     // Update is called once per frame
@@ -62,14 +63,13 @@ public class lapTime : MonoBehaviour
 
     private void LoadRecord()
     {
-        float _newRecordFloat = pm.currentScoreSO.CurrentScore;
-        recordtext.text = _newRecordFloat.ToString();
+        string _newRecordText = PlayerPrefs.GetFloat("highScore").ToString();
+        recordtext.text = _newRecordText + "s";
     }
 
     public void SetRecord(float newScore)
     {
-        float _newRecordFloat = newScore / 100;
-        string _newRecordText = _newRecordFloat.ToString();
+        string _newRecordText = PlayerPrefs.GetFloat("highScore").ToString();
         recordtext.text = _newRecordText + "s";
     }
 

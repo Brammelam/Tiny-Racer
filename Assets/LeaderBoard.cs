@@ -56,7 +56,7 @@ public class LeaderBoard : MonoBehaviour
     public IEnumerator SubmitScoreCoroutine(int scoreToUpload, int level, bool isGlobalScore)
     {
         bool done = false;
-        string playerID = pm.playerId.ToString();
+        string playerID = PlayerPrefs.GetInt("playerid").ToString();
         string levelID = leaderboardIds[level].ToString();
 
         LootLockerSDKManager.SubmitScore(playerID, scoreToUpload, levelID, (response) =>
@@ -78,6 +78,7 @@ public class LeaderBoard : MonoBehaviour
     {
         bool done = false;
         int _numberOfLeaderboards = leaderboardIds.Count;
+        string _playerId = PlayerPrefs.GetInt("playerid").ToString();
         Dictionary<int, int> tempPlayerScores = new Dictionary<int, int>(_numberOfLeaderboards);
 
             LootLockerSDKManager.GetAllMemberRanks(pm.playerId, _numberOfLeaderboards, (response) =>
@@ -88,6 +89,7 @@ public class LeaderBoard : MonoBehaviour
                     {
                         int leaderboardId = leaderboard.leaderboard_id;
                         int score = leaderboard.rank.score;
+                        if (score <= 1) score = 99999;
 
                         tempPlayerScores.Add(leaderboardId, score);
                     }
@@ -141,7 +143,7 @@ public class LeaderBoard : MonoBehaviour
                 if (response.success && response.items.Length > 0)
                 {
                     var item = response.items[0];
-                    if (string.IsNullOrEmpty(item.player.name)) 
+                    if (item.player.name == "") 
                     {
                         entry.playerName = "Anonymous";
                     } 

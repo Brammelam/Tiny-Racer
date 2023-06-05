@@ -49,6 +49,9 @@ public class selectedCar : MonoBehaviour
     public CarsettingsSO carsettings;
     public ScoresSO leaderboardSO;
 
+    [SerializeField]
+    public hideButton hideButton;
+
 
     private void Awake()
     {
@@ -65,12 +68,7 @@ public class selectedCar : MonoBehaviour
 
     private void Start()
     {
-
-
         LoadPrefs();
-        
-        Debug.Log("Subscribed to SOReady in SelectedCar");
-
     }
 
     private void OnApplicationQuit()
@@ -80,12 +78,14 @@ public class selectedCar : MonoBehaviour
 
     public void Unlock()
     {
-        int i = pm.currentCar + 1;
+        int i = PlayerPrefs.GetInt("car") + 1;
         string s = i.ToString();
         string input = "getCar" + s;
+        string gotcar = "gotCar" + s;
 
         pm.TriggerEvent(input);
-        pm.unlockedCars.Add("gotcar" + i.ToString());
+        PlayerPrefs.SetString(gotcar, "true");
+        PlayerPrefs.Save();
         change = transform.GetChild(pm.currentCar).gameObject.GetComponent<changeMaterial>();
         change.Unlock();
         
@@ -96,7 +96,6 @@ public class selectedCar : MonoBehaviour
     {
         qualityDropdown.value = qualityIndex;
         QualitySettings.SetQualityLevel(qualityIndex);
-        Debug.Log("Set quality to: " + qualityIndex);
         PlayerPrefs.SetInt("Quality", qualityIndex);
         PlayerPrefs.Save();
     }
@@ -114,7 +113,10 @@ public class selectedCar : MonoBehaviour
 
     public void addNewNode(int _index)
     {
+        int _car = PlayerPrefs.GetInt("car");
         hatIndex = _index;
+        PlayerPrefs.SetInt("hat", hatIndex);
+        PlayerPrefs.Save();
 
         if (_index == 0)
             _hat = Instantiate(Resources.Load("tophat") as GameObject);
@@ -124,11 +126,11 @@ public class selectedCar : MonoBehaviour
             _hat = Instantiate(Resources.Load("party") as GameObject);
         if (_index != 3)
         {
-            _hat.transform.SetParent(this.gameObject.transform.GetChild(pm.currentCar));
+            _hat.transform.SetParent(this.gameObject.transform.GetChild(_car));
 
             _hat.transform.localRotation = new Quaternion(0, 0, 0, 0);
             _hat.transform.localPosition = new Vector3(0, 1.4f, -0.3f);
-            if (pm.currentCar == 2) // adjust for SUV
+            if (_car == 2) // adjust for SUV
             {
                 _hat.transform.localPosition = new Vector3(0, 1.6f, -0.3f);
                 if (hatIndex == 2)
@@ -141,6 +143,8 @@ public class selectedCar : MonoBehaviour
     {
         Destroy(_hat);
         hatIndex = 3;
+        PlayerPrefs.GetInt("hat", 3);
+        PlayerPrefs.Save();
 
     }
 
@@ -181,7 +185,6 @@ public class selectedCar : MonoBehaviour
     public void UpdateCarName()
     {
         carText.text = carNames[pm.currentCar];
-
         // Disable outlines on all hats when changing cars (hat is turned off so outline must also be turned off)
         GameObject[] rdwoc = GameObject.FindGameObjectsWithTag("hatButton");
         foreach (GameObject lol in rdwoc)
@@ -204,6 +207,9 @@ public class selectedCar : MonoBehaviour
             DontMoveHat(move);
             pm.currentCar += 1;
             carIndex += 1;
+            PlayerPrefs.SetInt("car", carIndex);
+            PlayerPrefs.Save();
+            hideButton.CheckUnlock(carIndex);
         }
         else
         {
@@ -211,6 +217,9 @@ public class selectedCar : MonoBehaviour
             DontMoveHat(-6 * move);
             pm.currentCar = 0;
             carIndex = 0;
+            PlayerPrefs.SetInt("car", carIndex);
+            PlayerPrefs.Save();
+            hideButton.CheckUnlock(carIndex);
         }
     }
 
@@ -222,6 +231,9 @@ public class selectedCar : MonoBehaviour
             DontMoveHat(-move);
             pm.currentCar -= 1;
             carIndex -= 1;
+            PlayerPrefs.SetInt("car", carIndex);
+            PlayerPrefs.Save();
+            hideButton.CheckUnlock(carIndex);
         }
         else
         {
@@ -229,6 +241,9 @@ public class selectedCar : MonoBehaviour
             DontMoveHat(6 * move);
             pm.currentCar = 6;
             carIndex = 6;
+            PlayerPrefs.SetInt("car", carIndex);
+            PlayerPrefs.Save();
+            hideButton.CheckUnlock(carIndex);
         }
     }
 
@@ -242,12 +257,11 @@ public class selectedCar : MonoBehaviour
         bool done = false;
         yield return StartCoroutine(pm.SavePreferencesToFilePM());
         //SavePrefs();
-
-        if(pm.unlockedCars.Contains("TutorialUnlock"))
+        if (PlayerPrefs.HasKey("TutorialUnlock"))
             SceneManager.LoadScene(1);
         else
         {
-            pm.leaderboardSO.CurrentLevel = 9;
+            PlayerPrefs.SetInt("level", 9);
             SceneManager.LoadScene(11);
         }
 
@@ -258,9 +272,9 @@ public class selectedCar : MonoBehaviour
     // Disabling music and effect sliders for now
     public void LoadPrefs()
     {
-        carsettings = pm.carsettings;
-        hatIndex = pm.carsettings.CurrentHat;
-        carIndex = pm.carsettings.CurrentCar;
+
+        carIndex = PlayerPrefs.GetInt("car", 0); //pm.carsettings;
+        hatIndex = PlayerPrefs.GetInt("hat", 3); // pm.carsettings.CurrentHat;
         carText.text = carNames[carIndex];
 
         this.transform.position = this.transform.position - (move * carIndex);
@@ -278,14 +292,14 @@ public class selectedCar : MonoBehaviour
                 }
             }
             pm.SetCarDefaultSettingsData();
-            if (pm.carsettings.CustomCar) pm.ModifyCar();
+            if (PlayerPrefs.GetInt("custom") == 1) pm.ModifyCar();
         }
         catch (Exception e)
         {
             Debug.Log("Failed with error: " + e);
         }
 
-        float _masterVolume = PlayerPrefs.GetFloat("masterVolume", 0.15f);
+        float _masterVolume = PlayerPrefs.GetFloat("masterVolume", 0.1f);
 
         _volumeSlider.value = _masterVolume;
 
@@ -296,6 +310,10 @@ public class selectedCar : MonoBehaviour
         ChangeQuality(_qualityIndex);
     }
 
+    public void OnDestroy()
+    {
+        PlayerPrefs.Save();
+    }
 
     public void Quit()
     {

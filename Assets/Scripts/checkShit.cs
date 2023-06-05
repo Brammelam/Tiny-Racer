@@ -109,7 +109,6 @@ public class checkShit : MonoBehaviour
 
         tipped = false;
 
-        currentLevel = pm.currentLevel;
         playerRecord = new List<float>();
         saveRecord = new List<float>();
         
@@ -129,15 +128,15 @@ public class checkShit : MonoBehaviour
 
     IEnumerator LoadPrefs()
     {
-        currentLevel = pm.currentLevel;
+        //currentLevel = pm.currentLevel;
 
-        globalRecordTime = pm.currentScoreSO.CurrentScore;
-        playerRecordTime = pm.currentScoreSO.CurrentPlayerScore;
+        globalRecordTime = PlayerPrefs.GetFloat("highScore");  //globalRecordTime = pm.currentScoreSO.CurrentScore;
+        playerRecordTime = PlayerPrefs.GetFloat("playerScore");  //playerRecordTime = pm.currentScoreSO.CurrentPlayerScore;
         if (currentLevel == 9) globalRecordTime = 0;
-
-        whatCar = pm.carsettings.CurrentCar;
-        hatIndex = pm.carsettings.CurrentHat;
-        currentLevel = pm.currentLevel;
+        
+        whatCar = PlayerPrefs.GetInt("car", 0);
+        hatIndex = PlayerPrefs.GetInt("hat", 3);
+        currentLevel = PlayerPrefs.GetInt("level", 2);
 
         cars = new List<GameObject>(1);
         deadCars = new List<GameObject>(1);
@@ -234,34 +233,35 @@ public class checkShit : MonoBehaviour
         st = cop.GetComponent<speedTracker>();
         rt = cop.GetComponent<rotationTracker>();
         rb2 = deadCop.GetComponent<Rigidbody>();
-        Debug.Log("Now assigning SPEEDTRACKER DELEGATE");
-        
-
-
-
+  
         //ghost = GameObject.FindGameObjectWithTag("Ghost") ?? ghost;
 
         //ghost = Instantiate(Resources.Load("ghostCar") as GameObject);
         //_ghostFollower = ghost.GetComponent<ghostFollower>();
 
-        if (pm.carsettings.CustomCar)
+        if (PlayerPrefs.GetInt("custom") == 1)
         {
-            Color _colbody = new Color(pm.carsettings.BodyColor[0], pm.carsettings.BodyColor[1], pm.carsettings.BodyColor[2]);
-            Color _colwindow = new Color(pm.carsettings.WindowColor[0], pm.carsettings.WindowColor[1], pm.carsettings.WindowColor[2]);
+            float b1 = PlayerPrefs.GetFloat("b1");
+            float b2 = PlayerPrefs.GetFloat("b2");
+            float b3 = PlayerPrefs.GetFloat("b3");
+            float w1 = PlayerPrefs.GetFloat("w1");
+            float w2 = PlayerPrefs.GetFloat("w2");
+            float w3 = PlayerPrefs.GetFloat("w3");
+
+            Color _colbody = new Color(b1, b2, b3);
+            Color _colwindow = new Color(w1, w2, w3);
             cop.GetComponentInChildren<MeshRenderer>().materials[0].color = _colbody;
             cop.GetComponentInChildren<MeshRenderer>().materials[1].color = _colwindow;
             deadCop.GetComponentInChildren<MeshRenderer>().materials[0].color = _colbody;
             deadCop.GetComponentInChildren<MeshRenderer>().materials[1].color = _colwindow;
         }
         deadCop.SetActive(false);
-        //loadedGhost = pm.ghostData;     
-
-
-        
+        //loadedGhost = pm.ghostData; 
     }
 
     IEnumerator SetHat()
     {
+        hatIndex = PlayerPrefs.GetInt("hat", 3);
         string hatName = "";
         Vector3 hatPosition = new Vector3(0, 1.4f, -0.3f);
 
@@ -475,11 +475,12 @@ public class checkShit : MonoBehaviour
                 string _car = "car" + _currentLevel.ToString();
                 string _gotCar = "gotcar" + _currentLevel.ToString();
                 
-                if (!pm.unlockedCars.Contains(_car) && currentLevel != 9)
+                if (!PlayerPrefs.HasKey(_car) && currentLevel != 9)
                 {
                     string triggerCarUnlock = "grantCar" + _currrentLevelString;
                     pm.TriggerEvent(triggerCarUnlock);
-                    pm.unlockedCars.Add(_car);
+                    PlayerPrefs.SetInt(_car, 1);
+                    PlayerPrefs.Save();
                 }
 
                 // Disables repeating tutorial text after completing first lap
@@ -491,7 +492,8 @@ public class checkShit : MonoBehaviour
                     if (someCount == 0)
                     {
                         pm.TriggerEvent("tutorialUnlock");
-                        pm.unlockedCars.Add("TutorialUnlock");
+                        PlayerPrefs.SetString("TutorialUnlock", "true");
+                        PlayerPrefs.Save();
                     }
 
                     someCount = 1;
@@ -511,7 +513,9 @@ public class checkShit : MonoBehaviour
                     
                     globalRecordTime = _tempScore;
                     playerRecordTime = _tempScore;
-
+                    PlayerPrefs.SetFloat("highScore", _tempScore);
+                    PlayerPrefs.SetFloat("playerScore", _tempScore);
+                    PlayerPrefs.Save();
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
 
@@ -534,6 +538,8 @@ public class checkShit : MonoBehaviour
                     float _tempScore = Mathf.Round((elapsedTime * 100) / 100);
                     
                     playerRecordTime = _tempScore;
+                    PlayerPrefs.SetFloat("playerScore", _tempScore);
+                    PlayerPrefs.Save();
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
 

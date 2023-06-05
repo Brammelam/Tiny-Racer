@@ -7,48 +7,92 @@ public class hideButton : MonoBehaviour
 {
     public selectedCar sc;
     public PlayerManager pm;
-    public GameObject button;
+    [SerializeField]
+    public int car;
+    public GameObject unlockButton;
     public GameObject playButton;
+    public Button unlockButtonButton;
     public Text unlockText;
     public int unlockedindex;
+    
     // Start is called before the first frame update
     void Start()
     {
         pm = GameObject.FindObjectOfType<PlayerManager>();
-        
+        car = PlayerPrefs.GetInt("car", 0);
+        CheckUnlock(car);
     }
 
 
+    public void TriggerButton()
+    {
+        unlockButtonButton.interactable = false;
+        string _gotcar = "gotcar" + (pm.currentCar + 1);
+        PlayerPrefs.SetString(_gotcar, "true");
+        StartCoroutine(ChangeButton());
+    }
+
+    IEnumerator ChangeButton()
+    {
+        yield return new WaitForSeconds(0.2f);
+        unlockText.text = "";
+
+        var tempColor = unlockButton.GetComponent<Image>().color;
+        tempColor.a = 0f;
+        unlockButton.GetComponent<Image>().color = tempColor;
+        unlockButton.GetComponentInChildren<Text>().text = "";
+        unlockButton.SetActive(false);
+        playButton.SetActive(true);
+
+    }
+
 
     // Update is called once per frame
-    void FixedUpdate()
+    public void CheckUnlock(int _carIndex)
     {
-        
-        if (button == null) button = GameObject.FindGameObjectWithTag("unlockbutton");
-        if (pm.currentCar != 0)
+        car = _carIndex;
+        int i = _carIndex + 1; // cars start at 1
+        string gotcar = "gotcar" + i;
+        string carindex = "car" + i;
+
+        if (unlockButton == null) { unlockButton = GameObject.FindGameObjectWithTag("unlockbutton"); }
+
+        Debug.Log("Here is going fucky???" + _carIndex);
+        // Car 0 is active by default
+        if (_carIndex == 0)
         {
-            int i = pm.currentCar + 1;
+            unlockText.text = "";
+            var tempColor = unlockButton.GetComponent<Image>().color;
+            tempColor.a = 0f;
+            unlockButton.GetComponent<Image>().color = tempColor;
+            unlockButton.GetComponentInChildren<Text>().text = "";
+            unlockButton.SetActive(false);
+            playButton.SetActive(true);
+
+        }
+        else
+        {
             // You have claimed the unlocked car
-            if (pm.unlockedCars.Contains("gotcar" + i))
+            if (PlayerPrefs.HasKey(carindex) && (PlayerPrefs.HasKey(gotcar)))
             {
                 unlockText.text = "";
 
-                var tempColor = button.GetComponent<Image>().color;
+                var tempColor = unlockButton.GetComponent<Image>().color;
                 tempColor.a = 0f;
-                button.GetComponent<Image>().color = tempColor;
-                button.GetComponentInChildren<Text>().text = "";
-                button.SetActive(false);
+                unlockButton.GetComponent<Image>().color = tempColor;
+                unlockButton.GetComponentInChildren<Text>().text = "";
+                unlockButton.SetActive(false);
                 playButton.SetActive(true);
             }
 
             // You are eligble to unlock the car, but have not done so yet
-            else if (pm.unlockedCars.Contains("car" + i) && !(pm.unlockedCars.Contains("gotcar" + i)))
+            else if (PlayerPrefs.HasKey(carindex) && (!PlayerPrefs.HasKey(gotcar)))
             {
                 unlockText.text = "";
                 playButton.SetActive(false);
-                button.SetActive(true);
-                button.GetComponent<Image>().color = Color.green;
-                button.GetComponentInChildren<Text>().text = "UNLOCK";
+                unlockButton.SetActive(true);
+                unlockButton.GetComponent<Image>().color = Color.green;
+                unlockButton.GetComponentInChildren<Text>().text = "UNLOCK";
             }
 
             // You are not eligble to unlock the car
@@ -56,22 +100,11 @@ public class hideButton : MonoBehaviour
             {
                 string _complete = "Complete level 1 - " + i;
                 unlockText.text = _complete;
-                var tempColor = button.GetComponent<Image>().color;
+                var tempColor = unlockButton.GetComponent<Image>().color;
                 tempColor.a = 0f;
-                button.SetActive(false);
+                unlockButton.SetActive(false);
                 playButton.SetActive(false);
             }
-        } else
-        {
-            unlockText.text = "";
-
-            var tempColor = button.GetComponent<Image>().color;
-            tempColor.a = 0f;
-            button.GetComponent<Image>().color = tempColor;
-            button.GetComponentInChildren<Text>().text = "";
-            button.SetActive(false);
-            playButton.SetActive(true);
         }
-
     }
 }

@@ -120,6 +120,8 @@ public class WhiteLabelManager : MonoBehaviour
                     Debug.Log("Session started successfully!");
                     
                     playerManager.playerId = response.player_id;
+                    PlayerPrefs.SetInt("playerid", response.player_id);
+                    PlayerPrefs.Save();
                     playerManager.Setup();
                 }
             });
@@ -182,6 +184,8 @@ public class WhiteLabelManager : MonoBehaviour
                             return;
                         }
                         playerManager.playerId = response.player_id;
+                        PlayerPrefs.SetInt("playerid", response.player_id);
+                        PlayerPrefs.Save();
                         playerManager.Setup();
                     });
                 });

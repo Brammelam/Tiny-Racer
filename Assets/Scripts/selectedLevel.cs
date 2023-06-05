@@ -36,7 +36,6 @@ public class selectedLevel : MonoBehaviour
     public TextMeshProUGUI playerScores;
     public TextMeshProUGUI playerOwnScore;
 
-
     public Light directionalLight;
     public AudioSource _switchOn;
     public AudioSource _switchOff;
@@ -51,8 +50,8 @@ public class selectedLevel : MonoBehaviour
     [Header("Text stuff")]
     public Text[] textObjects;
     private Color day, night;
-
-    private bool ready = false;
+    [SerializeField]
+    private bool ready;
 
     private void Awake()
     {
@@ -63,6 +62,7 @@ public class selectedLevel : MonoBehaviour
     }
     public void Start()
     {
+        ready = false;
         levels = GameObject.FindGameObjectsWithTag("nature").ToList();
         Light[] lights = FindObjectsOfType<Light>();
         foreach (Light light in lights)
@@ -72,6 +72,9 @@ public class selectedLevel : MonoBehaviour
                 directionalLight = light;
             }
         }
+
+        GameObject playerManagerObject = new GameObject("PlayerManager");
+        pm = playerManagerObject.AddComponent<PlayerManager>();
 
         //Set the colors
         day = new Color(0.196f, 0.196f, 0.196f);
@@ -83,24 +86,21 @@ public class selectedLevel : MonoBehaviour
     private void LookForStuff()
     {
         if (pm == null)
-        {
-            GameObject playerManagerObject = new GameObject("PlayerManager");
-            pm = playerManagerObject.AddComponent<PlayerManager>();
-        }
+            GameObject.FindObjectOfType<PlayerManager>();
 
         if (leaderBoard == null)
             leaderBoard = GameObject.FindObjectOfType<LeaderBoard>();
+
         if (pm != null && leaderBoard != null)
         {
-            
-            if (pm.allSOfound) OnSOReady();            
-            
+            ready = true;
+            OnSOReady();
         }
     }
 
     public void OnApplicationQuit()
     {
-        UpdateLevelName();
+        PlayerPrefs.Save();
     }
 
     private void FixedUpdate()
@@ -114,16 +114,16 @@ public class selectedLevel : MonoBehaviour
     public void Update()
     {
 
-        if (!ready)
+        while (!ready)
         {
             LookForStuff();
-        } else
-        {
-            if (Input.GetKeyUp("a") || Input.GetKeyUp("left")) PreviousLevel();
-            if (Input.GetKeyUp("d") || Input.GetKeyUp("right")) NextLevel();
-            if (Input.GetKeyUp("space") || Input.GetKeyUp("enter")) StartCoroutine(SelectLevel());
-            if (Input.GetKeyUp("escape")) ReturnToMenu();
+            return;
         }
+        
+        if (Input.GetKeyUp("a") || Input.GetKeyUp("left")) PreviousLevel();
+        if (Input.GetKeyUp("d") || Input.GetKeyUp("right")) NextLevel();
+        if (Input.GetKeyUp("space") || Input.GetKeyUp("enter")) StartCoroutine(SelectLevel());
+        if (Input.GetKeyUp("escape")) ReturnToMenu();
 
     }
 
@@ -211,10 +211,11 @@ public class selectedLevel : MonoBehaviour
         playerNames.text = leaderBoard.leaderboardNames[levelIndex];
         playerScores.text = _floatScore.ToString() + "s";
         playerOwnScore.text = _floatPlayerScore.ToString() + "s";
-        pm.leaderboardSO.CurrentLevel = levelIndex;
-        SavePrefs(_floatScore, _floatPlayerScore);
 
-
+        PlayerPrefs.SetFloat("highScore", _floatScore);
+        PlayerPrefs.SetFloat("playerScore", _floatPlayerScore);
+        PlayerPrefs.SetInt("level", levelIndex);
+        PlayerPrefs.Save();
     }
 
     public void Wrapper()
@@ -230,24 +231,23 @@ public class selectedLevel : MonoBehaviour
       
     }
 
-    public void SavePrefs(float _score, float _playerScore)
-    {
-        pm.currentScoreSO.CurrentScore = _score;
-        pm.currentScoreSO.CurrentPlayerScore = _playerScore;
-
-    }
-
     public void OnSOReady()
     {
-        ready = true;
-        levelIndex = pm.leaderboardSO.CurrentLevel;
+        levelIndex = PlayerPrefs.GetInt("level", 0);
 
         this.transform.position = this.transform.position - (move * (levelIndex));
 
         //Toggle night mode
         if (levelIndex > 7) SetNightMode(true);
         else SetNightMode(false);
+        
+        ready = true;
         UpdateLevelName();
 
+    }
+
+    public void OnDestroy()
+    {
+        PlayerPrefs.Save();
     }
 }

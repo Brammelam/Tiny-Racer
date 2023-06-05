@@ -13,6 +13,53 @@ public class hatScript : MonoBehaviour
     public void Start()
     {
         outline = GetComponent<Outline>();
+        _index = PlayerPrefs.GetInt("hat", 3);
+        // Logic for enabling/disabling hats
+
+        // index 0
+        if (this.name == "tophat")
+        {
+            if (_index != 0)
+            {
+                sc.removeNewNode(_index);
+                _index = 0;
+                sc.addNewNode(_index);
+            }
+            else
+            {
+                sc.removeNewNode(_index);
+            }           
+        }
+
+        // index 1
+        else if (this.name == "crown")
+        {
+            if (_index != 1)
+            {
+                sc.removeNewNode(_index);
+                _index = 1;
+                sc.addNewNode(_index);
+            }
+            else
+            {
+                sc.removeNewNode(_index);
+            }
+        }
+
+        // index 2
+        else if (this.name == "party")
+        {
+            if (_index != 2)
+            {
+                sc.removeNewNode(_index);
+                _index = 2;
+                sc.addNewNode(_index);
+            }
+            else
+            {
+                sc.removeNewNode(_index);
+            }
+        }
     }
 
     public void Update()
@@ -37,8 +84,9 @@ public class hatScript : MonoBehaviour
                     }
 
                     // Update the hatindex
-                    _index = sc.hatIndex;
-
+                    
+                    PlayerPrefs.SetInt("hat", sc.hatIndex);
+                    PlayerPrefs.Save();
                     // Logic for enabling/disabling hats
 
                     // index 0
@@ -86,6 +134,8 @@ public class hatScript : MonoBehaviour
                         }
                     }
                 }
+                PlayerPrefs.SetInt("hat", _index);
+                PlayerPrefs.Save();
             }
         }
     }
@@ -130,7 +180,8 @@ public class hatScript : MonoBehaviour
 
             // Update the hatindex
             _index = sc.hatIndex;
-
+            PlayerPrefs.SetInt("hat", sc.hatIndex);
+            PlayerPrefs.Save();
             // Logic for enabling/disabling hats
 
             // index 0

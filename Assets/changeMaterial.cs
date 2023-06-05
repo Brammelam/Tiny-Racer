@@ -39,9 +39,11 @@ public class changeMaterial : MonoBehaviour
     public void SetLockedCars()
     {
         int index = transform.GetSiblingIndex() + 1;
-        if (!pm.unlockedCars.Contains("gotcar" + index) && index > 0)
-        {
+        string gotcar = "gotcar";
+        string gotcarindex = gotcar + index;
 
+        if (!PlayerPrefs.HasKey(gotcarindex) && (index > 1))
+        {
             Material[] mat = newmaterials.ToArray();
 
             for (int i = 0; i < newmaterials.Count; i++)
@@ -50,7 +52,6 @@ public class changeMaterial : MonoBehaviour
             }
 
             newRend.materials = mat;
-
         }       
     }
 
@@ -97,9 +98,9 @@ public class changeMaterial : MonoBehaviour
         //also update the carsettings
         Color _body = mat[0].color;
         Color _window = mat[1].color;
-
-        pm.oldcolors[0, pm.currentCar] = _body;
-        pm.oldcolors[1, pm.currentCar] = _window;
+        int _car = PlayerPrefs.GetInt("car");
+        pm.oldcolors[0, _car] = _body;
+        pm.oldcolors[1, _car] = _window;
 
         yield return new WaitForSeconds(waitTime);
 
