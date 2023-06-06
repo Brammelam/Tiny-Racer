@@ -57,7 +57,6 @@ public class hideButton : MonoBehaviour
 
         if (unlockButton == null) { unlockButton = GameObject.FindGameObjectWithTag("unlockbutton"); }
 
-        Debug.Log("Here is going fucky???" + _carIndex);
         // Car 0 is active by default
         if (_carIndex == 0)
         {

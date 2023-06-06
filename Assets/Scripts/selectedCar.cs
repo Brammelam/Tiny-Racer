@@ -184,7 +184,8 @@ public class selectedCar : MonoBehaviour
 
     public void UpdateCarName()
     {
-        carText.text = carNames[pm.currentCar];
+        int _car = PlayerPrefs.GetInt("car", 0);
+        carText.text = carNames[_car];
         // Disable outlines on all hats when changing cars (hat is turned off so outline must also be turned off)
         GameObject[] rdwoc = GameObject.FindGameObjectsWithTag("hatButton");
         foreach (GameObject lol in rdwoc)
