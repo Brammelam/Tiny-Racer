@@ -92,7 +92,7 @@ public class WhiteLabelManager : MonoBehaviour
             if (!response.success)
             {
                 loginButton.interactable = true;
-                StartCoroutine(AnimateButton(loginButton, ":(", "REGISTER"));
+                StartCoroutine(AnimateButton(loginButton, ":(", "LOGIN"));
                 Debug.Log("Error while logging in!");
                 return;
             } else

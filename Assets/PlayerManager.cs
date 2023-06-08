@@ -76,7 +76,7 @@ public class PlayerManager : MonoBehaviour
     public string playerNameString;
     public List<string> unlockedCars;
     public List<float> ghostData;
-    //public List<int> ghosts;
+    public List<int> ghosts;
     //public List<int> playerIds;
     public bool allSOfound;
 
@@ -95,8 +95,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-
-        
+        ghostData = new List<float>();
+        ghostsSO = Resources.Load<GhostsSO>("SO/GhostsSO");
         //audioManager.GetComponent<AudioManager>().Initialize();
     }
 
@@ -104,7 +104,7 @@ public class PlayerManager : MonoBehaviour
     {
         selectButton.interactable = false;
         StartCoroutine(SetupRoutine());
-        //ghosts = ghostsSO.GhostIds;
+        
     }
 
     public void Update()
@@ -136,6 +136,8 @@ public class PlayerManager : MonoBehaviour
 
         string _playa = PlayerPrefs.GetString("name");
         playerName.text = "Welcome back, " + _playa + "!";
+        currentCar = PlayerPrefs.GetInt("car", 0);
+        currentHat = PlayerPrefs.GetInt("hat", 3);
 
         IEnumerator[] coroutines = {
             SetUpUI(),
@@ -188,7 +190,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         // Set Ghost ID
-        // SetGhostId();
+        //SetGhostId();
 
         // Progress complete
         Progress = 1f;
@@ -220,7 +222,7 @@ public class PlayerManager : MonoBehaviour
     {
         bool done = false;
         selectionScreen.SetActive(true);
-        selectedCar.SetActive(true);
+        selectedCar.SetActive(true);        
         nextButton.onClick.AddListener(selectedCar.GetComponent<selectedCar>().NextCar);
         previousButton.onClick.AddListener(selectedCar.GetComponent<selectedCar>().PreviousCar);
         nextButton.onClick.AddListener(selectedCar.GetComponent<selectedCar>().UpdateCarName);
@@ -282,7 +284,7 @@ public class PlayerManager : MonoBehaviour
         leaderboardSO = Resources.Load<ScoresSO>("SO/ScoresSO");
         unlockedCarsSO = Resources.Load<UnlockedCarsSO>("SO/UnlockedCarsSO");
         currentScoreSO = Resources.Load<CurrentscoreSO>("SO/CurrentscoreSO");
-        //ghostsSO;  Disabled for now, will enable ghosts later
+        
         carsettings = Resources.Load<CarsettingsSO>("SO/CarsettingsSO"); ;
 
         // Load the carsettings for the player 
@@ -293,7 +295,6 @@ public class PlayerManager : MonoBehaviour
             currentLevel = 0; // Fix player getting stuck in tutorial
 
         playerNameString = PlayerPrefs.GetString("name");
-        //sc.addNewNode(currentHat);  This results in the player being able to wear two hats lol
         
         //load the leaderboards for highscores on levelselect
         leaderboardNames = leaderboardSO.Names;
@@ -398,6 +399,9 @@ public class PlayerManager : MonoBehaviour
             }
         }
         else if (playernameInputfield.text != "")
+        {
+
+
             LootLockerSDKManager.SetPlayerName(playernameInputfield.text, (response) =>
             {
                 if (response.success)
@@ -414,6 +418,7 @@ public class PlayerManager : MonoBehaviour
                     Debug.Log("Setting player name failed: " + response.Error);
                 }
             });
+        }
     }
 
     public void RemoveInfoText()
@@ -505,7 +510,7 @@ public class PlayerManager : MonoBehaviour
         SceneManager.LoadScene(_currentLevel);
     }
 
-    /*
+    
     public void SaveToFile(List<float> _ghostData)
     {
         string filePath = Path.Combine(Application.persistentDataPath + "/" + currentLevel + ".txt");
@@ -515,15 +520,15 @@ public class PlayerManager : MonoBehaviour
         writer.Close();
         StartCoroutine(UploadGhostData());
     }
-    */
+    
     public IEnumerator DownloadLevelTextFile(string _s)
     {
         bool done = false;
-
+        int _currentLevel = PlayerPrefs.GetInt("level");
         UnityWebRequest www = UnityWebRequest.Get(_s);
         yield return www.SendWebRequest();
 
-        string filePath = Path.Combine(Application.persistentDataPath + "/" + currentLevel + ".txt");
+        string filePath = Path.Combine(Application.persistentDataPath + "/" + _currentLevel + ".txt");
 
         List<string> temp = new List<string>(www.downloadHandler.text.Split(','));
         string[] stringarray = www.downloadHandler.text.Split(separator: '\n');
@@ -535,13 +540,15 @@ public class PlayerManager : MonoBehaviour
                 float f = float.Parse(stringarray[i]);
                 ghostData.Add(f);
             }
+
+            done = true;
         }
         catch (Exception e)
         {
             Debug.Log($"Failed at {e}");
+            done = true;
         }
 
-        done = true;
         yield return new WaitWhile(() => done == false);
     }
 
@@ -591,9 +598,7 @@ public class PlayerManager : MonoBehaviour
         yield return new WaitWhile(() => done == false);
     }
 
-    /* DISABLED - Can't access files belonging to other players
-     * 
-     * 
+    /*
     public IEnumerator GetGlobalGhostData()
     {
         bool done = false;
@@ -619,26 +624,25 @@ public class PlayerManager : MonoBehaviour
         });     
         yield return new WaitWhile(() => done == false);
     }
-
     */
 
     public IEnumerator GetGhostData()
     {
 
         bool done = false;
-        int f = ghostsSO.GhostIds[currentLevel];
+        int _level = PlayerPrefs.GetInt("level");
+        int _ghostFileID = ghostsSO.GhostIds[_level];
 
-        LootLockerSDKManager.GetPlayerFile(f, (response) =>
+        LootLockerSDKManager.GetPlayerFile(_ghostFileID, (response) =>
         {
             if (response.success)
             {
-                if (response.id == f)
+                if (response.id == _ghostFileID)
                 {
                     var s = response.url;
                     StartCoroutine(DownloadLevelTextFile(s));
                 }
                 else Debug.Log("FileId did not match!");
-
 
                 done = true;
             }
@@ -693,8 +697,7 @@ public class PlayerManager : MonoBehaviour
         foreach (changeMaterial changemat in changemat) changemat.SetLockedCars();
     }
 
-    //Ghost disabled atm
-    /*
+
     public IEnumerator UploadPlayerGhost()
     {
         bool done = false;
@@ -704,10 +707,16 @@ public class PlayerManager : MonoBehaviour
         LootLockerSDKManager.UpdateOrCreateKeyValue(key, pi, (response) =>
         {
             if (response.success)
+            {
                 done = true;
+            }
+            else
+            {
+                Debug.Log("Error uploading player ghost! ");
+                done = true;
+            }
         }); yield return new WaitWhile(() => done == false);
     }
-    */
 
     // Fetch ghost data and carsettings (color, which car, which hat)
     public IEnumerator DownloadPlayerFileKeys()
@@ -719,11 +728,6 @@ public class PlayerManager : MonoBehaviour
 
             foreach (var item in response.payload)
             {
-                if (item.key == i.ToString())
-                {
-
-                    ghostsSO.GhostIds[i] = int.Parse(item.value);
-                }
                 if (item.key == "9999")
                 {
                     int _settings = int.Parse(item.value);
@@ -738,34 +742,62 @@ public class PlayerManager : MonoBehaviour
         }); yield return new WaitWhile(() => done == false);
     }
 
-    // Ghost stuff disabled for now
-    /*
+    public IEnumerator DownloadGhostId()
+    {
+        bool done = false;
+        int i = 0;
+        string _level = PlayerPrefs.GetInt("level").ToString();
+        LootLockerSDKManager.GetEntirePersistentStorage((response) =>
+        {
+            foreach (var item in response.payload)
+            {
+                if (item.key == i.ToString())
+                {
+                    ghostsSO.GhostIds[i] = int.Parse(item.value);
+                }
+
+                i++;
+            }
+            done = true;
+        }); yield return new WaitWhile(() => done == false);
+    }
+
+
     public void StartUploadGhost(List<float> _ghostData)
     {
-        //SaveToFile(_ghostData);
+        SaveToFile(_ghostData);
     }
-    */
-    /*
+    
+    
     public IEnumerator UploadGhostData()
     {
+        int _level = PlayerPrefs.GetInt("level");
+        int _playerId = PlayerPrefs.GetInt("playerid");
+        string _ghostFileId = "ghost" + _level;
+
         bool done = false;
         if (currentLevel != 9)
         {
-            int f = ghostsSO.GhostIds[currentLevel];
-            string textFilePath = Path.Combine(Application.persistentDataPath + "/" + currentLevel + ".txt");
+            int _fileID = ghostsSO.GhostIds[_level];
+            string textFilePath = Path.Combine(Application.persistentDataPath + "/" + _level + ".txt");
 
-            if (f > 0) // check if ghostId exists, if so, delete previous ghost
-                LootLockerSDKManager.DeletePlayerFile(f, (response) =>
+            if (PlayerPrefs.HasKey(_ghostFileId)) // Delete old ghost if we have one
+            {                
+                LootLockerSDKManager.DeletePlayerFile(_fileID, (response) =>
                 {
                     if (response.statusCode != 200) Debug.Log(response.Error);
                 });
-
-            LootLockerSDKManager.UploadPlayerFile(textFilePath, currentLevel + " Ghost " + playerId, true, (response) =>
+            }
+            // Upload the new ghost data
+            string _levelString = _level.ToString();
+            LootLockerSDKManager.UploadPlayerFile(textFilePath, _levelString, true, (response) =>
             {
                 if (response.success)
                 {
-                    ghostsSO.GhostIds[currentLevel] = response.id;
-                    ghostsSO.PlayerIds[currentLevel] = playerId;
+                    ghostsSO.GhostIds[_level] = response.id;                   
+                    
+                    PlayerPrefs.SetInt(_ghostFileId, response.id); // store the filekey in playerprefs
+                    PlayerPrefs.Save();
                     StartCoroutine(UploadPlayerGhost());
                     done = true;
                 }
@@ -778,7 +810,7 @@ public class PlayerManager : MonoBehaviour
             }); yield return new WaitWhile(() => done == false);
         }
     }
-    */
+    
 
     public void ResetOriginalCar()
     {
@@ -829,21 +861,20 @@ public class PlayerManager : MonoBehaviour
     {
 
         PlayerPrefs.SetInt("car", currentCar);
-        PlayerPrefs.SetInt("hat", currentHat);
 
         bool done = false;
         string filePath = Path.Combine(Application.persistentDataPath + "/carsettings.txt");
         StreamWriter writer = new StreamWriter(filePath, false);
 
         int f = int.Parse(carsettings.SettingsKey);
-        int _settingsKey = 0;
+        int _settingsKey = PlayerPrefs.GetInt("settings");
         
         // check if settings exists, if so, delete previous settings
         if (PlayerPrefs.HasKey("settings")) {
             _settingsKey = PlayerPrefs.GetInt("settings");
             LootLockerSDKManager.DeletePlayerFile(_settingsKey, (response) =>
             {
-                if (response.statusCode != 200)
+                if (!response.success)
                     Debug.Log("Failed removing old playerfiles! " + response.Error);
             });
         }
@@ -856,7 +887,7 @@ public class PlayerManager : MonoBehaviour
         writer.WriteLine(PlayerPrefs.GetFloat("w3"));  //writer.WriteLine(carsettings.WindowColor[2]);
 
         writer.WriteLine(PlayerPrefs.GetInt("car", 0));  //writer.WriteLine(carsettings.CurrentCar);
-        writer.WriteLine(PlayerPrefs.GetInt("hat", 3));  //writer.WriteLine(carsettings.CurrentHat);
+        writer.WriteLine(PlayerPrefs.GetString("hat", "no"));  //writer.WriteLine(carsettings.CurrentHat);
         writer.WriteLine(PlayerPrefs.GetInt("custom", 0));  //writer.WriteLine(carsettings.CustomCar);
         writer.WriteLine(PlayerPrefs.GetInt("level"));  //writer.WriteLine(leaderboardSO.CurrentLevel);
         writer.Close();

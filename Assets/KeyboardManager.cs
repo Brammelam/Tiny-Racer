@@ -7,6 +7,9 @@ public class KeyboardManager : MonoBehaviour
     [Header("Inputfields")]
     public List<TMP_InputField> inputFields;
     public int currentInputField;
+    
+    [SerializeField]
+    private bool isShiftPressed;
 
     private void Start()
     {
@@ -38,6 +41,8 @@ public class KeyboardManager : MonoBehaviour
             AddLetterClass addLetterScript = addLetterScripts[i];
 
             addLetterScript.SetInputField(inputFields[0]);
+            addLetterScript.UpdateTextCasing(isShiftPressed);
+
 
         }
     }
@@ -50,6 +55,7 @@ public class KeyboardManager : MonoBehaviour
             AddLetterClass addLetterScript = addLetterScripts[i];
 
             addLetterScript.SetInputField(inputFields[_i]);
+            addLetterScript.UpdateTextCasing(isShiftPressed);
 
         }
     }
@@ -68,5 +74,18 @@ public class KeyboardManager : MonoBehaviour
     {
         currentInputField = 2;
         UpdateIndex(currentInputField);
+    }
+
+    public void ToggleShift()
+    {
+        if (isShiftPressed) isShiftPressed = false;
+        else isShiftPressed = true;
+
+        AddLetterClass[] addLetterScripts = GetComponentsInChildren<AddLetterClass>();
+        for (int i = 0; i < addLetterScripts.Length; i++)
+        {
+            AddLetterClass addLetterScript = addLetterScripts[i];
+            addLetterScript.UpdateTextCasing(isShiftPressed);
+        }
     }
 }

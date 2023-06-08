@@ -49,9 +49,13 @@ public class selectedLevel : MonoBehaviour
 
     [Header("Text stuff")]
     public Text[] textObjects;
+    public TMP_Text[] tmpTextObjects;
     private Color day, night;
     [SerializeField]
     private bool ready;
+
+    [SerializeField]
+    private int HAT;
 
     private void Awake()
     {
@@ -62,6 +66,7 @@ public class selectedLevel : MonoBehaviour
     }
     public void Start()
     {
+        HAT = PlayerPrefs.GetInt("hat");
         ready = false;
         levels = GameObject.FindGameObjectsWithTag("nature").ToList();
         Light[] lights = FindObjectsOfType<Light>();
@@ -184,6 +189,10 @@ public class selectedLevel : MonoBehaviour
             foreach (Text _text in textObjects) {
                 _text.color = night;
             }
+            foreach (TMP_Text _tmpText in tmpTextObjects)
+            {
+                _tmpText.color = night;
+            }
             _switchOn.Play();
         }
         else
@@ -191,6 +200,10 @@ public class selectedLevel : MonoBehaviour
             foreach (Text _text in textObjects)
             {
                 _text.color = day;
+            }
+            foreach (TMP_Text _tmpText in tmpTextObjects)
+            {
+                _tmpText.color = day;
             }
             _switchOff.Play();
         }
@@ -225,6 +238,8 @@ public class selectedLevel : MonoBehaviour
 
     IEnumerator SelectLevel()
     {
+        PlayerPrefs.SetInt("level", levelIndex);
+        PlayerPrefs.Save();
         pm.SetCurrentLevel(levelIndex + 2); // Taking into account carSelect and levelSelect as first two levels
         yield return null;
                    

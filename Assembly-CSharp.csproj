@@ -73,10 +73,12 @@
      <Compile Include="Assets\Resources\garageScript.cs" />
      <Compile Include="Assets\Scripts\SnowScript.cs" />
      <Compile Include="Assets\PathCreator\Examples\Scripts\PathPlacer.cs" />
+     <Compile Include="Assets\ReturnHatName.cs" />
      <Compile Include="Assets\WhiteLabelManager.cs" />
      <Compile Include="Assets\Scripts\ghostRecorder.cs" />
      <Compile Include="Assets\openKeyboard.cs" />
      <Compile Include="Assets\SOfiles\CarsettingsSO.cs" />
+     <Compile Include="Assets\HatManager.cs" />
      <Compile Include="Assets\FileHandler.cs" />
      <Compile Include="Assets\KeyboardManager.cs" />
      <Compile Include="Assets\Scripts\MusicClass.cs" />
@@ -106,6 +108,7 @@
      <Compile Include="Assets\Scripts\carController2.cs" />
      <Compile Include="Assets\Resources\Navigate.cs" />
      <Compile Include="Assets\GarageScreen.cs" />
+     <Compile Include="Assets\SelectHat.cs" />
      <Compile Include="Assets\Scripts\backScript.cs" />
      <Compile Include="Assets\PathCreator\Examples\Scripts\PathFollower.cs" />
      <Compile Include="Assets\InputEntry.cs" />

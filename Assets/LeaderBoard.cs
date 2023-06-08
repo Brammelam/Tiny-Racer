@@ -143,15 +143,15 @@ public class LeaderBoard : MonoBehaviour
                 if (response.success && response.items.Length > 0)
                 {
                     var item = response.items[0];
-                    if (item.player.name == "") 
+                    if (item.player.name.Length == 0) 
                     {
                         entry.playerName = "Anonymous";
                     } 
                     else
                     {
-                        entry.fastestTime = item.score;
                         entry.playerName = item.player.name;
                     }
+                        entry.fastestTime = item.score;
 
                 }
                 else

@@ -14,15 +14,16 @@ public class checkShit : MonoBehaviour
     public List<GameObject> cars;
     public List<GameObject> deadCars;
 
+    [SerializeField]
     private List<float> playerRecord;
     public List<float> saveRecord;
 
-    //public List<float> loadedGhost;
+    public List<float> loadedGhost;
 
-    //public float ghostDistanceTravelled;
+    public float ghostDistanceTravelled;
 
-    //public GameObject ghost;
-    //public ghostFollower _ghostFollower;
+    public GameObject ghost;
+    public ghostFollower _ghostFollower;
     public GameObject cop;
     public GameObject deadCop;
     public Rigidbody rb, rb2;
@@ -35,8 +36,7 @@ public class checkShit : MonoBehaviour
     public event Action<bool> TippedChanged;
     public speedTracker st;
     public rotationTracker rt;
-    //private float tipAngleLeft = 35f;
-    //private float tipAngleRight = -35f;
+
     private const float MIN_ANGLE = 45f;
     private const float FLIP_ANGLE = 65f;
     private const float MAX_SPEED = 100f;
@@ -75,6 +75,7 @@ public class checkShit : MonoBehaviour
     public GameObject _hat;
     public CarMusicClass _car;
     public int hatIndex;
+    public string hat;
 
     private int frame;
     private GameObject donut;
@@ -83,7 +84,7 @@ public class checkShit : MonoBehaviour
     public saveLevel saveLevel;
 
     // tutorial stuff
-    public float slowMo = 0.5f;
+    public float slowMo = 1f;
 
     public bool setSlow = false;
     public GameObject tutorial;
@@ -116,13 +117,12 @@ public class checkShit : MonoBehaviour
 
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<cameraFollow>();
 
-        /*
-        // Wait until finished saving
-        if (GameObject.FindGameObjectWithTag("save") != null)
-            StartCoroutine(WaitForGhost());
-        else DontWaitForGhost();
-        */
 
+        // Wait until finished saving
+        //if (GameObject.FindGameObjectWithTag("save") != null)
+        //    StartCoroutine(WaitForGhost());
+        //else DontWaitForGhost();
+        playerRecord = new List<float>();
 
     }
 
@@ -132,11 +132,18 @@ public class checkShit : MonoBehaviour
 
         globalRecordTime = PlayerPrefs.GetFloat("highScore");  //globalRecordTime = pm.currentScoreSO.CurrentScore;
         playerRecordTime = PlayerPrefs.GetFloat("playerScore");  //playerRecordTime = pm.currentScoreSO.CurrentPlayerScore;
-        if (currentLevel == 9) globalRecordTime = 0;
-        
+
         whatCar = PlayerPrefs.GetInt("car", 0);
-        hatIndex = PlayerPrefs.GetInt("hat", 3);
+        
         currentLevel = PlayerPrefs.GetInt("level", 2);
+
+        if (currentLevel == 9) globalRecordTime = 0;
+
+        yield return pm.DownloadGhostId(); // Find the file id for the ghost data of the current track
+        yield return pm.GetGhostData(); // Adds the data to the pm.ghostData list of floats we use to animate the ghost
+
+        loadedGhost = pm.ghostData; // load the ghostdata for use in the GameLogic()
+        
 
         cars = new List<GameObject>(1);
         deadCars = new List<GameObject>(1);
@@ -177,7 +184,8 @@ public class checkShit : MonoBehaviour
         deadCop = Instantiate(deadCars[0]);
 
         yield return WaitForAssignments();
-        if (hatIndex != 3) yield return SetHat();
+        hat = PlayerPrefs.GetString("hat", "no");
+        if (PlayerPrefs.HasKey("hat")) yield return SetHat();
 
         if (currentLevel < 3 || currentLevel == 7 || currentLevel == 8 || currentLevel == 9)
         {
@@ -201,6 +209,7 @@ public class checkShit : MonoBehaviour
         _car = GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>();
         _car.PlayCarMusic();
         _car.timeElapsed = 0;
+
 
 
         ready = true;
@@ -234,10 +243,10 @@ public class checkShit : MonoBehaviour
         rt = cop.GetComponent<rotationTracker>();
         rb2 = deadCop.GetComponent<Rigidbody>();
   
-        //ghost = GameObject.FindGameObjectWithTag("Ghost") ?? ghost;
+        ghost = GameObject.FindGameObjectWithTag("Ghost") ?? ghost;
 
-        //ghost = Instantiate(Resources.Load("ghostCar") as GameObject);
-        //_ghostFollower = ghost.GetComponent<ghostFollower>();
+        ghost = Instantiate(Resources.Load("ghostCar") as GameObject);
+        _ghostFollower = ghost.GetComponent<ghostFollower>();
 
         if (PlayerPrefs.GetInt("custom") == 1)
         {
@@ -261,30 +270,24 @@ public class checkShit : MonoBehaviour
 
     IEnumerator SetHat()
     {
-        hatIndex = PlayerPrefs.GetInt("hat", 3);
-        string hatName = "";
-        Vector3 hatPosition = new Vector3(0, 1.4f, -0.3f);
+        int _car = PlayerPrefs.GetInt("car");
+        Debug.Log("Found this hat: " + hat);
+        string hatLocation = hat + "1"; // add 1 which are the smaller models
+        Debug.Log("loading " + hatLocation);
 
-        switch (hatIndex)
-        {
-            case 0:
-                hatName = "tophat1";
-                break;
-            case 1:
-                hatName = "crown1";
-                break;
-            case 2:
-                hatName = "party1";
-                hatPosition -= new Vector3(0, -0.2f, 0);
-                break;
-        }
 
-        _hat = Instantiate(Resources.Load(hatName) as GameObject);
+        _hat = Instantiate(Resources.Load(hatLocation) as GameObject);
+
         _hat.transform.SetParent(cop.transform);
-        _hat.transform.localPosition = hatPosition;
 
-        if (whatCar == 5)
+        _hat.transform.localRotation = new Quaternion(0, 0, 0, 0);
+        _hat.transform.localPosition = new Vector3(0, 1.4f, -0.3f);
+        if (_car == 2) // adjust for SUV
+        {
             _hat.transform.localPosition = new Vector3(0, 1.6f, -0.3f);
+            if (_hat.name == "party")
+                _hat.transform.localPosition -= new Vector3(0, -0.2f, 0);
+        }
 
         yield return null;
     }
@@ -312,6 +315,7 @@ public class checkShit : MonoBehaviour
         }
     }
     */
+    
     public void SavePrefs()
     {
         /*
@@ -330,6 +334,7 @@ public class checkShit : MonoBehaviour
         pm = FindObjectOfType<PlayerManager>() ?? pm;
         _score = FindObjectOfType<Score>() ?? _score;
         leaderBoard = FindObjectOfType<LeaderBoard>() ?? leaderBoard;
+        st = FindObjectOfType<speedTracker>() ?? st;
 
         // check if all conditions are met
         if (pm != null && _score != null && leaderBoard != null)
@@ -394,56 +399,17 @@ public class checkShit : MonoBehaviour
             {
                 if (someCount == 0)
                 {
-                    if (player.distanceTravelled > 120 && player.distanceTravelled < 135 && !setSlow)
+                    if (player.distanceTravelled > 120 && player.distanceTravelled < 135)
                     {
                         tutorialIndex = 0;
-                        setSlow = true;
-                        Time.timeScale = 0.1f;
-                        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
                     }
 
-                    if (player.distanceTravelled > 135 && player.distanceTravelled < 275 && setSlow)
-                    {
-                        if (Time.timeScale < 1f)
-                        {
-
-                            Time.timeScale += 0.02f;
-                            Time.fixedDeltaTime = Time.timeScale * 0.02f;
-                            if (Time.timeScale >= 1f)
-                            {
-                                Time.timeScale = 1f;
-                                Time.fixedDeltaTime = 0.02f;
-                            }
-                        }
-
-                        if (Time.timeScale == 1f)
-                            setSlow = false;
-                    }
-
-                    if (player.distanceTravelled > 275 && player.distanceTravelled < 280 && !setSlow)
+                    if (player.distanceTravelled > 275 && player.distanceTravelled < 280)
                     {
                         tutorialIndex = 1;
-                        setSlow = true;
-                        Time.timeScale = 0.05f;
-                        Time.fixedDeltaTime = Time.timeScale * 0.02f;
                     }
 
-                    if (player.distanceTravelled > 280 && setSlow)
-                    {
-                        if (Time.timeScale < 1f)
-                        {
-                            Time.timeScale += 0.02f;
-                            Time.fixedDeltaTime = Time.timeScale * 0.02f;
-                            if (Time.timeScale >= 1f)
-                            {
-                                Time.timeScale = 1f;
-                                Time.fixedDeltaTime = 0.02f;
-                            }
-                        }
-
-                        if (Time.timeScale == 1f)
-                            setSlow = false;
-                    }
                 }
             }
 
@@ -453,10 +419,10 @@ public class checkShit : MonoBehaviour
                 donut = Instantiate(Resources.Load("donut"), cop.transform.position, cop.transform.rotation) as GameObject;
                 donut.GetComponent<Rigidbody>().velocity = -cop.transform.right * 10 + new Vector3(0, UnityEngine.Random.Range(15, 20), 0) + cop.transform.forward * UnityEngine.Random.Range(15, 30);
                 frame = 0;
-                Destroy(donut, 5f);
+                Destroy(donut, 30f);
             }
 
-            /*
+            
             // start ghost when player starts playing
             if (index < loadedGhost.Count && currentLevel != 9)
             {
@@ -465,7 +431,8 @@ public class checkShit : MonoBehaviour
                 ghost.transform.SetPositionAndRotation(pathCreator.path.GetPointAtDistance(ghostDistance), pathCreator.path.GetRotationAtDistance(ghostDistance));
                 index++;
             }
-            */
+            
+            
             // If player completes a lap, reset values and start saving
             // this part continues working even when new scenes are loaded
             if (player.distanceTravelled >= pathCreator.path.length && !tipped)
@@ -474,7 +441,9 @@ public class checkShit : MonoBehaviour
                 string _currrentLevelString = currentLevel.ToString();
                 string _car = "car" + _currentLevel.ToString();
                 string _gotCar = "gotcar" + _currentLevel.ToString();
-                
+                pm.StartUploadGhost(playerRecord);
+                loadedGhost = playerRecord;
+
                 if (!PlayerPrefs.HasKey(_car) && currentLevel != 9)
                 {
                     string triggerCarUnlock = "grantCar" + _currrentLevelString;
@@ -521,9 +490,9 @@ public class checkShit : MonoBehaviour
 
                     StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel, isGlobalRecord));
                     pm.UpdateScoreText(_recordTime, isGlobalRecord);
-                    //loadedGhost = playerRecord;
+                    
 
-                    //pm.StartUploadGhost(playerRecord);
+                    
 
 
                     SavePrefs();
@@ -545,10 +514,13 @@ public class checkShit : MonoBehaviour
 
                     StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel, isGlobalRecord));
                     pm.UpdateScoreText(_recordTime, isGlobalRecord);
+
+                    loadedGhost = playerRecord;
+
+                    pm.StartUploadGhost(playerRecord);
                 }
                 playerRecord = new List<float>(); // Resets the ghost data array
-                startTime = Time.time;
-                
+                startTime = Time.time;                
             }
 
             // Start recording the player
@@ -556,8 +528,6 @@ public class checkShit : MonoBehaviour
         }
     }
 
-    // celebration when completing a lap. Very slow... causes stuttering
-    // Removed for now
     private void Victory(int _i)
     {       
         Vector3 spawnVector3 = pathCreator.path.GetPointAtDistance(0) + new Vector3(0, 5, 0);

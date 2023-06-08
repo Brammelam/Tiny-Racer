@@ -64,11 +64,16 @@ public class selectedCar : MonoBehaviour
         pos2 = this.transform.position - (move * 6);
 
         GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().PlayMusic();
+        LoadPrefs();
     }
 
     private void Start()
     {
-        LoadPrefs();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            GameObject child = transform.GetChild(i).gameObject;
+            child.SetActive(true);
+        }
     }
 
     private void OnApplicationQuit()
@@ -111,48 +116,6 @@ public class selectedCar : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-    public void addNewNode(int _index)
-    {
-        int _car = PlayerPrefs.GetInt("car");
-        hatIndex = _index;
-        PlayerPrefs.SetInt("hat", hatIndex);
-        PlayerPrefs.Save();
-
-        if (_index == 0)
-            _hat = Instantiate(Resources.Load("tophat") as GameObject);
-        if (_index == 1)
-            _hat = Instantiate(Resources.Load("crown") as GameObject);
-        if (_index == 2)
-            _hat = Instantiate(Resources.Load("party") as GameObject);
-        if (_index != 3)
-        {
-            _hat.transform.SetParent(this.gameObject.transform.GetChild(_car));
-
-            _hat.transform.localRotation = new Quaternion(0, 0, 0, 0);
-            _hat.transform.localPosition = new Vector3(0, 1.4f, -0.3f);
-            if (_car == 2) // adjust for SUV
-            {
-                _hat.transform.localPosition = new Vector3(0, 1.6f, -0.3f);
-                if (hatIndex == 2)
-                    _hat.transform.localPosition -= new Vector3(0, -0.2f, 0);
-            }
-        }
-    }
-
-    public void removeNewNode(int _index)
-    {
-        Destroy(_hat);
-        hatIndex = 3;
-        PlayerPrefs.GetInt("hat", 3);
-        PlayerPrefs.Save();
-
-    }
-
-    public void removeNewNodeButton()
-    {
-        removeNewNode(hatIndex);
-    }
-
     private void Update()
     {
         if (pm == null) pm = GameObject.FindObjectOfType<PlayerManager>();
@@ -162,12 +125,12 @@ public class selectedCar : MonoBehaviour
             if (Input.GetKeyUp("a") || Input.GetKeyUp("left"))
             {
                 PreviousCar();
-                removeNewNodeButton();
+                //removeNewNodeButton();
             }
             if (Input.GetKeyUp("d") || Input.GetKeyUp("right"))
             {
                 NextCar();
-                removeNewNodeButton();
+                //removeNewNodeButton();
             }
             if (Input.GetKeyUp("space") || Input.GetKeyUp("enter"))
             {               
@@ -209,6 +172,7 @@ public class selectedCar : MonoBehaviour
             pm.currentCar += 1;
             carIndex += 1;
             PlayerPrefs.SetInt("car", carIndex);
+            PlayerPrefs.SetInt("custom", 0);
             PlayerPrefs.Save();
             hideButton.CheckUnlock(carIndex);
         }
@@ -219,6 +183,7 @@ public class selectedCar : MonoBehaviour
             pm.currentCar = 0;
             carIndex = 0;
             PlayerPrefs.SetInt("car", carIndex);
+            PlayerPrefs.SetInt("custom", 0);
             PlayerPrefs.Save();
             hideButton.CheckUnlock(carIndex);
         }
@@ -233,6 +198,7 @@ public class selectedCar : MonoBehaviour
             pm.currentCar -= 1;
             carIndex -= 1;
             PlayerPrefs.SetInt("car", carIndex);
+            PlayerPrefs.SetInt("custom", 0);
             PlayerPrefs.Save();
             hideButton.CheckUnlock(carIndex);
         }
@@ -243,6 +209,7 @@ public class selectedCar : MonoBehaviour
             pm.currentCar = 6;
             carIndex = 6;
             PlayerPrefs.SetInt("car", carIndex);
+            PlayerPrefs.SetInt("custom", 0);
             PlayerPrefs.Save();
             hideButton.CheckUnlock(carIndex);
         }
@@ -306,7 +273,7 @@ public class selectedCar : MonoBehaviour
 
         mixer.SetFloat("masterVolume", Mathf.Log10(_masterVolume) * 20);
 
-        _qualityIndex = PlayerPrefs.GetInt("Quality", 2);
+        _qualityIndex = PlayerPrefs.GetInt("Quality", 0);
 
         ChangeQuality(_qualityIndex);
     }
