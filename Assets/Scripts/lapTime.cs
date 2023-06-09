@@ -45,7 +45,7 @@ public class lapTime : MonoBehaviour
 
     public void Start()
     {
-        recordtext.text = recordScore.ToString() + "s";
+        recordtext.text = recordScore.ToString("F2") + "s";
         ready = false;
         LookForStuff();
         
@@ -68,7 +68,7 @@ public class lapTime : MonoBehaviour
         recordtext.text = _newRecordText + "s";
     }
 
-    public void SetRecord(float newScore)
+    public void SetRecord()
     {
         string _newRecordText = PlayerPrefs.GetFloat("highScore").ToString();
         recordtext.text = _newRecordText + "s";

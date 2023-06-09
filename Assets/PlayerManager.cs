@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using LootLocker.Requests;
 using TMPro;
+using System.Globalization;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -530,18 +531,17 @@ public class PlayerManager : MonoBehaviour
 
         string filePath = Path.Combine(Application.persistentDataPath + "/" + _currentLevel + ".txt");
 
-        List<string> temp = new List<string>(www.downloadHandler.text.Split(','));
-        string[] stringarray = www.downloadHandler.text.Split(separator: '\n');
+        //List<string> temp = new List<string>(www.downloadHandler.text.Split(','));
+        string[] lines = www.downloadHandler.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
         try
         {
-            for (int i = 0; i < stringarray.Length; i++)
+            foreach (string line in lines)
             {
-
-                float f = float.Parse(stringarray[i]);
-                ghostData.Add(f);
+                if (float.TryParse(line, out float floatValue))
+                {
+                    ghostData.Add(floatValue);
+                }
             }
-
-            done = true;
         }
         catch (Exception e)
         {
@@ -562,8 +562,7 @@ public class PlayerManager : MonoBehaviour
 
         string filePath = Path.Combine(Application.persistentDataPath + "/carsettings.txt");
 
-        List<string> temp = new List<string>(www.downloadHandler.text.Split(','));
-        string[] stringarray = www.downloadHandler.text.Split(separator: '\n');
+        string[] stringarray = www.downloadHandler.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
         // Body
         float f = float.Parse(stringarray[0]);

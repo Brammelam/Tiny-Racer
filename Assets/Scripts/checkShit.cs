@@ -98,6 +98,8 @@ public class checkShit : MonoBehaviour
     private bool ready = false;
     public AudioManager audioManager;
 
+    private lapTime lapTime;
+
 
     public void Awake()
     {
@@ -112,6 +114,7 @@ public class checkShit : MonoBehaviour
 
         playerRecord = new List<float>();
         saveRecord = new List<float>();
+        lapTime = GameObject.FindObjectOfType<lapTime>();
         
         Physics.gravity = new Vector3(0, -50F, 0);
 
@@ -141,7 +144,7 @@ public class checkShit : MonoBehaviour
 
         yield return pm.DownloadGhostId(); // Find the file id for the ghost data of the current track
         yield return pm.GetGhostData(); // Adds the data to the pm.ghostData list of floats we use to animate the ghost
-
+        yield return pm.GetSO(); // Load the Scriptable Objects
         loadedGhost = pm.ghostData; // load the ghostdata for use in the GameLogic()
         
 
@@ -219,7 +222,6 @@ public class checkShit : MonoBehaviour
     private void OnSpeedChanged(float _speed)
     {
         currentSpeed = _speed;
-        Debug.Log("Updating speed with " + _speed);
     }
  
     IEnumerator WaitForAssignments()
@@ -271,9 +273,9 @@ public class checkShit : MonoBehaviour
     IEnumerator SetHat()
     {
         int _car = PlayerPrefs.GetInt("car");
-        Debug.Log("Found this hat: " + hat);
+
         string hatLocation = hat + "1"; // add 1 which are the smaller models
-        Debug.Log("loading " + hatLocation);
+
 
 
         _hat = Instantiate(Resources.Load(hatLocation) as GameObject);
@@ -353,30 +355,32 @@ public class checkShit : MonoBehaviour
             FindObjectsInScene();
             return;
         }
-
-        if (Input.GetKeyUp("escape")) Menu();
-
-        if (!_score.isActiveAndEnabled) _score.enabled = true;
-
-        if (ready) GameLogic();
-
-        if (!tipped)
+        else
         {
-            currentSpeed = st.speed * 50;
-            float thresholdAngle = MIN_ANGLE + (FLIP_ANGLE - MIN_ANGLE) * (player.speed / MAX_SPEED);
-            float adjustedThresholdAngle = thresholdAngle + Mathf.Abs(rt.turningangle);
+            if (Input.GetKeyUp("escape")) Menu();
 
-            // Perform your logic based on the average angle and threshold angle
-            if (Mathf.Abs(rt.averageAngle) > adjustedThresholdAngle)
+            if (!_score.isActiveAndEnabled) _score.enabled = true;
+
+            if (ready) GameLogic();
+
+            if (!tipped && st != null)
             {
-                FlipCar();
-            }
-        }
+                currentSpeed = st.speed * 50;
+                float thresholdAngle = MIN_ANGLE + (FLIP_ANGLE - MIN_ANGLE) * (player.speed / MAX_SPEED);
+                float adjustedThresholdAngle = thresholdAngle + Mathf.Abs(rt.turningangle);
 
-        // Restart level on spacebar, touch screen or mouseclick
-        else if (tipped)
-        {
-            if (Input.GetKeyUp("space") || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began) || Input.GetMouseButtonDown(0)) WaitForReset(0.8f);
+                // Perform your logic based on the average angle and threshold angle
+                if (Mathf.Abs(rt.averageAngle) > adjustedThresholdAngle)
+                {
+                    FlipCar();
+                }
+            }
+
+            // Restart level on spacebar, touch screen or mouseclick
+            else if (tipped)
+            {
+                if (Input.GetKeyUp("space") || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began) || Input.GetMouseButtonDown(0)) WaitForReset(0.8f);
+            }
         }
     }
 
@@ -393,6 +397,9 @@ public class checkShit : MonoBehaviour
         {
             elapsedTime = Time.time - startTime;
             frame++;
+
+            // Start recording the player
+            playerRecord.Add(player.distanceTravelled);
 
             //TUTORIAL STUFF
             if (currentLevel == 9)
@@ -431,19 +438,15 @@ public class checkShit : MonoBehaviour
                 ghost.transform.SetPositionAndRotation(pathCreator.path.GetPointAtDistance(ghostDistance), pathCreator.path.GetRotationAtDistance(ghostDistance));
                 index++;
             }
-            
-            
+                     
             // If player completes a lap, reset values and start saving
-            // this part continues working even when new scenes are loaded
             if (player.distanceTravelled >= pathCreator.path.length && !tipped)
             {
                 float _currentLevel = currentLevel + 1; // cars start at 1
                 string _currrentLevelString = currentLevel.ToString();
                 string _car = "car" + _currentLevel.ToString();
                 string _gotCar = "gotcar" + _currentLevel.ToString();
-                pm.StartUploadGhost(playerRecord);
-                loadedGhost = playerRecord;
-
+                
                 if (!PlayerPrefs.HasKey(_car) && currentLevel != 9)
                 {
                     string triggerCarUnlock = "grantCar" + _currrentLevelString;
@@ -477,25 +480,27 @@ public class checkShit : MonoBehaviour
                 {
                     bool isGlobalRecord = true;
 
-                    Victory(2);
-                    float _tempScore = Mathf.Round((elapsedTime * 100) / 100);
+                    Victory(2); // instatiate some confetti
+
+                    float _tempScore = Mathf.Round((elapsedTime * 100)) / 100f;
                     
                     globalRecordTime = _tempScore;
                     playerRecordTime = _tempScore;
+
                     PlayerPrefs.SetFloat("highScore", _tempScore);
                     PlayerPrefs.SetFloat("playerScore", _tempScore);
                     PlayerPrefs.Save();
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
+                    lapTime.SetRecord();
 
                     StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel, isGlobalRecord));
                     pm.UpdateScoreText(_recordTime, isGlobalRecord);
-                    
 
-                    
+                    loadedGhost = playerRecord;
 
+                    pm.StartUploadGhost(playerRecord);
 
-                    SavePrefs();
                 }
 
                 // Player only beat own record, not global record
@@ -504,8 +509,8 @@ public class checkShit : MonoBehaviour
                     bool isGlobalRecord = false;
 
                     Victory(1);
-                    float _tempScore = Mathf.Round((elapsedTime * 100) / 100);
-                    
+                    float _tempScore = Mathf.Round((elapsedTime * 100)) / 100f;
+
                     playerRecordTime = _tempScore;
                     PlayerPrefs.SetFloat("playerScore", _tempScore);
                     PlayerPrefs.Save();
@@ -519,12 +524,10 @@ public class checkShit : MonoBehaviour
 
                     pm.StartUploadGhost(playerRecord);
                 }
+
                 playerRecord = new List<float>(); // Resets the ghost data array
                 startTime = Time.time;                
             }
-
-            // Start recording the player
-            playerRecord.Add(player.distanceTravelled);
         }
     }
 

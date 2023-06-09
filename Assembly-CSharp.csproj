@@ -118,6 +118,7 @@
      <Compile Include="Assets\playernamescript.cs" />
      <Compile Include="Assets\PlayerManagerManager.cs" />
      <Compile Include="Assets\Scripts\checkShit.cs" />
+     <Compile Include="Assets\ToggleHatScript.cs" />
      <Compile Include="Assets\Resources\saveLevel.cs" />
      <Compile Include="Assets\Scripts\CarMusicClass.cs" />
      <Compile Include="Assets\AddLetterClass.cs" />
@@ -129,6 +130,8 @@
      <Compile Include="Assets\CarDriverAI\Scripts\CarDriverImp.cs" />
      <Compile Include="Assets\PathCreator\Examples\Scripts\RoadMeshCreator.cs" />
      <Compile Include="Assets\ProgressBar.cs" />
+     <Compile Include="Assets\ToggleHatButton.cs" />
+     <Compile Include="Assets\PanelToggle.cs" />
      <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

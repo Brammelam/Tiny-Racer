@@ -26,10 +26,13 @@ public class HatManager : MonoBehaviour
         if (hatExists)
         {
             RemoveHat();
-            PlayerPrefs.SetString("hat", "no");
-            PlayerPrefs.DeleteKey("hatindex");
-            PlayerPrefs.Save();
-
+            if (PlayerPrefs.GetInt("hatindex") == hatIndex) return;
+            else
+            {
+                PlayerPrefs.SetString("hat", "no");
+                PlayerPrefs.DeleteKey("hatindex");
+                PlayerPrefs.Save();
+            }
         }
 
         if (hatIndex >= 0 && hatIndex < hatPrefabs.Count)
@@ -51,7 +54,7 @@ public class HatManager : MonoBehaviour
 
             currentHats.Add(hat);
             string hatName = hatPrefab.name.Replace("(Clone)", "");
-            Debug.Log("Set " + hatName + " to playerprefs");
+
             PlayerPrefs.SetString("hat", hatName);
             PlayerPrefs.Save();
             PlayerPrefs.SetInt("hatindex", hatIndex);
