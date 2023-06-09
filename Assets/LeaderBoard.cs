@@ -183,7 +183,11 @@ public class LeaderBoard : MonoBehaviour
         }
 
         // Convert fastestTimes and playerNames to lists of strings
-        List<string> leaderboardFastestTimesAsString = fastestTimes.ConvertAll(time => time.ToString());
+        List<string> leaderboardFastestTimesAsString = new List<string>();
+        foreach (int time in fastestTimes)
+        {
+            leaderboardFastestTimesAsString.Add(time.ToString());
+        }
         List<string> leaderboardPlayerNames = leaderboardEntries.ConvertAll(entry => entry.playerName);
 
         // Assign leaderboardFastestTimesAsString and leaderboardPlayerNames to pm.leaderboardPlayerScores and pm.leaderboardNames respectively

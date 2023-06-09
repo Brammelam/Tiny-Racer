@@ -46,10 +46,8 @@ public class GarageScreen : MonoBehaviour
     private Color oldbodyColor;
     [SerializeField]
     private Color oldwindowColor;
-
     [SerializeField]
     private Material[] materialColors;
-
     [SerializeField]
     CarsettingsSO carsettings;
 
@@ -68,13 +66,11 @@ public class GarageScreen : MonoBehaviour
         sliderBodyValue.onValueChanged.AddListener(delegate { SetBodyColor(); });
         sliderWindowHue.onValueChanged.AddListener(delegate { SetWindowColor(); });
         sliderWindowSaturation.onValueChanged.AddListener(delegate { SetWindowColor(); });
-        sliderWindowValue.onValueChanged.AddListener(delegate { SetWindowColor(); });
-        
+        sliderWindowValue.onValueChanged.AddListener(delegate { SetWindowColor(); });       
     }
 
     public void SetCar(int carIndex)
-    {
-        
+    {      
         if (car != null)
         {
             Destroy(car);  // Destroy the existing car if it already exists
@@ -104,7 +100,6 @@ public class GarageScreen : MonoBehaviour
         materials = new List<Material>(renderer.materials);
         SetSliders();
 
-
         // Store the MeshRenderer of the new car in the carRenderers array
         carRenderers[pm.currentCar] = renderer;
     }
@@ -124,6 +119,7 @@ public class GarageScreen : MonoBehaviour
 
             PlayerPrefs.Save();
         }
+
         float b1 = PlayerPrefs.GetFloat("b1");
         float b2 = PlayerPrefs.GetFloat("b2");
         float b3 = PlayerPrefs.GetFloat("b3");
@@ -180,7 +176,7 @@ public class GarageScreen : MonoBehaviour
 
     public IEnumerator SavePreferencesToFile()
     {
-        bool done = false;
+        bool doneDeletingPlayerFile = false;
         int c = pm.currentCar;
 
         if (!didyoufuckwiththeslidersbody && !didyoufuckwiththesliderswindow)
@@ -194,36 +190,34 @@ public class GarageScreen : MonoBehaviour
                 PlayerPrefs.SetFloat("b2", bodyColor.g);  //carsettings.BodyColor[1] = bodyColor.g;
                 PlayerPrefs.SetFloat("b3", bodyColor.b);  //carsettings.BodyColor[2] = bodyColor.b;
             }
-            else
-            {
-
-            }
             if (didyoufuckwiththesliderswindow)
             {
                 PlayerPrefs.SetFloat("w1", windowColor.r);  //carsettings.WindowColor[0] = windowColor.r;
                 PlayerPrefs.SetFloat("w2", windowColor.g);  //carsettings.WindowColor[1] = windowColor.g;
                 PlayerPrefs.SetFloat("w3", windowColor.b);  //carsettings.WindowColor[2] = windowColor.b;
             }
-            else
-            {
-
-            }
         }
-
         
         string filePath = Path.Combine(Application.persistentDataPath + "/carsettings.txt");
         StreamWriter writer = new StreamWriter(filePath, false);
 
-        int f = int.Parse(carsettings.SettingsKey);
         int _settingsKey = PlayerPrefs.GetInt("settings");
         // check if settings exists, if so, delete previous settings
         if (PlayerPrefs.HasKey("settings")) { 
             LootLockerSDKManager.DeletePlayerFile(_settingsKey, (response) =>
             {
-                if (response.statusCode != 200)
+                if (response.success)
+                {
+                    doneDeletingPlayerFile = true;
+                }
+                else
+                {
                     Debug.Log("Failed deleting Playerfile settings in Garage!" + response.Error);
+                    doneDeletingPlayerFile = true;
+                }
 
             });
+            yield return new WaitUntil(() => doneDeletingPlayerFile == true);
         }
 
         writer.WriteLine(PlayerPrefs.GetFloat("b1"));  //writer.WriteLine(carsettings.BodyColor[0]);
@@ -234,32 +228,30 @@ public class GarageScreen : MonoBehaviour
         writer.WriteLine(PlayerPrefs.GetFloat("w3"));  //writer.WriteLine(carsettings.WindowColor[2]);
 
         writer.WriteLine(PlayerPrefs.GetInt("car", 0));  //writer.WriteLine(carsettings.CurrentCar);
-        writer.WriteLine(PlayerPrefs.GetInt("hat", 3));  //writer.WriteLine(carsettings.CurrentHat);
+        writer.WriteLine(PlayerPrefs.GetString("hat"));  //writer.WriteLine(carsettings.CurrentHat);
         writer.WriteLine(PlayerPrefs.GetInt("custom", 0));  //writer.WriteLine(carsettings.CustomCar);
         writer.WriteLine(PlayerPrefs.GetInt("level"));  //writer.WriteLine(leaderboardSO.CurrentLevel);
         writer.Close();
 
+        bool doneUploadingPlayerFile = false;
         LootLockerSDKManager.UploadPlayerFile(filePath, "settings", true, (response) =>
         {
-
-
             if (response.success)
-            {
-                
+            {             
                 carsettings.SettingsKey = response.id.ToString();
                 PlayerPrefs.SetInt("settings", response.id);
                 StartCoroutine(UploadCarsettingsKey());
-                done = true;
+                doneUploadingPlayerFile = true;
             }
 
             else
             {
                 Debug.Log("Failed uploading settings!  " + response.Error);
-                done = true;
+                doneUploadingPlayerFile = true;
             }
         });
 
-        yield return new WaitWhile(() => done == false);
+        yield return new WaitUntil(() => doneUploadingPlayerFile == true);
     }
 
     public IEnumerator UploadCarsettingsKey()
@@ -273,12 +265,17 @@ public class GarageScreen : MonoBehaviour
         {
             if (response.success)
                 done = true;
+            else
+            {
+                Debug.Log("There was an error uploading the carsettings key to LootLocker!");
+                done = true;
+            }
         });
         didyoufuckwiththeslidersbody = false;
         didyoufuckwiththesliderswindow = false;
         pm.ModifyCar();
         pm.LeaveGarage();
-        yield return new WaitWhile(() => done == false);
+        yield return new WaitUntil(() => done == true);
     }
 
     public void ResetCarInGarage()
@@ -288,8 +285,7 @@ public class GarageScreen : MonoBehaviour
         renderer.materials[0].color = pm.oldcolors[0,c];
         renderer.materials[1].color = pm.oldcolors[1,c];
 
-        PlayerPrefs.SetString("custom", "no");
-        //carsettings.CustomCar = false;
+        PlayerPrefs.SetInt("custom", 0);
         SetSliders();
         pm.ResetOriginalCar();
     }

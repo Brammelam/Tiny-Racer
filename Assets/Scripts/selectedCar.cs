@@ -163,6 +163,14 @@ public class selectedCar : MonoBehaviour
         }
     }
 
+    private void DeletePlayerPrefsWhenSwitchingCars()
+    {
+        PlayerPrefs.SetInt("car", carIndex);
+        PlayerPrefs.DeleteKey("hat");
+        PlayerPrefs.SetInt("custom", 0);
+        PlayerPrefs.Save();
+    }
+
     public void NextCar()
     {
         if (pm.currentCar < 6)
@@ -171,9 +179,7 @@ public class selectedCar : MonoBehaviour
             DontMoveHat(move);
             pm.currentCar += 1;
             carIndex += 1;
-            PlayerPrefs.SetInt("car", carIndex);
-            PlayerPrefs.SetInt("custom", 0);
-            PlayerPrefs.Save();
+            DeletePlayerPrefsWhenSwitchingCars();
             hideButton.CheckUnlock(carIndex);
         }
         else
@@ -182,9 +188,7 @@ public class selectedCar : MonoBehaviour
             DontMoveHat(-6 * move);
             pm.currentCar = 0;
             carIndex = 0;
-            PlayerPrefs.SetInt("car", carIndex);
-            PlayerPrefs.SetInt("custom", 0);
-            PlayerPrefs.Save();
+            DeletePlayerPrefsWhenSwitchingCars();
             hideButton.CheckUnlock(carIndex);
         }
     }
@@ -197,9 +201,7 @@ public class selectedCar : MonoBehaviour
             DontMoveHat(-move);
             pm.currentCar -= 1;
             carIndex -= 1;
-            PlayerPrefs.SetInt("car", carIndex);
-            PlayerPrefs.SetInt("custom", 0);
-            PlayerPrefs.Save();
+            DeletePlayerPrefsWhenSwitchingCars();
             hideButton.CheckUnlock(carIndex);
         }
         else
@@ -208,9 +210,7 @@ public class selectedCar : MonoBehaviour
             DontMoveHat(6 * move);
             pm.currentCar = 6;
             carIndex = 6;
-            PlayerPrefs.SetInt("car", carIndex);
-            PlayerPrefs.SetInt("custom", 0);
-            PlayerPrefs.Save();
+            DeletePlayerPrefsWhenSwitchingCars();
             hideButton.CheckUnlock(carIndex);
         }
     }
@@ -242,12 +242,12 @@ public class selectedCar : MonoBehaviour
     {
 
         carIndex = PlayerPrefs.GetInt("car", 0); //pm.carsettings;
-        hatIndex = PlayerPrefs.GetInt("hat", 3); // pm.carsettings.CurrentHat;
+
         carText.text = carNames[carIndex];
 
         this.transform.position = this.transform.position - (move * carIndex);
         UpdateCarName();
-        DontMoveHat(move * carIndex);
+        //DontMoveHat(move * carIndex);
 
         try
         {          

@@ -3437,9 +3437,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 93014817}
-  buttonAnimator: {fileID: 0}
-  hoverAnimationName: settingsopen
-  pressAnimationName: settingsopen
 --- !u!114 &93014817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3704,7 +3701,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &108811490
 GameObject:
@@ -5147,7 +5144,7 @@ RectTransform:
   - {fileID: 1124411027}
   - {fileID: 223633801}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12132,7 +12129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 338881867}
   - component: {fileID: 338881869}
-  - component: {fileID: 338881868}
   m_Layer: 5
   m_Name: HatsRow1 (1)
   m_TagString: Untagged
@@ -12163,25 +12159,6 @@ RectTransform:
   m_AnchoredPosition: {x: 287.01407, y: -297.5}
   m_SizeDelta: {x: 554.02814, y: 138.75}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &338881868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 338881866}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1665ef5b049a30247a374779f7d09570, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sc: {fileID: 2014416846}
-  hatPrefabs:
-  - {fileID: 9168809590912255409, guid: 9f86ee7a37c010449ada03247bd29edd, type: 3}
-  - {fileID: 8509695632690113042, guid: 67a3cfa63b678044c94831c9e4deb8d4, type: 3}
-  - {fileID: 2361118896895897049, guid: 126511fd0b9dbe7429ec142fb82cad6a, type: 3}
-  - {fileID: 4634921959020524511, guid: 0dc60c727db17f0479db06f5722cc9f6, type: 3}
-  currentHats: []
 --- !u!114 &338881869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13439,7 +13416,6 @@ GameObject:
   m_Component:
   - component: {fileID: 367946052}
   - component: {fileID: 367946054}
-  - component: {fileID: 367946053}
   m_Layer: 5
   m_Name: HatsRow1 (2)
   m_TagString: Untagged
@@ -13470,25 +13446,6 @@ RectTransform:
   m_AnchoredPosition: {x: 287.01407, y: -441.25}
   m_SizeDelta: {x: 554.02814, y: 138.75}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &367946053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 367946051}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1665ef5b049a30247a374779f7d09570, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sc: {fileID: 2014416846}
-  hatPrefabs:
-  - {fileID: 9168809590912255409, guid: 9f86ee7a37c010449ada03247bd29edd, type: 3}
-  - {fileID: 8509695632690113042, guid: 67a3cfa63b678044c94831c9e4deb8d4, type: 3}
-  - {fileID: 2361118896895897049, guid: 126511fd0b9dbe7429ec142fb82cad6a, type: 3}
-  - {fileID: 4634921959020524511, guid: 0dc60c727db17f0479db06f5722cc9f6, type: 3}
-  currentHats: []
 --- !u!114 &367946054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15368,7 +15325,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &417454131
 GameObject:
@@ -15475,7 +15432,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &418227280
 MonoBehaviour:
@@ -18585,7 +18542,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &490156065
 MonoBehaviour:
@@ -19353,7 +19310,7 @@ RectTransform:
   - {fileID: 1540797478}
   - {fileID: 1760687282}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -22060,7 +22017,6 @@ GameObject:
   m_Component:
   - component: {fileID: 558773752}
   - component: {fileID: 558773754}
-  - component: {fileID: 558773753}
   m_Layer: 5
   m_Name: HatsRow2
   m_TagString: Untagged
@@ -22091,25 +22047,6 @@ RectTransform:
   m_AnchoredPosition: {x: 287.01407, y: -153.75}
   m_SizeDelta: {x: 554.02814, y: 138.75}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &558773753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558773751}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1665ef5b049a30247a374779f7d09570, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sc: {fileID: 2014416846}
-  hatPrefabs:
-  - {fileID: 9168809590912255409, guid: 9f86ee7a37c010449ada03247bd29edd, type: 3}
-  - {fileID: 8509695632690113042, guid: 67a3cfa63b678044c94831c9e4deb8d4, type: 3}
-  - {fileID: 2361118896895897049, guid: 126511fd0b9dbe7429ec142fb82cad6a, type: 3}
-  - {fileID: 4634921959020524511, guid: 0dc60c727db17f0479db06f5722cc9f6, type: 3}
-  currentHats: []
 --- !u!114 &558773754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24830,6 +24767,7 @@ GameObject:
   - component: {fileID: 665488918}
   - component: {fileID: 665488921}
   - component: {fileID: 665488922}
+  - component: {fileID: 665488923}
   m_Layer: 5
   m_Name: settingsButton
   m_TagString: Untagged
@@ -24965,9 +24903,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 665488918}
-  buttonAnimator: {fileID: 665488922}
-  hoverAnimationName: settingsopen
-  pressAnimationName: settingsopen
 --- !u!95 &665488922
 Animator:
   serializedVersion: 3
@@ -24987,6 +24922,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &665488923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665488916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe8cdca02290fd4c88b1b955a380c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 665488918}
+  buttonAnimator: {fileID: 665488922}
+  hoverAnimationName: settingsopen
+  pressAnimationName: settingsopen
 --- !u!1 &666130646
 GameObject:
   m_ObjectHideFlags: 0
@@ -30107,7 +30058,7 @@ RectTransform:
   - {fileID: 519708935}
   - {fileID: 1028868461}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -30653,7 +30604,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &799757428
 GameObject:
@@ -31764,7 +31715,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &842126530
 GameObject:
@@ -33288,7 +33239,7 @@ RectTransform:
   - {fileID: 1040734794}
   - {fileID: 255092852}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -34302,7 +34253,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1842085241}
+      - m_Target: {fileID: 519708941}
         m_TargetAssemblyTypeName: HatManager, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 3
@@ -34310,6 +34261,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 519708940}
+        m_TargetAssemblyTypeName: PanelToggle, Assembly-CSharp
+        m_MethodName: TogglePanels
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -34459,7 +34422,7 @@ RectTransform:
   - {fileID: 2047253190}
   - {fileID: 1401845282}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -37839,7 +37802,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &998803390
 MonoBehaviour:
@@ -40815,7 +40778,7 @@ RectTransform:
   - {fileID: 25131521}
   - {fileID: 254382724}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -41158,7 +41121,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1097227355
 GameObject:
@@ -41378,10 +41341,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2014416847}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1100069989
 MonoBehaviour:
@@ -43413,7 +43375,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1842085241}
+      - m_Target: {fileID: 519708941}
         m_TargetAssemblyTypeName: HatManager, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 3
@@ -43421,6 +43383,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 519708940}
+        m_TargetAssemblyTypeName: PanelToggle, Assembly-CSharp
+        m_MethodName: TogglePanels
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -51034,7 +51008,7 @@ RectTransform:
   - {fileID: 2054741610}
   - {fileID: 1694687613}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -52579,18 +52553,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1843081505}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
         m_MethodName: LeaveGarage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 902424828}
-        m_TargetAssemblyTypeName: GarageScreen, Assembly-CSharp
-        m_MethodName: SetSliders
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -55790,7 +55752,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1513836044}
   - component: {fileID: 1513836045}
-  - component: {fileID: 1513836046}
   m_Layer: 5
   m_Name: HatRows
   m_TagString: Untagged
@@ -55847,25 +55808,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
---- !u!114 &1513836046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513836043}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1665ef5b049a30247a374779f7d09570, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sc: {fileID: 2014416846}
-  hatPrefabs:
-  - {fileID: 8509695632690113042, guid: 67a3cfa63b678044c94831c9e4deb8d4, type: 3}
-  - {fileID: 9168809590912255409, guid: 9f86ee7a37c010449ada03247bd29edd, type: 3}
-  - {fileID: 2361118896895897049, guid: 126511fd0b9dbe7429ec142fb82cad6a, type: 3}
-  - {fileID: 4634921959020524511, guid: 0dc60c727db17f0479db06f5722cc9f6, type: 3}
-  currentHats: []
 --- !u!1 &1518878954
 GameObject:
   m_ObjectHideFlags: 0
@@ -63085,7 +63027,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1674983249
 GameObject:
@@ -63426,9 +63368,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 1681857028}
-  buttonAnimator: {fileID: 0}
-  hoverAnimationName: settingsopen
-  pressAnimationName: settingsopen
 --- !u!114 &1681857028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63657,7 +63596,7 @@ RectTransform:
   - {fileID: 1613058243}
   - {fileID: 1875645288}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -64429,9 +64368,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 1695336474}
-  buttonAnimator: {fileID: 0}
-  hoverAnimationName: settingsopen
-  pressAnimationName: settingsopen
 --- !u!114 &1695336474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65649,7 +65585,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1842085241}
+      - m_Target: {fileID: 519708941}
         m_TargetAssemblyTypeName: HatManager, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 3
@@ -65657,6 +65593,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 519708940}
+        m_TargetAssemblyTypeName: PanelToggle, Assembly-CSharp
+        m_MethodName: TogglePanels
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -66189,7 +66137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727569788}
   m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: -26.4, z: 394.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1529446829}
@@ -68228,7 +68176,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786163321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 200}
+  m_LocalPosition: {x: 0, y: 0, z: 1089}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 902424827}
@@ -69730,7 +69678,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1842085239}
   - component: {fileID: 1842085240}
-  - component: {fileID: 1842085241}
   m_Layer: 5
   m_Name: HatsRow1
   m_TagString: Untagged
@@ -69787,25 +69734,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
---- !u!114 &1842085241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842085238}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1665ef5b049a30247a374779f7d09570, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sc: {fileID: 2014416846}
-  hatPrefabs:
-  - {fileID: 9168809590912255409, guid: 9f86ee7a37c010449ada03247bd29edd, type: 3}
-  - {fileID: 8509695632690113042, guid: 67a3cfa63b678044c94831c9e4deb8d4, type: 3}
-  - {fileID: 2361118896895897049, guid: 126511fd0b9dbe7429ec142fb82cad6a, type: 3}
-  - {fileID: 4634921959020524511, guid: 0dc60c727db17f0479db06f5722cc9f6, type: 3}
-  currentHats: []
 --- !u!1 &1843081504
 GameObject:
   m_ObjectHideFlags: 0
@@ -69935,7 +69863,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1845233521
 GameObject:
@@ -70050,7 +69978,7 @@ RectTransform:
   - {fileID: 628360463}
   - {fileID: 125230175}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -70947,10 +70875,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1842085241}
+      - m_Target: {fileID: 519708941}
         m_TargetAssemblyTypeName: HatManager, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 519708940}
+        m_TargetAssemblyTypeName: PanelToggle, Assembly-CSharp
+        m_MethodName: TogglePanels
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -73717,7 +73657,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1927467538
 GameObject:
@@ -76301,7 +76241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2014416846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76362,7 +76302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014416845}
   m_LocalRotation: {x: -0.24184473, y: 0.66446304, z: -0.24184473, w: 0.66446304}
-  m_LocalPosition: {x: 0, y: -19, z: 140}
+  m_LocalPosition: {x: 0, y: -18, z: 130}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 1595434105}
@@ -76372,8 +76312,8 @@ Transform:
   - {fileID: 774917383}
   - {fileID: 1005818663}
   - {fileID: 333919204}
-  m_Father: {fileID: 1100069988}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -40}
 --- !u!114 &2014416848
 MonoBehaviour:
@@ -77097,7 +77037,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2045126970
 GameObject:
@@ -78907,9 +78847,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 2100478985}
-  buttonAnimator: {fileID: 0}
-  hoverAnimationName: settingsopen
-  pressAnimationName: settingsopen
 --- !u!114 &2100478985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81040,7 +80977,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2142045283
 AudioSource:
@@ -81165,7 +81102,6 @@ GameObject:
   - component: {fileID: 2143425984}
   - component: {fileID: 2143425982}
   - component: {fileID: 2143425981}
-  - component: {fileID: 2143425983}
   m_Layer: 5
   m_Name: saveButton
   m_TagString: Untagged
@@ -81259,22 +81195,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2143425983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143425980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0370a11786be842b7e56a271c9f69a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _button: {fileID: 2143425981}
-  buttonAnimator: {fileID: 0}
-  hoverAnimationName: settingsopen
-  pressAnimationName: settingsopen
 --- !u!222 &2143425984
 CanvasRenderer:
   m_ObjectHideFlags: 0

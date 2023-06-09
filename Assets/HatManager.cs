@@ -18,7 +18,7 @@ public class HatManager : MonoBehaviour
 
     public void OnButtonClick(int hatIndex)
     {
-        int car = sc.carIndex;
+        int car = PlayerPrefs.GetInt("car", 0);
 
         // Check if a hat already exists on the car
         bool hatExists = HatExistsOnCar();
@@ -26,13 +26,7 @@ public class HatManager : MonoBehaviour
         if (hatExists)
         {
             RemoveHat();
-            if (PlayerPrefs.GetInt("hatindex") == hatIndex) return;
-            else
-            {
-                PlayerPrefs.SetString("hat", "no");
-                PlayerPrefs.DeleteKey("hatindex");
-                PlayerPrefs.Save();
-            }
+           
         }
 
         if (hatIndex >= 0 && hatIndex < hatPrefabs.Count)

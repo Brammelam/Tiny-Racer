@@ -138,7 +138,6 @@ public class PlayerManager : MonoBehaviour
         string _playa = PlayerPrefs.GetString("name");
         playerName.text = "Welcome back, " + _playa + "!";
         currentCar = PlayerPrefs.GetInt("car", 0);
-        currentHat = PlayerPrefs.GetInt("hat", 3);
 
         IEnumerator[] coroutines = {
             SetUpUI(),
@@ -290,7 +289,7 @@ public class PlayerManager : MonoBehaviour
 
         // Load the carsettings for the player 
         currentCar = PlayerPrefs.GetInt("car", 0); //currentCar = carsettings.CurrentCar;
-        currentHat = PlayerPrefs.GetInt("hat", 3);  //currentHat = carsettings.CurrentHat;
+
         currentLevel = PlayerPrefs.GetInt("level", 0); //currentLevel = leaderboardSO.CurrentLevel;
         if (currentLevel == 9 && PlayerPrefs.HasKey("TutorialUnlock"))
             currentLevel = 0; // Fix player getting stuck in tutorial
@@ -510,8 +509,7 @@ public class PlayerManager : MonoBehaviour
     {        
         SceneManager.LoadScene(_currentLevel);
     }
-
-    
+   
     public void SaveToFile(List<float> _ghostData)
     {
         string filePath = Path.Combine(Application.persistentDataPath + "/" + currentLevel + ".txt");
@@ -575,7 +573,7 @@ public class PlayerManager : MonoBehaviour
         // CurrentCar
         int l = int.Parse(stringarray[6]);
         // CurrentHat
-        int m = int.Parse(stringarray[7]);
+        string m = stringarray[7];
         // CustomCar
         int n = int.Parse(stringarray[8]);
         //
@@ -588,7 +586,7 @@ public class PlayerManager : MonoBehaviour
         PlayerPrefs.SetFloat("b2", j);
         PlayerPrefs.SetFloat("b2", k);
         PlayerPrefs.SetInt("car", l);
-        PlayerPrefs.SetInt("hat", m);
+        PlayerPrefs.SetString("hat", m);
         PlayerPrefs.SetInt("custom", n);
         PlayerPrefs.SetInt("level", o);
         PlayerPrefs.Save();
@@ -690,9 +688,10 @@ public class PlayerManager : MonoBehaviour
 
     public void SetCarDefaultSettingsData()
     {
-        newrenderer = sc.cars[currentCar].GetComponentInChildren<MeshRenderer>();
-        newrenderer.materials[0].color = oldcolors[0, currentCar];
-        newrenderer.materials[1].color = oldcolors[1, currentCar];
+        int _car = PlayerPrefs.GetInt("car", 0);
+        newrenderer = sc.cars[_car].GetComponentInChildren<MeshRenderer>();
+        newrenderer.materials[0].color = oldcolors[0, _car];
+        newrenderer.materials[1].color = oldcolors[1, _car];
         foreach (changeMaterial changemat in changemat) changemat.SetLockedCars();
     }
 
@@ -835,8 +834,6 @@ public class PlayerManager : MonoBehaviour
 
         newrenderer.materials[0].color = _bodyColor;
         newrenderer.materials[1].color = _windowColor;
-
-        currentHat = PlayerPrefs.GetInt("hat", 3);
             
     }
 

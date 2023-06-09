@@ -273,10 +273,9 @@ public class checkShit : MonoBehaviour
     IEnumerator SetHat()
     {
         int _car = PlayerPrefs.GetInt("car");
+        string _hatName = PlayerPrefs.GetString("hat");
 
-        string hatLocation = hat + "1"; // add 1 which are the smaller models
-
-
+        string hatLocation = _hatName + "1"; // add 1 which are the smaller models
 
         _hat = Instantiate(Resources.Load(hatLocation) as GameObject);
 
