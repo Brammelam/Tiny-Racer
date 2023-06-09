@@ -2127,7 +2127,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Version 1.8 - June 9, 2023
+  m_Text: Version 1.8.1 - June 9, 2023
 --- !u!222 &43457087
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20190,8 +20190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sc: {fileID: 2014416846}
   hatPrefabs:
-  - {fileID: 8509695632690113042, guid: 67a3cfa63b678044c94831c9e4deb8d4, type: 3}
   - {fileID: 9168809590912255409, guid: 9f86ee7a37c010449ada03247bd29edd, type: 3}
+  - {fileID: 8509695632690113042, guid: 67a3cfa63b678044c94831c9e4deb8d4, type: 3}
   - {fileID: 2361118896895897049, guid: 126511fd0b9dbe7429ec142fb82cad6a, type: 3}
   - {fileID: 4634921959020524511, guid: 0dc60c727db17f0479db06f5722cc9f6, type: 3}
   currentHats: []
@@ -34277,6 +34277,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1513836043}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &897928119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43391,6 +43403,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: PanelToggle, Assembly-CSharp
         m_MethodName: TogglePanels
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1513836043}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -65609,6 +65633,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1513836043}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1716449231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70891,6 +70927,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: PanelToggle, Assembly-CSharp
         m_MethodName: TogglePanels
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1513836043}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
