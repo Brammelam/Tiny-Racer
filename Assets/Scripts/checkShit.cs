@@ -187,8 +187,8 @@ public class checkShit : MonoBehaviour
         deadCop = Instantiate(deadCars[0]);
 
         yield return WaitForAssignments();
-        hat = PlayerPrefs.GetString("hat", "no");
-        if (PlayerPrefs.HasKey("hat")) yield return SetHat();
+
+        if (PlayerPrefs.GetString("hat") != "no") yield return SetHat();
 
         if (currentLevel < 3 || currentLevel == 7 || currentLevel == 8 || currentLevel == 9)
         {
@@ -274,6 +274,7 @@ public class checkShit : MonoBehaviour
     {
         int _car = PlayerPrefs.GetInt("car");
         string _hatName = PlayerPrefs.GetString("hat");
+        Debug.Log("Found this hat: " + _hatName);
 
         string hatLocation = _hatName + "1"; // add 1 which are the smaller models
 
@@ -551,7 +552,7 @@ public class checkShit : MonoBehaviour
         copPosition = cop.transform.position;
         copRotation = cop.transform.rotation;
         direction = cop.transform.forward;
-        if (hatIndex != 3)
+        if (PlayerPrefs.GetInt("hatindex") > -1)
         {
             _hat.transform.parent = null;
             _hat.GetComponent<Rigidbody>().isKinematic = false;

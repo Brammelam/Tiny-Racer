@@ -573,7 +573,7 @@ public class PlayerManager : MonoBehaviour
         // CurrentCar
         int l = int.Parse(stringarray[6]);
         // CurrentHat
-        string m = stringarray[7];
+        int m = int.Parse(stringarray[7]);
         // CustomCar
         int n = int.Parse(stringarray[8]);
         //
@@ -586,7 +586,7 @@ public class PlayerManager : MonoBehaviour
         PlayerPrefs.SetFloat("b2", j);
         PlayerPrefs.SetFloat("b2", k);
         PlayerPrefs.SetInt("car", l);
-        PlayerPrefs.SetString("hat", m);
+        PlayerPrefs.SetInt("hatindex", m);
         PlayerPrefs.SetInt("custom", n);
         PlayerPrefs.SetInt("level", o);
         PlayerPrefs.Save();
@@ -883,7 +883,7 @@ public class PlayerManager : MonoBehaviour
         writer.WriteLine(PlayerPrefs.GetFloat("w3"));  //writer.WriteLine(carsettings.WindowColor[2]);
 
         writer.WriteLine(PlayerPrefs.GetInt("car", 0));  //writer.WriteLine(carsettings.CurrentCar);
-        writer.WriteLine(PlayerPrefs.GetString("hat", "no"));  //writer.WriteLine(carsettings.CurrentHat);
+        writer.WriteLine(PlayerPrefs.GetInt("hatindex", -1));  //writer.WriteLine(carsettings.CurrentHat);
         writer.WriteLine(PlayerPrefs.GetInt("custom", 0));  //writer.WriteLine(carsettings.CustomCar);
         writer.WriteLine(PlayerPrefs.GetInt("level"));  //writer.WriteLine(leaderboardSO.CurrentLevel);
         writer.Close();

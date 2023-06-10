@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
   m_Name: ColorGrading
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -101,13 +101,13 @@ MonoBehaviour:
     overrideState: 1
     value: -5
   brightness:
-    overrideState: 0
+    overrideState: 1
     value: 21
   postExposure:
     overrideState: 1
     value: 1.01
   contrast:
-    overrideState: 1
+    overrideState: 0
     value: 13
   mixerRedOutRedIn:
     overrideState: 0
@@ -1477,13 +1477,13 @@ MonoBehaviour:
     value: 1
   focusDistance:
     overrideState: 0
-    value: 24.5
+    value: 5.7
   aperture:
     overrideState: 0
     value: 10.2
   focalLength:
-    overrideState: 0
-    value: 178
+    overrideState: 1
+    value: 71
   kernelSize:
     overrideState: 0
     value: 0

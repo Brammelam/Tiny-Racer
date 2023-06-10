@@ -14,6 +14,6 @@ public class rotateCar : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        caringarage.Rotate(0, -1f, 0);
+        caringarage.Rotate(0, -0.9f, 0);
     }
 }

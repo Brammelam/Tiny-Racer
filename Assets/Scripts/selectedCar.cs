@@ -166,7 +166,8 @@ public class selectedCar : MonoBehaviour
     private void DeletePlayerPrefsWhenSwitchingCars()
     {
         PlayerPrefs.SetInt("car", carIndex);
-        PlayerPrefs.DeleteKey("hat");
+        PlayerPrefs.SetString("hat", "no");
+        PlayerPrefs.SetInt("hatindex", -1);
         PlayerPrefs.SetInt("custom", 0);
         PlayerPrefs.Save();
     }

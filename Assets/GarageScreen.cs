@@ -228,7 +228,7 @@ public class GarageScreen : MonoBehaviour
         writer.WriteLine(PlayerPrefs.GetFloat("w3"));  //writer.WriteLine(carsettings.WindowColor[2]);
 
         writer.WriteLine(PlayerPrefs.GetInt("car", 0));  //writer.WriteLine(carsettings.CurrentCar);
-        writer.WriteLine(PlayerPrefs.GetString("hat"));  //writer.WriteLine(carsettings.CurrentHat);
+        writer.WriteLine(PlayerPrefs.GetInt("hatindex", -1));  //writer.WriteLine(carsettings.CurrentHat);
         writer.WriteLine(PlayerPrefs.GetInt("custom", 0));  //writer.WriteLine(carsettings.CustomCar);
         writer.WriteLine(PlayerPrefs.GetInt("level"));  //writer.WriteLine(leaderboardSO.CurrentLevel);
         writer.Close();

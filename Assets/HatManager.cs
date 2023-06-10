@@ -26,6 +26,13 @@ public class HatManager : MonoBehaviour
         if (hatExists)
         {
             RemoveHat();
+            int currentHat = PlayerPrefs.GetInt("hatindex");
+            if (currentHat == hatIndex) // If player is already wearing this hat, disable and return (allows removing the hat)
+            {
+                PlayerPrefs.SetInt("hatindex", -1);
+                PlayerPrefs.SetString("hat", "no");
+                return;
+            }
            
         }
 
