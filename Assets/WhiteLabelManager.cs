@@ -59,7 +59,7 @@ public class WhiteLabelManager : MonoBehaviour
         if (serverManager != null)
         {
             Debug.Log("We are already playing, skipping stuff..");
-            StartCoroutine(playerManager.ReturnToMenu());
+            playerManager.Setup();
         }
         else
         {

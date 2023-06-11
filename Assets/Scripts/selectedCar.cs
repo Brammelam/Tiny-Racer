@@ -51,6 +51,8 @@ public class selectedCar : MonoBehaviour
 
     [SerializeField]
     public hideButton hideButton;
+    [SerializeField]
+    private HatManager hatManager;
 
 
     private void Awake()
@@ -165,6 +167,7 @@ public class selectedCar : MonoBehaviour
 
     private void DeletePlayerPrefsWhenSwitchingCars()
     {
+        hatManager.RemoveHat();
         PlayerPrefs.SetInt("car", carIndex);
         PlayerPrefs.SetString("hat", "no");
         PlayerPrefs.SetInt("hatindex", -1);

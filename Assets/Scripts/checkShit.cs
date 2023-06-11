@@ -278,7 +278,7 @@ public class checkShit : MonoBehaviour
 
         string hatLocation = _hatName + "1"; // add 1 which are the smaller models
 
-        _hat = Instantiate(Resources.Load(hatLocation) as GameObject);
+        _hat = Instantiate(Resources.Load("GameHats/" + hatLocation) as GameObject);
 
         _hat.transform.SetParent(cop.transform);
 
@@ -287,10 +287,12 @@ public class checkShit : MonoBehaviour
         if (_car == 2) // adjust for SUV
         {
             _hat.transform.localPosition = new Vector3(0, 1.6f, -0.3f);
-            if (_hat.name == "party")
-                _hat.transform.localPosition -= new Vector3(0, -0.2f, 0);
+            
         }
-
+        if (_hat.name.Contains("halo")) _hat.transform.localPosition += new Vector3(0, 0.2f, 0);
+        if (_hat.name.Contains("rkey")) _hat.transform.localPosition += new Vector3(0, 0.2f, 0);
+        if (_hat.name.Contains("party")) _hat.transform.localPosition += new Vector3(0, -0.2f, 0);
+        if (_hat.name.Contains("antenna")) _hat.transform.localPosition += new Vector3(0, -0.35f, -0.25f);
         yield return null;
     }
 

@@ -166,16 +166,16 @@ public class PlayerManager : MonoBehaviour
         loadingScreen.SetActive(true);
         float[] stepProgress = { 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.2f };
 
-        IEnumerator[] coroutines = {        
+        IEnumerator[] coroutines = {
 
-            GetPlayerName(),           
+            GetPlayerName(),
             DownloadPlayerFileKeys(),
             CheckCars(),
             GetCarSettingsData(),
             leaderBoard.FetchHighscores(),
             leaderBoard.FetchPlayerScores(),
             SetUpUI(),
-            GetSO(),
+            GetSO(),            
             DisableStartScreens(),
 
     };
@@ -194,10 +194,8 @@ public class PlayerManager : MonoBehaviour
 
         // Progress complete
         Progress = 1f;
-        UpdateProgress(Progress);
+        UpdateProgress(Progress);       
         
-        
-        SetSO();
     }
 
     public IEnumerator DisableStartScreens()

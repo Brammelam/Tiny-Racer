@@ -20,12 +20,12 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.7735849, g: 0.4022272, b: 0.3247597, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 3
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -33,12 +33,12 @@ RenderSettings:
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
-  m_DefaultReflectionResolution: 128
-  m_ReflectionBounces: 1
+  m_DefaultReflectionResolution: 1024
+  m_ReflectionBounces: 2
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_Sun: {fileID: 266962418}
+  m_IndirectSpecularColor: {r: 0.44629687, g: 0.49609655, b: 0.5746444, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: be85860f472dc6643ab9dc6d6de32718, type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 4280b8cb0ca9a1245b96ce242b1ea440, type: 2}
+  m_LightingDataAsset: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 7362f432a42d88245b3dcbe04246ff6f, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2066,7 +2066,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.9871, b: 0.871, a: 1}
+  m_Color: {r: 1, g: 0.94404674, b: 0.8066038, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2074,10 +2074,10 @@ Light:
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
-    m_Resolution: 0
+    m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.771
-    m_Bias: 0.285
+    m_Strength: 1
+    m_Bias: 0.427
     m_NormalBias: 0
     m_NearPlane: 1.73
     m_CullingMatrixOverride:
@@ -2116,7 +2116,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
-  m_ShadowAngle: 0
+  m_ShadowAngle: 1.6
 --- !u!4 &266962419
 Transform:
   m_ObjectHideFlags: 0
@@ -2124,13 +2124,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266962417}
-  m_LocalRotation: {x: 0.65904003, y: 0.120115556, z: 0.19846259, w: 0.7154377}
+  m_LocalRotation: {x: 0.6833707, y: -0.30726257, z: -0.16536309, w: 0.64128727}
   m_LocalPosition: {x: -143.5, y: 35.8, z: -39.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 63.551, y: 76.699, z: 83.223}
+  m_LocalEulerAnglesHint: {x: 50.792, y: -101.203, z: -88.974}
 --- !u!1001 &272972614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3032,7 +3032,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382089041}
   m_LocalRotation: {x: 0.22315519, y: -0.7639462, z: 0.3405302, w: 0.50062686}
-  m_LocalPosition: {x: 22.2, y: -7.8, z: 64.3}
+  m_LocalPosition: {x: 39.1, y: 23.6, z: -62.1}
   m_LocalScale: {x: 1.12, y: 1.12, z: 1.12}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3946,6 +3946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01c6aa5e10007f4bb231d22a230a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leaderBoard: {fileID: 0}
+  pm: {fileID: 0}
   cars:
   - {fileID: 1825199115517716153, guid: 9bed9c5ae98cdd84ab2733247094ded2, type: 3}
   - {fileID: 1825199115517716153, guid: 9dbd8c512653a434f8b175a4399600f0, type: 3}
@@ -3962,7 +3964,12 @@ MonoBehaviour:
   - {fileID: 3472657004133281580, guid: 7e4580b18f0cae64786593329726a572, type: 3}
   - {fileID: 3472657004133281580, guid: 43f1f7dbb4ffb7c4496c727bef967ab5, type: 3}
   - {fileID: 3472657004133281580, guid: 26c5b95bd7721e64fa43707ff45abf50, type: 3}
+  playerRecord: []
   saveRecord: []
+  loadedGhost: []
+  ghostDistanceTravelled: 0
+  ghost: {fileID: 0}
+  _ghostFollower: {fileID: 0}
   cop: {fileID: 0}
   deadCop: {fileID: 3472657004133281580, guid: de3f2d93ea0231640b351b6c745d768e, type: 3}
   rb: {fileID: 0}
@@ -3977,9 +3984,11 @@ MonoBehaviour:
   rt: {fileID: 0}
   tipSpeed: 1.6
   pathCreator: {fileID: 506408650}
+  currspeed: 0
   startTime: 0
   elapsedTime: 0
-  recordTime: 0
+  globalRecordTime: 0
+  playerRecordTime: 0
   hasStarted: 0
   player: {fileID: 0}
   transition: {fileID: 0}
@@ -3993,10 +4002,11 @@ MonoBehaviour:
   saveIndex: 0
   lapLength: 0
   lastGhostDistance: {x: 0, y: 0, z: 0}
-  _car: {fileID: 0}
   _score: {fileID: 0}
   _hat: {fileID: 0}
+  _car: {fileID: 0}
   hatIndex: 0
+  hat: 
   save: {fileID: 0}
   saveLevel: {fileID: 0}
   slowMo: 0.5
@@ -4006,7 +4016,8 @@ MonoBehaviour:
   completedTutorial: 0
   completedTutorialLap: 0
   someCount: 0
-  currspeed: 0
+  allObjectsFound: 0
+  audioManager: {fileID: 0}
 --- !u!114 &506408650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5758,7 +5769,7 @@ MonoBehaviour:
   lb: {fileID: 0}
   recordScore: 0
   lapScore: 0
-  f: 0
+  ready: 0
 --- !u!114 &729977841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6840,6 +6851,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6590991de93bd984eb806f270ce4d27c, type: 3}
       propertyPath: m_Name
       value: PineTree_5 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 6590991de93bd984eb806f270ce4d27c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6590991de93bd984eb806f270ce4d27c, type: 3}
@@ -12286,7 +12301,7 @@ MonoBehaviour:
   lb: {fileID: 0}
   recordScore: 0
   lapScore: 0
-  f: 0
+  ready: 0
 --- !u!222 &1693473037
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15649,9 +15664,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.323
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 5424f596af95767428f682cb2d1ba0b5, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 5424f596af95767428f682cb2d1ba0b5, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5424f596af95767428f682cb2d1ba0b5, type: 3}
       propertyPath: m_Name
       value: PineTree_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 5424f596af95767428f682cb2d1ba0b5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5424f596af95767428f682cb2d1ba0b5, type: 3}

@@ -48,12 +48,13 @@ public class HatManager : MonoBehaviour
             hat.transform.localPosition = new Vector3(0, 1.4f, -0.3f);
             if (car == 2) // adjust for SUV
             {
-                hat.transform.localPosition = new Vector3(0, 1.6f, -0.3f);
-                if (hatPrefab.name == "party")
-                    hat.transform.localPosition -= new Vector3(0, -0.2f, 0);
-            }
+                hat.transform.localPosition += new Vector3(0, 0.2f, 0);
 
-            currentHats.Add(hat);
+            }
+            if (hatPrefab.name.Contains("halo")) hat.transform.localPosition += new Vector3(0, 0.2f, 0);
+            if (hatPrefab.name.Contains("rkey")) hat.transform.localPosition += new Vector3(0, 0.4f, 0);
+            if (hatPrefab.name.Contains("party")) hat.transform.localPosition += new Vector3(0, -0.2f, 0);
+            if (hatPrefab.name.Contains("antenna")) hat.transform.localPosition += new Vector3(0, -0.35f, -0.25f);
             string hatName = hatPrefab.name.Replace("(Clone)", "");
 
             PlayerPrefs.SetString("hat", hatName);
@@ -65,12 +66,8 @@ public class HatManager : MonoBehaviour
 
     public void RemoveHat()
     {
-        foreach (GameObject hat in currentHats)
-        {
-            Destroy(hat);
-        }
-
-        currentHats.Clear();
+        ReturnHatName[] hats = FindObjectsOfType<ReturnHatName>();
+        foreach (ReturnHatName x in hats) Destroy(x.gameObject);
     }
 
     private bool HatExistsOnCar()
@@ -95,9 +92,9 @@ public class HatManager : MonoBehaviour
         return false;
     }
 
-    private void SetHat()
+    public void SetHat()
     {
-        int car = sc.carIndex;
+        int car = PlayerPrefs.GetInt("car", 0);
         int savedHatIndex = PlayerPrefs.GetInt("hatindex", -1);
 
         if (savedHatIndex >= 0 && savedHatIndex < hatPrefabs.Count)
@@ -113,11 +110,12 @@ public class HatManager : MonoBehaviour
             if (car == 2) // adjust for SUV
             {
                 hat.transform.localPosition = new Vector3(0, 1.6f, -0.3f);
-                if (this.name == "party")
-                    hat.transform.localPosition -= new Vector3(0, -0.2f, 0);
-            }
 
-            currentHats.Add(hat);
+            }
+            if (hatPrefab.name.Contains("halo")) hat.transform.localPosition += new Vector3(0, 0.2f, 0);
+            if (hatPrefab.name.Contains("rkey")) hat.transform.localPosition += new Vector3(0, 0.4f, 0);
+            if (hatPrefab.name.Contains("party")) hat.transform.localPosition += new Vector3(0, -0.2f, 0);
+            if (hatPrefab.name.Contains("antenna")) hat.transform.localPosition += new Vector3(0, -0.18f, -0.7f);
         }
     }
 
