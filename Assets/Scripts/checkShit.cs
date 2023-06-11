@@ -100,6 +100,8 @@ public class checkShit : MonoBehaviour
 
     private lapTime lapTime;
 
+    private ParticleSystem smoke;
+
 
     public void Awake()
     {
@@ -320,6 +322,35 @@ public class checkShit : MonoBehaviour
     }
     */
     
+    private void CarSmoke(float _size)
+    {
+        float size = UnityEngine.Random.Range(_size/100, _size/10);
+        smoke = Resources.Load<ParticleSystem>("Effects/SmokeParticle");
+        Vector3 offset = new Vector3(0, 0.46f, 0);
+        smoke = Instantiate(smoke, cop.transform.position, cop.transform.rotation);
+        ParticleSystem.MainModule mainModule = smoke.main;
+        mainModule.startColor = new ParticleSystem.MinMaxGradient(new Color(1f, 1f, 1f, 1f));
+        mainModule.startSize = size;
+
+        Vector3 offset2 = cop.transform.TransformVector(Vector3.back) * 1.8f;
+
+        smoke.transform.position += offset;
+        smoke.transform.position += offset2;
+
+        float fadeDuration = 3f;
+        Gradient alphaGradient = new Gradient();
+        alphaGradient.SetKeys(new GradientColorKey[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(Color.clear, 3f) },
+            new GradientAlphaKey[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(0f, 3f) });
+
+        ParticleSystem.ColorOverLifetimeModule colorOverLifetimeModule = smoke.colorOverLifetime;
+        colorOverLifetimeModule.enabled = true;
+        colorOverLifetimeModule.color = alphaGradient;
+
+        smoke.Play();
+
+        Destroy(smoke.gameObject, fadeDuration);
+    }
+
     public void SavePrefs()
     {
         /*
@@ -363,10 +394,15 @@ public class checkShit : MonoBehaviour
 
             if (!_score.isActiveAndEnabled) _score.enabled = true;
 
-            if (ready) GameLogic();
+            if (ready)
+            {
+                
+                GameLogic();
+            }
 
             if (!tipped && st != null)
             {
+                if (st.speed > 0) CarSmoke(st.speed);
                 currentSpeed = st.speed * 50;
                 float thresholdAngle = MIN_ANGLE + (FLIP_ANGLE - MIN_ANGLE) * (player.speed / MAX_SPEED);
                 float adjustedThresholdAngle = thresholdAngle + Mathf.Abs(rt.turningangle);
@@ -396,8 +432,11 @@ public class checkShit : MonoBehaviour
             frame = 0;
         }
         if (hasStarted)
-        {
+        {            
+
             elapsedTime = Time.time - startTime;
+
+            if (elapsedTime % 0.1f == 0) CarSmoke(st.speed);
             frame++;
 
             // Start recording the player
