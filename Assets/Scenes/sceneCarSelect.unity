@@ -2302,7 +2302,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Version 1.8.3 - June 11, 2023
+  m_Text: Version 1.9.1 - June 12, 2023
 --- !u!222 &43457087
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -72105,7 +72105,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: now with hats!
+  m_Text: watch out for cows!
 --- !u!222 &1857609944
 CanvasRenderer:
   m_ObjectHideFlags: 0

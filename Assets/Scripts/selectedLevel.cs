@@ -62,7 +62,7 @@ public class selectedLevel : MonoBehaviour
         move = new Vector3(100f, 0, 0);
         // Camera positions for toggling current selected level
         pos1 = this.transform.position;
-        pos2 = this.transform.position - (move * 8);
+        pos2 = this.transform.position - (move * 9);
     }
     public void Start()
     {
@@ -134,12 +134,13 @@ public class selectedLevel : MonoBehaviour
 
     public void NextLevel()
     {
-        if (levelIndex < 8)
+        if (levelIndex < 9)
         {
             this.transform.position = this.transform.position - move;
             levelIndex += 1;
-            
-            if (levelIndex == 7) SetNightMode(true);            
+
+            if (levelIndex == 7 || levelIndex == 8) SetNightMode(true);
+            else SetNightMode(false);
         }
         else
         {
@@ -163,7 +164,7 @@ public class selectedLevel : MonoBehaviour
         else
         {
             this.transform.position = pos2;
-            levelIndex = 8;
+            levelIndex = 9;
             SetNightMode(true);
         }
         
@@ -177,7 +178,7 @@ public class selectedLevel : MonoBehaviour
 
     public void TutorialLevel()
     {
-        SceneManager.LoadScene(11);
+        SceneManager.LoadScene(2);
     }
 
     public void SetNightMode(bool _mode)
@@ -240,7 +241,7 @@ public class selectedLevel : MonoBehaviour
     {
         PlayerPrefs.SetInt("level", levelIndex);
         PlayerPrefs.Save();
-        pm.SetCurrentLevel(levelIndex + 2); // Taking into account carSelect and levelSelect as first two levels
+        pm.SetCurrentLevel(levelIndex + 3); // Taking into account carSelect and levelSelect and tutorial as first two levels
         yield return null;
                    
       
@@ -253,7 +254,7 @@ public class selectedLevel : MonoBehaviour
         this.transform.position = this.transform.position - (move * (levelIndex));
 
         //Toggle night mode
-        if (levelIndex > 7) SetNightMode(true);
+        if (levelIndex == 7 || levelIndex == 8) SetNightMode(true);
         else SetNightMode(false);
         
         ready = true;

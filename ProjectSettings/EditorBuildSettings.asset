@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/sceneLevelSelect.unity
     guid: 9d9fe8fde66c86544a3fc11509bd054a
   - enabled: 1
+    path: Assets/Scenes/tutorial_Scene.unity
+    guid: 1df7b13a1fd106f42ae20ae352561bda
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
@@ -39,6 +42,6 @@ EditorBuildSettings:
     path: Assets/Scenes/level4-2.unity
     guid: a914fcce238c85342932681f23398c7a
   - enabled: 1
-    path: Assets/Scenes/tutorial_Scene.unity
-    guid: 1df7b13a1fd106f42ae20ae352561bda
+    path: Assets/Scenes/CowScene.unity
+    guid: 649bf8b1d5e182d40a6aee6062e718e2
   m_configObjects: {}

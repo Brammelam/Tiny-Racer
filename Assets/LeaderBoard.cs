@@ -41,7 +41,7 @@ public class LeaderBoard : MonoBehaviour
     {
         leaderboardIds = new List<int>()
         {
-            8492, 8493, 8656, 8660, 8661, 8662, 8663, 8664, 8665
+            8492, 8493, 8656, 8660, 8661, 8662, 8663, 8664, 8665, 15084
         };
 
         DontDestroyOnLoad(this);

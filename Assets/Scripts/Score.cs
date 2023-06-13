@@ -62,7 +62,7 @@ public class Score : MonoBehaviour
 			return;
 		}
 
-		if (gh.currentLevel == 9)
+		if (gh.currentLevel == 2)
         {
 			if (gh.hasStarted)
 			{

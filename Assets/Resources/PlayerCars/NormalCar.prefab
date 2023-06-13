@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 1555150608783596523}
   - component: {fileID: 1555150608783596519}
   - component: {fileID: 1555150608783596512}
+  - component: {fileID: -3006903104636240081}
   m_Layer: 0
   m_Name: NormalCar
   m_TagString: Player
@@ -213,7 +214,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825199115517716153}
-  m_LocalRotation: {x: 0, y: -0.63607824, z: 0, w: -0.77162457}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
@@ -303,6 +304,19 @@ MonoBehaviour:
   lastPosition: {x: 0, y: 0, z: 0}
   speed: 0
   direction: {x: 0, y: 0, z: 0}
+--- !u!65 &-3006903104636240081
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825199115517716153}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9464612, y: 1.3680687, z: 4.571022}
+  m_Center: {x: -0.017527184, y: 0.6046831, z: -0.017855167}
 --- !u!1 &3037317276266075493
 GameObject:
   m_ObjectHideFlags: 0

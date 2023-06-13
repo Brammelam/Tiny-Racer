@@ -25,6 +25,10 @@ public class newAI2 : MonoBehaviour
     public checkShit check;
     public bool touching = false;
     private Transform rotationPoint;
+    private ParticlePool particlePool;
+
+    private float timer = 0f;
+    private float interval = 0.05f;
 
     [SerializeField] private float mult;
     public void Awake()
@@ -36,16 +40,20 @@ public class newAI2 : MonoBehaviour
     public void Start()
     {
         smoothTime = 0.15f;
+        particlePool = gameObject.AddComponent<ParticlePool>();
 
     }
 
-    public void FixedUpdate()
+    public void Update()
     {
         pathCreator ??= PathCreator.FindObjectOfType<PathCreator>();
         check ??= checkShit.FindObjectOfType<checkShit>();
         if (check == null) return;
-        distanceTravelled += speed * Time.deltaTime;
+        
+        
 
+        distanceTravelled += speed * Time.deltaTime;       
+        
         if (Input.touchCount > 0 || Input.GetMouseButton(0) || Input.GetKey("space"))
         {
             touching = true;
@@ -60,6 +68,8 @@ public class newAI2 : MonoBehaviour
         {
             speed = Mathf.Max(speed - 1.5f, 0f);
         }
+
+        if (speed > 0) particlePool.EnableNextParticle(speed);
 
         if (check != null && check.rt != null && pathCreator != null && pathCreator.path != null)
         {

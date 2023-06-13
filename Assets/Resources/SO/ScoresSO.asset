@@ -13,32 +13,36 @@ MonoBehaviour:
   m_Name: ScoresSO
   m_EditorClassIdentifier: 
   _names:
-  - No score
-  - No score
-  - No score
-  - No score
-  - No score
-  - No score
-  - No score
-  - No score
+  - bram
   - brammelam
+  - Eirin
+  - Eirin
+  - brammelam
+  - pjepper
+  - pjepper
+  - bram
+  - brammelam
+  - Anonymous
   _scores:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - -912
+  - 734
+  - 1018
+  - 1484
+  - 865
+  - 1215
+  - 2489
+  - 3506
+  - 2035
+  - 1597
+  - 99999
   _playerScores:
-  - 0
-  - -912
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 734
+  - 1280
+  - 1770
+  - 1272
+  - 1215
+  - 2675
+  - 3956
+  - 2035
+  - 1754
+  - 99999
+  _levelIndex: 0

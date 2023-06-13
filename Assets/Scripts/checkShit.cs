@@ -100,8 +100,6 @@ public class checkShit : MonoBehaviour
 
     private lapTime lapTime;
 
-    private ParticleSystem smoke;
-
 
     public void Awake()
     {
@@ -140,9 +138,9 @@ public class checkShit : MonoBehaviour
 
         whatCar = PlayerPrefs.GetInt("car", 0);
         
-        currentLevel = PlayerPrefs.GetInt("level", 2);
+        currentLevel = PlayerPrefs.GetInt("level", 3);
 
-        if (currentLevel == 9) globalRecordTime = 0;
+        if (currentLevel == 2) globalRecordTime = 0;
 
         yield return pm.DownloadGhostId(); // Find the file id for the ghost data of the current track
         yield return pm.GetGhostData(); // Adds the data to the pm.ghostData list of floats we use to animate the ghost
@@ -192,7 +190,7 @@ public class checkShit : MonoBehaviour
 
         if (PlayerPrefs.GetString("hat") != "no") yield return SetHat();
 
-        if (currentLevel < 3 || currentLevel == 7 || currentLevel == 8 || currentLevel == 9)
+        if (currentLevel < 3 || currentLevel == 8 || currentLevel == 9 || currentLevel == 9)
         {
             GameObject.FindGameObjectWithTag("Ambient").GetComponent<AmbientClass>().PlayAmbientMusic();
             if (currentLevel == 7 || currentLevel == 8)
@@ -206,7 +204,7 @@ public class checkShit : MonoBehaviour
             GameObject.FindGameObjectWithTag("City").GetComponent<CityScript>().PlayCityMusic();
             GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().StopMusic();
         }
-        else if (currentLevel > 3 && currentLevel != 7)
+        else if (currentLevel > 3 && currentLevel < 7)
         {
             GameObject.FindGameObjectWithTag("Snow").GetComponent<SnowScript>().PlaySnowMusic();
         }
@@ -214,8 +212,6 @@ public class checkShit : MonoBehaviour
         _car = GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>();
         _car.PlayCarMusic();
         _car.timeElapsed = 0;
-
-
 
         ready = true;
 
@@ -321,35 +317,6 @@ public class checkShit : MonoBehaviour
         }
     }
     */
-    
-    private void CarSmoke(float _size)
-    {
-        float size = UnityEngine.Random.Range(_size/100, _size/10);
-        smoke = Resources.Load<ParticleSystem>("Effects/SmokeParticle");
-        Vector3 offset = new Vector3(0, 0.46f, 0);
-        smoke = Instantiate(smoke, cop.transform.position, cop.transform.rotation);
-        ParticleSystem.MainModule mainModule = smoke.main;
-        mainModule.startColor = new ParticleSystem.MinMaxGradient(new Color(1f, 1f, 1f, 1f));
-        mainModule.startSize = size;
-
-        Vector3 offset2 = cop.transform.TransformVector(Vector3.back) * 1.8f;
-
-        smoke.transform.position += offset;
-        smoke.transform.position += offset2;
-
-        float fadeDuration = 3f;
-        Gradient alphaGradient = new Gradient();
-        alphaGradient.SetKeys(new GradientColorKey[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(Color.clear, 3f) },
-            new GradientAlphaKey[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(0f, 3f) });
-
-        ParticleSystem.ColorOverLifetimeModule colorOverLifetimeModule = smoke.colorOverLifetime;
-        colorOverLifetimeModule.enabled = true;
-        colorOverLifetimeModule.color = alphaGradient;
-
-        smoke.Play();
-
-        Destroy(smoke.gameObject, fadeDuration);
-    }
 
     public void SavePrefs()
     {
@@ -402,7 +369,6 @@ public class checkShit : MonoBehaviour
 
             if (!tipped && st != null)
             {
-                if (st.speed > 0) CarSmoke(st.speed);
                 currentSpeed = st.speed * 50;
                 float thresholdAngle = MIN_ANGLE + (FLIP_ANGLE - MIN_ANGLE) * (player.speed / MAX_SPEED);
                 float adjustedThresholdAngle = thresholdAngle + Mathf.Abs(rt.turningangle);
@@ -436,14 +402,13 @@ public class checkShit : MonoBehaviour
 
             elapsedTime = Time.time - startTime;
 
-            if (elapsedTime % 0.1f == 0) CarSmoke(st.speed);
             frame++;
 
             // Start recording the player
             playerRecord.Add(player.distanceTravelled);
 
             //TUTORIAL STUFF
-            if (currentLevel == 9)
+            if (currentLevel == 2)
             {
                 if (someCount == 0)
                 {
@@ -472,7 +437,7 @@ public class checkShit : MonoBehaviour
 
             
             // start ghost when player starts playing
-            if (index < loadedGhost.Count && currentLevel != 9)
+            if (index < loadedGhost.Count && currentLevel != 2)
             {
                 float ghostDistance = loadedGhost[index];
 
@@ -488,7 +453,7 @@ public class checkShit : MonoBehaviour
                 string _car = "car" + _currentLevel.ToString();
                 string _gotCar = "gotcar" + _currentLevel.ToString();
                 
-                if (!PlayerPrefs.HasKey(_car) && currentLevel != 9)
+                if (!PlayerPrefs.HasKey(_car) && currentLevel != 2)
                 {
                     string triggerCarUnlock = "grantCar" + _currrentLevelString;
                     pm.TriggerEvent(triggerCarUnlock);
@@ -497,7 +462,7 @@ public class checkShit : MonoBehaviour
                 }
 
                 // Disables repeating tutorial text after completing first lap
-                if (currentLevel == 9)
+                if (currentLevel == 2)
                 {
                     completedTutorial = true;
                     completedTutorialLap = true;
@@ -517,7 +482,7 @@ public class checkShit : MonoBehaviour
                 index = 0;
 
                 // Player beat global record
-                if ((globalRecordTime == 0 || elapsedTime < globalRecordTime) && currentLevel != 9)
+                if ((globalRecordTime == 0 || elapsedTime < globalRecordTime) && currentLevel != 2)
                 {
                     bool isGlobalRecord = true;
 
@@ -545,7 +510,7 @@ public class checkShit : MonoBehaviour
                 }
 
                 // Player only beat own record, not global record
-                else if ((((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime)) || (playerRecordTime == 0)) && currentLevel != 9)
+                else if ((((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime)) || (playerRecordTime == 0)) && currentLevel != 2)
                 {
                     bool isGlobalRecord = false;
 
@@ -605,7 +570,7 @@ public class checkShit : MonoBehaviour
 
         // Calculate flip direction based on the corner direction
         Vector3 flipDirection = Quaternion.Euler(0f, 0f, -90f) * direction;
-
+        GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>().StopCarMusic();
         rb2.AddForce(Vector3.up * 10000f, ForceMode.Impulse);
         rb2.AddForce(direction * 10000f, ForceMode.Impulse);
         rb2.AddTorque(flipDirection * 5000f * -rt.averageAngle, ForceMode.Impulse);

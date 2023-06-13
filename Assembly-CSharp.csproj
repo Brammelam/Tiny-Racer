@@ -144,6 +144,10 @@
     <Compile Include="Assets\SettingsAnimationScript.cs" />
     <Compile Include="Assets\ButtonScript.cs" />
     <Compile Include="Assets\SmokeScript.cs" />
+    <Compile Include="Assets\Resources\Effects\ParticlePool.cs" />
+    <Compile Include="Assets\CowScript.cs" />
+    <Compile Include="Assets\CowCollision.cs" />
+    <Compile Include="Assets\CollisionHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
