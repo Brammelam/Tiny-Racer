@@ -19,7 +19,7 @@ public class lapTime : MonoBehaviour
 
     public void Awake()
     {
-        recordScore = PlayerPrefs.GetFloat("highScore");
+        recordScore = PlayerPrefs.GetFloat("playerScore");
         recordtext = GameObject.Find("recordTime").GetComponent<Text>();
         timetext = GameObject.Find("lapTime").GetComponent<Text>();
 
@@ -64,13 +64,13 @@ public class lapTime : MonoBehaviour
 
     private void LoadRecord()
     {
-        string _newRecordText = PlayerPrefs.GetFloat("highScore").ToString();
+        string _newRecordText = PlayerPrefs.GetFloat("playerScore").ToString();
         recordtext.text = _newRecordText + "s";
     }
 
     public void SetRecord()
     {
-        string _newRecordText = PlayerPrefs.GetFloat("highScore").ToString();
+        string _newRecordText = PlayerPrefs.GetFloat("playerScore").ToString();
         recordtext.text = _newRecordText + "s";
     }
 
