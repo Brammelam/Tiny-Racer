@@ -22,7 +22,7 @@ public class CarMusicClass : MonoBehaviour
 
     public void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex > 1 && SceneManager.GetActiveScene().buildIndex != 12 ) {
+        if (SceneManager.GetActiveScene().buildIndex > 1 ) {
             if (_check == null) _check = GameObject.FindGameObjectWithTag("GameController").GetComponent<checkShit>();
 
             if (_check.tipped)

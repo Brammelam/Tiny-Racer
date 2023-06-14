@@ -62,7 +62,7 @@ public class selectedLevel : MonoBehaviour
         move = new Vector3(100f, 0, 0);
         // Camera positions for toggling current selected level
         pos1 = this.transform.position;
-        pos2 = this.transform.position - (move * 9);
+        pos2 = this.transform.position - (move * 10);
     }
     public void Start()
     {
@@ -134,7 +134,7 @@ public class selectedLevel : MonoBehaviour
 
     public void NextLevel()
     {
-        if (levelIndex < 9)
+        if (levelIndex < 10)
         {
             this.transform.position = this.transform.position - move;
             levelIndex += 1;
@@ -158,14 +158,15 @@ public class selectedLevel : MonoBehaviour
         {
             this.transform.position = this.transform.position + move;
             levelIndex -= 1;
-            
-            if (levelIndex == 6) SetNightMode(false);
+
+            if (levelIndex == 7 || levelIndex == 8) SetNightMode(true);
+            else SetNightMode(false);
         }
         else
         {
             this.transform.position = pos2;
-            levelIndex = 9;
-            SetNightMode(true);
+            levelIndex = 10;
+            SetNightMode(false);
         }
         
         UpdateLevelName();

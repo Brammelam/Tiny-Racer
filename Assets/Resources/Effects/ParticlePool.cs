@@ -5,7 +5,7 @@ public class ParticlePool : MonoBehaviour
 {
     public string particlePath = "Effects/SmokeParticle";
     public Transform emissionPoint;
-    public int poolSize = 100;
+    public int poolSize = 70;
     public float particleSize = 1f;
     [SerializeField]
     private ParticleSystem[] particlePool;

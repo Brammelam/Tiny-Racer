@@ -27,8 +27,7 @@ public class newAI2 : MonoBehaviour
     private Transform rotationPoint;
     private ParticlePool particlePool;
 
-    private float timer = 0f;
-    private float interval = 0.05f;
+    private int interval = 0;
 
     [SerializeField] private float mult;
     public void Awake()
@@ -46,6 +45,7 @@ public class newAI2 : MonoBehaviour
 
     public void Update()
     {
+        interval++;
         pathCreator ??= PathCreator.FindObjectOfType<PathCreator>();
         check ??= checkShit.FindObjectOfType<checkShit>();
         if (check == null) return;
@@ -69,7 +69,7 @@ public class newAI2 : MonoBehaviour
             speed = Mathf.Max(speed - 1.5f, 0f);
         }
 
-        if (speed > 0) particlePool.EnableNextParticle(speed);
+        if (speed > 0 && interval % 2 == 0) particlePool.EnableNextParticle(speed);
 
         if (check != null && check.rt != null && pathCreator != null && pathCreator.path != null)
         {
