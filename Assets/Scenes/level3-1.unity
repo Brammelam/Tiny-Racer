@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1528304460}
-  m_IndirectSpecularColor: {r: 0.18362832, g: 0.22787781, b: 0.29804918, a: 1}
+  m_IndirectSpecularColor: {r: 0.45115, g: 0.4997657, b: 0.5676668, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -166,6 +166,8 @@ MonoBehaviour:
   speed: 0
   distanceTravelled: 0
   touching: 0
+  offsetValue: 0
+  check: {fileID: 0}
 --- !u!122 &203912033
 Halo:
   m_ObjectHideFlags: 0
@@ -298,7 +300,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!65 &249807641
 BoxCollider:
@@ -475,9 +477,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: PineTree_Snow_4 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 81d6d6618b3aede4ebc3aa5bf795aa1a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: 81d6d6618b3aede4ebc3aa5bf795aa1a, type: 3}
       propertyPath: m_LocalPosition.z
       value: -3.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 81d6d6618b3aede4ebc3aa5bf795aa1a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81d6d6618b3aede4ebc3aa5bf795aa1a, type: 3}
@@ -624,6 +634,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_Snow_2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0914d0aa8256f2f4aabf3fd8027b6fb5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 0914d0aa8256f2f4aabf3fd8027b6fb5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0914d0aa8256f2f4aabf3fd8027b6fb5, type: 3}
 --- !u!4 &673446471 stripped
@@ -682,8 +700,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   check: {fileID: 0}
-  time: {fileID: 892364933}
-  record: {fileID: 1171433547}
+  timetext: {fileID: 0}
+  recordtext: {fileID: 0}
+  pm: {fileID: 0}
+  lb: {fileID: 0}
+  recordScore: 0
+  lapScore: 0
+  ready: 0
 --- !u!114 &892364933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,6 +806,11 @@ MonoBehaviour:
   scoreText: {fileID: 902240329}
   restartText: {fileID: 1193144273}
   image: {fileID: 934476550}
+  tutorial: {fileID: 0}
+  tutorial2: {fileID: 0}
+  welcomeTutorial: {fileID: 0}
+  completeTutorial: {fileID: 0}
+  tutorialCounter: 0
   maxValue: 80
   newSpeed: 0
   lastSpeed: 0
@@ -793,6 +821,8 @@ MonoBehaviour:
   maxTip: {r: 1, g: 0, b: 0, a: 1}
   hasStarted: 0
   showText: 0
+  check: 0
+  tempCount: 0
 --- !u!114 &902240329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -953,14 +983,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 0}
-  offset: {x: 0, y: 0.24, z: 0}
-  forwardCop: {x: 0, y: 0, z: 0}
-  followSpeed: 11.5
-  lookSpeed: 20
-  velocity: {x: 0, y: 0, z: 0}
+  offset: 0.12
   smoothTime: 0.15
+  forwardCop: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
   check: {fileID: 1524868681}
-  forwardAmount: 10
+  pathCreator: {fileID: 0}
+  cameraDistance: 0
 --- !u!81 &1021801100
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1170,6 +1199,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Willow_Dead_Snow_5
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b522a60e05ffc4540af8e249fd76d304, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: b522a60e05ffc4540af8e249fd76d304, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b522a60e05ffc4540af8e249fd76d304, type: 3}
 --- !u!4 &1088160486 stripped
@@ -1231,6 +1268,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f1c33544e14118e4da8b5aaaba6fcce7, type: 3}
       propertyPath: m_Name
       value: Rock_Snow_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f1c33544e14118e4da8b5aaaba6fcce7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: f1c33544e14118e4da8b5aaaba6fcce7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1c33544e14118e4da8b5aaaba6fcce7, type: 3}
@@ -1369,6 +1414,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_Snow_7
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 607e84076958a9045b902aca1911df36, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 607e84076958a9045b902aca1911df36, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 607e84076958a9045b902aca1911df36, type: 3}
 --- !u!4 &1144360424 stripped
@@ -1442,8 +1495,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   check: {fileID: 0}
-  time: {fileID: 1171433547}
-  record: {fileID: 1171433547}
+  timetext: {fileID: 0}
+  recordtext: {fileID: 0}
+  pm: {fileID: 0}
+  lb: {fileID: 0}
+  recordScore: 0
+  lapScore: 0
+  ready: 0
 --- !u!222 &1171433549
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1582,7 +1640,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1325451289
 Transform:
@@ -2083,6 +2141,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_Snow_7 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 607e84076958a9045b902aca1911df36, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 607e84076958a9045b902aca1911df36, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 607e84076958a9045b902aca1911df36, type: 3}
 --- !u!4 &1518418406 stripped
@@ -2247,6 +2313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01c6aa5e10007f4bb231d22a230a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leaderBoard: {fileID: 0}
+  pm: {fileID: 0}
   cars:
   - {fileID: 1825199115517716153, guid: 9bed9c5ae98cdd84ab2733247094ded2, type: 3}
   - {fileID: 1825199115517716153, guid: 9dbd8c512653a434f8b175a4399600f0, type: 3}
@@ -2281,28 +2349,42 @@ MonoBehaviour:
   tipped: 0
   st: {fileID: 0}
   rt: {fileID: 0}
+  tipSpeed: 1.6
   pathCreator: {fileID: 1524868682}
+  currspeed: 0
   startTime: 0
   elapsedTime: 0
-  recordTime: 0
+  globalRecordTime: 0
+  playerRecordTime: 0
   hasStarted: 0
   player: {fileID: 0}
   transition: {fileID: 0}
   cam: {fileID: 0}
   whatCar: 1
+  currentLevel: 0
   currentSpeed: 0
   menuButton: {fileID: 0}
-  resetButton: {fileID: 0}
-  volumeSlider: {fileID: 0}
-  musicSlider: {fileID: 0}
-  currentLevel: 0
-  scoretime: 0
   lapCompleted: 0
   index: 0
   saveIndex: 0
   lapLength: 0
   lastGhostDistance: {x: 0, y: 0, z: 0}
+  _score: {fileID: 0}
+  _hat: {fileID: 0}
   _car: {fileID: 0}
+  hatIndex: 0
+  hat: 
+  save: {fileID: 0}
+  saveLevel: {fileID: 0}
+  slowMo: 1
+  setSlow: 0
+  tutorial: {fileID: 0}
+  tutorialIndex: 0
+  completedTutorial: 0
+  completedTutorialLap: 0
+  someCount: 0
+  allObjectsFound: 0
+  audioManager: {fileID: 0}
 --- !u!114 &1524868682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2641,6 +2723,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: WoodLog_Snow
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ca9aee894d9dc0245989a3427769beb3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: ca9aee894d9dc0245989a3427769beb3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca9aee894d9dc0245989a3427769beb3, type: 3}
 --- !u!1001 &1661331905
@@ -2701,6 +2791,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b0d648f25a091d6419ad33a860cf3da8, type: 3}
       propertyPath: m_Name
       value: poly2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b0d648f25a091d6419ad33a860cf3da8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: b0d648f25a091d6419ad33a860cf3da8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0d648f25a091d6419ad33a860cf3da8, type: 3}
@@ -2989,6 +3087,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PineTree_Snow_3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1170289a7d17bc2418b6b87c0ac0b69b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: 1170289a7d17bc2418b6b87c0ac0b69b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.86
@@ -3000,6 +3102,10 @@ PrefabInstance:
     - target: {fileID: 1151388028547126963, guid: 1170289a7d17bc2418b6b87c0ac0b69b, type: 3}
       propertyPath: m_LocalPosition.z
       value: -9.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 1170289a7d17bc2418b6b87c0ac0b69b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1170289a7d17bc2418b6b87c0ac0b69b, type: 3}
@@ -3067,6 +3173,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PineTree_Snow_2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4f3a1554dadd508478efd6b9411c9770, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 4f3a1554dadd508478efd6b9411c9770, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f3a1554dadd508478efd6b9411c9770, type: 3}
 --- !u!4 &2043857315 stripped
@@ -3129,6 +3243,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PineTree_Snow_1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2afd74fe6bb926458514302a2584c7d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: f2afd74fe6bb926458514302a2584c7d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2afd74fe6bb926458514302a2584c7d, type: 3}
 --- !u!1001 &2096533175
@@ -3190,9 +3312,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: PineTree_Snow_4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 81d6d6618b3aede4ebc3aa5bf795aa1a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: 81d6d6618b3aede4ebc3aa5bf795aa1a, type: 3}
       propertyPath: m_LocalPosition.z
       value: -3.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 81d6d6618b3aede4ebc3aa5bf795aa1a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81d6d6618b3aede4ebc3aa5bf795aa1a, type: 3}
