@@ -493,12 +493,13 @@ public class checkShit : MonoBehaviour
                     globalRecordTime = _tempScore;
                     playerRecordTime = _tempScore;
 
+                    lapTime.SetRecord(_tempScore); // Update the UI
+
                     PlayerPrefs.SetFloat("highScore", _tempScore);
                     PlayerPrefs.SetFloat("playerScore", _tempScore);
                     PlayerPrefs.Save();
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
-                    lapTime.SetRecord();
 
                     StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel, isGlobalRecord));
                     pm.UpdateScoreText(_recordTime, isGlobalRecord);
@@ -518,11 +519,13 @@ public class checkShit : MonoBehaviour
                     float _tempScore = Mathf.Round((elapsedTime * 100)) / 100f;
 
                     playerRecordTime = _tempScore;
+
+                    lapTime.SetRecord(_tempScore); // Update the UI
+
                     PlayerPrefs.SetFloat("playerScore", _tempScore);
                     PlayerPrefs.Save();
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
-
                     StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel, isGlobalRecord));
                     pm.UpdateScoreText(_recordTime, isGlobalRecord);
 

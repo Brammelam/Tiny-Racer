@@ -42,6 +42,7 @@ TagManager:
   - carScreen
   - loadingScreen
   - obstacle
+  - collectable
   layers:
   - Default
   - TransparentFX

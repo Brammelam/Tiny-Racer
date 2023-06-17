@@ -5,43 +5,20 @@ using UnityEngine.UI;
 
 public class ToggleHatButton : MonoBehaviour
 {
-    public Color normalColor; // The normal color of the button
-    public Color highlightColor; // The highlighted color of the button
 
-    private bool isPressed;
-    private Button button;
+    private Image buttonImage;
+    [SerializeField] private Sprite lockedSprite;
 
     private void Start()
     {
-        button = GetComponent<Button>();
-        button.onClick.AddListener(Toggle);
-    }
-
-    private void Toggle()
-    {
-        isPressed = !isPressed;
-
-        // Update the button visuals
-        UpdateButtonVisuals();
-
-        // Disable other ToggleButtons in the scene
-        ToggleHatButton[] otherToggleButtons = FindObjectsOfType<ToggleHatButton>();
-        foreach (ToggleHatButton otherButton in otherToggleButtons)
+        buttonImage = GetComponent<Image>();
+        if (!PlayerPrefs.HasKey(this.name))
         {
-            if (otherButton != this)
-            {
-                otherButton.isPressed = false;
-                otherButton.UpdateButtonVisuals();
-            }
+            Debug.Log("Player has not unlocked: " + this.name);
+            GetComponent<Button>().interactable = false;
+            buttonImage.sprite = lockedSprite;
         }
-    }
-
-    private void UpdateButtonVisuals()
-    {
-        // Set the button's color based on its pressed state
-        ColorBlock colorBlock = button.colors;
-        colorBlock.normalColor = isPressed ? highlightColor : normalColor;
-        button.colors = colorBlock;
+        
     }
 }
 

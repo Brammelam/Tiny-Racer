@@ -32,8 +32,8 @@ public class lapTime : MonoBehaviour
         if (pm != null && check != null)
         {
             LoadRecord();
-            //currentScoreSO = pm.currentScoreSO;
-            //currentScoreSO.OnScoreChanged += SetRecord;
+            currentScoreSO = pm.currentScoreSO;
+
             ready = true;
         }
         else
@@ -68,14 +68,14 @@ public class lapTime : MonoBehaviour
         recordtext.text = _newRecordText + "s";
     }
 
-    public void SetRecord()
+    public void SetRecord(float _record)
     {
-        string _newRecordText = PlayerPrefs.GetFloat("playerScore").ToString();
-        recordtext.text = _newRecordText + "s";
+        // _newRecordText = PlayerPrefs.GetFloat("playerScore").ToString();
+        recordtext.text = _record + "s";
     }
 
     private void OnDestroy()
     {
-        //currentScoreSO.OnScoreChanged -= SetRecord;
+
     }
 }
