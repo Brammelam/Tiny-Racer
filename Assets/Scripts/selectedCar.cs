@@ -232,10 +232,7 @@ public class selectedCar : MonoBehaviour
         if (PlayerPrefs.HasKey("TutorialUnlock"))
             SceneManager.LoadScene(1);
         else
-        {
-            PlayerPrefs.SetInt("level", -1);
             SceneManager.LoadScene(2);
-        }
 
         done = true;
         yield return new WaitWhile(() => done == false);

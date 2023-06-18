@@ -35,10 +35,10 @@ public class Score : MonoBehaviour
 
 	void Awake()
 	{
-		tutorial = GameObject.FindGameObjectWithTag("tutorial");
 		player ??= GameObject.FindGameObjectWithTag("Player")?.GetComponent<newAI2>();
 		gh ??= GameObject.FindGameObjectWithTag("GameController")?.GetComponent<checkShit>();
 		scoreText ??= GameObject.FindGameObjectWithTag("Slider")?.GetComponent<Slider>();
+		if (SceneManager.GetActiveScene().buildIndex == 2) tutorialLevel = true;
 	}
 
 	void FindObjects()
@@ -55,12 +55,11 @@ public class Score : MonoBehaviour
 
 		if (player != null && gh != null && scoreText != null) { 
 			ready = true;
-			if (SceneManager.GetActiveScene().buildIndex == 2) tutorialLevel = true;
 		}
 
 	}
 
-	void Update()
+	public void Update()
 	{
 		while (!ready)
 		{
@@ -73,26 +72,19 @@ public class Score : MonoBehaviour
 			if (gh.hasStarted)
 			{
 				welcomeTutorial.SetActive(false);
-			}
-
-			if (gh.setSlow && gh.someCount == 0)
-			{
-				if (gh.tutorialIndex == 0)
+				if (gh.tutorialIndex == 1)
 					ShowTutorial1();
-				else ShowTutorial2();
+				if (gh.tutorialIndex == 2)
+					ShowTutorial2(); 
+				if (gh.someCount == 1 && !check)
+				{
+					check = true;
+					ShowTutorial3();
+				}
 			}
-			else if (!gh.setSlow)
-			{
 
-				HideTutorial();
 
-			}
-
-			if (gh.someCount == 1 && !check && tempCount == 0)
-			{
-				check = true;
-				ShowTutorial3();
-			}
+			
 		}
 
 
@@ -126,13 +118,18 @@ public class Score : MonoBehaviour
 
 	public void ShowTutorial2()
 	{
+		tutorial.SetActive(false);
 		tutorial2.SetActive(true);
 	}
 
 	public void ShowTutorial3()
     {
+		tutorial.SetActive(false);
+		tutorial2.SetActive(false);
 		completeTutorial.SetActive(true);
-		tempCount = 1;
+
+		Destroy(tutorial, 0.1f);
+		Destroy(tutorial2, 0.1f);
 		Destroy(completeTutorial, 3f);
     }
 

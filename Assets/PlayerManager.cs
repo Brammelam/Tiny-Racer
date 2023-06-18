@@ -291,7 +291,7 @@ public class PlayerManager : MonoBehaviour
         currentCar = PlayerPrefs.GetInt("car", 0); //currentCar = carsettings.CurrentCar;
 
         currentLevel = PlayerPrefs.GetInt("level", 0); //currentLevel = leaderboardSO.CurrentLevel;
-        if (currentLevel == 9 && PlayerPrefs.HasKey("TutorialUnlock"))
+        if (currentLevel == -1 && PlayerPrefs.HasKey("TutorialUnlock"))
             currentLevel = 0; // Fix player getting stuck in tutorial
 
         playerNameString = PlayerPrefs.GetString("name");
@@ -523,7 +523,7 @@ public class PlayerManager : MonoBehaviour
     public IEnumerator DownloadLevelTextFile(string _s)
     {
         bool done = false;
-        int _currentLevel = PlayerPrefs.GetInt("level");
+        int _currentLevel = PlayerPrefs.GetInt("level", 0);
         UnityWebRequest www = UnityWebRequest.Get(_s);
         yield return www.SendWebRequest();
 
@@ -627,7 +627,8 @@ public class PlayerManager : MonoBehaviour
     {
 
         bool done = false;
-        int _level = PlayerPrefs.GetInt("level");
+        int _level = PlayerPrefs.GetInt("level", 0);
+
         int _ghostFileID = ghostsSO.GhostIds[_level];
 
         LootLockerSDKManager.GetPlayerFile(_ghostFileID, (response) =>
@@ -677,7 +678,7 @@ public class PlayerManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Failed getting ghost data " + response.Error);
+                    Debug.Log("Failed getting car settings data " + response.Error);
                     done = true;
                 }
             });
@@ -744,7 +745,8 @@ public class PlayerManager : MonoBehaviour
     {
         bool done = false;
         int i = 0;
-        string _level = PlayerPrefs.GetInt("level").ToString();
+        int _level = PlayerPrefs.GetInt("level", 0);
+
         LootLockerSDKManager.GetEntirePersistentStorage((response) =>
         {
             foreach (var item in response.payload)
@@ -769,7 +771,7 @@ public class PlayerManager : MonoBehaviour
     
     public IEnumerator UploadGhostData()
     {
-        int _level = PlayerPrefs.GetInt("level");
+        int _level = PlayerPrefs.GetInt("level", 0);
         int _playerId = PlayerPrefs.GetInt("playerid");
         string _ghostFileId = "ghost" + _level;
 
@@ -783,7 +785,7 @@ public class PlayerManager : MonoBehaviour
             {                
                 LootLockerSDKManager.DeletePlayerFile(_fileID, (response) =>
                 {
-                    if (response.statusCode != 200) Debug.Log(response.Error);
+                    if (response.statusCode != 200) Debug.Log("Old ghost data does not exist");
                 });
             }
             // Upload the new ghost data
@@ -885,7 +887,7 @@ public class PlayerManager : MonoBehaviour
         writer.WriteLine(PlayerPrefs.GetInt("car", 0));  //writer.WriteLine(carsettings.CurrentCar);
         writer.WriteLine(PlayerPrefs.GetInt("hatindex", -1));  //writer.WriteLine(carsettings.CurrentHat);
         writer.WriteLine(PlayerPrefs.GetInt("custom", 0));  //writer.WriteLine(carsettings.CustomCar);
-        writer.WriteLine(PlayerPrefs.GetInt("level"));  //writer.WriteLine(leaderboardSO.CurrentLevel);
+        writer.WriteLine(PlayerPrefs.GetInt("level", 0));  //writer.WriteLine(leaderboardSO.CurrentLevel);
         writer.Close();
 
         LootLockerSDKManager.UploadPlayerFile(filePath, "settings", true, (response) =>

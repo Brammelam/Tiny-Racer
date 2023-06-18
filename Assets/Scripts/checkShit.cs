@@ -141,13 +141,17 @@ public class checkShit : MonoBehaviour
         
         currentLevel = PlayerPrefs.GetInt("level", 0);
         if (SceneManager.GetActiveScene().buildIndex == 2) tutorialLevel = true;
+        Debug.Log("Tutorial is: " + tutorialLevel);
         if (tutorialLevel) globalRecordTime = 0;
 
-        yield return pm.DownloadGhostId(); // Find the file id for the ghost data of the current track
-        yield return pm.GetGhostData(); // Adds the data to the pm.ghostData list of floats we use to animate the ghost
-        yield return pm.GetSO(); // Load the Scriptable Objects
-        loadedGhost = pm.ghostData; // load the ghostdata for use in the GameLogic()
+        if (!tutorialLevel)
+        {
+            yield return pm.DownloadGhostId(); // Find the file id for the ghost data of the current track
+            yield return pm.GetGhostData(); // Adds the data to the pm.ghostData list of floats we use to animate the ghost
+            loadedGhost = pm.ghostData; // load the ghostdata for use in the GameLogic()
+        }
         
+            yield return pm.GetSO(); // Load the Scriptable Objects
 
         cars = new List<GameObject>(1);
         deadCars = new List<GameObject>(1);
@@ -189,7 +193,7 @@ public class checkShit : MonoBehaviour
 
         yield return WaitForAssignments();
 
-        if (PlayerPrefs.GetString("hat") != "no") yield return SetHat();
+        if (PlayerPrefs.GetInt("hatIndex", -1) > 0) yield return SetHat();
 
         if (currentLevel < 3 || currentLevel == 8 || currentLevel == 9 || currentLevel == 9)
         {
@@ -243,11 +247,15 @@ public class checkShit : MonoBehaviour
         st = cop.GetComponent<speedTracker>();
         rt = cop.GetComponent<rotationTracker>();
         rb2 = deadCop.GetComponent<Rigidbody>();
-  
-        ghost = GameObject.FindGameObjectWithTag("Ghost") ?? ghost;
+        
+        if (!tutorialLevel)
+        {
+            ghost = GameObject.FindGameObjectWithTag("Ghost") ?? ghost;
 
-        ghost = Instantiate(Resources.Load("ghostCar") as GameObject);
-        _ghostFollower = ghost.GetComponent<ghostFollower>();
+            ghost = Instantiate(Resources.Load("ghostCar") as GameObject);
+            _ghostFollower = ghost.GetComponent<ghostFollower>();
+
+        }
 
         if (PlayerPrefs.GetInt("custom") == 1)
         {
@@ -364,7 +372,7 @@ public class checkShit : MonoBehaviour
 
             if (ready)
             {
-                
+                Debug.Log("gh found everything leggo"); 
                 GameLogic();
             }
 
@@ -411,20 +419,17 @@ public class checkShit : MonoBehaviour
             //TUTORIAL STUFF
             if (tutorialLevel)
             {
-                if (someCount == 0)
+                if (player.distanceTravelled > 120 && player.distanceTravelled < 135)
                 {
-                    if (player.distanceTravelled > 120 && player.distanceTravelled < 135)
-                    {
-                        tutorialIndex = 0;
-
-                    }
-
-                    if (player.distanceTravelled > 275 && player.distanceTravelled < 280)
-                    {
-                        tutorialIndex = 1;
-                    }
+                    tutorialIndex = 1;
 
                 }
+
+                if (player.distanceTravelled > 275 && player.distanceTravelled < 280)
+                {
+                    tutorialIndex = 2;
+                }
+
             }
 
             // Spawn a donut every 100 frames and destroy it after 5 seconds
