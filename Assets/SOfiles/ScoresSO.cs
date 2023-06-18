@@ -49,4 +49,27 @@ public class ScoresSO : ScriptableObject
     {
         LevelIndexChanged?.Invoke(_levelIndex);
     }
+
+    // Method to update the size of the Values list
+    public void UpdateValuesSize(int newSize)
+    {
+        if (newSize < 0)
+        {
+            Debug.LogWarning("New size cannot be negative.");
+            return;
+        }
+
+        int currentSize = Values.Count;
+
+        if (newSize < currentSize)
+        {
+            // If the new size is smaller, remove excess elements
+            Values.RemoveRange(newSize, currentSize - newSize);
+        }
+        else if (newSize > currentSize)
+        {
+            // If the new size is larger, add null elements to fill the gap
+            Values.AddRange(new string[newSize - currentSize]);
+        }
+    }
 }

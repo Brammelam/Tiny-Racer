@@ -23,6 +23,8 @@ MonoBehaviour:
   - bram
   - brammelam
   - Anonymous
+  - Anonymous
+  - Anonymous
   _scores:
   - 734
   - 1018
@@ -34,6 +36,8 @@ MonoBehaviour:
   - 2035
   - 1597
   - 99999
+  - 99999
+  - 99999
   _playerScores:
   - 734
   - 1280
@@ -44,5 +48,7 @@ MonoBehaviour:
   - 3956
   - 2035
   - 1754
+  - 99999
+  - 99999
   - 99999
   _levelIndex: 0

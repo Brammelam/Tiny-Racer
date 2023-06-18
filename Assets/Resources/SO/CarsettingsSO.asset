@@ -21,6 +21,6 @@ MonoBehaviour:
   - 0.7935929
   - 0.2024209
   currentCar: 0
-  currentHat: 1
-  settingsKey: 175058
-  customCar: 1
+  currentHat: 0
+  settingsKey: 0
+  customCar: 0
