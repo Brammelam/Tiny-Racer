@@ -272,7 +272,7 @@ public class checkShit : MonoBehaviour
     {
         int _car = PlayerPrefs.GetInt("car");
         string _hatName = PlayerPrefs.GetString("hat");
-        Debug.Log("Found this hat: " + _hatName);
+        //Debug.Log("Found this hat: " + _hatName);
 
         string hatLocation = _hatName + "1"; // add 1 which are the smaller models
 
@@ -609,6 +609,11 @@ public class checkShit : MonoBehaviour
 
         SceneManager.LoadScene(0);
         yield return null;
+    }
+
+    public void SetTimeScale()
+    {
+        Time.timeScale = 1f;
     }
 
     private void OnDestroy()

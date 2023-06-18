@@ -7,7 +7,7 @@ public class tutorialScript : MonoBehaviour
 
 	public void onTriggerEnter2D(Collider collision)
 	{
-		Debug.Log("START TUTORIAL 1");
+		//Debug.Log("START TUTORIAL 1");
 
 	}
 

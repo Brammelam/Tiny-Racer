@@ -27,21 +27,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.1051068, y: 5.384132, z: 6.226893}
-  m_Center: {x: -0.32981652, y: -0.524734, z: -1.5492775}
---- !u!65 &1786678656
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4112163789592577360}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.1051068, y: 5.384132, z: 6.226893}
-  m_Center: {x: -0.32981652, y: -0.524734, z: -1.5492775}
+  m_Size: {x: 3.0413153, y: 5.622135, z: 6.3544135}
+  m_Center: {x: -0.3776467, y: -0.46920013, z: -1.5014576}
 --- !u!114 &1786678651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,6 +41,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10026723826cb454c91503c62fe678d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectionCanvas: {fileID: 0}
+  collider: {fileID: 0}
+  hasTriggered: 0
 --- !u!95 &5214593446027447952
 Animator:
   serializedVersion: 3

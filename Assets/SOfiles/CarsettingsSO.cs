@@ -25,12 +25,12 @@ public class CarsettingsSO : ScriptableObject
     public List<float> BodyColor
     {
         get { return bodyColor; }
-        set { bodyColor = value; Debug.Log("body color changed!"); }
+        set { bodyColor = value; }
     }    
     public List<float> WindowColor
     {
         get { return windowColor; }
-        set { windowColor = value; Debug.Log("window color changed!"); }
+        set { windowColor = value; }
     }
     public int CurrentCar
     {

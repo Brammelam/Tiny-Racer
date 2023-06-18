@@ -13,12 +13,10 @@ public class ToggleHatButton : MonoBehaviour
     {
         buttonImage = GetComponent<Image>();
         if (!PlayerPrefs.HasKey(this.name))
-        {
-            Debug.Log("Player has not unlocked: " + this.name);
+        {           
             GetComponent<Button>().interactable = false;
             buttonImage.sprite = lockedSprite;
-        }
-        
+        }        
     }
 }
 

@@ -32,9 +32,7 @@ public class AudioManager : MonoBehaviour
         check = GameObject.FindObjectOfType<checkShit>();
         FindMainCamera();
 
-        sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        
-        Debug.Log("THE CURRENT SCENE IS " + sceneIndex);
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;     
 
         // Subscribe to the check variable's change event
         if (check != null)

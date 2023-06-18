@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Score : MonoBehaviour
@@ -29,6 +30,7 @@ public class Score : MonoBehaviour
 	public bool check = false;
 	public int tempCount = 0;
 	private bool ready = false;
+	private bool tutorialLevel = false;
 
 
 	void Awake()
@@ -51,7 +53,11 @@ public class Score : MonoBehaviour
 		}
 		if (scoreText == null) scoreText = GameObject.FindObjectOfType<Slider>();
 
-		if (player != null && gh != null && scoreText != null) ready = true;
+		if (player != null && gh != null && scoreText != null) { 
+			ready = true;
+			if (SceneManager.GetActiveScene().buildIndex == 2) tutorialLevel = true;
+		}
+
 	}
 
 	void Update()
@@ -62,7 +68,7 @@ public class Score : MonoBehaviour
 			return;
 		}
 
-		if (gh.currentLevel == 2)
+		if (tutorialLevel)
         {
 			if (gh.hasStarted)
 			{

@@ -242,7 +242,7 @@ public class selectedLevel : MonoBehaviour
     {
         PlayerPrefs.SetInt("level", levelIndex);
         PlayerPrefs.Save();
-        pm.SetCurrentLevel(levelIndex + 3); // Taking into account carSelect and levelSelect and tutorial as first two levels
+        pm.SetCurrentLevel(levelIndex + 3); // Taking into account carSelect and levelSelect and tutorial as first three levels
         yield return null;
                    
       

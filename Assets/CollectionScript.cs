@@ -6,6 +6,7 @@ public class CollectionScript : MonoBehaviour
 {
     [SerializeField] GameObject collectionCanvas;
     PlayerManager pm;
+    private float transitionDuration = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +27,33 @@ public class CollectionScript : MonoBehaviour
         {
             pm.TriggerEvent(name);
             collectionCanvas.SetActive(true);
-            Time.timeScale = 0;
+            Time.timeScale = 0.1f;
             PlayerPrefs.SetInt(name, 1);
             Destroy(gameObject);
         }
+    }
+
+    public void StartNormalTime()
+    {
+        StartCoroutine(NormalTimeCoroutine());
+    }
+
+    private IEnumerator NormalTimeCoroutine()
+    {
+        float elapsedTime = 0f;
+        float startScale = 0.1f;
+        float endScale = 1f;
+
+        while (elapsedTime < transitionDuration)
+        {
+            float t = elapsedTime / transitionDuration;
+            Time.timeScale = Mathf.Lerp(startScale, endScale, t);
+
+            elapsedTime += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        Time.timeScale = endScale;
     }
 
     // Ensures time returns to normal

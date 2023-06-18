@@ -6,6 +6,7 @@ public class CowCollision : MonoBehaviour
 {
     private checkShit checkShit;
     [SerializeField] GameObject collectionCanvas;
+    [SerializeField] Collider collider;
     public bool hasTriggered;
 
     private void Start()
@@ -17,6 +18,10 @@ public class CowCollision : MonoBehaviour
     {
         if (!hasTriggered && other.gameObject.CompareTag("Player")) 
         {
+            hasTriggered = true;
+            BoxCollider collider = GetComponent<BoxCollider>();
+            collider.isTrigger = false;
+
             Rigidbody rb = this.GetComponent<Rigidbody>();
 
             Vector3 direction = other.transform.position - transform.position;
@@ -32,7 +37,7 @@ public class CowCollision : MonoBehaviour
 
             PlayerPrefs.SetInt(animalCollision, numberOfCollisions);
             PlayerPrefs.Save();
-            Debug.Log("Collided with " + animal + " " + numberOfCollisions + " times!");
+            //Debug.Log("Collided with " + animal + " " + numberOfCollisions + " times!");
 
             if (numberOfCollisions == 5)
             {
@@ -43,31 +48,9 @@ public class CowCollision : MonoBehaviour
             }
             
             checkShit.FlipCar();
-            rb.isKinematic = false;
-            rb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
-            rb.AddForce(direction * 10f, ForceMode.Impulse);
 
             GetComponentInParent<CowScript>().enabled = false;
-            GetComponentInParent<Animator>().enabled = false;
-
-            hasTriggered = true;
+           
         }
     }
-
-    public string GetFirstCapitalWord()
-    {
-        string gameObjectName = gameObject.name;
-        string[] words = gameObjectName.Split(' ');
-
-        foreach (string word in words)
-        {
-            if (char.IsUpper(word[0]))
-            {
-                return word.ToLower();
-            }
-        }
-
-        return "";
-    }
-
 }
