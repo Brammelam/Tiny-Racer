@@ -11,17 +11,21 @@ public class KeyboardManager : MonoBehaviour
     [SerializeField]
     private bool isShiftPressed;
 
-    private void Start()
+    private void Awake()
     {
         inputFields = new List<TMP_InputField>();
 
-        TMP_InputField[] tmpInputFields = FindObjectsOfType<TMP_InputField>();
-        foreach (TMP_InputField inputField in tmpInputFields)
+        Transform parentTransform = transform.parent;
+        foreach (Transform childTransform in parentTransform)
         {
-            string inputFieldTag = inputField.gameObject.tag;
-            if (!string.IsNullOrEmpty(inputFieldTag))
+            TMP_InputField tmpInputField = childTransform.GetComponent<TMP_InputField>();
+            if (tmpInputField != null)
             {
-                inputFields.Add(inputField);
+                string inputFieldTag = tmpInputField.gameObject.tag;
+                if (!string.IsNullOrEmpty(inputFieldTag))
+                {
+                    inputFields.Add(tmpInputField);
+                }
             }
         }
 
