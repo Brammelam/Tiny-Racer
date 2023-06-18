@@ -233,7 +233,7 @@ public class selectedCar : MonoBehaviour
             SceneManager.LoadScene(1);
         else
         {
-            PlayerPrefs.SetInt("level", 2);
+            PlayerPrefs.SetInt("level", -1);
             SceneManager.LoadScene(2);
         }
 

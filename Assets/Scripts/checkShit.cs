@@ -84,6 +84,7 @@ public class checkShit : MonoBehaviour
     public saveLevel saveLevel;
 
     // tutorial stuff
+    private bool tutorialLevel = false;
     public float slowMo = 1f;
 
     public bool setSlow = false;
@@ -138,9 +139,9 @@ public class checkShit : MonoBehaviour
 
         whatCar = PlayerPrefs.GetInt("car", 0);
         
-        currentLevel = PlayerPrefs.GetInt("level", 3);
-
-        if (currentLevel == 2) globalRecordTime = 0;
+        currentLevel = PlayerPrefs.GetInt("level", 0);
+        if (SceneManager.GetActiveScene().buildIndex == 2) tutorialLevel = true;
+        if (tutorialLevel) globalRecordTime = 0;
 
         yield return pm.DownloadGhostId(); // Find the file id for the ghost data of the current track
         yield return pm.GetGhostData(); // Adds the data to the pm.ghostData list of floats we use to animate the ghost
@@ -408,7 +409,7 @@ public class checkShit : MonoBehaviour
             playerRecord.Add(player.distanceTravelled);
 
             //TUTORIAL STUFF
-            if (currentLevel == 2)
+            if (tutorialLevel)
             {
                 if (someCount == 0)
                 {
@@ -437,7 +438,7 @@ public class checkShit : MonoBehaviour
 
             
             // start ghost when player starts playing
-            if (index < loadedGhost.Count && currentLevel != 2)
+            if (index < loadedGhost.Count && !tutorialLevel)
             {
                 float ghostDistance = loadedGhost[index];
 
@@ -453,7 +454,7 @@ public class checkShit : MonoBehaviour
                 string _car = "car" + _currentLevel.ToString();
                 string _gotCar = "gotcar" + _currentLevel.ToString();
                 
-                if (!PlayerPrefs.HasKey(_car) && currentLevel != 2)
+                if (!PlayerPrefs.HasKey(_car) && !tutorialLevel)
                 {
                     string triggerCarUnlock = "grantCar" + _currrentLevelString;
                     pm.TriggerEvent(triggerCarUnlock);
@@ -462,7 +463,7 @@ public class checkShit : MonoBehaviour
                 }
 
                 // Disables repeating tutorial text after completing first lap
-                if (currentLevel == 2)
+                if (tutorialLevel)
                 {
                     completedTutorial = true;
                     completedTutorialLap = true;
@@ -482,7 +483,7 @@ public class checkShit : MonoBehaviour
                 index = 0;
 
                 // Player beat global record
-                if ((globalRecordTime == 0 || elapsedTime < globalRecordTime) && currentLevel != 2)
+                if ((globalRecordTime == 0 || elapsedTime < globalRecordTime) && !tutorialLevel)
                 {
                     bool isGlobalRecord = true;
 
@@ -511,7 +512,7 @@ public class checkShit : MonoBehaviour
                 }
 
                 // Player only beat own record, not global record
-                else if ((((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime)) || (playerRecordTime == 0)) && currentLevel != 2)
+                else if ((((elapsedTime < playerRecordTime) && (elapsedTime > globalRecordTime)) || (playerRecordTime == 0)) && !tutorialLevel)
                 {
                     bool isGlobalRecord = false;
 
