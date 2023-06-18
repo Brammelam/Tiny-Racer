@@ -6,7 +6,6 @@ public class CowCollision : MonoBehaviour
 {
     private checkShit checkShit;
     [SerializeField] GameObject collectionCanvas;
-    [SerializeField] Collider collider;
     public bool hasTriggered;
 
     private void Start()
