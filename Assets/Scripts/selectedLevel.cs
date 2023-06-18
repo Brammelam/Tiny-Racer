@@ -61,14 +61,14 @@ public class selectedLevel : MonoBehaviour
     {
         move = new Vector3(100f, 0, 0);
         // Camera positions for toggling current selected level
+        levels = GameObject.FindGameObjectsWithTag("nature").ToList();
         pos1 = this.transform.position;
-        pos2 = this.transform.position - (move * 10);
+        pos2 = this.transform.position - (move * (levels.Count - 1));
     }
     public void Start()
     {
         HAT = PlayerPrefs.GetInt("hat");
         ready = false;
-        levels = GameObject.FindGameObjectsWithTag("nature").ToList();
         Light[] lights = FindObjectsOfType<Light>();
         foreach (Light light in lights)
         {
@@ -134,7 +134,7 @@ public class selectedLevel : MonoBehaviour
 
     public void NextLevel()
     {
-        if (levelIndex < 10)
+        if (levelIndex < (levels.Count - 1))
         {
             this.transform.position = this.transform.position - move;
             levelIndex += 1;
@@ -165,7 +165,7 @@ public class selectedLevel : MonoBehaviour
         else
         {
             this.transform.position = pos2;
-            levelIndex = 10;
+            levelIndex = (levels.Count - 1);
             SetNightMode(false);
         }
         

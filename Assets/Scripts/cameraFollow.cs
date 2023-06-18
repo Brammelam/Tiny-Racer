@@ -22,9 +22,17 @@ public class cameraFollow : MonoBehaviour
 
     public void Start()
     {
-        cameraDistance = 30f;
+        float cameraDistancePreference = PlayerPrefs.GetFloat("cameradistance", 30f);
+        cameraDistance = cameraDistancePreference;
         smoothTime = 0.08f;
         this.gameObject.GetComponent<Camera>().orthographicSize = cameraDistance;
+    }
+
+    public void UpdateCameraDistance(float _distance)
+    {
+        this.gameObject.GetComponent<Camera>().orthographicSize = _distance;
+        PlayerPrefs.SetFloat("cameradistance", _distance);
+        PlayerPrefs.Save();
     }
 
     public void Update()
@@ -52,7 +60,7 @@ public class cameraFollow : MonoBehaviour
 
             // The camera follows a point ahead of the car determined by an offset (float value) to see the road ahead
             if (offset > 10f)
-                offset = 0.15f * check.player.speed;
+                offset = 0.5f * check.player.speed;
             else offset = 10f;
 
             Vector3 _followMe = pathCreator.path.GetPointAtDistance(check.player.distanceTravelled + (offset));

@@ -144,6 +144,8 @@
      <Compile Include="Assets\CanvasResize.cs" />
      <Compile Include="Assets\ButtonDown.cs" />
      <Compile Include="Assets\PopupParticles.cs" />
+     <Compile Include="Assets\SetCameraDistance.cs" />
+     <Compile Include="Assets\IgnoreInputRegion.cs" />
      <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

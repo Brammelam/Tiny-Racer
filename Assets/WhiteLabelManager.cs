@@ -9,6 +9,10 @@ using System;
 
 public class WhiteLabelManager : MonoBehaviour
 {
+    [Header("Guest Session")]
+    public Button guestButton;
+    public TMP_InputField guestSessionInputField;
+
     [Header("New User")]
     public TMP_InputField newuserEmailInputField;
     public TMP_InputField newuserPasswordInputField;
@@ -67,6 +71,45 @@ public class WhiteLabelManager : MonoBehaviour
             if (rememberMe == 0) rememberMeToggle.isOn = false;
             else rememberMeToggle.isOn = true;
         }
+    }
+
+    public void GuestSession()
+    {
+        bool done = false;
+        guestButton.interactable = false;
+        string guestName = guestSessionInputField.text;
+        LootLockerSDKManager.StartGuestSession(response =>
+        {
+            if (!response.success) { 
+                
+                Debug.Log("Failed to start guest session!");
+                StartCoroutine(AnimateButton(guestButton, ":(", "START"));
+            }
+            else
+            {
+                if (guestName != "")
+                {
+                    PlayerPrefs.SetString("name", guestName);
+                    PlayerPrefs.Save();
+                    LootLockerSDKManager.SetPlayerName(guestName, (response) =>
+                    {
+                        if (response.success)
+                        {
+
+                            playerManager.playerName.text = "Welcome back, " + response.name.ToString() + "!";
+                            playerManager.playerNameString = response.name.ToString();
+                            PlayerPrefs.SetString("name", guestName);
+                            PlayerPrefs.Save();
+                        }
+                        else
+                        {
+                            Debug.Log("Setting player name failed: " + response.Error);
+                        }
+                    });
+                }
+                playerManager.Setup();
+            }
+        });
     }
 
     public void AutofillLogin()
@@ -140,6 +183,7 @@ public class WhiteLabelManager : MonoBehaviour
         registerButton.interactable = true;
         loginButton.interactable = true;
         resetPasswordButton.interactable = true;
+        guestButton.interactable = true;
     }
 
     public void NewUser()

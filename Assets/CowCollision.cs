@@ -18,9 +18,7 @@ public class CowCollision : MonoBehaviour
         if (!hasTriggered && other.gameObject.CompareTag("Player")) 
         {
             hasTriggered = true;
-            BoxCollider collider = GetComponent<BoxCollider>();
-            collider.isTrigger = false;
-
+            this.GetComponent<Collider>().isTrigger = false;
             Rigidbody rb = this.GetComponent<Rigidbody>();
 
             Vector3 direction = other.transform.position - transform.position;

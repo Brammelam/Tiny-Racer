@@ -7,7 +7,7 @@ public class ButtonScript : MonoBehaviour
 {
     [Header("Elements")]
     [SerializeField] private Animator animator;
-    [SerializeField] private GameObject loginscreen, startscreen, registerscreen, resetscreen, loginbutton;
+    [SerializeField] private GameObject guestscreen, loginscreen, startscreen, registerscreen, resetscreen, loginbutton;
     [SerializeField] WhiteLabelManager whiteLabelManager;
     private bool animationComplete;
 
@@ -15,6 +15,14 @@ public class ButtonScript : MonoBehaviour
     void Start()
     {
         animationComplete = false;
+    }
+
+    public void OnClickGuestScreen()
+    {
+        animationComplete = false;
+        animator.Play("buttonclick");
+
+        StartCoroutine(ClickGuestScreen());
     }
 
     public void OnClickLoginScreen()
@@ -40,6 +48,14 @@ public class ButtonScript : MonoBehaviour
         animator.Play("buttonclick");
 
         StartCoroutine(ClickResetScreen());
+    }
+
+    public void OnClickGuest()
+    {
+        animationComplete = false;
+        animator.Play("buttonclick");
+
+        StartCoroutine(ClickGuest());
     }
 
     public void OnClickLogin()
@@ -109,6 +125,22 @@ public class ButtonScript : MonoBehaviour
 
     }
 
+    private IEnumerator ClickBackFromGuest()
+    {
+        while (!animationComplete) yield return null;
+
+        startscreen.SetActive(true);
+        guestscreen.SetActive(false);
+    }
+
+    private IEnumerator ClickGuestScreen()
+    {
+        while (!animationComplete) yield return null;
+
+        guestscreen.SetActive(true);
+        startscreen.SetActive(false);
+    }
+
 
     private IEnumerator ClickLoginScreen()
     {
@@ -139,6 +171,13 @@ public class ButtonScript : MonoBehaviour
         resetscreen.SetActive(true);
         startscreen.SetActive(false);
 
+    }
+
+    private IEnumerator ClickGuest()
+    {
+        while (!animationComplete) yield return null;
+
+        whiteLabelManager.GuestSession();
     }
 
     private IEnumerator ClickLogin()

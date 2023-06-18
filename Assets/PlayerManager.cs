@@ -48,6 +48,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject loadingScreen;
     public GameObject garageScreen;
     public GameObject startScreen;
+    public GameObject guestScreen;
     public GameObject registerScreen;
     public GameObject loginScreen;
     public GameObject resetpasswordScreen;
@@ -202,6 +203,7 @@ public class PlayerManager : MonoBehaviour
     {
         bool done = false;
         startScreen.SetActive(false);
+        guestScreen.SetActive(false);
         registerScreen.SetActive(false);
         loginScreen.SetActive(false);
         resetpasswordScreen.SetActive(false);

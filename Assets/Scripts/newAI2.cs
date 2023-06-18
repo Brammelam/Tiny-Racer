@@ -9,7 +9,8 @@ public class newAI2 : MonoBehaviour
     public GameObject cop;
     public GameObject deadCop;
     public PathCreator pathCreator;
-
+    private SetCameraDistance cameraDistanceScript;
+    private Rect inputRegion;
     //public PathCreator pathCreator;
     public float smoothTime;
 
@@ -38,8 +39,12 @@ public class newAI2 : MonoBehaviour
 
     public void Start()
     {
+        cameraDistanceScript = FindObjectOfType<SetCameraDistance>();
         smoothTime = 0.15f;
         particlePool = gameObject.AddComponent<ParticlePool>();
+
+        float screenWidth = Screen.width;
+        inputRegion = new Rect(0, Screen.height - 200, screenWidth, 200);
 
     }
 
@@ -48,16 +53,23 @@ public class newAI2 : MonoBehaviour
         interval++;
         pathCreator ??= PathCreator.FindObjectOfType<PathCreator>();
         check ??= checkShit.FindObjectOfType<checkShit>();
-        if (check == null) return;
-        
-        
+        if (check == null) return;                
 
-        distanceTravelled += speed * Time.deltaTime;       
-        
-        if (Input.touchCount > 0 || Input.GetMouseButton(0) || Input.GetKey("space"))
+        distanceTravelled += speed * Time.deltaTime;
+        if (Input.GetKey("space")) touching = true;
+
+        if (Input.touchCount > 0 || Input.GetMouseButton(0))
         {
-            touching = true;
+            // Get the touch or mouse position
+            Vector2 inputPosition = Input.mousePosition;
+
+            // Check if the player is touching the excluded zone
+            if (!inputRegion.Contains(inputPosition))
+            {
+                touching = true;
+            }
         }
+
         else touching = false;
 
         if (!check.tipped && touching)
