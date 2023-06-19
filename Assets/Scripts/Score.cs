@@ -27,10 +27,10 @@ public class Score : MonoBehaviour
 	public bool hasStarted = false;
 	public IEnumerator coroutine;
 	public bool showText = false;
-	public bool check = false;
 	public int tempCount = 0;
 	private bool ready = false;
 	private bool tutorialLevel = false;
+	private bool tutorialCompleted = false;
 
 
 	void Awake()
@@ -72,21 +72,17 @@ public class Score : MonoBehaviour
 			if (gh.hasStarted)
 			{
 				welcomeTutorial.SetActive(false);
-				if (gh.tutorialIndex == 1)
+				if (gh.tutorialIndex == 1 && !tutorialCompleted)
 					ShowTutorial1();
-				if (gh.tutorialIndex == 2)
+				if (gh.tutorialIndex == 2 && !tutorialCompleted)
 					ShowTutorial2(); 
-				if (gh.someCount == 1 && !check)
+				if (gh.someCount == 1 && !tutorialCompleted)
 				{
-					check = true;
+					tutorialCompleted = true;
 					ShowTutorial3();
 				}
-			}
-
-
-			
+			}			
 		}
-
 
 		if (!gh.tipped)
 		{
@@ -142,7 +138,6 @@ public class Score : MonoBehaviour
 	IEnumerator ShowRestartText(float waitTime)
     {
 		yield return new WaitForSeconds(waitTime);
-		restartText.SetActive(true);
-		
+		restartText.SetActive(true);		
 	}
 }

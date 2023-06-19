@@ -241,9 +241,7 @@ public class selectedCar : MonoBehaviour
     // Disabling music and effect sliders for now
     public void LoadPrefs()
     {
-
         carIndex = PlayerPrefs.GetInt("car", 0); //pm.carsettings;
-
         carText.text = carNames[carIndex];
 
         this.transform.position = this.transform.position - (move * carIndex);
@@ -274,7 +272,7 @@ public class selectedCar : MonoBehaviour
 
         mixer.SetFloat("masterVolume", Mathf.Log10(_masterVolume) * 20);
 
-        _qualityIndex = PlayerPrefs.GetInt("Quality", 0);
+        _qualityIndex = PlayerPrefs.GetInt("Quality", 1);
 
         ChangeQuality(_qualityIndex);
     }
