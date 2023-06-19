@@ -34,7 +34,6 @@ public class CowCollision : MonoBehaviour
 
             PlayerPrefs.SetInt(animalCollision, numberOfCollisions);
             PlayerPrefs.Save();
-            //Debug.Log("Collided with " + animal + " " + numberOfCollisions + " times!");
 
             if (numberOfCollisions == 5)
             {

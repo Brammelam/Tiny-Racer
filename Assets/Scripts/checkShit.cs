@@ -141,7 +141,7 @@ public class checkShit : MonoBehaviour
         
         currentLevel = PlayerPrefs.GetInt("level", 0);
         if (SceneManager.GetActiveScene().buildIndex == 2) tutorialLevel = true;
-        Debug.Log("Tutorial is: " + tutorialLevel);
+
         if (tutorialLevel) globalRecordTime = 0;
 
         if (!tutorialLevel)
@@ -151,7 +151,7 @@ public class checkShit : MonoBehaviour
             loadedGhost = pm.ghostData; // load the ghostdata for use in the GameLogic()
         }
         
-            yield return pm.GetSO(); // Load the Scriptable Objects
+        yield return pm.GetSO(); // Load the Scriptable Objects
 
         cars = new List<GameObject>(1);
         deadCars = new List<GameObject>(1);
@@ -193,7 +193,7 @@ public class checkShit : MonoBehaviour
 
         yield return WaitForAssignments();
 
-        if (PlayerPrefs.GetInt("hatIndex", -1) > 0) yield return SetHat();
+        yield return SetHat();
 
         if (currentLevel < 3 || currentLevel == 8 || currentLevel == 9 || currentLevel == 9)
         {
@@ -281,10 +281,11 @@ public class checkShit : MonoBehaviour
     {
         int _car = PlayerPrefs.GetInt("car");
         string _hatName = PlayerPrefs.GetString("hat");
-        //Debug.Log("Found this hat: " + _hatName);
+
+        if (_hatName == "no" || !PlayerPrefs.HasKey("hat")) yield break;
 
         string hatLocation = _hatName + "1"; // add 1 which are the smaller models
-
+        Debug.Log("Found hat" + _hatName + " at index " + PlayerPrefs.GetInt("hatindex"));
         _hat = Instantiate(Resources.Load("GameHats/" + hatLocation) as GameObject);
 
         _hat.transform.SetParent(cop.transform);
@@ -372,7 +373,6 @@ public class checkShit : MonoBehaviour
 
             if (ready)
             {
-                Debug.Log("gh found everything leggo"); 
                 GameLogic();
             }
 
@@ -567,7 +567,7 @@ public class checkShit : MonoBehaviour
         copPosition = cop.transform.position;
         copRotation = cop.transform.rotation;
         direction = cop.transform.forward;
-        if (PlayerPrefs.GetInt("hatindex") > -1)
+        if (_hat != null)
         {
             _hat.transform.parent = null;
             _hat.GetComponent<Rigidbody>().isKinematic = false;

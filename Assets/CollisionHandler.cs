@@ -11,7 +11,6 @@ public class CollisionHandler : MonoBehaviour
         if (CheckColliderOverlap())
         {
             Debug.Log("Colliders are overlapping!");
-            // Perform desired actions when the colliders are overlapping
         }
     }
 
