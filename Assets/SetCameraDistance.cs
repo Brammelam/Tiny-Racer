@@ -10,8 +10,6 @@ public class SetCameraDistance : MonoBehaviour
 
     public RectTransform inputRegion;
 
-    public bool isInputRegionActive { get; private set; }
-
     public void Start()
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -21,23 +19,9 @@ public class SetCameraDistance : MonoBehaviour
     }
     public void UpdateCameraDistance(float _distance)
     {
-        if (isInputRegionActive)
-        {
-            return;
-        }
 
         mainCamera.orthographicSize = _distance;
         PlayerPrefs.SetFloat("cameradistance", _distance);
         PlayerPrefs.Save();
-    }
-
-    public void OnPointerDownInInputRegion()
-    {
-        isInputRegionActive = true;
-    }
-
-    public void OnPointerUpInInputRegion()
-    {
-        isInputRegionActive = false;
     }
 }

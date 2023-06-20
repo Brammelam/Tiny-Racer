@@ -15,8 +15,6 @@ public class lapTime : MonoBehaviour
     public float recordScore, lapScore;
     public bool ready;
 
-    private CurrentscoreSO currentScoreSO;
-
     public void Awake()
     {
         recordScore = PlayerPrefs.GetFloat("playerScore");
@@ -32,7 +30,6 @@ public class lapTime : MonoBehaviour
         if (pm != null && check != null)
         {
             LoadRecord();
-            currentScoreSO = pm.currentScoreSO;
 
             ready = true;
         }
@@ -47,8 +44,7 @@ public class lapTime : MonoBehaviour
     {
         recordtext.text = recordScore.ToString("F2") + "s";
         ready = false;
-        LookForStuff();
-        
+        LookForStuff();       
 
     }
 
@@ -70,7 +66,6 @@ public class lapTime : MonoBehaviour
 
     public void SetRecord(float _record)
     {
-        // _newRecordText = PlayerPrefs.GetFloat("playerScore").ToString();
         recordtext.text = _record + "s";
     }
 

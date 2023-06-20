@@ -5,7 +5,6 @@ public class CarMusicClass : MonoBehaviour
 {
     public AudioSource _audioSource;
     public GameObject _audio;
-    public CarMusicClass _carMusicClass;
     public checkShit _check;
 
     public float _pitch;
@@ -33,6 +32,7 @@ public class CarMusicClass : MonoBehaviour
             {
                 _pitch = _check.currentSpeed / 95;
                 _audioSource.pitch = _pitch;
+                Debug.Log("pitch is " + _pitch);
             }
 
             

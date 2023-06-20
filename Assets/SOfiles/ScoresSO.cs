@@ -6,12 +6,26 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ScoresSO : ScriptableObject
 {
+    private static ScoresSO _instance;
+
+    public static ScoresSO Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = Resources.Load<ScoresSO>("SO/ScoresSO");
+            }
+            return _instance;
+        }
+    }
+
     [SerializeField]
     private List<string> _names;
     [SerializeField]
-    public List<string> _scores;
+    public List<int> _scores;
     [SerializeField]
-    private List<string> _playerScores;
+    private List<int> _playerScores;
     [SerializeField]
     public int _levelIndex;
 
@@ -23,16 +37,20 @@ public class ScoresSO : ScriptableObject
         set { _names = value; }
     }
 
-    public List<string> Values
+    public List<int> Values
     {
         get { return _scores; }
         set { _scores = value; }
     }
 
-    public List<string> PlayerValues
+    public List<int> PlayerValues
     {
         get { return _playerScores; }
-        set { _playerScores = value; }
+        set
+        {
+            _playerScores = value;
+
+        }
     }
 
     public int CurrentLevel
@@ -48,28 +66,5 @@ public class ScoresSO : ScriptableObject
     private void OnLevelIndexChanged()
     {
         LevelIndexChanged?.Invoke(_levelIndex);
-    }
-
-    // Method to update the size of the Values list
-    public void UpdateValuesSize(int newSize)
-    {
-        if (newSize < 0)
-        {
-            Debug.LogWarning("New size cannot be negative.");
-            return;
-        }
-
-        int currentSize = Values.Count;
-
-        if (newSize < currentSize)
-        {
-            // If the new size is smaller, remove excess elements
-            Values.RemoveRange(newSize, currentSize - newSize);
-        }
-        else if (newSize > currentSize)
-        {
-            // If the new size is larger, add null elements to fill the gap
-            Values.AddRange(new string[newSize - currentSize]);
-        }
     }
 }

@@ -54,8 +54,6 @@ public class selectedLevel : MonoBehaviour
     [SerializeField]
     private bool ready;
 
-    [SerializeField]
-    private int HAT;
 
     private void Awake()
     {
@@ -67,7 +65,7 @@ public class selectedLevel : MonoBehaviour
     }
     public void Start()
     {
-        HAT = PlayerPrefs.GetInt("hat");
+        levelIndex = PlayerPrefs.GetInt("level", 0);
         ready = false;
         Light[] lights = FindObjectsOfType<Light>();
         foreach (Light light in lights)
@@ -215,12 +213,12 @@ public class selectedLevel : MonoBehaviour
     {
         int _levelIndexName = levelIndex + 1;
         levelText.text = "1 - " + _levelIndexName.ToString();
+        Debug.Log("LevelIndex is: " + levelIndex);
+        int _tempScore = leaderBoard.leaderboardScores[levelIndex];
+        int _tempPlayerScore = leaderBoard.leaderboardPlayerScores[levelIndex];
 
-        string _tempScore = leaderBoard.leaderboardScores[levelIndex];
-        string _tempPlayerScore = leaderBoard.leaderboardPlayerScores[levelIndex];
-
-        float _floatScore = float.Parse(_tempScore) / 100;
-        float _floatPlayerScore = float.Parse(_tempPlayerScore) / 100;
+        float _floatScore = Mathf.Round(_tempScore / 100f * 100f) / 100f;
+        float _floatPlayerScore = Mathf.Round(_tempPlayerScore / 100f * 100f) / 100f;
 
         // Format the highscores retrieved from LeaderBoard
         playerNames.text = leaderBoard.leaderboardNames[levelIndex];

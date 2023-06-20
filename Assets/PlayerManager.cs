@@ -63,7 +63,6 @@ public class PlayerManager : MonoBehaviour
     public List<string> leaderboardNames;
     public List<string> leaderboardScores;
     public List<string> leaderboardPlayerScores;
-    public ScoresSO leaderboardSO;
     public CurrentscoreSO currentScoreSO;
     public GhostsSO ghostsSO;
     public UnlockedCarsSO unlockedCarsSO;
@@ -83,8 +82,7 @@ public class PlayerManager : MonoBehaviour
     public bool allSOfound;
 
     public float Progress { get; private set; }
-    public event Action<int> LevelChanged;
-    public event Action SOReady;
+
     GameObject audioManager;
 
     void Awake()
@@ -97,6 +95,9 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        // Set ingame framerate to 60
+        Application.targetFrameRate = 60;
+
         ghostData = new List<float>();
         ghostsSO = Resources.Load<GhostsSO>("SO/GhostsSO");
         //audioManager.GetComponent<AudioManager>().Initialize();
@@ -173,10 +174,10 @@ public class PlayerManager : MonoBehaviour
             DownloadPlayerFileKeys(),
             CheckCars(),
             GetCarSettingsData(),
+            GetSO(),            
             leaderBoard.FetchHighscores(),
             leaderBoard.FetchPlayerScores(),
             SetUpUI(),
-            GetSO(),            
             DisableStartScreens(),
 
     };
@@ -281,44 +282,21 @@ public class PlayerManager : MonoBehaviour
     public IEnumerator GetSO()
     {   
         // Load the Scriptable Objects
-        leaderboardSO = Resources.Load<ScoresSO>("SO/ScoresSO");
         unlockedCarsSO = Resources.Load<UnlockedCarsSO>("SO/UnlockedCarsSO");
-        currentScoreSO = Resources.Load<CurrentscoreSO>("SO/CurrentscoreSO");
         
         carsettings = Resources.Load<CarsettingsSO>("SO/CarsettingsSO"); ;
 
         // Load the carsettings for the player 
-        currentCar = PlayerPrefs.GetInt("car", 0); //currentCar = carsettings.CurrentCar;
+        currentCar = PlayerPrefs.GetInt("car", 0);
 
-        currentLevel = PlayerPrefs.GetInt("level", 0); //currentLevel = leaderboardSO.CurrentLevel;
+        currentLevel = PlayerPrefs.GetInt("level", 0);
         if (currentLevel == -1 && PlayerPrefs.HasKey("TutorialUnlock"))
             currentLevel = 0; // Fix player getting stuck in tutorial
 
         playerNameString = PlayerPrefs.GetString("name");
         
-        //load the leaderboards for highscores on levelselect
-        leaderboardNames = leaderboardSO.Names;
-        leaderboardScores = leaderboardSO.Values;
-        leaderboardPlayerScores = leaderboardSO.PlayerValues;
         allSOfound = true;
         yield return null;
-    }
-
-    public void UpdateScoreText(float _score, bool _uploadPlayerScoreAsGlobal)
-    {
-        if (_uploadPlayerScoreAsGlobal)
-        {
-            leaderboardSO.Values[currentLevel] = _score.ToString();
-            leaderboardSO.PlayerValues[currentLevel] = _score.ToString();
-            leaderboardSO.Names[currentLevel] = playerNameString;
-            currentScoreSO.CurrentScore = _score;
-            currentScoreSO.CurrentPlayerScore = _score;
-        } 
-        else
-        {
-            leaderboardSO.PlayerValues[currentLevel] = _score.ToString();            
-            currentScoreSO.CurrentPlayerScore = _score;
-        }
     }
 
     public void TriggerEvent(string _car)
@@ -326,10 +304,7 @@ public class PlayerManager : MonoBehaviour
         string triggerName = _car;
         LootLockerSDKManager.ExecuteTrigger(triggerName, (response) =>
         {
-            if (!response.success)
-            {
-                Debug.Log("Error retrieving triggered events");
-            }
+            if (!response.success) Debug.Log("Error triggering " + triggerName);
         });
     }
 
@@ -721,6 +696,7 @@ public class PlayerManager : MonoBehaviour
     public IEnumerator DownloadPlayerFileKeys()
     {
         bool done = false;
+        int _settings = 0;
         int i = 0;
         LootLockerSDKManager.GetEntirePersistentStorage((response) =>
         {
@@ -729,7 +705,7 @@ public class PlayerManager : MonoBehaviour
             {
                 if (item.key == "9999")
                 {
-                    int _settings = int.Parse(item.value);
+                    _settings = int.Parse(item.value);
                     PlayerPrefs.SetInt("settings", _settings);
                     PlayerPrefs.Save();
                     //carsettings.SettingsKey = item.value;

@@ -26,7 +26,7 @@ public class hideButton : MonoBehaviour
 
     public void TriggerButton()
     {
-        unlockButtonButton.interactable = false;
+        unlockButton.SetActive(false);
         string _gotcar = "gotcar" + (pm.currentCar + 1);
         PlayerPrefs.SetString(_gotcar, "true");
         StartCoroutine(ChangeButton());

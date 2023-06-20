@@ -97,15 +97,13 @@ public class checkShit : MonoBehaviour
     [SerializeField]
     private bool allObjectsFound = false;
     private bool ready = false;
-    public AudioManager audioManager;
 
     private lapTime lapTime;
 
 
     public void Awake()
     {
-        // Set ingame framerate to 60
-        Application.targetFrameRate = 60;
+        
         
         // Generate a playermanager
         GameObject playerManagerObject = new GameObject("PlayerManager");
@@ -195,7 +193,7 @@ public class checkShit : MonoBehaviour
 
         yield return SetHat();
 
-        if (currentLevel < 3 || currentLevel == 8 || currentLevel == 9 || currentLevel == 9)
+        if (currentLevel < 3 || currentLevel >= 7)
         {
             GameObject.FindGameObjectWithTag("Ambient").GetComponent<AmbientClass>().PlayAmbientMusic();
             if (currentLevel == 7 || currentLevel == 8)
@@ -214,9 +212,9 @@ public class checkShit : MonoBehaviour
             GameObject.FindGameObjectWithTag("Snow").GetComponent<SnowScript>().PlaySnowMusic();
         }
 
-        _car = GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>();
-        _car.PlayCarMusic();
-        _car.timeElapsed = 0;
+        //_car = GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>();
+        //_car.PlayCarMusic();
+        //_car.timeElapsed = 0;
 
         ready = true;
 
@@ -281,8 +279,8 @@ public class checkShit : MonoBehaviour
     {
         int _car = PlayerPrefs.GetInt("car");
         string _hatName = PlayerPrefs.GetString("hat");
-
-        if (_hatName == "no" || !PlayerPrefs.HasKey("hat")) yield break;
+        int _hatindex = PlayerPrefs.GetInt("hatindex", -1);
+        if (_hatindex <= -1) yield break;
 
         string hatLocation = _hatName + "1"; // add 1 which are the smaller models
         Debug.Log("Found hat" + _hatName + " at index " + PlayerPrefs.GetInt("hatindex"));
@@ -499,6 +497,7 @@ public class checkShit : MonoBehaviour
                     globalRecordTime = _tempScore;
                     playerRecordTime = _tempScore;
 
+
                     lapTime.SetRecord(_tempScore); // Update the UI
 
                     PlayerPrefs.SetFloat("highScore", _tempScore);
@@ -508,7 +507,7 @@ public class checkShit : MonoBehaviour
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
 
                     StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel, isGlobalRecord));
-                    pm.UpdateScoreText(_recordTime, isGlobalRecord);
+                    leaderBoard.HandlePlayerValuesChanged(_recordTime, currentLevel, true);
 
                     loadedGhost = playerRecord;
 
@@ -533,7 +532,8 @@ public class checkShit : MonoBehaviour
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
                     StartCoroutine(leaderBoard.SubmitScoreCoroutine(_recordTime, currentLevel, isGlobalRecord));
-                    pm.UpdateScoreText(_recordTime, isGlobalRecord);
+
+                    leaderBoard.HandlePlayerValuesChanged(_recordTime, currentLevel, false);
 
                     loadedGhost = playerRecord;
 
@@ -549,13 +549,13 @@ public class checkShit : MonoBehaviour
     private void Victory(int _i)
     {       
         Vector3 spawnVector3 = pathCreator.path.GetPointAtDistance(0) + new Vector3(0, 5, 0);
-        GameObject conf1 = Instantiate(Resources.Load("confetti1"), spawnVector3, Quaternion.Euler(-40f, 0, 0f)) as GameObject;
+        //GameObject conf1 = Instantiate(Resources.Load("confetti1"), spawnVector3, Quaternion.Euler(-40f, 0, 0f)) as GameObject;
         if (_i > 1) // Beating global record justifies double the confetti
         {
-            GameObject conf2 = Instantiate(Resources.Load("confetti2"), spawnVector3, Quaternion.Euler(-140f, 0, 0f)) as GameObject;
+            //GameObject conf2 = Instantiate(Resources.Load("confetti2"), spawnVector3, Quaternion.Euler(-140f, 0, 0f)) as GameObject;
         }
 
-        Destroy(conf1, 3f);
+        //Destroy(conf1, 3f);
         //Destroy(conf2, 3f);
        
     }
@@ -579,7 +579,7 @@ public class checkShit : MonoBehaviour
 
         // Calculate flip direction based on the corner direction
         Vector3 flipDirection = Quaternion.Euler(0f, 0f, -90f) * direction;
-        GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>().StopCarMusic();
+        // GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>().StopCarMusic();
         rb2.AddForce(Vector3.up * 10000f, ForceMode.Impulse);
         rb2.AddForce(direction * 10000f, ForceMode.Impulse);
         rb2.AddTorque(flipDirection * 5000f * -rt.averageAngle, ForceMode.Impulse);
@@ -624,12 +624,61 @@ public class checkShit : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameObject.FindGameObjectWithTag("Ambient").GetComponent<AudioSource>().pitch = 1f;
-        GameObject.FindGameObjectWithTag("Ambient").GetComponent<AmbientClass>().StopAmbientMusic();
-        GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().StopMusic();
-        GameObject.FindGameObjectWithTag("City").GetComponent<CityScript>().StopCityMusic();
-        GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>().StopCarMusic();
-        GameObject.FindGameObjectWithTag("Snow").GetComponent<SnowScript>().StopSnowMusic();
+        GameObject ambientGameObject = GameObject.FindGameObjectWithTag("Ambient");
+        if (ambientGameObject != null)
+        {
+            AudioSource ambientAudioSource = ambientGameObject.GetComponent<AudioSource>();
+            if (ambientAudioSource != null)
+            {
+                ambientAudioSource.pitch = 1f;
+            }
+
+            AmbientClass ambientClass = ambientGameObject.GetComponent<AmbientClass>();
+            if (ambientClass != null)
+            {
+                ambientClass.StopAmbientMusic();
+            }
+        }
+
+        GameObject musicGameObject = GameObject.FindGameObjectWithTag("Music");
+        if (musicGameObject != null)
+        {
+            MusicClass musicClass = musicGameObject.GetComponent<MusicClass>();
+            if (musicClass != null)
+            {
+                musicClass.StopMusic();
+            }
+        }
+
+        GameObject cityGameObject = GameObject.FindGameObjectWithTag("City");
+        if (cityGameObject != null)
+        {
+            CityScript cityScript = cityGameObject.GetComponent<CityScript>();
+            if (cityScript != null)
+            {
+                cityScript.StopCityMusic();
+            }
+        }
+
+        GameObject engineNoiseGameObject = GameObject.FindGameObjectWithTag("engineNoise");
+        if (engineNoiseGameObject != null)
+        {
+            CarMusicClass carMusicClass = engineNoiseGameObject.GetComponent<CarMusicClass>();
+            if (carMusicClass != null)
+            {
+                carMusicClass.StopCarMusic();
+            }
+        }
+
+        GameObject snowGameObject = GameObject.FindGameObjectWithTag("Snow");
+        if (snowGameObject != null)
+        {
+            SnowScript snowScript = snowGameObject.GetComponent<SnowScript>();
+            if (snowScript != null)
+            {
+                snowScript.StopSnowMusic();
+            }
+        }
     }
 
 }

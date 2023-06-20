@@ -87,10 +87,12 @@ public class WhiteLabelManager : MonoBehaviour
             }
             else
             {
+                playerManager.playerId = response.player_id;
+                PlayerPrefs.SetInt("playerid", response.player_id);
+                PlayerPrefs.Save(); 
                 if (guestName != "")
                 {
-                    PlayerPrefs.SetString("name", guestName);
-                    PlayerPrefs.Save();
+                    
                     LootLockerSDKManager.SetPlayerName(guestName, (response) =>
                     {
                         if (response.success)
@@ -98,6 +100,7 @@ public class WhiteLabelManager : MonoBehaviour
 
                             playerManager.playerName.text = "Welcome back, " + response.name.ToString() + "!";
                             playerManager.playerNameString = response.name.ToString();
+                            
                             PlayerPrefs.SetString("name", guestName);
                             PlayerPrefs.Save();
                         }

@@ -19,7 +19,7 @@ public class speedTracker : MonoBehaviour
 		direction = (carPosition - lastPosition);
 		lastPosition = transform.position;
 
-		//UpdateSpeed();
+		UpdateSpeed();
 
 	}
 

@@ -151,10 +151,6 @@ public class selectedCar : MonoBehaviour
     {
         int _car = PlayerPrefs.GetInt("car", 0);
         carText.text = carNames[_car];
-        // Disable outlines on all hats when changing cars (hat is turned off so outline must also be turned off)
-        GameObject[] rdwoc = GameObject.FindGameObjectsWithTag("hatButton");
-        foreach (GameObject lol in rdwoc)
-            lol.GetComponent<Outline>().enabled = false;
     }
 
     private void DontMoveHat(Vector3 _move)
@@ -241,12 +237,12 @@ public class selectedCar : MonoBehaviour
     // Disabling music and effect sliders for now
     public void LoadPrefs()
     {
-        carIndex = PlayerPrefs.GetInt("car", 0); //pm.carsettings;
+        carIndex = PlayerPrefs.GetInt("car", 0);
         carText.text = carNames[carIndex];
 
-        this.transform.position = this.transform.position - (move * carIndex);
+        this.transform.position = pos1 - (move * carIndex);
         UpdateCarName();
-        //DontMoveHat(move * carIndex);
+
 
         try
         {          

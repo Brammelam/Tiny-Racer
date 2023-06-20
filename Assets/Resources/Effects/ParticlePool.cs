@@ -5,16 +5,12 @@ public class ParticlePool : MonoBehaviour
 {
     public string particlePath = "Effects/SmokeParticle";
     public Transform emissionPoint;
-    public int poolSize = 70;
+    public int poolSize = 50;
     public float particleSize = 1f;
-    [SerializeField]
     private ParticleSystem[] particlePool;
     private int currentIndex = 0;
-    [SerializeField]
     Vector3 offset = new Vector3(0f, 0.4f, 2.4f);
-    [SerializeField]
     float minSize = 6;
-    [SerializeField]
     float maxSize = 7;
     public float fadeDuration = 8f;
 

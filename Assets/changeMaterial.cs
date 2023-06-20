@@ -9,7 +9,6 @@ public class changeMaterial : MonoBehaviour
     [SerializeField]
     List<Material> newmaterials;
 
-    public GameObject blackgo;
     public Material black;
     MeshRenderer myRend;
     MeshRenderer newRend;
@@ -24,7 +23,7 @@ public class changeMaterial : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        black = Resources.Load("black") as Material;
+        //black = Resources.Load("black") as Material;
 
         myRend = gameObject.GetComponentInChildren<MeshRenderer>();
         newRend = gameObject.GetComponentInChildren<MeshRenderer>();
