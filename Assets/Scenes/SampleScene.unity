@@ -10458,6 +10458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IngameCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8040674635789979034, guid: 566b7b3574b74db45ac831c8688ca4a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8040674635789979047, guid: 566b7b3574b74db45ac831c8688ca4a9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -18634,7 +18638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8448390931058875652, guid: 089245638c8bd00458643637dbc8be56, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960
+      value: 400.2497
       objectReference: {fileID: 0}
     - target: {fileID: 8448390931058875652, guid: 089245638c8bd00458643637dbc8be56, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -18650,7 +18654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8448390931132052045, guid: 089245638c8bd00458643637dbc8be56, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960
+      value: 400.2497
       objectReference: {fileID: 0}
     - target: {fileID: 8448390931132052045, guid: 089245638c8bd00458643637dbc8be56, type: 3}
       propertyPath: m_AnchoredPosition.y

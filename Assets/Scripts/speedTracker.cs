@@ -12,23 +12,11 @@ public class speedTracker : MonoBehaviour
 	public Vector3 direction = Vector3.zero;
 	public void FixedUpdate()
 	{
-
 		carPosition = transform.position;
 
 		speed = (carPosition - lastPosition).magnitude;
 		direction = (carPosition - lastPosition);
 		lastPosition = transform.position;
 
-		UpdateSpeed();
-
-	}
-
-	// Method to update the speed
-	public void UpdateSpeed()
-	{
-		CurrentSpeed = (carPosition - lastPosition).magnitude;
-
-		// Notify subscribers that the speed has changed
-		SpeedChanged?.Invoke(CurrentSpeed);
 	}
 }

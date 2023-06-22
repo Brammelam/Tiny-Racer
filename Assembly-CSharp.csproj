@@ -58,102 +58,104 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.2f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\ghostRecorder.cs" />
-    <Compile Include="Assets\playernamescript.cs" />
-    <Compile Include="Assets\Resources\ghostFollower.cs" />
     <Compile Include="Assets\Resources\Navigate.cs" />
-    <Compile Include="Assets\FileHandler.cs" />
-    <Compile Include="Assets\SOfiles\ScoresSO.cs" />
-    <Compile Include="Assets\ToggleHatScript.cs" />
     <Compile Include="Assets\PlayerManagerManager.cs" />
     <Compile Include="Assets\SelectHat.cs" />
-    <Compile Include="Assets\Resources\SetVolume.cs" />
-    <Compile Include="Assets\ToggleHatButton.cs" />
     <Compile Include="Assets\Scripts\CarMusicClass.cs" />
-    <Compile Include="Assets\findPlayerManager.cs" />
     <Compile Include="Assets\LoadingText.cs" />
     <Compile Include="Assets\Scripts\CityScript.cs" />
-    <Compile Include="Assets\Scripts\Score.cs" />
-    <Compile Include="Assets\Scripts\changeQuality.cs" />
     <Compile Include="Assets\AddLetterClass.cs" />
-    <Compile Include="Assets\hideButton.cs" />
     <Compile Include="Assets\MovingScript.cs" />
     <Compile Include="Assets\SmokeScript.cs" />
     <Compile Include="Assets\Progress.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\PathPlacer.cs" />
-    <Compile Include="Assets\Scripts\AmbientClass.cs" />
-    <Compile Include="Assets\ReturnHatName.cs" />
-    <Compile Include="Assets\Scripts\rotationTracker.cs" />
-    <Compile Include="Assets\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\backScript.cs" />
     <Compile Include="Assets\SOfiles\CarsettingsSO.cs" />
-    <Compile Include="Assets\SOfiles\UnlockedCarsSO.cs" />
     <Compile Include="Assets\GarageScreen.cs" />
+    <Compile Include="Assets\SOfiles\UnlockedCarsSO.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\PathSceneTool.cs" />
     <Compile Include="Assets\ToggleLoginStart.cs" />
-    <Compile Include="Assets\IgnoreInputRegion.cs" />
-    <Compile Include="Assets\loadScript.cs" />
-    <Compile Include="Assets\SettingsAnimationScript.cs" />
-    <Compile Include="Assets\Scripts\SnowScript.cs" />
     <Compile Include="Assets\ProgressBar.cs" />
-    <Compile Include="Assets\WhiteLabelManager.cs" />
     <Compile Include="Assets\Scripts\selectedLevel.cs" />
-    <Compile Include="Assets\Scripts\newAI2.cs" />
-    <Compile Include="Assets\CowCollision.cs" />
-    <Compile Include="Assets\Instance.cs" />
+    <Compile Include="Assets\ContentManager.cs" />
     <Compile Include="Assets\ToggleButton.cs" />
-    <Compile Include="Assets\Scripts\carController2.cs" />
     <Compile Include="Assets\Scripts\onLoad.cs" />
-    <Compile Include="Assets\Scripts\lapTime.cs" />
-    <Compile Include="Assets\CollectionScript.cs" />
     <Compile Include="Assets\CowScript.cs" />
     <Compile Include="Assets\ButtonScript.cs" />
     <Compile Include="Assets\LeaderBoard.cs" />
     <Compile Include="Assets\ChangeActiveInputField.cs" />
     <Compile Include="Assets\Scripts\horn.cs" />
-    <Compile Include="Assets\Scripts\CarAITargetMouse.cs" />
     <Compile Include="Assets\openKeyboard.cs" />
     <Compile Include="Assets\ButtonDown.cs" />
-    <Compile Include="Assets\prefabscriptls.cs" />
-    <Compile Include="Assets\Scripts\newController.cs" />
     <Compile Include="Assets\Resources\saveLevel.cs" />
     <Compile Include="Assets\InputHandler.cs" />
-    <Compile Include="Assets\SOfiles\GhostsSO.cs" />
     <Compile Include="Assets\CollisionHandler.cs" />
-    <Compile Include="Assets\PathCreator\Examples\Scripts\GeneratePathExample.cs" />
-    <Compile Include="Assets\PathCreator\Examples\Scripts\RoadMeshCreator.cs" />
     <Compile Include="Assets\changeMaterial.cs" />
     <Compile Include="Assets\Scripts\hatScript.cs" />
     <Compile Include="Assets\PanelToggle.cs" />
-    <Compile Include="Assets\Scripts\buttonSelect.cs" />
     <Compile Include="Assets\Scripts\cameraFollow.cs" />
-    <Compile Include="Assets\HatManager.cs" />
-    <Compile Include="Assets\KeyboardManager.cs" />
     <Compile Include="Assets\Scripts\carDriverAI.cs" />
-    <Compile Include="Assets\Scripts\MusicClass.cs" />
-    <Compile Include="Assets\rotateCar.cs" />
-    <Compile Include="Assets\checkName.cs" />
+    <Compile Include="Assets\KeyboardManager.cs" />
     <Compile Include="Assets\InputEntry.cs" />
-    <Compile Include="Assets\Scripts\titleCar.cs" />
-    <Compile Include="Assets\Scripts\speedTracker.cs" />
     <Compile Include="Assets\CanvasResize.cs" />
-    <Compile Include="Assets\PopupParticles.cs" />
-    <Compile Include="Assets\Scripts\tutorialScript.cs" />
-    <Compile Include="Assets\Scripts\selectedCar.cs" />
     <Compile Include="Assets\Resources\Effects\ParticlePool.cs" />
-    <Compile Include="Assets\PathCreator\Examples\Scripts\PathSpawner.cs" />
     <Compile Include="Assets\Scripts\navigateKeys.cs" />
-    <Compile Include="Assets\Resources\garageScript.cs" />
     <Compile Include="Assets\Scripts\checkShit.cs" />
     <Compile Include="Assets\SOfiles\CurrentscoreSO.cs" />
     <Compile Include="Assets\Scripts\newAI.cs" />
-    <Compile Include="Assets\SetCameraDistance.cs" />
     <Compile Include="Assets\SlowDownTime.cs" />
+    <Compile Include="Assets\PathCreator\Examples\Scripts\PathFollower.cs" />
+    <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
+    <Compile Include="Assets\Scripts\ghostRecorder.cs" />
+    <Compile Include="Assets\playernamescript.cs" />
+    <Compile Include="Assets\Resources\ghostFollower.cs" />
+    <Compile Include="Assets\FileHandler.cs" />
+    <Compile Include="Assets\SOfiles\ScoresSO.cs" />
+    <Compile Include="Assets\ToggleHatScript.cs" />
+    <Compile Include="Assets\Resources\SetVolume.cs" />
+    <Compile Include="Assets\ToggleHatButton.cs" />
+    <Compile Include="Assets\findPlayerManager.cs" />
+    <Compile Include="Assets\Scripts\Score.cs" />
+    <Compile Include="Assets\Scripts\changeQuality.cs" />
+    <Compile Include="Assets\hideButton.cs" />
+    <Compile Include="Assets\Scripts\AmbientClass.cs" />
+    <Compile Include="Assets\ReturnHatName.cs" />
+    <Compile Include="Assets\Scripts\rotationTracker.cs" />
+    <Compile Include="Assets\PlayerManager.cs" />
+    <Compile Include="Assets\IgnoreInputRegion.cs" />
+    <Compile Include="Assets\loadScript.cs" />
+    <Compile Include="Assets\SettingsAnimationScript.cs" />
+    <Compile Include="Assets\Scripts\SnowScript.cs" />
+    <Compile Include="Assets\WhiteLabelManager.cs" />
+    <Compile Include="Assets\Scripts\newAI2.cs" />
+    <Compile Include="Assets\CowCollision.cs" />
+    <Compile Include="Assets\Instance.cs" />
+    <Compile Include="Assets\Scripts\carController2.cs" />
+    <Compile Include="Assets\Scripts\lapTime.cs" />
+    <Compile Include="Assets\CollectionScript.cs" />
+    <Compile Include="Assets\Scripts\CarAITargetMouse.cs" />
+    <Compile Include="Assets\prefabscriptls.cs" />
+    <Compile Include="Assets\Scripts\newController.cs" />
+    <Compile Include="Assets\SOfiles\GhostsSO.cs" />
+    <Compile Include="Assets\PathCreator\Examples\Scripts\GeneratePathExample.cs" />
+    <Compile Include="Assets\PathCreator\Examples\Scripts\RoadMeshCreator.cs" />
+    <Compile Include="Assets\Scripts\buttonSelect.cs" />
+    <Compile Include="Assets\HatManager.cs" />
+    <Compile Include="Assets\Scripts\MusicClass.cs" />
+    <Compile Include="Assets\checkName.cs" />
+    <Compile Include="Assets\rotateCar.cs" />
+    <Compile Include="Assets\Scripts\titleCar.cs" />
+    <Compile Include="Assets\Scripts\speedTracker.cs" />
+    <Compile Include="Assets\PopupParticles.cs" />
+    <Compile Include="Assets\Scripts\tutorialScript.cs" />
+    <Compile Include="Assets\Scripts\selectedCar.cs" />
+    <Compile Include="Assets\tooltiptext.cs" />
+    <Compile Include="Assets\PathCreator\Examples\Scripts\PathSpawner.cs" />
+    <Compile Include="Assets\Resources\garageScript.cs" />
+    <Compile Include="Assets\SetCameraDistance.cs" />
     <Compile Include="Assets\SafeAreaHandler.cs" />
     <Compile Include="Assets\Scripts\SessionManager.cs" />
-    <Compile Include="Assets\PathCreator\Examples\Scripts\PathFollower.cs" />
     <Compile Include="Assets\SOfiles\FloatSO.cs" />
-    <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
@@ -805,8 +807,14 @@
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.2f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Recorder.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Recorder.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.IK.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
@@ -826,8 +834,8 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    <Reference Include="Unity.Recorder.Base">
+      <HintPath>Library\ScriptAssemblies\Unity.Recorder.Base.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
@@ -835,11 +843,14 @@
     <Reference Include="Unity.2D.Animation.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
@@ -889,8 +900,14 @@
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Recorder">
+      <HintPath>Library\ScriptAssemblies\Unity.Recorder.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>

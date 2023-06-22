@@ -6,16 +6,16 @@ using UnityEngine.UI;
 public class ToggleHatButton : MonoBehaviour
 {
 
-    private Image buttonImage;
-    [SerializeField] private Sprite lockedSprite;
+    private RawImage buttonImage;
+    [SerializeField] private Texture2D lockedSprite;
 
     private void Start()
     {
-        buttonImage = GetComponent<Image>();
+        buttonImage = GetComponent<RawImage>();
         if (!PlayerPrefs.HasKey(this.name))
         {           
             GetComponent<Button>().interactable = false;
-            buttonImage.sprite = lockedSprite;
+            buttonImage.texture = lockedSprite;
         }        
     }
 }

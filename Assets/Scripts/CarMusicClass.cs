@@ -6,6 +6,7 @@ public class CarMusicClass : MonoBehaviour
     public AudioSource _audioSource;
     public GameObject _audio;
     public checkShit _check;
+    private newAI2 player;
 
     public float _pitch;
     public float timeElapsed = 0;
@@ -17,24 +18,30 @@ public class CarMusicClass : MonoBehaviour
         else Destroy(gameObject);        
     }
 
-    
+    public void Start()
+    {
+        player = FindObjectOfType<newAI2>();
+    }
+
 
     public void Update()
     {
         if (SceneManager.GetActiveScene().buildIndex > 1 ) {
             if (_check == null) _check = GameObject.FindGameObjectWithTag("GameController").GetComponent<checkShit>();
+            if (player == null) player = FindObjectOfType<newAI2>();
 
-            if (_check.tipped)
+            if (_check.tipped && _check != null)
             {
 
                 SlowCarMusic();
             } else
             {
-                _pitch = _check.currentSpeed / 95;
-                _audioSource.pitch = _pitch;
-                Debug.Log("pitch is " + _pitch);
-            }
+                float normalizedSpeed = Mathf.InverseLerp(0f, 80f, player.speed);
+                float translatedValue = Mathf.Lerp(0.6f, 1.2f, normalizedSpeed);
+                _audioSource.pitch = _pitch = translatedValue;
 
+                PlayCarMusic();
+            }
             
         }
 
