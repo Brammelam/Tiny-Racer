@@ -1,0 +1,36 @@
+{
+    "achievements": [
+        {
+            "id": "flipping_car",
+            "name": "Flipping the Car",
+            "description": "Flip the car 10 times",
+            "progress": 0,
+            "goal": 10,
+            "completed": false
+        },
+        {
+            "id": "collecting_hat",
+            "name": "Collecting a Hat",
+            "description": "Collect 1 hat",
+            "progress": 0,
+            "goal": 1,
+            "completed": false
+        },
+        {
+            "id": "unlocking_car",
+            "name": "Unlocking a Car",
+            "description": "Unlock 1 car",
+            "progress": 0,
+            "goal": 1,
+            "completed": false
+        },
+        {
+            "id": "completing_level",
+            "name": "Completing a Level",
+            "description": "Complete 1 level",
+            "progress": 0,
+            "goal": 1,
+            "completed": false
+        }
+    ]
+}

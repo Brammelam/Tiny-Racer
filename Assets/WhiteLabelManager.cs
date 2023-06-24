@@ -63,7 +63,7 @@ public class WhiteLabelManager : MonoBehaviour
         if (serverManager != null)
         {
             Debug.Log("We are already playing, skipping stuff..");
-            playerManager.Setup();
+            playerManager.ReturnToMenu();
         }
         else
         {
@@ -75,7 +75,7 @@ public class WhiteLabelManager : MonoBehaviour
 
     public void GuestSession()
     {
-        bool done = false;
+
         guestButton.interactable = false;
         string guestName = guestSessionInputField.text;
         LootLockerSDKManager.StartGuestSession(response =>

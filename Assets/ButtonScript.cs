@@ -148,16 +148,17 @@ public class ButtonScript : MonoBehaviour
 
         whiteLabelManager.AutofillLogin();
 
-        loginscreen.SetActive(true);
-        startscreen.SetActive(false);
-
+        if (PlayerPrefs.GetInt("rememberMe") == 1) whiteLabelManager.Login();
+        else
+        {
+            loginscreen.SetActive(true);
+            startscreen.SetActive(false);
+        }
     }
 
     private IEnumerator ClickRegisterScreen()
     {
         while (!animationComplete) yield return null;
-
-        whiteLabelManager.AutofillLogin();
 
         registerscreen.SetActive(true);
         startscreen.SetActive(false);

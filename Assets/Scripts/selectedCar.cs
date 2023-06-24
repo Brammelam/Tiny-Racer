@@ -53,6 +53,7 @@ public class selectedCar : MonoBehaviour
     public hideButton hideButton;
     [SerializeField]
     private HatManager hatManager;
+    [SerializeField] private AchievementHandler achievementHandler;
 
 
     private void Awake()
@@ -76,6 +77,7 @@ public class selectedCar : MonoBehaviour
             GameObject child = transform.GetChild(i).gameObject;
             child.SetActive(true);
         }
+        achievementHandler = FindObjectOfType<AchievementHandler>();
     }
 
     private void OnApplicationQuit()
@@ -85,6 +87,7 @@ public class selectedCar : MonoBehaviour
 
     public void Unlock()
     {
+        if (!PlayerPrefs.HasKey("a3_completed")) StartCoroutine(achievementHandler.UpdateAchievementProgression("a3"));
         int i = PlayerPrefs.GetInt("car") + 1;
         string s = i.ToString();
         string input = "getCar" + s;

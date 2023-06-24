@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\cameraFollow.cs" />
     <Compile Include="Assets\Scripts\carDriverAI.cs" />
     <Compile Include="Assets\KeyboardManager.cs" />
+    <Compile Include="Assets\AchievementHandler.cs" />
     <Compile Include="Assets\InputEntry.cs" />
     <Compile Include="Assets\CanvasResize.cs" />
     <Compile Include="Assets\Resources\Effects\ParticlePool.cs" />

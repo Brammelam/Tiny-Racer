@@ -22,7 +22,7 @@ public class GarageScreen : MonoBehaviour
     [SerializeField]
     private List<Material> materials;
     [SerializeField]
-    public MeshRenderer renderer;
+    public MeshRenderer carRenderer;
     [SerializeField]
     private MeshRenderer[] carRenderers;
 
@@ -96,12 +96,12 @@ public class GarageScreen : MonoBehaviour
 
         car.GetComponent<horn>().enabled = false;
         car.GetComponent<changeMaterial>().enabled = false;
-        renderer = car.GetComponentInChildren<MeshRenderer>();
-        materials = new List<Material>(renderer.materials);
+        carRenderer = car.GetComponentInChildren<MeshRenderer>();
+        materials = new List<Material>(carRenderer.materials);
         SetSliders();
 
         // Store the MeshRenderer of the new car in the carRenderers array
-        carRenderers[pm.currentCar] = renderer;
+        carRenderers[pm.currentCar] = carRenderer;
     }
 
     public void SetSliders()
@@ -184,6 +184,7 @@ public class GarageScreen : MonoBehaviour
 
         } else
         {
+            if (!PlayerPrefs.HasKey("a2_completed")) StartCoroutine(pm.achievementHandler.UpdateAchievementProgression("a2"));
             if (didyoufuckwiththeslidersbody)
             {
                 PlayerPrefs.SetFloat("b1", bodyColor.r);  //carsettings.BodyColor[0] = bodyColor.r;
@@ -282,8 +283,8 @@ public class GarageScreen : MonoBehaviour
     {
         int c = pm.currentCar;
 
-        renderer.materials[0].color = pm.oldcolors[0,c];
-        renderer.materials[1].color = pm.oldcolors[1,c];
+        carRenderer.materials[0].color = pm.oldcolors[0,c];
+        carRenderer.materials[1].color = pm.oldcolors[1,c];
 
         PlayerPrefs.SetInt("custom", 0);
         SetSliders();

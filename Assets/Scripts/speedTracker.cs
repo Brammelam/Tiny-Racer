@@ -4,7 +4,6 @@ using UnityEngine;
 public class speedTracker : MonoBehaviour
 {
 	public float CurrentSpeed { get; private set; }
-	public event Action<float> SpeedChanged;
 	public Vector3 carPosition = Vector3.zero;
 	public Vector3 lastPosition = Vector3.zero;
 	[SerializeField]

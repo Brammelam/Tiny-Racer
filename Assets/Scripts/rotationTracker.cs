@@ -16,11 +16,9 @@ public class rotationTracker : MonoBehaviour
     [SerializeField]
     public float driftingAngle = 25f;
 
-    private bool tipcarbool, tipcarboolback = false;
-    private float previousAverageAngle;
-    private float driftingAngleDifference = 5f;
+
     float t = 0f;
-    private float duration = 2f;
+
     private float stepSize;
 
 

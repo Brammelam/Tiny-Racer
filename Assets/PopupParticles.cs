@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PopupParticles : MonoBehaviour
 {
-    private ParticleSystem particleSystem;
+    private ParticleSystem currentParticleSystem;
     private Transform cameraTransform;
 
     private void Start()
     {
-        particleSystem = GetComponent<ParticleSystem>();
+        currentParticleSystem = GetComponent<ParticleSystem>();
         cameraTransform = Camera.main.transform;
 
         // Start the particle animation
@@ -19,20 +19,20 @@ public class PopupParticles : MonoBehaviour
     private System.Collections.IEnumerator PlayParticles()
     {
         // Play the particle animation
-        particleSystem.Play();
+        currentParticleSystem.Play();
 
-        while (particleSystem.isPlaying)
+        while (currentParticleSystem.isPlaying)
         {
             // Update the particle system's position to match the camera's position
-            particleSystem.transform.position = cameraTransform.position;
-            particleSystem.transform.rotation= cameraTransform.rotation;
+            currentParticleSystem.transform.position = cameraTransform.position;
+            currentParticleSystem.transform.rotation= cameraTransform.rotation;
 
 
             yield return null;
         }
 
         // Stop and disable the particle system
-        particleSystem.Stop();
-        particleSystem.gameObject.SetActive(false);
+        currentParticleSystem.Stop();
+        currentParticleSystem.gameObject.SetActive(false);
     }
 }

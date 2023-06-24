@@ -10,10 +10,12 @@ public class HatManager : MonoBehaviour
     private List<GameObject> hatPrefabs = new List<GameObject>();
     [SerializeField]
     private List<GameObject> currentHats = new List<GameObject>();
+    [SerializeField] private AchievementHandler achievementHandler;
 
     private void Start()
     {
         SetHat();
+        achievementHandler = FindObjectOfType<AchievementHandler>();
     }
 
     public void OnButtonClick(int hatIndex)
@@ -36,8 +38,10 @@ public class HatManager : MonoBehaviour
            
         }
 
+        if (!PlayerPrefs.HasKey("a5_completed")) StartCoroutine(achievementHandler.UpdateAchievementProgression("a5"));
+
         if (hatIndex >= 0 && hatIndex < hatPrefabs.Count)
-        {
+        {            
             GameObject hatPrefab = hatPrefabs[hatIndex];
 
             // Instantiate the hat prefab and assign it to the car object
@@ -49,7 +53,6 @@ public class HatManager : MonoBehaviour
             if (car == 2) // adjust for SUV
             {
                 hat.transform.localPosition += new Vector3(0, 0.2f, 0);
-
             }
             if (hatPrefab.name.Contains("halo")) hat.transform.localPosition += new Vector3(0, 0.2f, 0);
             if (hatPrefab.name.Contains("rkey")) hat.transform.localPosition += new Vector3(0, 0.4f, 0);

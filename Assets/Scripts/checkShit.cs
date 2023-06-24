@@ -40,8 +40,7 @@ public class checkShit : MonoBehaviour
     private const float MIN_ANGLE = 45f;
     private const float FLIP_ANGLE = 65f;
     private const float MAX_SPEED = 100f;
-    [SerializeField]
-    private float tipSpeed = 1.6f;
+
     public PathCreator pathCreator;
     private IEnumerator coroutine;
     public float currspeed;
@@ -99,12 +98,11 @@ public class checkShit : MonoBehaviour
     private bool ready = false;
 
     private lapTime lapTime;
+    [SerializeField] private AchievementHandler achievementHandler;
 
 
     public void Awake()
     {
-        
-        
         // Generate a playermanager
         GameObject playerManagerObject = new GameObject("PlayerManager");
         pm = playerManagerObject.AddComponent<PlayerManager>();
@@ -119,21 +117,21 @@ public class checkShit : MonoBehaviour
 
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<cameraFollow>();
 
-
-        // Wait until finished saving
-        //if (GameObject.FindGameObjectWithTag("save") != null)
-        //    StartCoroutine(WaitForGhost());
-        //else DontWaitForGhost();
         playerRecord = new List<float>();
 
+    }
+
+    public void Start()
+    {
+        achievementHandler = FindObjectOfType<AchievementHandler>();
     }
 
     IEnumerator LoadPrefs()
     {
         //currentLevel = pm.currentLevel;
 
-        globalRecordTime = PlayerPrefs.GetFloat("highScore");  //globalRecordTime = pm.currentScoreSO.CurrentScore;
-        playerRecordTime = PlayerPrefs.GetFloat("playerScore");  //playerRecordTime = pm.currentScoreSO.CurrentPlayerScore;
+        globalRecordTime = PlayerPrefs.GetFloat("highScore");
+        playerRecordTime = PlayerPrefs.GetFloat("playerScore");
 
         whatCar = PlayerPrefs.GetInt("car", 0);
         
@@ -212,17 +210,7 @@ public class checkShit : MonoBehaviour
             GameObject.FindGameObjectWithTag("Snow").GetComponent<SnowScript>().PlaySnowMusic();
         }
 
-        //_car = GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>();
-        //_car.PlayCarMusic();
-        //_car.timeElapsed = 0;
-
         ready = true;
-
-    }
-
-    private void OnSpeedChanged(float _speed)
-    {
-        currentSpeed = _speed;
     }
  
     IEnumerator WaitForAssignments()
@@ -272,7 +260,6 @@ public class checkShit : MonoBehaviour
             deadCop.GetComponentInChildren<MeshRenderer>().materials[1].color = _colwindow;
         }
         deadCop.SetActive(false);
-        //loadedGhost = pm.ghostData; 
     }
 
     IEnumerator SetHat()
@@ -281,6 +268,7 @@ public class checkShit : MonoBehaviour
         string _hatName = PlayerPrefs.GetString("hat");
         int _hatindex = PlayerPrefs.GetInt("hatindex", -1);
         if (_hatindex <= -1) yield break;
+        if (_hatName == "no") yield break;
 
         string hatLocation = _hatName + "1"; // add 1 which are the smaller models
         Debug.Log("Found hat" + _hatName + " at index " + PlayerPrefs.GetInt("hatindex"));
@@ -451,12 +439,11 @@ public class checkShit : MonoBehaviour
                      
             // If player completes a lap, reset values and start saving
             if (player.distanceTravelled >= pathCreator.path.length && !tipped)
-            {
+            {                
                 float _currentLevel = currentLevel + 1; // cars start at 1
                 string _currrentLevelString = currentLevel.ToString();
                 string _car = "car" + _currentLevel.ToString();
-                string _gotCar = "gotcar" + _currentLevel.ToString();
-                
+                if (!PlayerPrefs.HasKey("a4_completed") && !tutorialLevel) StartCoroutine(achievementHandler.UpdateAchievementProgression("a4"));
                 if (!PlayerPrefs.HasKey(_car) && !tutorialLevel)
                 {
                     string triggerCarUnlock = "grantCar" + _currrentLevelString;
@@ -497,12 +484,12 @@ public class checkShit : MonoBehaviour
                     globalRecordTime = _tempScore;
                     playerRecordTime = _tempScore;
 
-
                     lapTime.SetRecord(_tempScore); // Update the UI
 
                     PlayerPrefs.SetFloat("highScore", _tempScore);
                     PlayerPrefs.SetFloat("playerScore", _tempScore);
                     PlayerPrefs.Save();
+
                     // Upload highscore
                     int _recordTime = Mathf.RoundToInt(elapsedTime * 100);
 
@@ -512,7 +499,6 @@ public class checkShit : MonoBehaviour
                     loadedGhost = playerRecord;
 
                     pm.StartUploadGhost(playerRecord);
-
                 }
 
                 // Player only beat own record, not global record
@@ -573,17 +559,19 @@ public class checkShit : MonoBehaviour
             _hat.GetComponent<Rigidbody>().isKinematic = false;
         }
         Destroy(cop);
-        //Destroy(rb);
+
         deadCop.SetActive(true);
         deadCop.transform.SetPositionAndRotation(copPosition, copRotation);
 
         // Calculate flip direction based on the corner direction
         Vector3 flipDirection = Quaternion.Euler(0f, 0f, -90f) * direction;
-        // GameObject.FindGameObjectWithTag("engineNoise").GetComponent<CarMusicClass>().StopCarMusic();
+
         rb2.AddForce(Vector3.up * 10000f, ForceMode.Impulse);
         rb2.AddForce(direction * 10000f, ForceMode.Impulse);
         rb2.AddTorque(flipDirection * 5000f * -rt.averageAngle, ForceMode.Impulse);
         Instantiate(Resources.Load("carCrashSound") as GameObject);
+
+        if (!PlayerPrefs.HasKey("a1_completed")) StartCoroutine(achievementHandler.UpdateAchievementProgression("a1"));
     }
 
     // This prevents corrupted saves by forcing to wait until a save is complete
@@ -609,17 +597,9 @@ public class checkShit : MonoBehaviour
     IEnumerator ReturnToMenu()
     {
         SavePrefs();
-        //yield return leaderBoard.FetchHighscores();
-        Time.timeScale = 1f;
-        Time.fixedDeltaTime = 0.02f;
 
         SceneManager.LoadScene(0);
         yield return null;
-    }
-
-    public void SetTimeScale()
-    {
-        Time.timeScale = 1f;
     }
 
     private void OnDestroy()
@@ -680,5 +660,4 @@ public class checkShit : MonoBehaviour
             }
         }
     }
-
 }

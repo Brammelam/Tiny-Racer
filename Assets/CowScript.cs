@@ -9,7 +9,6 @@ public class CowScript : MonoBehaviour
 
     private Vector3 initialPosition;
     private Quaternion initialRotation;
-    private bool isReturning = false;
 
     private void Start()
     {
@@ -19,7 +18,6 @@ public class CowScript : MonoBehaviour
 
     private void Update()
     {
-
         // Move the object forward
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
 
@@ -37,5 +35,4 @@ public class CowScript : MonoBehaviour
         transform.position = initialPosition;
 
     }
-
 }

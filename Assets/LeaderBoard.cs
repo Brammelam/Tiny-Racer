@@ -193,7 +193,6 @@ public class LeaderBoard : MonoBehaviour
         }
 
         leaderboardScores = leaderboardScoresDict.Values.Select(tuple => tuple.Item1).ToList();
-        leaderboardNames = leaderboardScoresDict.Values.Select(tuple => tuple.Item2).ToList();
-             
+        leaderboardNames = leaderboardScoresDict.Values.Select(tuple => tuple.Item2).ToList();            
     }
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SmokeScript : MonoBehaviour
 {
-    private ParticleSystem particleSystem;
+    private ParticleSystem currentParticleSystem;
     private float fadeDuration = 5f;
     private float currentFadeTime = 0f;
 
     private void Start()
     {
-        particleSystem = GetComponent<ParticleSystem>();
+        currentParticleSystem = GetComponent<ParticleSystem>();
     }
 
     private void Update()
@@ -22,7 +22,7 @@ public class SmokeScript : MonoBehaviour
         alpha = Mathf.Clamp01(alpha); // Ensure alpha is between 0 and 1
 
         // Set the alpha value for all particle materials
-        ParticleSystemRenderer renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
+        ParticleSystemRenderer renderer = currentParticleSystem.GetComponent<ParticleSystemRenderer>();
         Material[] materials = renderer.materials;
         for (int i = 0; i < materials.Length; i++)
         {
@@ -34,8 +34,8 @@ public class SmokeScript : MonoBehaviour
         // Check if the fade is complete and stop the particle system
         if (currentFadeTime >= fadeDuration)
         {
-            particleSystem.Stop();
-            Destroy(gameObject, particleSystem.main.duration); // Destroy the GameObject after the particle system finishes playing
+            currentParticleSystem.Stop();
+            Destroy(gameObject, currentParticleSystem.main.duration); // Destroy the GameObject after the particle system finishes playing
         }
     }
 }

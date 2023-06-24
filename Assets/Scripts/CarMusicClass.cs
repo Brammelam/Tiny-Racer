@@ -32,15 +32,17 @@ public class CarMusicClass : MonoBehaviour
 
             if (_check.tipped && _check != null)
             {
-
                 SlowCarMusic();
             } else
             {
-                float normalizedSpeed = Mathf.InverseLerp(0f, 80f, player.speed);
-                float translatedValue = Mathf.Lerp(0.6f, 1.2f, normalizedSpeed);
-                _audioSource.pitch = _pitch = translatedValue;
+                if (player != null)
+                {
+                    float normalizedSpeed = Mathf.InverseLerp(0f, 80f, player.speed);
+                    float translatedValue = Mathf.Lerp(0.6f, 1.2f, normalizedSpeed);
+                    _audioSource.pitch = _pitch = translatedValue;
 
-                PlayCarMusic();
+                    PlayCarMusic();
+                }
             }
             
         }

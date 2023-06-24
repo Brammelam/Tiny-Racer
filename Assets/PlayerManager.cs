@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using LootLocker.Requests;
 using TMPro;
-using System.Globalization;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -39,7 +38,6 @@ public class PlayerManager : MonoBehaviour
     public delegate void ProgressUpdateDelegate(float progress);
     public event ProgressUpdateDelegate OnProgressUpdate;
     public ProgressBar progressBar;
-    //public List<changeMaterial> changemat;
 
     [Header("Screens")]
     public GameObject welcomeScreen;
@@ -55,9 +53,6 @@ public class PlayerManager : MonoBehaviour
     public GarageScreen garage;
     public selectedCar sc;
     public GameObject selectedCar;
-
-
-
 
     [Header("Persistent Data")]
     public List<string> leaderboardNames;
@@ -78,36 +73,36 @@ public class PlayerManager : MonoBehaviour
     public List<string> unlockedCars;
     public List<float> ghostData;
     public List<int> ghosts;
-    //public List<int> playerIds;
     public bool allSOfound;
+    public AchievementHandler achievementHandler;
 
     public float Progress { get; private set; }
-
-    GameObject audioManager;
 
     void Awake()
     {
         allSOfound = false;
 
-        //audioManager = Instantiate(Resources.Load("AudioManagerPrefab") as GameObject);
         sc = GameObject.FindObjectOfType<selectedCar>();
     }
 
     private void Start()
     {
-        // Set ingame framerate to 60
         Application.targetFrameRate = 60;
-
+        achievementHandler = FindObjectOfType<AchievementHandler>();
         ghostData = new List<float>();
         ghostsSO = Resources.Load<GhostsSO>("SO/GhostsSO");
-        //audioManager.GetComponent<AudioManager>().Initialize();
     }
 
     public void Setup()
     {
         selectButton.interactable = false;
-        StartCoroutine(SetupRoutine());
-        
+        StartCoroutine(SetupRoutine());     
+    }
+
+    public void ReturnToMenu()
+    {
+        selectButton.interactable = false;
+        StartCoroutine(ReturnToMenuRoutine());
     }
 
     public void Update()
@@ -126,9 +121,42 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public IEnumerator ReturnToMenu()
+    IEnumerator SetupRoutine()
     {
-        float[] stepProgress = { 0.2f, 0.2f, 0.2f, 0.2f, 0.2f };
+        loadingScreen.SetActive(true);
+        float[] stepProgress = { 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f };
+
+        IEnumerator[] coroutines = {
+        GetPlayerName(),
+        DownloadPlayerFileKeys(),
+        CheckCars(),
+        GetCarSettingsData(),
+        GetSO(),
+        leaderBoard.FetchHighscores(),
+        leaderBoard.FetchPlayerScores(),
+        SetUpUI(),
+        achievementHandler.LoadJSONData(),
+        DisableStartScreens(),
+    };
+
+        Progress = 0f;
+
+        for (int i = 0; i < coroutines.Length; i++)
+        {
+            yield return StartCoroutine(coroutines[i]);
+
+            Progress += stepProgress[i];
+            UpdateProgress(Progress);
+        }
+
+        // Progress complete
+        Progress = 1f;
+        UpdateProgress(Progress);
+    }
+
+    public IEnumerator ReturnToMenuRoutine()
+    {
+        float[] stepProgress = { 0.4f, 0.6f };
 
         // Disable any login screens if they are active
         GameObject[] welcomeScreens = GameObject.FindGameObjectsWithTag("welcome");
@@ -143,9 +171,6 @@ public class PlayerManager : MonoBehaviour
 
         IEnumerator[] coroutines = {
             SetUpUI(),
-            leaderBoard.FetchHighscores(),
-            leaderBoard.FetchPlayerScores(),
-            GetSO(),
             DisableStartScreens()
         };
         Progress = 0f;
@@ -161,43 +186,6 @@ public class PlayerManager : MonoBehaviour
         UpdateProgress(Progress);
 
         yield return null;
-    }
-
-    IEnumerator SetupRoutine()
-    {
-        loadingScreen.SetActive(true);
-        float[] stepProgress = { 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.2f };
-
-        IEnumerator[] coroutines = {
-
-            GetPlayerName(),
-            DownloadPlayerFileKeys(),
-            CheckCars(),
-            GetCarSettingsData(),
-            GetSO(),            
-            leaderBoard.FetchHighscores(),
-            leaderBoard.FetchPlayerScores(),
-            SetUpUI(),
-            DisableStartScreens(),
-
-    };
-
-        Progress = 0f;
-
-        for (int i = 0; i < coroutines.Length; i++)
-        {
-            yield return StartCoroutine(coroutines[i]);
-            Progress += stepProgress[i];
-            UpdateProgress(Progress);
-        }
-
-        // Set Ghost ID
-        //SetGhostId();
-
-        // Progress complete
-        Progress = 1f;
-        UpdateProgress(Progress);       
-        
     }
 
     public IEnumerator DisableStartScreens()
@@ -231,54 +219,12 @@ public class PlayerManager : MonoBehaviour
         
         selectButton.gameObject.GetComponentInChildren<Text>().text = "PLAY";
         selectButton.interactable = true;
-
-        
+      
         done = true;
         yield return new WaitWhile(() => done == false);
     }
 
-    /* GuestSession disabled while trying out WhitelabelLogin
-    IEnumerator LoginRoutine()
-    {
-        bool done = false;
-        LootLockerSDKManager.StartGuestSession((response) =>
-        {
-            if (response.success)
-            {
-                PlayerPrefs.SetString("PlayerID", response.player_id.ToString());
-             
-                done = true;
-            }
-            else
-            {
-                Debug.Log("Could not start session" + response.Error);
-
-                done = true;
-            }
-        });
-        yield return new WaitWhile(() => done == false);
-    }
-    */
-
-    public class LootLockerResponse
-    {
-        public bool Success { get; set; }
-        public string Message { get; set; }
-        public DataObject Data { get; set; }
-    }
-
-    // Nested DataObject class definition
-    public class DataObject
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-
-    public void SetSO()
-    {
-
-    }
-
+    // Still an issue with Scriptable Objects not reading/writing correctly in WeblGL build
     public IEnumerator GetSO()
     {   
         // Load the Scriptable Objects
@@ -299,6 +245,7 @@ public class PlayerManager : MonoBehaviour
         yield return null;
     }
 
+    // Triggers a LootLocker event by triggerName
     public void TriggerEvent(string _car)
     {
         string triggerName = _car;
@@ -307,6 +254,8 @@ public class PlayerManager : MonoBehaviour
             if (!response.success) Debug.Log("Error triggering " + triggerName);
         });
     }
+
+    
 
     // Fetch unlocked cars and check if tutorial is completed for player
     IEnumerator CheckCars()
@@ -320,11 +269,8 @@ public class PlayerManager : MonoBehaviour
                 for (int i = 0; i < inventory.Length; i++)
                 {
                     string item = inventory[i].asset.name.ToString();
-                    unlockedCars.Add(item);
-                    if (!PlayerPrefs.HasKey(item)) PlayerPrefs.SetInt(item, 1);                       
-
-                }
-                PlayerPrefs.Save();
+                    if (!PlayerPrefs.HasKey(item)) PlayerPrefs.SetInt(item, 1);
+                }                
                 done = true;
             }
             else
@@ -332,10 +278,8 @@ public class PlayerManager : MonoBehaviour
                 Debug.Log("Could not get inventory " + response.Error);
                 done = true;
             }
-        });
-        
-        yield return new WaitWhile(() => done == false);
-        
+            PlayerPrefs.Save();
+        }); yield return new WaitWhile(() => done == false);      
     }
 
     public void SetPlayerName()
@@ -405,6 +349,7 @@ public class PlayerManager : MonoBehaviour
     {
         StartCoroutine(GetPlayerName());
     }
+
     IEnumerator GetPlayerName()
     {
         bool done = false;
@@ -570,37 +515,8 @@ public class PlayerManager : MonoBehaviour
         yield return new WaitWhile(() => done == false);
     }
 
-    /*
-    public IEnumerator GetGlobalGhostData()
-    {
-        bool done = false;
-        int f = ghostsSO.GhostIds[currentLevel];
-        string fp = ghostsSO.PlayerIds[currentLevel].ToString();
-
-        var test = LootLocker.LootLockerEndPoints.getPlayerFilesByPlayerId;
-
-        Debug.Log(test.endPoint);
-
-        LootLockerSDKManager.GetAllPlayerFiles((response) =>
-        {
-            if (response.success)
-            {
-                Debug.Log(response);
-
-                LootLockerPlayerFile[] files = response.items;
-            }
-
-            else Debug.Log(response.Error);
-
-            done = true;
-        });     
-        yield return new WaitWhile(() => done == false);
-    }
-    */
-
     public IEnumerator GetGhostData()
     {
-
         bool done = false;
         int _level = PlayerPrefs.GetInt("level", 0);
 
@@ -671,7 +587,6 @@ public class PlayerManager : MonoBehaviour
         foreach (changeMaterial changemat in changemat) changemat.SetLockedCars();
     }
 
-
     public IEnumerator UploadPlayerGhost()
     {
         bool done = false;
@@ -708,7 +623,6 @@ public class PlayerManager : MonoBehaviour
                     _settings = int.Parse(item.value);
                     PlayerPrefs.SetInt("settings", _settings);
                     PlayerPrefs.Save();
-                    //carsettings.SettingsKey = item.value;
                 }
 
                 i++;
@@ -738,13 +652,11 @@ public class PlayerManager : MonoBehaviour
         }); yield return new WaitWhile(() => done == false);
     }
 
-
     public void StartUploadGhost(List<float> _ghostData)
     {
         SaveToFile(_ghostData);
     }
-    
-    
+      
     public IEnumerator UploadGhostData()
     {
         int _level = PlayerPrefs.GetInt("level", 0);
@@ -787,7 +699,6 @@ public class PlayerManager : MonoBehaviour
         }
     }
     
-
     public void ResetOriginalCar()
     {
         newrenderer = sc.cars[currentCar].GetComponentInChildren<MeshRenderer>();
@@ -815,25 +726,8 @@ public class PlayerManager : MonoBehaviour
             
     }
 
-    // Preferences are saved in the garageScreen
-    /*
-    public void SavePreferences()
-    {
-        carsettings.BodyColor[0] = garage.bodyColor.r;
-        carsettings.BodyColor[1] = garage.bodyColor.g;
-        carsettings.BodyColor[2] = garage.bodyColor.b;
-        carsettings.WindowColor[0] = garage.windowColor.r;
-        carsettings.WindowColor[1] = garage.windowColor.g;
-        carsettings.WindowColor[2] = garage.windowColor.b;
-        carsettings.CurrentCar = currentCar;
-        carsettings.CurrentHat = sc.hatIndex;
-        currentHat = sc.hatIndex;
-    }
-    */
-
     public IEnumerator SavePreferencesToFilePM()
     {
-
         PlayerPrefs.SetInt("car", currentCar);
 
         bool done = false;
@@ -908,6 +802,5 @@ public class PlayerManager : MonoBehaviour
     {
         PlayerPrefs.Save();
     }
-
 
 }
