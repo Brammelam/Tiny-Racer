@@ -50,4 +50,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/level5-1.unity
     guid: 1bddbccee28491f4692b04aad200fdb5
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/MultiplayerScene.unity
+    guid: 8d77f150e5539054986cf896c8f512d6
+  - enabled: 1
+    path: Assets/Scenes/MoonScene.unity
+    guid: c6663fba88b71534aaa631e987d6be7f
+  - enabled: 1
+    path: Assets/Scenes/CityTaxi.unity
+    guid: e2cbd85026ecf0a4993763ee4dc7803e
+  m_configObjects:
+    io.coherence.simulator.build.options: {fileID: 11400000, guid: a0ffadd0093fee546aaed4c8c9f85190, type: 2}

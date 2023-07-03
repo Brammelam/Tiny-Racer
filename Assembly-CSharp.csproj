@@ -54,107 +54,241 @@
   </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\bramm\Race\Library\PackageCache\io.coherence.sdk@0.10.15\Coherence.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.2f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.2f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\coherence\baked\GenericFieldLong2.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldFloat1.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldUInt0.gen.cs" />
     <Compile Include="Assets\Resources\Navigate.cs" />
+    <Compile Include="Assets\coherence\baked\WorldPositionQuery.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldString1.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldString0.gen.cs" />
+    <Compile Include="Assets\multiplayerFollower.cs" />
     <Compile Include="Assets\PlayerManagerManager.cs" />
     <Compile Include="Assets\SelectHat.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldInt9.gen.cs" />
     <Compile Include="Assets\Scripts\CarMusicClass.cs" />
     <Compile Include="Assets\LoadingText.cs" />
     <Compile Include="Assets\Scripts\CityScript.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldLong0.gen.cs" />
+    <Compile Include="Assets\starHandler.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldFloat3.gen.cs" />
     <Compile Include="Assets\AddLetterClass.cs" />
     <Compile Include="Assets\MovingScript.cs" />
     <Compile Include="Assets\SmokeScript.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldFloat4.gen.cs" />
     <Compile Include="Assets\Progress.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\PathPlacer.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldDouble3.gen.cs" />
+    <Compile Include="Assets\taxiCamera.cs" />
+    <Compile Include="Assets\coherence\baked\GenericField2dVector0.gen.cs" />
     <Compile Include="Assets\Scripts\backScript.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldEntity6.gen.cs" />
+    <Compile Include="Assets\coherence\baked\MultiplayerCar_onlineName_6379893805495976556.gen.cs" />
     <Compile Include="Assets\SOfiles\CarsettingsSO.cs" />
     <Compile Include="Assets\GarageScreen.cs" />
     <Compile Include="Assets\SOfiles\UnlockedCarsSO.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldDouble1.gen.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\PathSceneTool.cs" />
     <Compile Include="Assets\ToggleLoginStart.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldEntity4.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldULong3.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldVector0.gen.cs" />
     <Compile Include="Assets\ProgressBar.cs" />
     <Compile Include="Assets\Scripts\selectedLevel.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldDouble0.gen.cs" />
     <Compile Include="Assets\ContentManager.cs" />
     <Compile Include="Assets\ToggleButton.cs" />
+    <Compile Include="Assets\multiplayerAI.cs" />
     <Compile Include="Assets\Scripts\onLoad.cs" />
     <Compile Include="Assets\CowScript.cs" />
     <Compile Include="Assets\ButtonScript.cs" />
     <Compile Include="Assets\LeaderBoard.cs" />
     <Compile Include="Assets\ChangeActiveInputField.cs" />
     <Compile Include="Assets\Scripts\horn.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldBool5.gen.cs" />
     <Compile Include="Assets\openKeyboard.cs" />
     <Compile Include="Assets\ButtonDown.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldString2.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldBool2.gen.cs" />
+    <Compile Include="Assets\coherence\baked\Global.gen.cs" />
+    <Compile Include="Assets\coherence\baked\ImplSync.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldDouble7.gen.cs" />
+    <Compile Include="Assets\coherence\baked\CoherenceSyncdeadNormalCar2.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldVector1.gen.cs" />
     <Compile Include="Assets\Resources\saveLevel.cs" />
     <Compile Include="Assets\InputHandler.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldInt7.gen.cs" />
     <Compile Include="Assets\CollisionHandler.cs" />
+    <Compile Include="Assets\coherence\baked\GlobalQuery.gen.cs" />
+    <Compile Include="Assets\coherence\baked\AuthorityRequest.gen.cs" />
     <Compile Include="Assets\changeMaterial.cs" />
     <Compile Include="Assets\Scripts\hatScript.cs" />
     <Compile Include="Assets\PanelToggle.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldQuaternion0.gen.cs" />
     <Compile Include="Assets\Scripts\cameraFollow.cs" />
+    <Compile Include="Assets\coherence\baked\ImplMonoBridge.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldLong3.gen.cs" />
+    <Compile Include="Assets\TaxiGameHandler.cs" />
     <Compile Include="Assets\Scripts\carDriverAI.cs" />
+    <Compile Include="Assets\coherence\baked\PersistenceReady.gen.cs" />
     <Compile Include="Assets\KeyboardManager.cs" />
     <Compile Include="Assets\AchievementHandler.cs" />
+    <Compile Include="Assets\loadTaxiGame.cs" />
     <Compile Include="Assets\InputEntry.cs" />
     <Compile Include="Assets\CanvasResize.cs" />
     <Compile Include="Assets\Resources\Effects\ParticlePool.cs" />
+    <Compile Include="Assets\taxiRotation.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldFloat6.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldEntity5.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldEntity9.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldUInt5.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldDouble9.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldVector2.gen.cs" />
+    <Compile Include="Assets\onlineName.cs" />
     <Compile Include="Assets\Scripts\navigateKeys.cs" />
     <Compile Include="Assets\Scripts\checkShit.cs" />
+    <Compile Include="Assets\sheepScript.cs" />
     <Compile Include="Assets\SOfiles\CurrentscoreSO.cs" />
     <Compile Include="Assets\Scripts\newAI.cs" />
     <Compile Include="Assets\SlowDownTime.cs" />
+    <Compile Include="Assets\coherence\baked\ImplLiveQuery.gen.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\PathFollower.cs" />
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldEntity3.gen.cs" />
     <Compile Include="Assets\Scripts\ghostRecorder.cs" />
     <Compile Include="Assets\playernamescript.cs" />
+    <Compile Include="Assets\sheepTaxi.cs" />
     <Compile Include="Assets\Resources\ghostFollower.cs" />
+    <Compile Include="Assets\TaxiDialog.cs" />
     <Compile Include="Assets\FileHandler.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldFloat8.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericField2dVector1.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldInt5.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldVector3.gen.cs" />
+    <Compile Include="Assets\coherence\baked\LocalUser.gen.cs" />
+    <Compile Include="Assets\coherence\baked\WorldPosition.gen.cs" />
     <Compile Include="Assets\SOfiles\ScoresSO.cs" />
     <Compile Include="Assets\ToggleHatScript.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldBool6.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldDouble5.gen.cs" />
     <Compile Include="Assets\Resources\SetVolume.cs" />
     <Compile Include="Assets\ToggleHatButton.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldInt2.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldInt3.gen.cs" />
     <Compile Include="Assets\findPlayerManager.cs" />
+    <Compile Include="Assets\coherence\baked\Archetypes.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldUInt9.gen.cs" />
     <Compile Include="Assets\Scripts\Score.cs" />
     <Compile Include="Assets\Scripts\changeQuality.cs" />
     <Compile Include="Assets\hideButton.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldInt0.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldInt1.gen.cs" />
     <Compile Include="Assets\Scripts\AmbientClass.cs" />
     <Compile Include="Assets\ReturnHatName.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldBool7.gen.cs" />
     <Compile Include="Assets\Scripts\rotationTracker.cs" />
+    <Compile Include="Assets\coherence\baked\Tag.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldInt4.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldUInt8.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldString3.gen.cs" />
+    <Compile Include="Assets\coherence\baked\WorldOrientation.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericField2dVector3.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldFloat2.gen.cs" />
     <Compile Include="Assets\PlayerManager.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldBool0.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldInt6.gen.cs" />
+    <Compile Include="Assets\Resources\People\personAnimator.cs" />
     <Compile Include="Assets\IgnoreInputRegion.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldBool4.gen.cs" />
     <Compile Include="Assets\loadScript.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldUInt1.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldFloat7.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldColor0.gen.cs" />
     <Compile Include="Assets\SettingsAnimationScript.cs" />
     <Compile Include="Assets\Scripts\SnowScript.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldString4.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldDouble2.gen.cs" />
+    <Compile Include="Assets\coherence\baked\ConnectedEntity.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericPrefabId.gen.cs" />
     <Compile Include="Assets\WhiteLabelManager.cs" />
     <Compile Include="Assets\Scripts\newAI2.cs" />
     <Compile Include="Assets\CowCollision.cs" />
+    <Compile Include="Assets\coherence\baked\PreserveChildren.gen.cs" />
     <Compile Include="Assets\Instance.cs" />
+    <Compile Include="Assets\coherence\baked\Definition.gen.cs" />
     <Compile Include="Assets\Scripts\carController2.cs" />
     <Compile Include="Assets\Scripts\lapTime.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldFloat0.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericCommand.gen.cs" />
     <Compile Include="Assets\CollectionScript.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldUInt7.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldEntity2.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldUInt2.gen.cs" />
     <Compile Include="Assets\Scripts\CarAITargetMouse.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldUInt6.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldColor1.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldBytes0.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericPrefabReference.gen.cs" />
     <Compile Include="Assets\prefabscriptls.cs" />
     <Compile Include="Assets\Scripts\newController.cs" />
+    <Compile Include="Assets\multiplayerScript.cs" />
+    <Compile Include="Assets\taxiAI.cs" />
     <Compile Include="Assets\SOfiles\GhostsSO.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldDouble8.gen.cs" />
+    <Compile Include="Assets\coherence\baked\QuerySynced.gen.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\GeneratePathExample.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\RoadMeshCreator.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldUInt4.gen.cs" />
+    <Compile Include="Assets\coherence\baked\AdoptOrphan.gen.cs" />
+    <Compile Include="Assets\coherence\baked\Persistence.gen.cs" />
+    <Compile Include="Assets\coherence\baked\AuthorityTransfer.gen.cs" />
     <Compile Include="Assets\Scripts\buttonSelect.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldULong2.gen.cs" />
     <Compile Include="Assets\HatManager.cs" />
+    <Compile Include="Assets\coherence\baked\ArchetypeComponent.gen.cs" />
     <Compile Include="Assets\Scripts\MusicClass.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldEntity8.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldEntity1.gen.cs" />
     <Compile Include="Assets\checkName.cs" />
     <Compile Include="Assets\rotateCar.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldEntity7.gen.cs" />
+    <Compile Include="Assets\coherence\baked\ImplTagQuery.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldBool9.gen.cs" />
     <Compile Include="Assets\Scripts\titleCar.cs" />
     <Compile Include="Assets\Scripts\speedTracker.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldDouble6.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericScale.gen.cs" />
     <Compile Include="Assets\PopupParticles.cs" />
     <Compile Include="Assets\Scripts\tutorialScript.cs" />
+    <Compile Include="Assets\coherence\baked\TagQuery.gen.cs" />
     <Compile Include="Assets\Scripts\selectedCar.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldBool1.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldUInt3.gen.cs" />
     <Compile Include="Assets\tooltiptext.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldULong0.gen.cs" />
+    <Compile Include="Assets\coherence\baked\UniqueID.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldFloat5.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldEntity0.gen.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\PathSpawner.cs" />
+    <Compile Include="Assets\coherence\baked\GenericField2dVector2.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldBool3.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldBool8.gen.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldDouble4.gen.cs" />
     <Compile Include="Assets\Resources\garageScript.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldInt8.gen.cs" />
+    <Compile Include="Assets\coherence\baked\CoherenceSyncMultiplayerCar.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldFloat9.gen.cs" />
+    <Compile Include="Assets\multiplayerCamera.cs" />
     <Compile Include="Assets\SetCameraDistance.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldULong1.gen.cs" />
+    <Compile Include="Assets\multiplayerRotation.cs" />
+    <Compile Include="Assets\coherence\baked\Connection.gen.cs" />
     <Compile Include="Assets\SafeAreaHandler.cs" />
+    <Compile Include="Assets\coherence\baked\GenericFieldLong1.gen.cs" />
     <Compile Include="Assets\Scripts\SessionManager.cs" />
     <Compile Include="Assets\SOfiles\FloatSO.cs" />
   </ItemGroup>
@@ -166,6 +300,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\QuickOutline\Resources\Shaders\OutlineMask.shader" />
+    <None Include="Assets\coherence\Gathered.schema" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Resources\selectedShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
@@ -432,6 +567,12 @@
     </Reference>
     <Reference Include="ReportGeneratorMerged">
       <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@1.2.4\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="JWT">
+      <HintPath>Library\PackageCache\io.coherence.sdk@0.10.15\Coherence.Auth\JWT.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.2f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll</HintPath>
@@ -811,8 +952,14 @@
     <Reference Include="Unity.Recorder.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Recorder.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Coherence.Stats">
+      <HintPath>Library\ScriptAssemblies\Coherence.Stats.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.IK.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.Transport">
+      <HintPath>Library\ScriptAssemblies\Coherence.Transport.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
       <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
@@ -823,32 +970,17 @@
     <Reference Include="Unity.Burst.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Burst">
-      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.2D.Common.Path.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Path.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    <Reference Include="Coherence.Toolkit">
+      <HintPath>Library\ScriptAssemblies\Coherence.Toolkit.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Recorder.Base">
-      <HintPath>Library\ScriptAssemblies\Unity.Recorder.Base.dll</HintPath>
+    <Reference Include="Coherence.ProtocolDef">
+      <HintPath>Library\ScriptAssemblies\Coherence.ProtocolDef.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Animation.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    <Reference Include="Coherence.Log">
+      <HintPath>Library\ScriptAssemblies\Coherence.Log.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
@@ -856,50 +988,41 @@
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.InternalAPIEngineBridge.001">
-      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Common.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="lootlocker.lootlockersdk.runtime">
       <HintPath>Library\ScriptAssemblies\lootlocker.lootlockersdk.runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.Brisk">
+      <HintPath>Library\ScriptAssemblies\Coherence.Brisk.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.Cram">
+      <HintPath>Library\ScriptAssemblies\Coherence.Cram.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.Auth">
+      <HintPath>Library\ScriptAssemblies\Coherence.Auth.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
-      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Collections">
       <HintPath>Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.InternalAPIEditorBridge.001">
-      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
+    <Reference Include="Coherence.Runtime">
+      <HintPath>Library\ScriptAssemblies\Coherence.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
+    <Reference Include="Coherence.Brook">
+      <HintPath>Library\ScriptAssemblies\Coherence.Brook.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Mathematics">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Common.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
+    <Reference Include="Coherence.Tend">
+      <HintPath>Library\ScriptAssemblies\Coherence.Tend.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Recorder">
       <HintPath>Library\ScriptAssemblies\Unity.Recorder.dll</HintPath>
@@ -907,14 +1030,104 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Coherence.Connection.Web">
+      <HintPath>Library\ScriptAssemblies\Coherence.Connection.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.Simulator">
+      <HintPath>Library\ScriptAssemblies\Coherence.Simulator.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Recorder.Base">
+      <HintPath>Library\ScriptAssemblies\Unity.Recorder.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence">
+      <HintPath>Library\ScriptAssemblies\Coherence.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Animation.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.Prefs">
+      <HintPath>Library\ScriptAssemblies\Coherence.Prefs.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.Core">
+      <HintPath>Library\ScriptAssemblies\Coherence.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.Interpolation">
+      <HintPath>Library\ScriptAssemblies\Coherence.Interpolation.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEngineBridge.001">
+      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Common.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.Entity">
+      <HintPath>Library\ScriptAssemblies\Coherence.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.Serializer">
+      <HintPath>Library\ScriptAssemblies\Coherence.Serializer.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEditorBridge.001">
+      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.Common">
+      <HintPath>Library\ScriptAssemblies\Coherence.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.SimulationFrame">
+      <HintPath>Library\ScriptAssemblies\Coherence.SimulationFrame.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Common.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Cinemachine">
       <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.UI">
+      <HintPath>Library\ScriptAssemblies\Coherence.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Coherence.Editor">
+      <HintPath>Library\ScriptAssemblies\Coherence.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.IK.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Coherence.Utils">
+      <HintPath>Library\ScriptAssemblies\Coherence.Utils.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

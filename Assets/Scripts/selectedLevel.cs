@@ -213,7 +213,6 @@ public class selectedLevel : MonoBehaviour
     {
         int _levelIndexName = levelIndex + 1;
         levelText.text = "1 - " + _levelIndexName.ToString();
-        Debug.Log("LevelIndex is: " + levelIndex);
         int _tempScore = leaderBoard.leaderboardScores[levelIndex];
         int _tempPlayerScore = leaderBoard.leaderboardPlayerScores[levelIndex];
 

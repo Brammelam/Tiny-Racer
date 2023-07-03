@@ -223,6 +223,11 @@ public class selectedCar : MonoBehaviour
         StartCoroutine(SelectCarCoroutine());
     }
 
+    public void SelectMultiplayer()
+    {
+        StartCoroutine(SelectMultiplayerCoroutine());
+    }
+
     public IEnumerator SelectCarCoroutine()
     {
         bool done = false;
@@ -233,6 +238,15 @@ public class selectedCar : MonoBehaviour
         else
             SceneManager.LoadScene(2);
 
+        done = true;
+        yield return new WaitWhile(() => done == false);
+    }
+
+    public IEnumerator SelectMultiplayerCoroutine()
+    {
+        bool done = false;
+        SceneManager.LoadScene("MultiplayerScene");
+        
         done = true;
         yield return new WaitWhile(() => done == false);
     }
